@@ -6,9 +6,9 @@ The Solr check tracks the state and performance of a Solr cluster. It collects m
 
 # Installation
 
-The Solr check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Solr nodes.
+The Solr check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=solr). To install the Solr check install the `sd-agent-solr` package.
 
-This check is JMX-based, so you'll need to enable JMX Remote on your Tomcat servers. Read the [JMX Check documentation](http://docs.datadoghq.com/integrations/java/) for more information on that.
+This check is JMX-based, so you'll need to enable JMX Remote on your Tomcat servers. Read the [JMX Check documentation](hhttps://support.serverdensity.com/hc/en-us/search?query=java) for more information on that.
 
 # Configuration
 
@@ -91,9 +91,8 @@ init_config:
           metric_type: gauge
 ```
 
-Again, see the [JMX Check documentation](http://docs.datadoghq.com/integrations/java/) for a list of configuration options usable by all JMX-based checks. The page also describes how the Agent tags JMX metrics.
 
-Restart the Agent to start sending Solr metrics to Datadog.
+Restart the Agent to start sending Solr metrics to Server Density.
 
 # Validation
 
@@ -118,4 +117,4 @@ The solr check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/solr/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.

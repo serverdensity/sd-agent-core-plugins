@@ -1,8 +1,14 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "alias": "memcache",
+  "guid": "b1c4033c-bf96-4456-be63-e74ff171f991",
+  "linux_package_name": "sd-agent-memcache",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
+  "module_files": [
+    "memcache.py"
+  ],
   "name": "mcache",
   "short_description": "Track memory use, hits, misses, evictions, fill percent, and more.",
   "support": "core",
@@ -10,6 +16,5 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.0.0",
-  "guid": "b1c4033c-bf96-4456-be63-e74ff171f991"
+  "version": "1.0.0"
 }

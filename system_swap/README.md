@@ -6,7 +6,7 @@ This check monitors the number of bytes a host has swapped in and swapped out.
 
 # Installation
 
-The system swap check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host.
+The system swap check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=system+swap). To install the system swap check install the `sd-agent-system-swap` package.
 
 # Configuration
 
@@ -44,4 +44,4 @@ The system_swap check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/system_swap/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.

@@ -1,18 +1,20 @@
 {
-  "manifest_version": "0.1.0",
-  "name": "couch",
+  "alias": "couchdb",
+  "description": "Apache CouchDB is a document-oriented database that can be queried and indexed using JavaScript in a MapReduce fashion.",
   "display_name": "couch",
-  "version": "1.0.0",
+  "guid": "9e7ed68c-669a-40f0-8564-548d49aa8098",
+  "linux_package_name": "sd-agent-couchdb",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
+  "name": "couch",
+  "short_description": "Track and graph your CouchDB activity and performance metrics.",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
-  "short_description": "Track and graph your CouchDB activity and performance metrics.",
-  "description": "Apache CouchDB is a document-oriented database that can be queried and indexed using JavaScript in a MapReduce fashion.",
-  "guid": "9e7ed68c-669a-40f0-8564-548d49aa8098",
-  "maintainer": "help@datadoghq.com"
+  "version": "1.0.0"
 }

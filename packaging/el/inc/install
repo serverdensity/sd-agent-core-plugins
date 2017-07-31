@@ -1,0 +1,44 @@
+%install
+mkdir -p %{buildroot}/etc/sd-agent
+cp -a conf.d %{buildroot}/etc/sd-agent
+mkdir -p %{buildroot}/usr/share/python/sd-agent
+cp -a checks.d %{buildroot}/usr/share/python/sd-agent
+mkdir -p %{buildroot}/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/
+cp -a %{__venv}/lib/python%{__sd_python_version}/site-packages %{buildroot}/usr/share/python/sd-agent/lib/python%{__sd_python_version}
+
+rm -Rf %{buildroot}/etc/sd-agent/conf.d/auto_conf
+rm -Rf %{buildroot}/etc/sd-agent/conf.d/jenkins.yaml.example
+rm -Rf %{buildroot}/etc/sd-agent/conf.d/pgbouncer.yaml.example
+rm -Rf %{buildroot}/usr/share/python/sd-agent/checks.d/jenkins.py
+rm -Rf %{buildroot}/usr/share/python/sd-agent/checks.d/pgbouncer.py
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/argparse*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/certifi*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/cffi*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/chardet*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/dns*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/easy-install.pth
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/google*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/gridfs*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/idna*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ipaddress*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/kazoo*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/meld3*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/memcache.pyc
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ntplib*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pip*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ply*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/protobuf*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/psutil*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pycparser*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pycryptodome*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pysmi*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/python*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/requests*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/setuptools-20.9.0-py2.7.egg
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/setuptools.pth
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/simplejson*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/six*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/snakebite*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/supervisor*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/urllib3*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/wheel*

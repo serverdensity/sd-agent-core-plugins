@@ -221,7 +221,7 @@ class Cacti(AgentCheck):
         return res
 
     def _format_metric_name(self, m_name, cfunc):
-        ''' Format a cacti metric name into a Datadog-friendly name '''
+        ''' Format a cacti metric name into a Server Density friendly name '''
         try:
             aggr = CFUNC_TO_AGGR[cfunc]
         except KeyError:

@@ -2,15 +2,15 @@
 
 # Overview
 
-Whether you use Redis as a database, cache, or message queue, this integration helps you track problems with your Redis servers and the parts of your infrastructure that they serve. The Datadog Agent's Redis check collects a wealth of metrics related to performance, memory usage, blocked clients, slave connections, disk persistence, expired and evicted keys, and many more.
+Whether you use Redis as a database, cache, or message queue, this integration helps you track problems with your Redis servers and the parts of your infrastructure that they serve. The Server Density Agent's Redis check collects a wealth of metrics related to performance, memory usage, blocked clients, slave connections, disk persistence, expired and evicted keys, and many more.
 
 # Installation
 
-The Redis check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Redis servers. If you need the newest version of the check, install the `dd-check-redis` package.
+The Redis check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=redis). To install the Redis check install the `sd-agent-redis` package.
 
 # Configuration
 
-Create a `redisdb.yaml` in the Datadog Agent's `conf.d` directory:
+Create a `redisdb.yaml` in the Server Density Agent's `conf.d` directory:
 
 ```
 init_config:
@@ -22,9 +22,9 @@ instances:
 #   password: myredispassword                   # if your redis requires auth
 ```
 
-See [this sample redisdb.yaml](https://github.com/Datadog/integrations-core/blob/master/redisdb/conf.yaml.example) for all available configuration options.
+See [this sample redisdb.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/redisdb/conf.yaml.example) for all available configuration options.
 
-Restart the Agent to begin sending Redis metrics to Datadog.
+Restart the Agent to begin sending Redis metrics to Server Density.
 
 # Validation
 
@@ -71,14 +71,4 @@ The redis check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/redisdb/metadata.csv) for a list of metrics provided by this integration.
-
-# Service Checks
-
-`redis.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to Redis to collect metrics, otherwise OK.
-
-# Further Reading
-
-Read our [series of blog posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/) about how to monitor your Redis servers with Datadog.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.

@@ -173,7 +173,7 @@ class ZookeeperCheck(AgentCheck):
             raise
         except Exception as e:
             self.warning(e)
-            self.increment('zookeeper.datadog_client_exception')
+            self.increment('zookeeper.serverdensity_client_exception')
             if report_instance_mode:
                 self.report_instance_mode(hostname, 'unknown', tags)
             raise
@@ -212,7 +212,7 @@ class ZookeeperCheck(AgentCheck):
                 raise
             except Exception as e:
                 self.warning(e)
-                self.increment('zookeeper.datadog_client_exception')
+                self.increment('zookeeper.serverdensity_client_exception')
                 if report_instance_mode:
                     self.report_instance_mode(hostname, 'unknown', tags)
                 raise
@@ -327,9 +327,6 @@ class ZookeeperCheck(AgentCheck):
 
         # Outstanding: 0
         _, value = buf.readline().split(':')
-        # Fixme: This metric name is wrong. It should be removed in a major version of the agent
-        # See https://github.com/DataDog/dd-agent/issues/1383
-        metrics.append(ZKMetric('zookeeper.bytes_outstanding', long(value.strip())))
         metrics.append(ZKMetric('zookeeper.outstanding_requests', long(value.strip())))
 
         # Zxid: 0x1034799c7

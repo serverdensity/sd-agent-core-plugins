@@ -1,8 +1,13 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "8a60c34f-ecde-4269-bcae-636e6cbce98f",
+  "linux_package_name": "sd-agent-ceph",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "module_files": [
+    "simplejson"
+  ],
   "name": "ceph",
   "short_description": "Collect per-pool performance metrics and monitor overall cluster status.",
   "support": "core",
@@ -10,6 +15,5 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.1.0",
-  "guid": "8a60c34f-ecde-4269-bcae-636e6cbce98f"
+  "version": "1.1.0"
 }

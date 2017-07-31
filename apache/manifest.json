@@ -1,18 +1,19 @@
 {
-  "manifest_version": "0.1.0",
-  "name": "Apache",
+  "description": "Track requests per second, bytes served, worker threads, uptime, and more.",
   "display_name": "Apache",
-  "version": "1.0.0",
+  "guid": "cb2b4a06-4ede-465e-9478-a45f8b32058a",
+  "linux_package_name": "sd-agent-apache",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
+  "name": "apache",
+  "short_description": "Track requests per second, bytes served, worker threads, uptime, and more.",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
-  "maintainer": "help@datadoghq.com",
-  "short_description": "Track requests per second, bytes served, worker threads, uptime, and more.",
-  "description": "Track requests per second, bytes served, worker threads, uptime, and more.",
-  "guid": "cb2b4a06-4ede-465e-9478-a45f8b32058a"
+  "version": "1.0.0"
 }

@@ -6,7 +6,7 @@ This check lets you track node, vnode and ring performance metrics from RiakKV o
 
 # Installation
 
-The Riak check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Riak servers. If you need the newest version of the check, install the `dd-check-riak` package.
+The Riak check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=riak). To install the Riak check install the `sd-agent-riak` package.
 
 # Configuration
 
@@ -19,7 +19,7 @@ instances:
   - url: http://127.0.0.1:8098/stats # or whatever your stats endpoint is
 ```
 
-Restart the Agent to start sending Riak metrics to Datadog.
+Restart the Agent to start sending Riak metrics to Server Density.
 
 # Validation
 
@@ -44,10 +44,5 @@ The riak check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/riak/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-**riak.can_connect**:
-
-Returns CRITICAL if the Agent cannot connect to the Riak stats endpoint to collect metrics, otherwise OK.

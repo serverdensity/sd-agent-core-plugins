@@ -254,7 +254,6 @@ class DockerDaemon(AgentCheck):
         """Run the Docker check for one instance."""
         if not self.init_success:
             # Initialization can fail if cgroups are not ready or docker daemon is down. So we retry if needed
-            # https://github.com/DataDog/dd-agent/issues/1896
             self.init()
 
             if self.docker_client is None:
@@ -1027,7 +1026,7 @@ class DockerDaemon(AgentCheck):
             self.warning("Unable to find any pid directory in {0}. "
                 "If you are running the agent in a container, make sure to "
                 'share the volume properly: "/proc:/host/proc:ro". '
-                "See https://github.com/DataDog/docker-dd-agent/blob/master/README.md for more information. "
+                "See https://github.com/serverdensity/docker-sd-agent/blob/master/README.md for more information. "
                 "Network metrics will be missing".format(proc_path))
             self._disable_net_metrics = True
             return container_dict

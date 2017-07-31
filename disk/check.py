@@ -12,7 +12,7 @@ try:
 except ImportError:
     psutil = None
 
-# datadog
+# agent
 from checks import AgentCheck
 from config import _is_affirmative
 from utils.platform import Platform
@@ -65,10 +65,10 @@ class Disk(AgentCheck):
         # Force exclusion of CDROM (iso9660) from disk check
         self._excluded_filesystems.append('iso9660')
 
-        # FIXME: 6.x, drop use_mount option in datadog.conf
+        # FIXME: 6.x, drop use_mount option in config.cfg
         self._load_legacy_option(instance, 'use_mount', False,
                                  operation=_is_affirmative)
-        # FIXME: 6.x, drop device_blacklist_re option in datadog.conf
+        # FIXME: 6.x, drop device_blacklist_re option in config.cfg
         self._load_legacy_option(instance, 'excluded_disk_re', '^$',
                                  legacy_name='device_blacklist_re',
                                  operation=re.compile)
@@ -80,7 +80,7 @@ class Disk(AgentCheck):
 
         if value == default and legacy_name in self.agentConfig:
             self.log.warn(
-                "Using `{0}` in datadog.conf has been deprecated"
+                "Using `{0}` in config.conf has been deprecated"
                 " in favor of `{1}` in disk.yaml".format(legacy_name, option)
             )
             value = self.agentConfig.get(legacy_name) or default

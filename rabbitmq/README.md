@@ -12,7 +12,7 @@ And more.
 
 # Installation
 
-The RabbitMQ check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your RabbitMQ servers. If you need the newest version of the check, install the `dd-check-rabbitmq` package.
+The rabbitmq check can be installed with your package manager, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=rabbitmq).
 
 # Configuration
 
@@ -43,9 +43,9 @@ If you don't set `vhosts`, the Agent sends the following for EVERY vhost:
 
 If you do set `vhosts`, the Agent sends this check and metric only for the vhosts you list.
 
-There are options for `queues` and `nodes` that work similarly—the Agent checks all queues and nodes by default, but you can provide lists or regexes to limit this. See the [example check configuration](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/conf.yaml.example) for details on these configuration options (and all others).
+There are options for `queues` and `nodes` that work similarly—the Agent checks all queues and nodes by default, but you can provide lists or regexes to limit this. See the [example check configuration](conf.yaml.example) for details on these configuration options (and all others).
 
-Restart the Agent to begin sending RabbitMQ metrics, events, and service checks to Datadog.
+Restart the Agent to begin sending RabbitMQ metrics to Server Density.
 
 # Validation
 
@@ -70,22 +70,7 @@ The rabbitmq check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
 The Agent tags `rabbitmq.queue.*` metrics by queue name, and `rabbitmq.node.*` metrics by node name.
 
-# Events
-
-For performance reasons, the RabbitMQ check self-limits the number of queues and nodes it will collect metrics for. If and when the check nears this limit, it emits a warning-level event to your event stream.
-
-See the [example check configuration](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/conf.yaml.example) for details about these limits.
-
-# Service Checks
-
-**rabbitmq.aliveness**:
-
-The Agent submits this service check for all vhosts (if `vhosts` is not configured) OR a subset of vhosts (those configured in `vhosts`), tagging each service check `vhost:<vhost_name>`. Returns CRITICAL if the aliveness check failed, otherwise OK.
-
-**rabbitmq.status**:
-
-Returns CRITICAL if the Agent cannot connect to rabbitmq to collect metrics, otherwise OK.

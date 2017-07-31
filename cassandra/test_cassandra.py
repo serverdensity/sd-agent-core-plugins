@@ -26,11 +26,11 @@ LOG_INFO = {
     'syslog_port': None,
     'log_level': logging.INFO,
     'disable_file_logging': True,
-    'collector_log_file': '/var/log/datadog/collector.log',
-    'forwarder_log_file': '/var/log/datadog/forwarder.log',
-    'dogstatsd_log_file': '/var/log/datadog/dogstatsd.log',
-    'jmxfetch_log_file': '/var/log/datadog/jmxfetch.log',
-    'go-metro_log_file': '/var/log/datadog/go-metro.log',
+    'collector_log_file': '/var/log/sd-agent/collector.log',
+    'forwarder_log_file': '/var/log/sd-agent/forwarder.log',
+    'dogstatsd_log_file': '/var/log/sd-agent/dogstatsd.log',
+    'jmxfetch_log_file': '/var/log/sd-agent/jmxfetch.log',
+    'go-metro_log_file': '/var/log/sd-agent/go-metro.log',
 }
 
 with mock.patch('config.get_logging_config', return_value=LOG_INFO):

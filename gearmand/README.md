@@ -10,7 +10,7 @@ Collect Gearman metrics to:
 
 # Installation
 
-The Gearman check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Gearman job servers.
+The Gearman check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=gearman). To install the gearman check install the `sd-agent-gearman` package.
 
 # Configuration
 
@@ -24,7 +24,7 @@ instances:
     port: 4730
 ```
 
-Restart the Agent to begin sending Gearman metrics to Datadog.
+Restart the Agent to begin sending Gearman metrics to Server Density.
 
 # Validation
 
@@ -51,14 +51,5 @@ The gearmand check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/gearmand/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-# Events
-
-# Service Checks
-
-`gearman.can_connect`:
-
-Returns `Critical` if the Agent cannot connect to Gearman to collect metrics.
-
-# Further Reading

@@ -1,8 +1,13 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "930b1839-cc1f-4e7a-b706-0e8cf3218464",
+  "linux_package_name": "sd-agent-vsphere",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.15.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "module_files": [
+    "pyvmoni"
+  ],
   "name": "vsphere",
   "short_description": "Understand how vSphere resource usage affects your application.",
   "support": "core",
@@ -11,6 +16,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.2",
-  "guid": "930b1839-cc1f-4e7a-b706-0e8cf3218464"
+  "version": "1.0.2"
 }

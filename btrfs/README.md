@@ -9,7 +9,7 @@ Get metrics from btrfs service in real time to:
 
 # Installation
 
-The Btrfs check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on every server that uses at least one Btrfs filesystem.
+The btrfs check can be installed with your package manager, if the sd-agent is installed on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=btrfs). To install the btrfs check install the `sd-agent-btrfs` package.
 
 # Configuration
 
@@ -38,6 +38,3 @@ The btrfs check is compatible with all major platforms.
 
 # Metrics
 
-# Events
-
-# Service Checks

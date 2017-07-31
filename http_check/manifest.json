@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "eb133a1f-697c-4143-bad3-10e72541fa9c",
+  "linux_package_name": "sd-agent-http_check",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.14.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "http_check",
   "short_description": "http_check description.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.1.1",
-  "guid": "eb133a1f-697c-4143-bad3-10e72541fa9c"
+  "version": "1.1.1"
 }

@@ -1,8 +1,11 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "description": "",
+  "display_name": "DNS Check",
+  "linux_package_name": "sd-agent-dns-check",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "dns_check",
   "short_description": "dns_check description.",
   "support": "core",
@@ -12,5 +15,8 @@
     "windows"
   ],
   "version": "1.0.2",
-  "guid": "31e4c84c-fc4b-4cd4-97ed-0331bf4e2023"
+  "guid": "31e4c84c-fc4b-4cd4-97ed-0331bf4e2023",
+  "module_files": [
+    "dns"
+  ]
 }

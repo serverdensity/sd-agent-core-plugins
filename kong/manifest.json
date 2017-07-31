@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "f1098d6f-b393-4374-81c0-47c0a142aeef",
+  "linux_package_name": "sd-agent-kong",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "kong",
   "short_description": "Track total requests, response codes, client connections, and more.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0",
-  "guid": "f1098d6f-b393-4374-81c0-47c0a142aeef"
+  "version": "1.0.0"
 }

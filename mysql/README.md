@@ -1,6 +1,6 @@
 # Overview
 
-The Datadog Agent can collect many metrics from MySQL databases, including:
+The Server Density Agent can collect many metrics from MySQL databases, including:
 
 * Query throughput
 * Query performance (average query run time, slow queries, etc)
@@ -11,26 +11,26 @@ And many more. You can also invent your own metrics using custom SQL queries.
 
 # Installation
 
-The MySQL check is included in the Datadog Agent package, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your MySQL servers. If you need the newest version of the check, install the `dd-check-mysql` package.
+The MySQL check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=mysql). To install the MySQL check install the `sd-agent-mysql` package.
 
 # Configuration
 
 ### Prepare MySQL
 
-On each MySQL server, create a database user for the Datadog Agent:
+On each MySQL server, create a database user for the Server Density Agent:
 
 ```
-mysql> CREATE USER 'datadog'@'localhost' IDENTIFIED BY '<YOUR_CHOSEN_PASSWORD>';
+mysql> CREATE USER 'serverdensity'@'localhost' IDENTIFIED BY '<YOUR_CHOSEN_PASSWORD>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
 The Agent needs a few privileges to collect metrics. Grant its user ONLY the following privileges:
 
 ```
-mysql> GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;
+mysql> GRANT REPLICATION CLIENT ON *.* TO 'serverdensity'@'localhost' WITH MAX_USER_CONNECTIONS 5;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 
-mysql> GRANT PROCESS ON *.* TO 'datadog'@'localhost';
+mysql> GRANT PROCESS ON *.* TO 'serverdensity'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -45,7 +45,7 @@ mysql> show databases like 'performance_schema';
 +-------------------------------+
 1 row in set (0.00 sec)
 
-mysql> GRANT SELECT ON performance_schema.* TO 'datadog'@'localhost';
+mysql> GRANT SELECT ON performance_schema.* TO 'serverdensity'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -58,7 +58,7 @@ init_config:
 
 instances:
   - server: localhost
-    user: datadog
+    user: serverdensity
     pass: <YOUR_CHOSEN_PASSWORD> # from the CREATE USER step earlier
     port: <YOUR_MYSQL_PORT> # e.g. 3306
     options:
@@ -73,9 +73,9 @@ instances:
 
 If you found above that MySQL doesn't have `performance_schema` enabled, do not set `extra_performance_metrics` to `true`.
 
-See our [sample mysql.yaml](https://github.com/Datadog/integrations-core/blob/master/mysql/conf.yaml.example) for all available configuration options, including those for custom metrics.
+See our [sample mysql.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/mysql/conf.yaml.example) for all available configuration options, including those for custom metrics.
 
-Restart the Agent to start sending MySQL metrics to Datadog.
+Restart the Agent to start sending MySQL metrics to Server Density.
 
 # Validation
 
@@ -99,17 +99,17 @@ If the status is not OK, see the Troubleshooting section.
 
 # Troubleshooting
 
-You may observe one of these common problems in the output of the Datadog Agent's `info` subcommand.
+You may observe one of these common problems in the output of the Server Density Agent's `info` subcommand.
 
 ### Agent cannot authenticate
 ```
     mysql
     -----
-      - instance #0 [ERROR]: '(1045, u"Access denied for user \'datadog\'@\'localhost\' (using password: YES)")'
+      - instance #0 [ERROR]: '(1045, u"Access denied for user \'serverdensity\'@\'localhost\' (using password: YES)")'
       - Collected 0 metrics, 0 events & 1 service check
 ```
 
-Either the `'datadog'@'localhost'` user doesn't exist or the Agent is not configured with correct credentials. Review the Configuration section to add a user, and review the Agent's `mysql.yaml`.
+Either the `'serverdensity'@'localhost'` user doesn't exist or the Agent is not configured with correct credentials. Review the Configuration section to add a user, and review the Agent's `mysql.yaml`.
 
 ### Database user lacks privileges
 ```
@@ -123,16 +123,16 @@ Either the `'datadog'@'localhost'` user doesn't exist or the Agent is not config
 The Agent can authenticate, but it lacks privileges for one or more metrics it wants to collect. In this case, it lacks the PROCESS privilege:
 
 ```
-mysql> select user,host,process_priv from mysql.user where user='datadog';
-+---------+-----------+--------------+
-| user    | host      | process_priv |
-+---------+-----------+--------------+
-| datadog | localhost | N            |
-+---------+-----------+--------------+
+mysql> select user,host,process_priv from mysql.user where user='serverdensity';
++---------------+-----------+--------------+
+| user          | host      | process_priv |
++---------------+-----------+--------------+
+| serverdebsity | localhost | N            |
++---------------+-----------+--------------+
 1 row in set (0.00 sec)
 ```
 
-Review the Configuration section and grant the datadog user all necessary privileges. Do NOT grant all privileges on all databases to this user.
+Review the Configuration section and grant the serverdensity user all necessary privileges. Do NOT grant all privileges on all databases to this user.
 
 # Compatibility
 
@@ -140,7 +140,7 @@ The MySQL integration is supported on versions x.x+
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/mysql/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
 The check does not collect all metrics by default. Set the following boolean configuration options to `true` to enable its metrics:
 
@@ -277,16 +277,3 @@ The check does not collect all metrics by default. Set the following boolean con
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
 
-# Service Checks
-
-`mysql.replication.slave_running`:
-
-Returns CRITICAL for a slave that's not running, otherwise OK.
-
-`mysql.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to MySQL to collect metrics, otherwise OK.
-
-# Further Reading
-
-Read our [series of blog posts](https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics/) about monitoring MySQL with Datadog.

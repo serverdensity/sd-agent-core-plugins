@@ -9,7 +9,7 @@ Get metrics from kubernetes_state service in real time to:
 
 ## Installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager
+Install the `sd-agent-kubernetes_state` package manually or with your favorite configuration manager
 
 ## Configuration
 
@@ -17,7 +17,7 @@ Edit the `kubernetes_state.yaml` file to point to your server and port, set the 
 
 ## Validation
 
-When you run `datadog-agent info` you should see something like the following:
+When you run `sd-agent info` you should see something like the following:
 
     Checks
     ======

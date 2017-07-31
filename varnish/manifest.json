@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "d2052eae-89b8-4cb1-b631-f373010da4b8",
+  "linux_package_name": "sd-agent-varnish",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.15.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
   "name": "varnish",
   "short_description": "Track client and backend connections, cache misses and evictions, and more.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.4",
-  "guid": "d2052eae-89b8-4cb1-b631-f373010da4b8"
+  "version": "1.0.4"
 }

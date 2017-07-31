@@ -6,7 +6,7 @@ The PHP-FPM check monitors the state of your FPM pool and tracks request perform
 
 # Installation
 
-The PHP-FPM check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any servers that use PHP-FPM. If you need the newest version of the check, install the `dd-check-php-fpm` package.
+The PHP-FPM check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=PHP-FPM). To install the PHP-FPM check install the `sd-agent-php_fpm` package.
 
 # Configuration
 
@@ -15,18 +15,18 @@ Create a file `php_fpm.yaml` in the Agent's `conf.d` directory:
 ```
 init_config:
 
-instances: 
+instances:
   - status_url: http://localhost/status # or whatever pm.status_path is set to in your PHP INI
     ping_url: http://localhost/ping     # or whatever ping.path is set to in your PHP INI
     ping_reply: pong                    # the reply to expect from ping; default is 'pong'
 #   user: <YOUR_USERNAME>     # if the status and ping URLs require HTTP basic auth
 #   password: <YOUR_PASSWORD> # if the status and ping URLs require HTTP basic auth
-#   http_host: <HOST>         # if your FPM pool is only accessible via a specific HTTP vhost 
+#   http_host: <HOST>         # if your FPM pool is only accessible via a specific HTTP vhost
 #   tags:
 #     - instance:foo
 ```
 
-Restart the Agent to start sending PHP-FPM metrics to Datadog.
+Restart the Agent to start sending PHP-FPM metrics to Server Density.
 
 # Validation
 
@@ -49,12 +49,7 @@ Run the Agent's `info` subcommand and look for `php_fpm` under the Checks sectio
 
 The php_fpm check is compatible with all major platforms.
 
-# Metrics 
+# Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/php_fpm/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-`php_fpm.can_ping`:
-
-Returns CRITICAL if the Agent cannot ping PHP-FPM at the configured `ping_url`, otherwise OK.

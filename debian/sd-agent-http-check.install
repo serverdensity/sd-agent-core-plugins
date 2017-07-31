@@ -1,0 +1,3 @@
+checks.d/http_check.py usr/share/python/sd-agent/checks.d
+conf.d/http_check.yaml.example etc/sd-agent/conf.d
+

@@ -2,9 +2,9 @@
 
 # Overview
 
-The Datadog Agent collects one main metric about Gunicorn: the number of worker processes running. It also sends one service check: whether or not Gunicorn is running.
+The Server Density Agent collects one main metric about Gunicorn: the number of worker processes running.
 
-Gunicorn itself can provide further metrics via DogStatsD, including those for:
+Gunicorn itself can provide further metrics via SDStatsD, including those for:
 
 * Total request rate
 * Request rate by status code (2xx, 3xx, 4xx, 5xx)
@@ -13,27 +13,27 @@ Gunicorn itself can provide further metrics via DogStatsD, including those for:
 
 # Installation
 
-The Datadog Agent's Gunicorn check is included in the Agent package, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Gunicorn servers. If you need the newest version of the Gunicorn check, install the `dd-check-gunicorn` package; this package's check will override the one packaged with the Agent. See the [integrations-core](https://github.com/DataDog/integrations-core#installing-the-integrations) repository for more details.
+The gunicorn check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=gunicorn). To install the gunicorn check install the `sd-agent-gunicorn` package.
 
-The Gunicorn check requires your Gunicorn app's Python environment to have the [`setproctitle`](https://pypi.python.org/pypi/setproctitle) package; without it, the Datadog Agent will always report that it cannot find a `gunicorn` master process (and hence, cannot find workers, either). Install the `setproctitle` package in your app's Python environment if you want to collect the `gunicorn.workers` metric.
+The Gunicorn check requires your Gunicorn app's Python environment to have the [`setproctitle`](https://pypi.python.org/pypi/setproctitle) package; without it, the Server Density Agent will always report that it cannot find a `gunicorn` master process (and hence, cannot find workers, either). Install the `setproctitle` package in your app's Python environment if you want to collect the `gunicorn.workers` metric.
 
 # Configuration
 
-### Configure the Datadog Agent
+### Configure the Server Density Agent
 
-Create a `gunicorn.yaml` in the Datadog Agent's `conf.d` directory:
+Create a `gunicorn.yaml` in the Server Density Agent's `conf.d` directory:
 
 ```
 init_config:
 
 instances:
-  # as set 
+  # as set
   # 1) in your app's config.py (proc_name = <YOUR_APP_NAME>), OR
   # 2) via CLI (gunicorn --name <YOUR_APP_NAME> your:app)
   - proc_name: <YOUR_APP_NAME>
 ```
 
-Restart the Agent to begin sending Gunicorn metrics to Datadog.
+Restart the Agent to begin sending Gunicorn metrics to Server Density.
 
 ### Connect Gunicorn to DogStatsD
 
@@ -71,7 +71,7 @@ udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 
 ```
   Checks
   ======
-  
+
     gunicorn (5.12.1)
     -----------------
       - instance #0 [ERROR]: 'Found no master process with name: gunicorn: master [my_web_app]'
@@ -91,7 +91,7 @@ ubuntu   18018 18013  0 20:23 pts/0    00:00:00 /usr/bin/python /usr/bin/gunicor
 ubuntu   18019 18013  0 20:23 pts/0    00:00:00 /usr/bin/python /usr/bin/gunicorn --config test-app-config.py gunicorn-test:app
 ```
 
-If it _is_ installed, `gunicorn` processes appear in the format the Datadog Agent expects:
+If it _is_ installed, `gunicorn` processes appear in the format the Server Density Agent expects:
 
 ```
 $ ps -ef | grep gunicorn
@@ -106,14 +106,4 @@ The gunicorn check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/gunicorn/metadata.csv) for a list of metrics provided by this integration - those from the Agent _and_ those sent by Gunicorn to DogStatsD.
-
-# Service Checks
-
-`gunicorn.is_running`:
-
-Returns CRITICAL if the Agent cannot find a Gunicorn master process, or if cannot find any working or idle worker processes.
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate your Gunicorn apps with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-gunicorn-performance/).
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration - those from the Agent _and_ those sent by Gunicorn to DogStatsD.

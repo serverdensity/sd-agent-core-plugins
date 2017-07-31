@@ -1,0 +1,3 @@
+checks.d/powerdns_recursor.py usr/share/python/sd-agent/checks.d
+conf.d/powerdns_recursor.yaml.example etc/sd-agent/conf.d
+

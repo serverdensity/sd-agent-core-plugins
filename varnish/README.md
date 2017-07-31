@@ -2,14 +2,14 @@
 
 ## Overview
 
-Connect Varnish to Datadog in order to:
+Connect Varnish to Server Density in order to:
 
 * Visualize your cache performance in real-time
 * Correlate the performance of Varnish with the rest of your applications
 
 ## Installation
 
-Install the `dd-check-varnish` package manually or with your favorite configuration manager
+Install the `sd-agent-varnish` package manually or with your favorite configuration manager
 
 ## Configuration
 
@@ -25,21 +25,14 @@ instances:
           - instance:production
 ```
 
- - If you're running Varnish 4.1+, you must add the dd-agent user to the varnish group.
+ - If you're running Varnish 4.1+, you must add the sd-agent user to the varnish group.
 ```
-sudo usermod -a -G varnish dd-agent
+sudo usermod -a -G varnish sd-agent
 ```
-
- - If you want the check to use `varnishadm` and send a service check, the agent must be able to access `varnishadm` with root privileges. For this, you can update your `/etc/sudoers` file with for example:
- ```
- dd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
- ```
-
-
 
 ## Validation
 
-When you run `datadog-agent info` you should see something like the following:
+When you run `sd-agent info` you should see something like the following:
 
     Checks
     ======

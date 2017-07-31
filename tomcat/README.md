@@ -12,7 +12,7 @@ And more.
 
 # Installation
 
-The Tomcat check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Tomcat servers.
+The Tomcat check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=tomcat). To install the Tomcat check install the `sd-agent-tomcat` package.
 
 This check is JMX-based, so you'll need to enable JMX Remote on your Tomcat servers. Follow the instructions in the [Tomcat documentation](http://tomcat.apache.org/tomcat-6.0-doc/monitoring.html) to do that.
 
@@ -93,9 +93,9 @@ init_config:
           metric_type: counter
 ```
 
-See the [JMX Check documentation](http://docs.datadoghq.com/integrations/java/) for a list of configuration options usable by all JMX-based checks. The page also describes how the Agent tags JMX metrics.
+See the [JMX Check documentation](https://support.serverdensity.com/hc/en-us/search?query=java) for a list of configuration options usable by all JMX-based checks. The page also describes how the Agent tags JMX metrics.
 
-Restart the Agent to start sending Tomcat metrics to Datadog.
+Restart the Agent to start sending Tomcat metrics to Server Density.
 
 # Validation
 
@@ -120,8 +120,5 @@ The tomcat check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/tomcat/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Further Reading
-
-See our [blog post](https://www.datadoghq.com/blog/monitor-tomcat-metrics/) about monitoring Tomcat with Datadog.

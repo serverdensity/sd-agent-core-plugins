@@ -1,9 +1,24 @@
-[![Build Status](https://travis-ci.org/DataDog/integrations-core.svg?branch=master)](https://travis-ci.org/DataDog/integrations-core)
-[![Build status](https://ci.appveyor.com/api/projects/status/8w4s2bilp48n43gw?svg=true)](https://ci.appveyor.com/project/Datadog/integrations-core)
-# Datadog Agent Core Integrations
+[![Build Status](https://travis-ci.org/serverdensity/sd-agent-core-plugins.svg?branch=master)](https://travis-ci.org/serverdensity/sd-agent-core-plugins)
+<!---[![Build status](https://ci.appveyor.com/api/projects/status/?svg=true)](https://ci.appveyor.com/project/)-->
+# Server Density Agent Core Plugins
 
-This repository contains the Agent Integrations that Datadog officially develops and supports. To add a new integration, please see the [Integrations Extras](https://github.com/DataDog/integrations-extras) repository and the [accompanying documentation](http://docs.datadoghq.com/guides/integration_sdk/).
+This repository contains the Agent Plugins that Server Density officially develops and supports.
 
+# Installing the Plugins
+
+The [Server Density Agent](https://github.com/serverdensity/sd-agent) linux repositories contain all core plugins from this repository, so to get started using them, simply ensure that you have the repository enabled on your server. Instructions are available for [RHEL/CentOS](https://support.serverdensity.com/hc/en-us/articles/212729448-CentOS-Red-Hat-servers) and [Debian/Ubuntu](https://support.serverdensity.com/hc/en-us/articles/213334967-Debian-Ubuntu-servers)
+
+You may install any individual core integration via its own `sd-agent-<plugin_name>` package, e.g. `sd-agent-nginx`.
+
+For a check with underscores in its name, its package name replaces underscores with dashes. For example, the `powerdns_recursor` check is packaged as `sd-agent-powerdns-recursor`.
+
+# Configuring the Plugins
+
+For most plugins you simply need to install the relevant package and rename the configuration file to remove the `.example` suffix. Configuration optons may be required in the plugin configuration file. More details for each plugin can be found at our [support site](https://support.serverdensity.com/hc/)
+
+# Reporting Issues
+
+For more information on plugins, please reference our [documentation](http://support.serverdensity.com). You can also email us at [hello@serverdensity.com](mailto:hello@serverdensity.com) to connect with us.
 
 # Quick development Setup
 
@@ -25,18 +40,3 @@ Once the required Ruby gems have been installed by Bundler, you can easily creat
   more about the Python virtual environment on the Virtualenv documentation.
 
 This is a quick setup but from that point you should be able to run the default test suit `rake ci:run`.
-To go beyond we advise you to read the full documentation [here](http://docs.datadoghq.com/guides/integration_sdk/).
-
-# Installing the Integrations
-
-The [Datadog Agent](https://github.com/DataDog/dd-agent) contains all core integrations from this repository, so to get started using them, simply install the `datadog-agent` package for your operating system.
-
-Additionally, you may install any individual core integration via its own `dd-check-<integration_name>` package, e.g. `dd-check-nginx`. We build these packages from this repository and release them more often than `datadog-agent`. This allows us to distribute integration updates - and brand new integrations - in between releases of `datadog-agent`.
-
-In other words: on the day of a new `datadog-agent` release, you'll likely get the same version of the nginx check from the agent package as you would from `dd-check-nginx`. But if we haven't released a new agent in 6 weeks and this repository contains a bugfix for the nginx check, install the latest `dd-check-nginx` to override the buggy check packaged with `datadog-agent`.
-
-For a check with underscores in its name, its package name replaces underscores with dashes. For example, the `powerdns_recursor` check is packaged as `dd-check-powerdns-recursor`.
-
-# Reporting Issues
-
-For more information on integrations, please reference our [documentation](http://docs.datadoghq.com) and [knowledge base](https://help.datadoghq.com/hc/en-us). You can also visit our [help page](http://docs.datadoghq.com/help/) to connect with us.

@@ -1,0 +1,1052 @@
+%package -n sd-agent-activemq
+Summary: Server Density Monitoring Agent. activemq plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-activemq
+%{longdescription}
+This package installs the activemq plugin.
+
+%files -n sd-agent-activemq
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/activemq.yaml.example
+
+%package -n sd-agent-activemq-xml
+Summary: Server Density Monitoring Agent. activemq_xml plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-activemq-xml
+%{longdescription}
+This package installs the activemq_xml plugin.
+
+%files -n sd-agent-activemq-xml
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/activemq_xml.py
+%config /etc/sd-agent/conf.d/activemq_xml.yaml.example
+
+%package -n sd-agent-agent-metrics
+Summary: Server Density Monitoring Agent. agent-metrics plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-agent-metrics
+%{longdescription}
+This package installs the agent-metrics plugin.
+
+%files -n sd-agent-agent-metrics
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/agent_metrics.py
+%config /etc/sd-agent/conf.d/agent_metrics.yaml.default
+
+%package -n sd-agent-apache
+Summary: Server Density Monitoring Agent. apache plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-apache
+%{longdescription}
+This package installs the apache plugin.
+
+%files -n sd-agent-apache
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/apache.py
+%config /etc/sd-agent/conf.d/apache.yaml.example
+
+%package -n sd-agent-btrfs
+Summary: Server Density Monitoring Agent. btrfs plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-btrfs
+%{longdescription}
+This package installs the btrfs plugin.
+
+%files -n sd-agent-btrfs
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/btrfs.py
+%config /etc/sd-agent/conf.d/btrfs.yaml.example
+
+%package -n sd-agent-cacti
+Summary: Server Density Monitoring Agent. cacti plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-cacti
+%{longdescription}
+This package installs the cacti plugin.
+
+%files -n sd-agent-cacti
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/cacti.py
+%config /etc/sd-agent/conf.d/cacti.yaml.example
+
+%package -n sd-agent-cassandra
+Summary: Server Density Monitoring Agent. cassandra plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-cassandra
+%{longdescription}
+This package installs the cassandra plugin.
+
+%files -n sd-agent-cassandra
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/cassandra.yaml.example
+
+%package -n sd-agent-ceph
+Summary: Server Density Monitoring Agent. ceph plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-ceph
+%{longdescription}
+This package installs the ceph plugin.
+
+%files -n sd-agent-ceph
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/ceph.py
+%config /etc/sd-agent/conf.d/ceph.yaml.example
+
+%package -n sd-agent-consul
+Summary: Server Density Monitoring Agent. consul plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-consul
+%{longdescription}
+This package installs the consul plugin.
+
+%files -n sd-agent-consul
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/consul.py
+%config /etc/sd-agent/conf.d/consul.yaml.example
+
+%package -n sd-agent-couchdb
+Summary: Server Density Monitoring Agent. couchdb plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-couchdb
+%{longdescription}
+This package installs the couchdb plugin.
+
+%files -n sd-agent-couchdb
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/couch.py
+%config /etc/sd-agent/conf.d/couch.yaml.example
+
+%package -n sd-agent-couchbase
+Summary: Server Density Monitoring Agent. couchbase plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-couchbase
+%{longdescription}
+This package installs the couchbase plugin.
+
+%files -n sd-agent-couchbase
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/couchbase.py
+%config /etc/sd-agent/conf.d/couchbase.yaml.example
+
+%package -n sd-agent-directory
+Summary: Server Density Monitoring Agent. directory plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+
+%description -n sd-agent-directory
+%{longdescription}
+This package installs the directory plugin.
+
+%files -n sd-agent-directory
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/directory.py
+%config /etc/sd-agent/conf.d/directory.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*scandir*
+
+%package -n sd-agent-disk
+Summary: Server Density Monitoring Agent. disk plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-disk
+%{longdescription}
+This package installs the disk plugin.
+
+%files -n sd-agent-disk
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/disk.py
+%config /etc/sd-agent/conf.d/disk.yaml.default
+
+%package -n sd-agent-dns-check
+Summary: Server Density Monitoring Agent. dns-check plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-dns-check
+%{longdescription}
+This package installs the dns-check plugin.
+
+%files -n sd-agent-dns-check
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/dns_check.py
+%config /etc/sd-agent/conf.d/dns_check.yaml.example
+
+%package -n sd-agent-docker
+Summary: Server Density Monitoring Agent. docker plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-docker
+%{longdescription}
+This package installs the docker plugin.
+
+%files -n sd-agent-docker
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/docker_daemon.py
+%config /etc/sd-agent/conf.d/docker_daemon.yaml.example
+
+%package -n sd-agent-elastic
+Summary: Server Density Monitoring Agent. elastic plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-elastic
+%{longdescription}
+This package installs the elastic plugin.
+
+%files -n sd-agent-elastic
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/elastic.py
+%config /etc/sd-agent/conf.d/elastic.yaml.example
+
+%package -n sd-agent-etcd
+Summary: Server Density Monitoring Agent. etcd plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-etcd
+%{longdescription}
+This package installs the etcd plugin.
+
+%files -n sd-agent-etcd
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/etcd.py
+%config /etc/sd-agent/conf.d/etcd.yaml.example
+
+%package -n sd-agent-fluentd
+Summary: Server Density Monitoring Agent. fluentd plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-fluentd
+%{longdescription}
+This package installs the fluentd plugin.
+
+%files -n sd-agent-fluentd
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/fluentd.py
+%config /etc/sd-agent/conf.d/fluentd.yaml.example
+
+%package -n sd-agent-gearmand
+Summary: Server Density Monitoring Agent. gearmand plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-gearmand
+%{longdescription}
+This package installs the gearmand plugin.
+
+%files -n sd-agent-gearmand
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/gearmand.py
+%config /etc/sd-agent/conf.d/gearmand.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/gearman*
+
+%package -n sd-agent-gunicorn
+Summary: Server Density Monitoring Agent. gunicorn plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-gunicorn
+%{longdescription}
+This package installs the gunicorn plugin.
+
+%files -n sd-agent-gunicorn
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/gunicorn.py
+%config /etc/sd-agent/conf.d/gunicorn.yaml.example
+
+%package -n sd-agent-haproxy
+Summary: Server Density Monitoring Agent. haproxy plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-haproxy
+%{longdescription}
+This package installs the haproxy plugin.
+
+%files -n sd-agent-haproxy
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/haproxy.py
+%config /etc/sd-agent/conf.d/haproxy.yaml.example
+
+%package -n sd-agent-hdfs-compat
+Summary: Server Density Monitoring Agent. hdfs plugin
+Group: System/Monitoring
+Obsoletes: sd-agent-hdfs < 2.1.6-2
+Requires: sd-agent-hdfs-datanode = 2.2.0
+Requires: sd-agent-hdfs-namenode = 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-hdfs-compat
+%{longdescription}
+This package only exists to help transition sd-agent-hdfs users to the new
+package split. It will be removed in next major release, please
+do not reference it or depend on it in any way.
+
+%files -n sd-agent-hdfs-compat
+
+%package -n sd-agent-hdfs-datanode
+Summary: Server Density Monitoring Agent. hdfs_datanode plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-hdfs-datanode
+%{longdescription}
+This package installs the hdfs_datanode plugin.
+
+%files -n sd-agent-hdfs-datanode
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/hdfs_datanode.py
+%config /etc/sd-agent/conf.d/hdfs_datanode.yaml.example
+
+%package -n sd-agent-hdfs-namenode
+Summary: Server Density Monitoring Agent. hdfs_namenode plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-hdfs-namenode
+%{longdescription}
+This package installs the hdfs_namenode plugin.
+
+%files -n sd-agent-hdfs-namenode
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/hdfs_namenode.py
+%config /etc/sd-agent/conf.d/hdfs_namenode.yaml.example
+
+%package -n sd-agent-http-check
+Summary: Server Density Monitoring Agent. http_check plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-http-check
+%{longdescription}
+This package installs the http_check plugin.
+
+%files -n sd-agent-http-check
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/http_check.py
+%config /etc/sd-agent/conf.d/http_check.yaml.example
+
+%package -n sd-agent-kafka
+Summary: Server Density Monitoring Agent. kafka plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kafka
+%{longdescription}
+This package installs the kafka plugin.
+
+%files -n sd-agent-kafka
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/kafka.yaml.example
+
+%package -n sd-agent-kafka-consumer
+Summary: Server Density Monitoring Agent. kafka_consumer plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kafka-consumer
+%{longdescription}
+This package installs the kafka_consumer plugin.
+
+%files -n sd-agent-kafka-consumer
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/kafka_consumer.py
+%config /etc/sd-agent/conf.d/kafka_consumer.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/kafka*
+
+%package -n sd-agent-kong
+Summary: Server Density Monitoring Agent. kong plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kong
+%{longdescription}
+This package installs the kong plugin.
+
+%files -n sd-agent-kong
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/kong.py
+%config /etc/sd-agent/conf.d/kong.yaml.example
+
+%package -n sd-agent-kube-dns
+Summary: Server Density Monitoring Agent. kube_dns plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kube-dns
+%{longdescription}
+This package installs the kube_dns plugin.
+
+%files -n sd-agent-kube-dns
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/kube_dns.py
+%config /etc/sd-agent/conf.d/kube_dns.yaml.example
+
+%package -n sd-agent-kubernetes
+Summary: Server Density Monitoring Agent. kubernetes plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kubernetes
+%{longdescription}
+This package installs the kubernetes plugin.
+
+%files -n sd-agent-kubernetes
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/kubernetes.py
+%config /etc/sd-agent/conf.d/kubernetes.yaml.example
+
+%package -n sd-agent-kubernetes-state
+Summary: Server Density Monitoring Agent. kubernetes_state plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kubernetes-state
+%{longdescription}
+This package installs the kubernetes_state plugin.
+
+%files -n sd-agent-kubernetes-state
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/kubernetes_state.py
+%config /etc/sd-agent/conf.d/kubernetes_state.yaml.example
+
+%package -n sd-agent-kyototycoon
+Summary: Server Density Monitoring Agent. kyototycoon plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-kyototycoon
+%{longdescription}
+This package installs the kyototycoon plugin.
+
+%files -n sd-agent-kyototycoon
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/kyototycoon.py
+%config /etc/sd-agent/conf.d/kyototycoon.yaml.example
+
+%package -n sd-agent-lighttpd
+Summary: Server Density Monitoring Agent. lighttpd plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-lighttpd
+%{longdescription}
+This package installs the lighttpd plugin.
+
+%files -n sd-agent-lighttpd
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/lighttpd.py
+%config /etc/sd-agent/conf.d/lighttpd.yaml.example
+
+%package -n sd-agent-linux-proc-extras
+Summary: Server Density Monitoring Agent. linux_proc_extras plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-linux-proc-extras
+%{longdescription}
+This package installs the linux_proc_extras plugin.
+
+%files -n sd-agent-linux-proc-extras
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/linux_proc_extras.py
+%config /etc/sd-agent/conf.d/linux_proc_extras.yaml.example
+
+%package -n sd-agent-mapreduce
+Summary: Server Density Monitoring Agent. mapreduce plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-mapreduce
+%{longdescription}
+This package installs the mapreduce plugin.
+
+%files -n sd-agent-mapreduce
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mapreduce.py
+%config /etc/sd-agent/conf.d/mapreduce.yaml.example
+
+%package -n sd-agent-marathon
+Summary: Server Density Monitoring Agent. marathon plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-marathon
+%{longdescription}
+This package installs the marathon plugin.
+
+%files -n sd-agent-marathon
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/marathon.py
+%config /etc/sd-agent/conf.d/marathon.yaml.example
+
+%package -n sd-agent-memcache
+Summary: Server Density Monitoring Agent. memcache plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-memcache
+%{longdescription}
+This package installs the memcache plugin.
+
+%files -n sd-agent-memcache
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mcache.py
+%config /etc/sd-agent/conf.d/mcache.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/memcache.py
+
+%package -n sd-agent-mongo
+Summary: Server Density Monitoring Agent. mongo plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+
+%description -n sd-agent-mongo
+%{longdescription}
+This package installs the mongo plugin.
+
+%files -n sd-agent-mongo
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mongo.py
+%config /etc/sd-agent/conf.d/mongo.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pymongo*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/bson*
+
+%package -n sd-agent-mysql
+Summary: Server Density Monitoring Agent. mysql plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-mysql
+%{longdescription}
+This package installs the mysql plugin.
+
+%files -n sd-agent-mysql
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mysql.py
+%config /etc/sd-agent/conf.d/mysql.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pymysql
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/PyMySQL*
+
+%package -n sd-agent-network
+Summary: Server Density Monitoring Agent. network plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-network
+%{longdescription}
+This package installs the network plugin.
+
+%files -n sd-agent-network
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/network.py
+%config /etc/sd-agent/conf.d/network.yaml.default
+
+%package -n sd-agent-nginx
+Summary: Server Density Monitoring Agent. nginx plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-nginx
+%{longdescription}
+This package installs the nginx plugin.
+
+%files -n sd-agent-nginx
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/nginx.py
+%config /etc/sd-agent/conf.d/nginx.yaml.example
+
+%package -n sd-agent-ntp
+Summary: Server Density Monitoring Agent. ntp plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-ntp
+%{longdescription}
+This package installs the ntp plugin.
+
+%files -n sd-agent-ntp
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/ntp.py
+%config /etc/sd-agent/conf.d/ntp.yaml.default
+
+%package -n sd-agent-openstack
+Summary: Server Density Monitoring Agent. openstack plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-openstack
+%{longdescription}
+This package installs the openstack plugin.
+
+%files -n sd-agent-openstack
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/openstack.py
+%config /etc/sd-agent/conf.d/openstack.yaml.example
+
+%package -n sd-agent-phpfpm
+Summary: Server Density Monitoring Agent. phpfpm plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-phpfpm
+%{longdescription}
+This package installs the phpfpm plugin.
+
+%files -n sd-agent-phpfpm
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/php_fpm.py
+%config /etc/sd-agent/conf.d/php_fpm.yaml.example
+
+%package -n sd-agent-postfix
+Summary: Server Density Monitoring Agent. postfix plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-postfix
+%{longdescription}
+This package installs the postfix plugin.
+
+%files -n sd-agent-postfix
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/postfix.py
+%config /etc/sd-agent/conf.d/postfix.yaml.example
+
+%package -n sd-agent-postgresql
+Summary: Server Density Monitoring Agent. postgresql plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+Obsoletes: sd-agent-postgres < 2.0.3-2
+BuildArch: noarch
+
+%description -n sd-agent-postgresql
+%{longdescription}
+This package installs the postgresql plugin.
+
+%files -n sd-agent-postgresql
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/postgres.py
+%config /etc/sd-agent/conf.d/postgres.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pg8000*
+
+%package -n sd-agent-powerdns-recursor
+Summary: Server Density Monitoring Agent. powerdns_recursor plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-powerdns-recursor
+%{longdescription}
+This package installs the powerdns_recursor plugin.
+
+%files -n sd-agent-powerdns-recursor
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/powerdns_recursor.py
+%config /etc/sd-agent/conf.d/powerdns_recursor.yaml.example
+
+%package -n sd-agent-process
+Summary: Server Density Monitoring Agent. process plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-process
+%{longdescription}
+This package installs the process plugin.
+
+%files -n sd-agent-process
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/process.py
+%config /etc/sd-agent/conf.d/process.yaml.example
+
+%package -n sd-agent-rabbitmq
+Summary: Server Density Monitoring Agent. rabbitmq plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-rabbitmq
+%{longdescription}
+This package installs the rabbitmq plugin.
+
+%files -n sd-agent-rabbitmq
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/rabbitmq.py
+%config /etc/sd-agent/conf.d/rabbitmq.yaml.example
+
+%package -n sd-agent-redis
+Summary: Server Density Monitoring Agent. redis plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-redis
+%{longdescription}
+This package installs the redis plugin.
+
+%files -n sd-agent-redis
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/redisdb.py
+%config /etc/sd-agent/conf.d/redisdb.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/redis*
+
+%package -n sd-agent-riak
+Summary: Server Density Monitoring Agent. riak plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-riak
+%{longdescription}
+This package installs the riak plugin.
+
+%files -n sd-agent-riak
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/riak.py
+%config /etc/sd-agent/conf.d/riak.yaml.example
+/usr/share/python/sd-agent/lib/python2.7/site-packages/httplib2*
+
+%package -n sd-agent-riakcs
+Summary: Server Density Monitoring Agent. riakcs plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-riakcs
+%{longdescription}
+This package installs the riakcs plugin.
+
+%files -n sd-agent-riakcs
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/riakcs.py
+%config /etc/sd-agent/conf.d/riakcs.yaml.example
+
+%package -n sd-agent-sd-cpu-stats
+Summary: Server Density Monitoring Agent. SD CPU Stats plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-sd-cpu-stats
+%{longdescription}
+This package installs the SD CPU Stats plugin.
+
+%files -n sd-agent-sd-cpu-stats
+%defattr(-,root,root,-)
+%config(noreplace) /etc/sd-agent/conf.d/sd_cpu_stats.yaml.default
+/usr/share/python/sd-agent/checks.d/sd_cpu_stats.py
+
+%package -n sd-agent-snmp
+Summary: Server Density Monitoring Agent. snmp plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-snmp
+%{longdescription}
+This package installs the snmp plugin.
+
+%files -n sd-agent-snmp
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/snmp.py
+%config /etc/sd-agent/conf.d/snmp.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pysnmp*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pyasn1*
+
+%package -n sd-agent-solr
+Summary: Server Density Monitoring Agent. solr plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-solr
+%{longdescription}
+This package installs the solr plugin.
+
+%files -n sd-agent-solr
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/solr.yaml.example
+
+%package -n sd-agent-spark
+Summary: Server Density Monitoring Agent. spark plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-spark
+%{longdescription}
+This package installs the spark plugin.
+
+%files -n sd-agent-spark
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/spark.py
+%config /etc/sd-agent/conf.d/spark.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/beautifulsoup4*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/bs4*
+
+%package -n sd-agent-ssh-check
+Summary: Server Density Monitoring Agent. ssh_check plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+
+%description -n sd-agent-ssh-check
+%{longdescription}
+This package installs the ssh_check plugin.
+
+%files -n sd-agent-ssh-check
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/ssh_check.py
+%config /etc/sd-agent/conf.d/ssh_check.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/paramiko*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/cryptography*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/Crypto*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/enum*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/_cffi_backend.so
+
+%package -n sd-agent-statsd
+Summary: Server Density Monitoring Agent. statsd plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-statsd
+%{longdescription}
+This package installs the statsd plugin.
+
+%files -n sd-agent-statsd
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/statsd.py
+%config /etc/sd-agent/conf.d/statsd.yaml.example
+
+%package -n sd-agent-supervisord
+Summary: Server Density Monitoring Agent. supervisord plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-supervisord
+%{longdescription}
+This package installs the supervisord plugin.
+
+%files -n sd-agent-supervisord
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/supervisord.py
+%config /etc/sd-agent/conf.d/supervisord.yaml.example
+
+%package -n sd-agent-system-core
+Summary: Server Density Monitoring Agent. system-core plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-system-core
+%{longdescription}
+This package installs the system-core plugin.
+
+%files -n sd-agent-system-core
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/system_core.py
+%config /etc/sd-agent/conf.d/system_core.yaml.example
+
+%package -n sd-agent-system-swap
+Summary: Server Density Monitoring Agent. system-swap plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-system-swap
+%{longdescription}
+This package installs the system-swap plugin.
+
+%files -n sd-agent-system-swap
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/system_swap.py
+%config /etc/sd-agent/conf.d/system_swap.yaml.example
+
+%package -n sd-agent-tcp-check
+Summary: Server Density Monitoring Agent. tcp_check plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-tcp-check
+%{longdescription}
+This package installs the tcp_check plugin.
+
+%files -n sd-agent-tcp-check
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/tcp_check.py
+%config /etc/sd-agent/conf.d/tcp_check.yaml.example
+
+%package -n sd-agent-tokumx
+Summary: Server Density Monitoring Agent. tokumx plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-tokumx
+%{longdescription}
+This package installs the tokumx plugin.
+
+%files -n sd-agent-tokumx
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/tokumx.py
+%config /etc/sd-agent/conf.d/tokumx.yaml.example
+
+%package -n sd-agent-tomcat
+Summary: Server Density Monitoring Agent. tomcat plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-tomcat
+%{longdescription}
+This package installs the tomcat plugin.
+
+%files -n sd-agent-tomcat
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/tomcat.yaml.example
+
+%package -n sd-agent-twemproxy
+Summary: Server Density Monitoring Agent. twemproxy plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-twemproxy
+%{longdescription}
+This package installs the twemproxy plugin.
+
+%files -n sd-agent-twemproxy
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/twemproxy.py
+%config /etc/sd-agent/conf.d/twemproxy.yaml.example
+
+%package -n sd-agent-varnish
+Summary: Server Density Monitoring Agent. varnish plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-varnish
+%{longdescription}
+This package installs the varnish plugin.
+
+%files -n sd-agent-varnish
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/varnish.py
+%config /etc/sd-agent/conf.d/varnish.yaml.example
+
+%package -n sd-agent-vsphere
+Summary: Server Density Monitoring Agent. vsphere plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-vsphere
+%{longdescription}
+This package installs the vsphere plugin.
+
+%files -n sd-agent-vsphere
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/vsphere.py
+%config /etc/sd-agent/conf.d/vsphere.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pyvmomi*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pyVmomi*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pyVim*
+
+%package -n sd-agent-yarn
+Summary: Server Density Monitoring Agent. yarn plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-yarn
+%{longdescription}
+This package installs the yarn plugin.
+
+%files -n sd-agent-yarn
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/yarn.py
+%config /etc/sd-agent/conf.d/yarn.yaml.example
+
+%package -n sd-agent-zookeeper
+Summary: Server Density Monitoring Agent. zookeeper plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-zookeeper
+%{longdescription}
+This package installs the zookeeper plugin.
+
+%files -n sd-agent-zookeeper
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/zk.py
+%config /etc/sd-agent/conf.d/zk.yaml.example
+

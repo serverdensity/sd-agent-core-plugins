@@ -9,7 +9,7 @@ Get metrics from kafka_consumer service in real time to:
 
 ## Installation
 
-Install the `dd-check-kafka_consumer` package manually or with your favorite configuration manager
+Install the `sd-agent-kafka_consumer` package manually or with your favorite configuration manager
 
 ## Configuration
 
@@ -17,7 +17,7 @@ Edit the `kafka_consumer.yaml` file to point to your server and port, set the ma
 
 ## Validation
 
-When you run `datadog-agent info` you should see something like the following:
+When you run `sd-agent info` you should see something like the following:
 
     Checks
     ======

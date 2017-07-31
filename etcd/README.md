@@ -10,7 +10,7 @@ Collect etcd metrics to:
 
 # Installation
 
-The etcd check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your etcd instance(s).
+The etcd check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=etcd). To install the etcd check install the `sd-agent-etcd` package.
 
 # Configuration
 
@@ -23,7 +23,7 @@ instances:
   - url: "https://server:port" # API endpoint of your etcd instance
 ```
 
-Restart the Agent to begin sending etcd metrics to Datadog.
+Restart the Agent to begin sending etcd metrics to Server Density.
 
 # Validation
 
@@ -50,16 +50,5 @@ The etcd check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/etcd/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-# Events
-
-# Service Checks
-
-`etcd.can_connect`:
-
-Returns 'Critical' if the Agent cannot collect metrics from your etcd API endpoint.
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate etcd with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-etcd-performance/) about it.

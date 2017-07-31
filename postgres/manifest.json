@@ -1,9 +1,16 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "alias": "postgresql",
+  "guid": "e9ca29d5-5b4f-4478-8989-20d89afda0c9",
+  "linux_package_name": "sd-agent-postgresql",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
+  "module_files": [
+    "pg8000"
+  ],
   "name": "postgres",
+  "package_deps": false,
   "short_description": "Collect a wealth of database performance and health metrics.",
   "support": "core",
   "supported_os": [
@@ -11,7 +18,5 @@
     "mac_os",
     "windows"
   ],
-  "package_deps": false,
-  "version": "1.0.3",
-  "guid": "e9ca29d5-5b4f-4478-8989-20d89afda0c9"
+  "version": "1.0.3"
 }

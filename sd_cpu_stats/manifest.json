@@ -1,0 +1,16 @@
+{
+  "guid": "7b9e89aa-a1b2-466f-ae67-94d18cea90b1",
+  "linux_package_name": "sd-agent-sd-cpu-stats",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "name": "sd_cpu_stats",
+  "short_description": "Per core CPU stats (SD Legacy).",
+  "support": "core",
+  "supported_os": [
+    "linux",
+    "mac_os"
+  ],
+  "version": "1.0.0"
+}

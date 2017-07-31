@@ -9,7 +9,7 @@ The Agent's Marathon check lets you:
 
 # Installation
 
-The Marathon check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Marathon master. If you need the newest version of the check, install the `dd-check-marathon` package.
+The Marathon check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=marathon). To install the marathon check install the `sd-agent-marathon` package.
 
 # Configuration
 
@@ -28,7 +28,7 @@ instances:
 
 The function of `user` and `password` depends on whether or not you configure `acs_url`; If you do, the Agent uses them to request an authentication token from ACS, which it then uses to authenticate to the Marathon API. Otherwise, the Agent uses `user` and `password` to directly authenticate to the Marathon API.
 
-Restart the Agent to begin sending Marathon metrics to Datadog.
+Restart the Agent to begin sending Marathon metrics to Server Density.
 
 # Validation
 
@@ -53,10 +53,5 @@ The marathon check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/marathon/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-`marathon.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to the Marathon API to collect metrics, otherwise OK.

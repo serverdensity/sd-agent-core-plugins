@@ -1,11 +1,12 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "eb31452b-d681-4823-87cc-2ef114559edf",
+  "linux_package_name": "sd-agent-kubernetes",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.15.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "kubernetes",
   "short_description": "Capture Pod scheduling events, track the status of your Kubelets, and much more.",
-  "guid": "eb31452b-d681-4823-87cc-2ef114559edf",
   "support": "contrib",
   "supported_os": [
     "linux",

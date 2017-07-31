@@ -1,0 +1,3 @@
+checks.d/system_swap.py usr/share/python/sd-agent/checks.d
+conf.d/system_swap.yaml.example etc/sd-agent/conf.d
+

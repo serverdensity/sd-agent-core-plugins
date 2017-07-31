@@ -2,7 +2,7 @@
 
 # Overview
 
-The Datadog Agent can collect many metrics from NGINX instances, including:
+The Server Density Agent can collect many metrics from NGINX instances, including:
 
 * Total requests
 * Connections (accepted, handled, active)
@@ -18,7 +18,7 @@ And many more.
 
 # Installation
 
-The NGINX check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your NGINX servers. If you need the newest version of the check, install the `dd-check-nginx` package.
+The NGINX check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=nginx). To install the MySQL check install the `sd-agent-nginx` package.
 
 ### NGINX status module
 
@@ -85,7 +85,7 @@ instances:
   # password: <PASSWORD>
 ```
 
-Restart the Agent to start sending NGINX metrics to Datadog.
+Restart the Agent to start sending NGINX metrics to Server Density.
 
 # Validation
 
@@ -108,13 +108,13 @@ See the Troubleshooting section if the status is not OK.
 
 # Troubleshooting
 
-You may observe one of these common problems in the output of the Datadog Agent's info subcommand.
+You may observe one of these common problems in the output of the Server Density Agent's info subcommand.
 
 ### Agent cannot connect
 ```
   Checks
   ======
-  
+
     nginx
     -----
       - instance #0 [ERROR]: "('Connection aborted.', error(111, 'Connection refused'))"
@@ -127,7 +127,7 @@ Check that the main `nginx.conf` includes a line like the following:
 
 ```
 http{
-	
+
 	...
 
 	include <directory_that_contains_status.conf>/*.conf;
@@ -143,7 +143,7 @@ The NGINX check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/nginx/metadata.csv) for a full list of provided metrics.
+See [metadata.csv](metadata.csv) for a full list of provided metrics.
 
 Not all metrics shown are available to users of open source NGINX. Compare the module reference for [stub status](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html) (open source NGINX) and [http status](http://nginx.org/en/docs/http/ngx_http_status_module.html) (NGINX Plus) to understand which metrics are provided by each module.
 
@@ -166,13 +166,3 @@ Finally, these metrics have no good equivalent:
 
 | nginx.net.reading | The current number of connections where nginx is reading the request header. |
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |
-
-# Service Checks
-
-`nginx.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to NGINX to collect metrics, otherwise OK.
-
-# Further Reading
-
-Read our [series of blog posts](https://www.datadoghq.com/blog/how-to-monitor-nginx/) about how to monitor NGINX with Datadog.

@@ -1,8 +1,14 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "4eb195ef-554f-4cc2-80af-8f286c631fa8",
+  "linux_package_name": "sd-agent-ssh_check",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "module_files": [
+    "paramiko",
+    "cryptography"
+  ],
   "name": "ssh_check",
   "short_description": "Monitor SSH connectivity and SFTP latency.",
   "support": "core",
@@ -11,6 +17,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.1.1",
-  "guid": "4eb195ef-554f-4cc2-80af-8f286c631fa8"
+  "version": "1.1.1"
 }

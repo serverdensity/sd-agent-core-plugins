@@ -160,7 +160,7 @@ class ConsulCheck(AgentCheck):
             # A few things could be happening here.
             #   1. Consul Agent is Down
             #   2. The cluster is in the midst of a leader election
-            #   3. The Datadog agent is not able to reach the Consul instance (network partition et al.)
+            #   3. The Server Density agent is not able to reach the Consul instance (network partition et al.)
             self.log.warn('Consul Leader information is not available!')
             return
 
@@ -324,7 +324,7 @@ class ConsulCheck(AgentCheck):
                     # An additional service is registered on this node. Bump up the counter
                     nodes_to_service_status[node_id]["up"] += 1
 
-                    # If there is no Check for the node then Consul and dd-agent consider it up
+                    # If there is no Check for the node then Consul and sd-agent consider it up
                     if 'Checks' not in node:
                         node_status['passing'] += 1
                         node_status['up'] += 1

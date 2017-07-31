@@ -9,7 +9,7 @@ Get metrics from agent_metrics service in real time to:
 
 ## Installation
 
-Install the `dd-check-agent_metrics` package manually or with your favorite configuration manager
+Install the `sd-agent-agent_metrics` package manually or with your favorite configuration manager
 
 ## Configuration
 
@@ -17,7 +17,7 @@ Edit the `agent_metrics.yaml` file to point to your server and port, set the mas
 
 ## Validation
 
-When you run `datadog-agent info` you should see something like the following:
+When you run `sd-agent-agent info` you should see something like the following:
 
     Checks
     ======

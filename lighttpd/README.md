@@ -6,7 +6,7 @@ The Agent's lighttpd check tracks uptime, bytes served, requests per second, res
 
 # Installation
 
-The lighttpd check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your lighttpd servers. If you need the newest version of the check, install the `dd-check-lighttpd` package.
+The Lighthttpd check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=lighthttpd). To install the lighthttpd check install the `sd-agent-lighthttpd` package.
 
 You'll also need to install `mod_status` on your Lighttpd servers.
 
@@ -24,7 +24,7 @@ instances:
 #     - instance:foo
 ```
 
-Restart the Agent to begin sending lighttpd metrics to Datadog.
+Restart the Agent to begin sending lighttpd metrics to Server Density.
 
 # Validation
 
@@ -88,10 +88,5 @@ It collects these metrics for lighttpd 2:
 - lighttpd.response.status_4xx
 - lighttpd.response.status_5xx
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/lighttpd/metadata.csv) for a description of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a description of metrics provided by this check.
 
-# Service Checks
-
-`- lighttpd.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to lighttpd to collect metrics, otherwise OK.

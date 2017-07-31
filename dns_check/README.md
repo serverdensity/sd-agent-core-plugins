@@ -6,9 +6,9 @@ Monitor the resolvability of and lookup times for any DNS records using nameserv
 
 # Installation
 
-The DNS check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host from which you want to probe your DNS servers. Though many metrics-oriented checks are best run on the same host(s) as the monitored service, you may want to run this status-oriented check from hosts that do not run the monitored DNS services.
+The DNS check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=dns). To install the dns check install the `sd-agent-dns` package.
 
-If you need the newest version of the DNS check, install the `dd-check-dns` package; this package's check will override the one packaged with the Agent. See the [integrations-core](https://github.com/DataDog/integrations-core#installing-the-integrations) repository for more details.
+Though many metrics-oriented checks are best run on the same host(s) as the monitored service, you may want to run this status-oriented check from hosts that do not run the monitored DNS services.
 
 # Configuration
 
@@ -28,7 +28,7 @@ instances:
 
 If you omit the `nameserver` option, the check will use whichever nameserver is configured in local network settings.
 
-Restart the Agent to begin sending DNS service checks and response times to Datadog.
+Restart the Agent to begin sending DNS service checks and response times to Server Density.
 
 # Validation
 
@@ -56,16 +56,4 @@ The DNS check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/dns_check/metadata.csv) for a list of metrics provided by this integration.
-
-# Events
-
-# Service Checks
-
-`dns.can_resolve`:
-
-Returns CRITICAL if the Agent fails to resolve the request, otherwise returns UP.
-
-Tagged by `hostname` and `record_type`.
-
-# Further Reading
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.

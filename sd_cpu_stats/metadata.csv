@@ -1,0 +1,6 @@
+metric_name,metric_type,interval,unit_name,per_unit_name,description,orientation,integration,short_name
+serverdensity.cpu.usr,gauge,,percent,,,-1,serverdensity,CPU user
+serverdensity.cpu.nice,gauge,,percent,,,-1,serverdensity,CPU nice
+serverdensity.cpu.sys,gauge,,percent,,,-1,serverdensity,CPU system
+serverdensity.cpu.irq,gauge,,percent,,,-1,serverdensity,CPU IRQ
+serverdensity.cpu.idle,gauge,,percent,,,-1,serverdensity,CPU idle

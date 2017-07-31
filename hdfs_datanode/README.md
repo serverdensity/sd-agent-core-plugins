@@ -8,7 +8,7 @@ Use this check (hdfs_datanode) and its counterpart check (hdfs_namenode), not th
 
 # Installation
 
-The HDFS DataNode check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your DataNodes.
+The HDFS Datanode check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=hdfs+datanode). To install the HDFS Datanode check install the `sd-agent-hdfs-datanode` package.
 
 # Configuration
 
@@ -36,7 +36,7 @@ instances:
   - hdfs_datanode_jmx_uri: http://localhost:50075
 ```
 
-Restart the Agent to begin sending DataNode metrics to Datadog.
+Restart the Agent to begin sending DataNode metrics to Server Density.
 
 # Validation
 
@@ -63,16 +63,5 @@ The hdfs_datanode check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-# Events
-
-# Service Checks
-
-`hdfs.datanode.jmx.can_connect`:
-
-Returns `Critical` if the Agent cannot connect to the DataNode's JMX interface for any reason (e.g. wrong port provided, timeout, un-parseable JSON response).
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate your HDFS DataNodes with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/hadoop-architecture-overview/) about monitoring Hadoop. In particular, [Part 2](https://www.datadoghq.com/blog/monitor-hadoop-metrics/) provides a useful walkthrough of key metrics.

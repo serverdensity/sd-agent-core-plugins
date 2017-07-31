@@ -9,7 +9,7 @@ Get metrics from statsd service in real time to:
 
 ## Installation
 
-Install the `dd-check-statsd` package manually or with your favorite configuration manager
+Install the `sd-agent-statsd` package manually or with your favorite configuration manager
 
 ## Configuration
 
@@ -17,7 +17,7 @@ Edit the `statsd.yaml` file to point to your server and port, set the masters to
 
 ## Validation
 
-When you run `datadog-agent info` you should see something like the following:
+When you run `sd-agent info` you should see something like the following:
 
     Checks
     ======

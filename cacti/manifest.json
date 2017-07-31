@@ -1,14 +1,15 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "566466b0-1422-44ef-b14f-493a64e7b58a",
+  "linux_package_name": "sd-agent-cacti",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "cacti",
-  "short_description": "Forward your Cacti RRDs to Datadog for richer alerting and beautiful graphing.",
+  "short_description": "Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.",
   "support": "core",
   "supported_os": [
     "linux"
   ],
-  "version": "1.0.0",
-  "guid": "566466b0-1422-44ef-b14f-493a64e7b58a"
+  "version": "1.0.0"
 }
