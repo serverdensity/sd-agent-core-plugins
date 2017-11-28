@@ -10,12 +10,16 @@ cache:
 python:
   - "2.7"
 
+env:
+  - SKIP_CSV_CHECK_DIRS="debian/ embedded/ packaging/ vendor/"
+
 git:
   depth: 3
 
 branches:
   only:
     - master
+    - /.*/
 
 services:
   - docker
@@ -23,115 +27,8 @@ services:
 matrix:
   fast_finish: true
 
-env:
-  global:
-    - NOSE_FILTER="not windows and not fixme"
-    - VOLATILE_DIR=/tmp/integration-sdk-testing
-    - SKIP_CLEANUP=true
-    - INTEGRATIONS_DIR=$HOME/embedded
-    - PIP_CACHE=$HOME/.cache/pip
-    - SDK_TESTING=true
-    - BUNDLE_PATH=$TRAVIS_BUILD_DIR/vendor/cache
-    - SD_AGENT_BRANCH=master
-    - EXTRAS_BRANCH=master
-    - JMXFETCH_URL="https://dd-jmxfetch.s3.amazonaws.com"
-    - REQ_LOCALS="$TRAVIS_BUILD_DIR,$HOME/sd-agent"
-  matrix:
-    - TRAVIS_FLAVOR=default
-    - TRAVIS_FLAVOR=activemq_xml FLAVOR_VERSION=5.11.1
-    - TRAVIS_FLAVOR=apache FLAVOR_VERSION=2.4.12
-    - TRAVIS_FLAVOR=cassandra FLAVOR_VERSION=2.0.17
-    - TRAVIS_FLAVOR=cassandra FLAVOR_VERSION=2.1.14
-    - TRAVIS_FLAVOR=cassandra FLAVOR_VERSION=2.2.10
-    - TRAVIS_FLAVOR=couch FLAVOR_VERSION=1.6.1
-    - TRAVIS_FLAVOR=consul FLAVOR_VERSION=v0.6.4
-    - TRAVIS_FLAVOR=consul FLAVOR_VERSION=0.7.2
-    - TRAVIS_FLAVOR=docker_daemon
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=0.90.13
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.0.3
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.1.2
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.2.4
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.3.9
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.4.5
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.5.2
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.6.2
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=1.7.4
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=2.0.2
-    - TRAVIS_FLAVOR=elastic FLAVOR_VERSION=2.1.1
-    - TRAVIS_FLAVOR=etcd FLAVOR_VERSION=2.0.5
-    - TRAVIS_FLAVOR=fluentd FLAVOR_VERSION=v0.12.22
-    - TRAVIS_FLAVOR=gearmand FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=gunicorn FLAVOR_VERSION=19.6.0
-    - TRAVIS_FLAVOR=go_expvar FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=haproxy FLAVOR_VERSION=1.4.26
-    - TRAVIS_FLAVOR=haproxy FLAVOR_VERSION=1.5.11
-    - TRAVIS_FLAVOR=haproxy FLAVOR_VERSION=1.6.9
-    - TRAVIS_FLAVOR=kafka_consumer FLAVOR_VERSION=0.10.1.0-1
-    - TRAVIS_FLAVOR=kafka FLAVOR_VERSION=0.10.1.0-1
-    - TRAVIS_FLAVOR=kong FLAVOR_VERSION=0.9.0
-    - TRAVIS_FLAVOR=kube_dns FLAVOR_VERSION=0.1.0
-    - TRAVIS_FLAVOR=kubernetes
-    - TRAVIS_FLAVOR=kyototycoon FLAVOR_VERSION=0.9.56
-    - TRAVIS_FLAVOR=lighttpd
-    - TRAVIS_FLAVOR=mcache FLAVOR_VERSION=1.4.22
-    - TRAVIS_FLAVOR=mongo FLAVOR_VERSION=2.6.9
-    - TRAVIS_FLAVOR=mongo FLAVOR_VERSION=3.0.1
-    - TRAVIS_FLAVOR=mongo FLAVOR_VERSION=3.2.10
-    - TRAVIS_FLAVOR=mongo FLAVOR_VERSION=3.4
-    - TRAVIS_FLAVOR=mysql FLAVOR_VERSION=5.5
-    - TRAVIS_FLAVOR=mysql FLAVOR_VERSION=5.6
-    - TRAVIS_FLAVOR=mysql FLAVOR_VERSION=5.7
-    - TRAVIS_FLAVOR=nginx FLAVOR_VERSION=1.6.2
-    - TRAVIS_FLAVOR=nginx FLAVOR_VERSION=1.7.11
-    - TRAVIS_FLAVOR=nginx FLAVOR_VERSION=1.9.15
-    - TRAVIS_FLAVOR=nginx FLAVOR_VERSION=1.11.8
-    - TRAVIS_FLAVOR=nginx FLAVOR_VERSION=1.10.2
-    - TRAVIS_FLAVOR=openstack
-    - TRAVIS_FLAVOR=pgbouncer FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=php_fpm FLAVOR_VERSION=5.5
-    - TRAVIS_FLAVOR=postgres FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=powerdns_recursor FLAVOR_VERSION=3.7.3
-    - TRAVIS_FLAVOR=powerdns_recursor FLAVOR_VERSION=4.0.3
-    - TRAVIS_FLAVOR=rabbitmq FLAVOR_VERSION=3.5.0
-    - TRAVIS_FLAVOR=rabbitmq FLAVOR_VERSION=3.6.0
-    - TRAVIS_FLAVOR=redisdb FLAVOR_VERSION=2.4.18
-    - TRAVIS_FLAVOR=redisdb FLAVOR_VERSION=2.6.17
-    - TRAVIS_FLAVOR=redisdb FLAVOR_VERSION=2.8.19
-    - TRAVIS_FLAVOR=riak FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=ssh_check
-    - TRAVIS_FLAVOR=snmp
-    - TRAVIS_FLAVOR=solr FLAVOR_VERSION=6.2
-    - TRAVIS_FLAVOR=sqlserver FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=statsd
-    - TRAVIS_FLAVOR=supervisord FLAVOR_VERSION=3.3.0
-    - TRAVIS_FLAVOR=tcp_check
-    - TRAVIS_FLAVOR=tokumx
-    - TRAVIS_FLAVOR=tomcat FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=twemproxy FLAVOR_VERSION=latest
-    - TRAVIS_FLAVOR=varnish FLAVOR_VERSION=4.1.7
-    - TRAVIS_FLAVOR=varnish FLAVOR_VERSION=5.0.0
-    # END OF TRAVIS MATRIX
-
 install:
-  - bundle install
-  - bundle package
-  - git -C $HOME/sd-agent pull || git clone -b $SD_AGENT_BRANCH --depth 1 https://github.com/serverdensity/sd-agent.git $HOME/sd-agent
-  - echo "$HOME/sd-agent/" > $(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")/sd-agent.pth
-  - if [ -e ~/sd-agent/requirements.txt ]; then pip install -r ~/sd-agent/requirements.txt; fi
-  - bundle exec rake setup_agent_libs
+  - gem install csvlint
 
 script:
-  - bundle exec rake prep_travis_ci
-  - bundle exec rake ci:run
-  - bundle exec rake requirements
-
-# we should clean generated files before we save the cache
-# We don't want to save .pyc files
-# Since clobber only cleans the project directory,
-# everything outside of it should be cleaned, too, so we'll use find and -delete
-before_cache:
-  - rake clobber
-  - find $HOME/.cache/pip $HOME/sd-agent -name *.pyc -delete
-
-after_script:
-  - if [[ $(docker ps -a -q) ]]; then docker stop $(docker ps -a -q); fi
+  - for d in */; do if [[ " $SKIP_CSV_CHECK_DIRS " =~ " $d " ]]; then continue; else csvlint "$d"metadata.csv; fi done

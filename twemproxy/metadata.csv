@@ -6,7 +6,7 @@ twemproxy.client_err,gauge,,error,,number of errors on client connections,-1,twe
 twemproxy.client_connections,gauge,,connection,,number of active client connections,0,twemproxy,client conns
 twemproxy.server_ejects,gauge,,event,,number of times backend server was ejected,-1,twemproxy,server ejects
 twemproxy.forward_error,gauge,,error,,number of times we encountered a forwarding error,-1,twemproxy,fwd err
-twemproxy.fragments,gauge,,request,,number of fragments created from a multi-vector request,twemproxy,frags
+twemproxy.fragments,gauge,,request,,number of fragments created from a multi-vector request,,twemproxy,frags
 twemproxy.in_queue,gauge,,request,,number of requests in incoming queue,0,twemproxy,in queue reqs
 twemproxy.out_queue,gauge,,request,,number of requests in outgoing queue,0,twemproxy,out queue reqs
 twemproxy.in_queue_bytes,gauge,,byte,,current request bytes in incoming queue,0,twemproxy,in queue bytes
