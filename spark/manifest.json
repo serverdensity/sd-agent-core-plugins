@@ -1,8 +1,14 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "f7a5a40f-f73c-465a-be8f-b2b371c706a2",
+  "linux_package_name": "sd-agent-spark",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "module_files": [
+    "simplejson",
+    "beautifulsoup4"
+  ],
   "name": "spark",
   "short_description": "Track failed task rates, shuffled bytes, and much more.",
   "support": "core",
@@ -11,6 +17,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.1",
-  "guid": "f7a5a40f-f73c-465a-be8f-b2b371c706a2"
+  "version": "1.0.1"
 }

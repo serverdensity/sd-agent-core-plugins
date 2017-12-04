@@ -2,8 +2,6 @@
 # WARNING
 ##########
 # This sample works only for ActiveMQ >= 5.8.0
-# If you are running a version older than that, you can refer to agent 5.10.x released
-# sample files, https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
 
 instances:
   - host: localhost
@@ -23,7 +21,7 @@ instances:
   #     newTag: test
 
 # List of metrics to be collected by the integration
-# Read http://docs.datadoghq.com/integrations/java/ to learn how to customize it
+# Read https://support.serverdensity.com/hc/en-us/search?query=java to learn how to customize it
 init_config:
   conf:
     - include:

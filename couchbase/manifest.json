@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "ba7ce7de-4fcb-4418-8c90-329baa6a5d59",
+  "linux_package_name": "sd-agent-couchbase",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "couchbase",
   "short_description": "Track and graph your Couchbase activity and performance metrics.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.1.0",
-  "guid": "ba7ce7de-4fcb-4418-8c90-329baa6a5d59"
+  "version": "1.1.0"
 }

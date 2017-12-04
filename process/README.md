@@ -3,17 +3,17 @@
 ## Overview
 
 * Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
-* Monitor the status of running processes with Process Monitors (Requires Datadog Agent >= 5.1.0).
+* Monitor the status of running processes with Process Monitors.
 
 ## Installation
 
-Install the `dd-check-process` package manually or with your favorite configuration manager
+Install the `sd-agent-process` package manually or with your favorite configuration manager
 
 ## Configuration
 
 Configure the Agent to connect to your processes. Our example configuration will monitor the ssh, sshd, and postgres processes.
 
-1. Edit `/etc/dd-agent/conf.d/process.yaml`
+1. Edit `/etc/sd-agent/conf.d/process.yaml`
 ```
 init_config:
   # used to override the default procfs path, e.g. for docker
@@ -27,24 +27,22 @@ instances:
     search_string: ['postgres']
 
   - name: pid_process
-    pid: 1278 
+    pid: 1278
     # Do not use search_string when searching by pid or multiple processes will be grabbed
 ```
 2. Restart the Agent
 
-```sudo /etc/init.d/datadog-agent restart```
-Refer to the comments in the process check [conf.yaml.example](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example) file for more options.
-
-After the Agent has sent data to Datadog you can visit the [New Monitor section of the application](https://app.datadoghq.com/monitors#create/process) to set up a Monitor. If you only see information on how to configure the process check in the Agent, Datadog has not yet received any process information from the Agent. Use the instructions below to validate whether the Agent has been configured correctly.
+```sudo /etc/init.d/sd-agent restart```
+Refer to the comments in the process check [conf.yaml.example](conf.yaml.example) file for more options.
 
 For more details about configuring this integration refer to the following file(s) on GitHub:
 
-* [Process Check YAML example](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
-* [Process Check check.py](https://github.com/DataDog/integrations-core/blob/master/process/check.py)
+* [Process Check YAML example](conf.yaml.example)
+* [Process Check check.py](check.py)
 
 ## Validation
 
-When you run `datadog-agent info` you should see something like the following:
+When you run `sd-agent info` you should see something like the following:
 
     Checks
     ======

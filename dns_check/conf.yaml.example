@@ -25,7 +25,6 @@ instances:
     # name that one expects to return an NXDOMAIN result can result in many dns queries, depending
     # on the resolver's configured search domain.
     # For these reasons, these queries are good candidates to monitor the worst-case performance of a DNS lookup.
-    # See https://github.com/DataDog/dd-agent/pull/2849 for more details.
 
     # - name: nxdomain_example
     #   hostname: nxdomain.example.org

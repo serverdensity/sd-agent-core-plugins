@@ -6,11 +6,11 @@ The Agent's Kong check tracks total requests, response codes, client connections
 
 # Installation
 
-The Kong check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Kong servers. If you need the newest version of the check, install the `dd-check-kong` package.
+The Kong check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=kong). To install the kong check install the `sd-agent-kong` package.
 
 # Configuration
 
-Create a `kong.yaml` in the Datadog Agent's `conf.d` directory:
+Create a `kong.yaml` in the Server Density Agent's `conf.d` directory:
 
 ```
 init_config:
@@ -25,11 +25,11 @@ instances:
 #    - instance:bar
 ```
 
-Restart the Agent to begin sending Kong metrics to Datadog.
+Restart the Agent to begin sending Kong metrics to Server Density.
 
 # Validation
 
-Run the Agent's `info` subcommand and look for kong` under the Checks section:
+Run the Agent's `info` subcommand and look for kong under the Checks section:
 
 ```
   Checks
@@ -50,10 +50,5 @@ The kong check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/kong/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-`kong.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to Kong to collect metrics, otherwise OK.

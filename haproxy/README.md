@@ -2,7 +2,7 @@
 
 # Overview
 
-Capture HAProxy activity in Datadog to:
+Capture HAProxy activity in Server Density to:
 
 * Visualize HAProxy load-balancing performance.
 * Know when a server goes down.
@@ -10,7 +10,7 @@ Capture HAProxy activity in Datadog to:
 
 # Installation
 
-The HAProxy check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your HAProxy servers.
+The HAProxy check can be installed with your package manager if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=haproxy). To install the haproxy check install the `sd-agent-haproxy` package.
 
 # Configuration
 
@@ -43,7 +43,7 @@ instances:
       password: <your_password>
 ```
 
-Restart the Agent to begin sending HAProxy metrics to Datadog.
+Restart the Agent to begin sending HAProxy metrics to Server Density.
 
 # Validation
 
@@ -70,12 +70,5 @@ The haproxy check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/haproxy/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-# Events
-
-# Service Checks
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate your HAProxy servers with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics/).

@@ -6,7 +6,7 @@ The Apache check tracks requests per second, bytes served, number of worker thre
 
 # Installation
 
-The Apache check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Apache servers.
+The Apache check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=apache). To install the apache check install the `sd-agent-apache` package.
 
 Install `mod_status` on your Apache servers and enable `ExtendedStatus`.
 
@@ -24,7 +24,7 @@ instances:
 #   disable_ssl_validation: true # if you need to disable SSL cert validation, i.e. for self-signed certs
 ```
 
-Restart the Agent to start sending Apache metrics to Datadog.
+Restart the Agent to start sending Apache metrics to Server Density.
 
 # Validation
 
@@ -49,10 +49,5 @@ The Apache check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/apache/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-**apache.can_connect**:
-
-Returns CRITICAL if the Agent cannot connect to the configured `apache_status_url`, otherwise OK.

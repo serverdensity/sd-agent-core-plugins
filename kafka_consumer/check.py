@@ -29,7 +29,7 @@ class KafkaCheck(AgentCheck):
     implemented, it will be much easier to add this functionality, although it
     would only work for Kafka brokers >= 0.10.2.0. In the meantime, you can
     instrument your individual kafka consumers to submit their offsets to
-    Datadog.
+    Server Density.
     """
 
     SOURCE_TYPE_NAME = 'kafka'

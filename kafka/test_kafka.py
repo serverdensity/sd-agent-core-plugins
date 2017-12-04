@@ -33,8 +33,8 @@ LOG_INFO = {
     'collector_log_file': '/tmp/collector.log',
     'forwarder_log_file': '/tmp/forwarder.log',
     'dogstatsd_log_file': '/tmp/dogstatsd.log',
-    'jmxfetch_log_file': '/tmp/datadog/jmxfetch.log',
-    'go-metro_log_file': '/tmp/datadog/go-metro.log',
+    'jmxfetch_log_file': '/tmp/sd-agent/jmxfetch.log',
+    'go-metro_log_file': '/tmp/sd-agent/go-metro.log',
 }
 
 with mock.patch('config.get_logging_config', return_value=LOG_INFO):

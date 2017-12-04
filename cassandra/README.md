@@ -9,7 +9,7 @@ Get metrics from cassandra service in real time to:
 
 # Installation
 
-The Cassandra check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Cassandra nodes.
+The Cassandra check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=cassandra). To install the cassandra check install the `sd-agent-cassandra` package.
 
 # Configuration
 
@@ -38,12 +38,5 @@ The cassandra check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/cassandra/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-# Events
-
-# Service Checks
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate your Cassandra cluster with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics) about it.

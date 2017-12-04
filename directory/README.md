@@ -11,7 +11,7 @@ Capture metrics from directories and files of your choosing. The Agent will coll
 
 # Installation
 
-The directory check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) anywhere you wish to use it.
+The Directory check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=directory). To install the directory check install the `sd-agent-directory` package.
 
 # Configuration
 
@@ -28,9 +28,9 @@ instances:
     countonly: False                # set to True to only collect the number of files matching 'pattern'. Useful for very large directories.
 ```
 
-Ensure that the user running the Agent process (usually `dd-agent`) has read access to the directories, subdirectories, and files you configure.
+Ensure that the user running the Agent process (usually `sd-agent`) has read access to the directories, subdirectories, and files you configure.
 
-Restart the Agent to begin sending metrics on your chosen directories to Datadog.
+Restart the Agent to begin sending metrics on your chosen directories to Server Density.
 
 # Validation
 
@@ -57,10 +57,5 @@ The directory check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-# Events
-
-# Service Checks
-
-# Further Reading

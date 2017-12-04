@@ -1,8 +1,18 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "74e1ce9c-dee9-4ad5-9b6a-05eeee7f5259",
+  "linux_package_name": "sd-agent-kafka_consumer",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
+  "module_files": [
+    "kafka",
+    "kafka_python-*-info",
+    "kazoo",
+    "zope",
+    "zope.interface-*-info",
+    "zope.interface-*-nspkg.pth"
+  ],
   "name": "kafka_consumer",
   "short_description": "Apache Kafka is publish-subscribe messaging rethought as a distributed commit log.",
   "support": "core",
@@ -10,6 +20,5 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.1.0",
-  "guid": "74e1ce9c-dee9-4ad5-9b6a-05eeee7f5259"
+  "version": "1.1.0"
 }

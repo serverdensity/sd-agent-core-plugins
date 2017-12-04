@@ -1,0 +1,9 @@
+checks.d/ssh_check.py usr/share/python/sd-agent/checks.d
+conf.d/ssh_check.yaml.example etc/sd-agent/conf.d
+
+debian/build/lib/python2.7/site-packages/paramiko*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python2.7/site-packages/cryptography*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python2.7/site-packages/Crypto*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python2.7/site-packages/enum*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python2.7/site-packages/_cffi_backend.so  usr/share/python/sd-agent/lib/python2.7/site-packages
+

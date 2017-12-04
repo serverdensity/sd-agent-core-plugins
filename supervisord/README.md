@@ -6,7 +6,7 @@ This check monitors the uptime, status, and number of processes running under su
 
 # Installation
 
-The Supervisor check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any servers that use Supervisor to manage processes. If you need the newest version of the check, install the `dd-check-supervisord` package.
+The supervisor check can be installed with your package manager, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=supervisor). install the `sd-agent-supervisord` package.
 
 # Configuration
 
@@ -25,7 +25,7 @@ username=user  # optional
 password=pass  # optional
 ```
 
-### UNIX socket 
+### UNIX socket
 
 Add blocks like these to `/etc/supervisor.conf` (if they're not already there):
 
@@ -38,7 +38,7 @@ file=/var/run/supervisor.sock
 chmod=777
 ```
 
-If supervisor is running as root, make sure `chmod` is set so that non-root users (i.e. dd-agent) can read the socket.
+If supervisor is running as root, make sure `chmod` is set so that non-root users (i.e. sd-agent) can read the socket.
 
 ---
 
@@ -53,20 +53,20 @@ init_config:
 
 instances:
   - name: supervisord0 # used to tag service checks and metrics, i.e. supervisor_server:supervisord0
-    host: localhost  
+    host: localhost
     port: 9001
 
 # To collect from the socket instead
 # - name: supervisord0
-#   host: http://127.0.0.1 
+#   host: http://127.0.0.1
 #   socket: unix:///var/run//supervisor.sock
 ```
 
 Use the `proc_names` and/or `proc_regex` options to list processes you want the Agent to collect metrics on and create service checks for. If you don't provide either option, the Agent tracks _all_ child processes of supervisord. If you provide both options, the Agent tracks processes from both lists (i.e. the two options are not mutually exclusive).
 
-See the [example check configuration](https://github.com/DataDog/integrations-core/blob/master/supervisord/conf.yaml.example) for comprehensive descriptions of other check options.
+See the [example check configuration](conf.yaml.example) for comprehensive descriptions of other check options.
 
-Restart the Agent to start sending Supervisor metrics to Datadog.
+Restart the Agent to start sending Supervisor metrics to Server Density.
 
 # Validation
 
@@ -91,7 +91,7 @@ The supervisord check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/supervisord/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
 # Service Checks
 
@@ -116,6 +116,3 @@ This table shows the `supervisord.process.status` that results from each supervi
 |FATAL|CRITICAL
 |UNKNOWN|UNKNOWN
 
-# Further Reading
-
-See our [blog post](https://www.datadoghq.com/blog/supervisor-monitors-your-processes-datadog-monitors-supervisor/) about monitoring Supervisor with Datadog.

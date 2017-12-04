@@ -1,7 +1,7 @@
 init_config:
   # Change the root directory to look at to get cgroup statistics. Useful when running inside a
   # container with host directories mounted on a different folder. Default: /.
-  # Example for the docker-dd-agent container:
+  # Example for the docker-sd-agent container:
   # docker_root: /host
 
   # Timeout in seconds for the connection to the docker daemon
@@ -164,11 +164,7 @@ instances:
     # Default to None
     # Example:
     # collect_labels_as_tags: ["com.docker.compose.service", "com.docker.compose.project"]
-    # List of docker event attributes to add as tags of the datadog events
-    # Defaults to None.
-    # 
-    # event_attributes_as_tags: ["signal"]
-    
+
     ## Rate Filtering
     ##
 

@@ -589,7 +589,7 @@ class Network(AgentCheck):
         # link:0:net1:unknowns    0
         # link:0:net1:zonename    53aa9b7e-48ba-4152-a52b-a6368c3d9e7c
 
-        # A mapping of solaris names -> datadog names
+        # A mapping of solaris names -> Server Density names
         metric_by_solaris_name = {
             'rbytes64':'bytes_rcvd',
             'obytes64':'bytes_sent',
@@ -609,14 +609,14 @@ class Network(AgentCheck):
             link, n, iface, name = cols[0].split(":")
             assert link == "link"
 
-            # Get the datadog metric name.
-            ddname = metric_by_solaris_name.get(name, None)
-            if ddname is None:
+            # Get the Server Density metric name.
+            sdname = metric_by_solaris_name.get(name, None)
+            if sdname is None:
                 continue
 
             # Add it to this interface's list of metrics.
             metrics = metrics_by_interface.get(iface, {})
-            metrics[ddname] = self._parse_value(cols[1])
+            metrics[sdname] = self._parse_value(cols[1])
             metrics_by_interface[iface] = metrics
 
         return metrics_by_interface

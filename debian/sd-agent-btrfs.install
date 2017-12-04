@@ -1,0 +1,3 @@
+checks.d/btrfs.py usr/share/python/sd-agent/checks.d
+conf.d/btrfs.yaml.example etc/sd-agent/conf.d
+

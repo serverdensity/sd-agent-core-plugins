@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "3223c2e3-29dd-4cfb-82a2-51b951c648eb",
+  "linux_package_name": "sd-agent-yarn",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "yarn",
   "short_description": "Collect cluster-wide health metrics and track application progress.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.1.0",
-  "guid": "3223c2e3-29dd-4cfb-82a2-51b951c648eb"
+  "version": "1.1.0"
 }

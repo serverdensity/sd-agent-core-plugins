@@ -6,7 +6,7 @@ This check lets you collect SNMP metrics from your network devices.
 
 # Installation
 
-The SNMP check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host where you want to run the check. If you need the newest version of the check, install the `dd-check-snmp` package.
+The SNMP check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=snmp). To install the SNMP check install the `sd-agent-snmp` package.
 
 # Configuration
 
@@ -83,7 +83,7 @@ Put all your pysnmp MIBs into any directory and point the SNMP check to this dir
 
 ---
 
-Restart the Agent to start sending SNMP metrics to Datadog.
+Restart the Agent to start sending SNMP metrics to Server Density.
 
 # Validation
 
@@ -108,12 +108,7 @@ The snmp check is compatible with all major platforms.
 
 # Metrics
 
-The SNMP check doesn't generate any standard metrics, so [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/snmp/metadata.csv) is empty. 
+The SNMP check doesn't generate any standard metrics, so [metadata.csv](metadata.csv) is empty.
 
 The check submits collects and submits the metrics you specify under the `snmp.*` namespace.
 
-# Service Checks
-
-**snmp.can_check**:
-
-Returns CRITICAL if the Agent cannot collect SNMP metrics, otherwise OK.

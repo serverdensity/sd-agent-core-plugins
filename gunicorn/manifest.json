@@ -1,8 +1,13 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "5347bfe1-2e9b-4c92-9410-48b8659ce10f",
+  "linux_package_name": "sd-agent-gunicorn",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "module_files": [
+    "psutil"
+  ],
   "name": "gunicorn",
   "short_description": "Monitor request rates and durations, log-message rates, and worker processes.",
   "support": "core",
@@ -10,6 +15,5 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.1.0",
-  "guid": "5347bfe1-2e9b-4c92-9410-48b8659ce10f"
+  "version": "1.1.0"
 }

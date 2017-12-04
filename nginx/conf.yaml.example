@@ -7,7 +7,7 @@ instances:
   # configuration stanza.  On debian/ubuntu, this is included in the
   # `nginx-extras` package.  For more details, see:
   #
-  #   http://docs.datadoghq.com/integrations/nginx/
+  # https://support.serverdensity.com/hc/en-us/articles/212543387
   #
 
   - nginx_status_url: http://localhost/nginx_status/
@@ -16,10 +16,10 @@ instances:
   #
   # - nginx_status_url: http://example2.com:1234/nginx_status/
   #   ssl_validation: False
-  
-  #   If the status page is behind basic auth. 
+
+  #   If the status page is behind basic auth.
   #   user: USER
   #   password: PASSWORD
-  
+
   #   tags:
   #     - instance:bar

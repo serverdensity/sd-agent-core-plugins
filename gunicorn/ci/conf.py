@@ -6,7 +6,7 @@ loglevel = "INFO"
 workers = "4"
 reload = True
 
-default_proc_name = "dd_test_gunicorn"
+default_proc_name = "sd_test_gunicorn"
 
 errorlog = "-"
 accesslog = "-"

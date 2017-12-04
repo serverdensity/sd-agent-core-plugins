@@ -1,8 +1,11 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "description": "",
+  "display_name": "Agent Metrics",
+  "linux_package_name": "sd-agent-agent-metrics",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "agent_metrics",
   "short_description": "agent_metrics description.",
   "guid": "032333e3-5272-4044-90d5-a05997667513",
@@ -12,5 +15,6 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.1"
+  "version": "1.0.1",
+  "conf_extension":"default"
 }

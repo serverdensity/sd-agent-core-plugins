@@ -2,7 +2,7 @@
 
 # Overview
 
-Enable the Datadog-Ceph integration to:
+Enable the Ceph integration to:
 
   * Track disk usage across storage pools
   * Receive service checks in case of issues
@@ -10,7 +10,7 @@ Enable the Datadog-Ceph integration to:
 
 # Installation
 
-The Ceph check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Ceph servers.
+The Ceph check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=ceph). To install the ceph check install the `sd-agent-ceph` package.
 
 # Configuration
 
@@ -27,7 +27,7 @@ instances:
 If you enabled `use_sudo`, add a line like the following to your `sudoers` file:
 
 ```
-dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
+sd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 ```
 
 # Validation
@@ -51,12 +51,4 @@ Run the Agent's `info` subcommand and look for `ceph` under the Checks section:
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/ceph/metadata.csv) for a list of metrics provided by this integration.
-
-# Events
-
-# Service Checks
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate your Ceph cluster with Datadog, check out our [blog post](https://www.datadoghq.com/blog/monitor-ceph-datadog/) about it.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.

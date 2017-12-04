@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "1c143492-84ac-42d2-89d5-a45c718092b0",
+  "linux_package_name": "sd-agent-mapreduce",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "mapreduce",
   "short_description": "Monitor the status and duration of map and reduce tasks.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0",
-  "guid": "1c143492-84ac-42d2-89d5-a45c718092b0"
+  "version": "1.0.0"
 }

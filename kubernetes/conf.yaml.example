@@ -14,10 +14,7 @@ instances:
   # through the downward API. See
   # https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
   #
-  # To enable Kubernetes State Metrics, please refer to kubernetes_states integration.
-  # For more information,
-  # please consult http://docs.datadoghq.com/integrations/kubernetes/#kubernetes-state-metrics
-  # and https://github.com/DataDog/integrations-core/ on the kubernetes_state directory.
+  # To enable Kubernetes State Metrics, please refer to kubernetes_states integration documentation.
   #
   # If the read-only endpoint is disabled, the check will query kubelet over HTTPS
   #
@@ -72,7 +69,7 @@ instances:
   # kubelet_tls_verify: True
 
   # collect_events controls whether the agent should fetch events from the kubernetes API and
-  # ingest them in Datadog. To avoid duplicates, only one agent at a time across the entire
+  # ingest them in Server Density. To avoid duplicates, only one agent at a time across the entire
   # cluster should have this feature enabled. To enable the feature, set the parameter to `true`.
   #
   # collect_events: false

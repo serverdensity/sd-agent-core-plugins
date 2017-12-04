@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+BUILD_DIR=debian/build
+DEST_VENV=/usr/share/python/sd-agent
+PLUGINS=activemq_xml agent_metrics apache btrfs cacti cassandra ceph consul couch couchbase \
+directory disk dns_check docker_daemon elastic etcd fluentd gearmand gunicorn haproxy \
+hdfs_datanode hdfs_namenode http_check jenkins kafka kafka_consumer kong kube_dns kubernetes \
+kubernetes_state kyototycoon lighttpd linux_proc_extras mapreduce marathon mcache mongo mysql \
+network nginx ntp openstack pgbouncer php_fpm postfix postgres powerdns_recursor process rabbitmq \
+redisdb riak riakcs snmp solr spark ssh_check statsd supervisord system_core system_swap \
+tcp_check tokumx tomcat twemproxy varnish vsphere yarn zk
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	$(create_venv)
+
+	for plugin in ${PLUGINS}; do echo ${plugin}; $(BUILD_DIR)/bin/python $(BUILD_DIR)/bin/pip install --no-binary=:all: -r $${plugin}/requirements.txt; done
+
+override_dh_auto_clean:
+	#rm -rf $(BUILD_DIR)
+
+override_dh_auto_install:
+	pyclean $(BUILD_DIR)
+
+define create_venv
+	curl -LO https://raw.github.com/pypa/virtualenv/1.11.6/virtualenv.py
+	python virtualenv.py -p python2 --no-site-packages --no-pip --no-setuptools $(BUILD_DIR)
+	curl -LO https://bootstrap.pypa.io/ez_setup.py
+	$(BUILD_DIR)/bin/python ez_setup.py --version="20.9.0"
+	curl -LO https://bootstrap.pypa.io/get-pip.py
+	$(BUILD_DIR)/bin/python get-pip.py
+endef

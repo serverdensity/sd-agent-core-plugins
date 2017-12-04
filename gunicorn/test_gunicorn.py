@@ -14,7 +14,7 @@ from tests.checks.common import AgentCheckTest
 instance = {
     'host': 'localhost',
     'port': 26379,
-    'password': 'datadog-is-devops-best-friend'
+    'password': 'serverdensity-is-devops-best-friend'
 }
 
 
@@ -29,10 +29,10 @@ class TestGunicorn(AgentCheckTest):
         """
         Testing Gunicorn check.
         """
-        self.run_check({'instances': [{'proc_name': 'dd-test-gunicorn'}]})
+        self.run_check({'instances': [{'proc_name': 'sd-test-gunicorn'}]})
 
-        self.assertMetric("gunicorn.workers", tags=['app:dd-test-gunicorn', 'state:idle'], at_least=0)
-        self.assertMetric("gunicorn.workers", tags=['app:dd-test-gunicorn', 'state:working'], at_least=0)
+        self.assertMetric("gunicorn.workers", tags=['app:sd-test-gunicorn', 'state:idle'], at_least=0)
+        self.assertMetric("gunicorn.workers", tags=['app:sd-test-gunicorn', 'state:working'], at_least=0)
 
         self.assertServiceCheck("gunicorn.is_running", count=1)
 

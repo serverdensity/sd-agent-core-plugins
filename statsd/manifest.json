@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "4830acf3-626b-42ff-a1db-3f37babd0ae6",
+  "linux_package_name": "sd-agent-statsd",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "statsd",
   "short_description": "Monitor the availability of StatsD servers and track metric counts.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0",
-  "guid": "4830acf3-626b-42ff-a1db-3f37babd0ae6"
+  "version": "1.0.0"
 }

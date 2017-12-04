@@ -5,7 +5,7 @@ init_config:
   # pid_cache_duration: 120
   #
   # used to override the default procfs path, e.g. for docker containers with the outside fs mounted at /host/proc
-  # DEPRECATED: please specify `procfs_path` globally in `datadog.conf` instead
+  # DEPRECATED: please specify `procfs_path` globally in `config.cfg` instead
   # procfs_path: /proc
 
 instances:
@@ -20,7 +20,7 @@ instances:
 #    pid_file: STRING. A Pid file.
 #    exact_match: (optional) Boolean. Default to True, if you want to look for an arbitrary
 #                 string only use search_string, use exact_match: False
-#    ignore_denied_access: (optional) Boolean. Default to True, when getting the number of files descriptors, dd-agent user might
+#    ignore_denied_access: (optional) Boolean. Default to True, when getting the number of files descriptors, sd-agent user might
 #    get a denied access. Set this to true to not issue a warning if that happens.
 #    thresholds: (optional) Two ranges: critical and warning
 #         warning: (optional) List of two values: If the number of processes found is below the first value or
@@ -29,7 +29,7 @@ instances:
 #                   above the second one, the process check will return CRITICAL.
 #     In this example, process check will return OK for 3 to 5 process. WARNING for 1, 2, 6, 7 processes and Critical below 1 or above 7.
 #     CRITICAL is always dominant in case of overlapping.
-#    collect_children: BOOLEAN. If true, the check will also collect metrics from all child processes of a matched process. Default to false. 
+#    collect_children: BOOLEAN. If true, the check will also collect metrics from all child processes of a matched process. Default to false.
 #                      Please be aware that the collection is recursive, and might take some time depending on the use case.
 #
 # Examples:

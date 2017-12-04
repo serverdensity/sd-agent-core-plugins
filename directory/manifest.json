@@ -1,8 +1,13 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "0c38c4ef-5266-4667-9fb1-de8f2b73708a",
+  "linux_package_name": "sd-agent-directory",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.1.1",
+  "module_files": [
+    "*scandir*"
+  ],
   "name": "directory",
   "short_description": "The Directory integration helps monitoring and reporting metrics on files for a provided directory.",
   "support": "core",
@@ -11,6 +16,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.1.0",
-  "guid": "0c38c4ef-5266-4667-9fb1-de8f2b73708a"
+  "version": "1.1.0"
 }

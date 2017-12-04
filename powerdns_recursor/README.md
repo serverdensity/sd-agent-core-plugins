@@ -14,7 +14,7 @@ And many more.
 
 # Installation
 
-The PowerDNS Recursor check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your recursors.
+The PowerDNS check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=PowerDNS). To install the PowerDNS check install the `sd-agent-powerdns` package.
 
 # Configuration
 
@@ -50,7 +50,7 @@ instances:
     version: 4 # omit this line if you're running pdns_recursor version 3.x
 ```
 
-Restart the Agent to begin sending PowerDNS Recursor metrics to Datadog.
+Restart the Agent to begin sending PowerDNS Recursor metrics to Server Density.
 
 # Validation
 
@@ -77,10 +77,4 @@ The PowerDNS Recursor check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/metadata.csv) for a list of metrics provided by this integration.
-
-# Service Checks
-
-**`powerdns.recursor.can_connect`**:
-
-Returns CRITICAL if the Agent is unable to connect to the recursor's statistics API, otherwise OK.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.

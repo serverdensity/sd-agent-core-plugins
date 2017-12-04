@@ -1,8 +1,10 @@
 {
-  "maintainer": "help@datadoghq.com",
+  "guid": "ae533b67-a2af-45ce-8e23-235acb3a3893",
+  "linux_package_name": "sd-agent-powerdns_recursor",
+  "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "powerdns_recursor",
   "short_description": "powerdns_recursor description.",
   "support": "core",
@@ -11,6 +13,5 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0",
-  "guid": "ae533b67-a2af-45ce-8e23-235acb3a3893"
+  "version": "1.0.0"
 }

@@ -12,7 +12,7 @@ end
 namespace :ci do
   namespace :gunicorn do |flavor|
     task before_install: ['ci:common:before_install'] do
-      sh %(ps ax | grep dd-test-gunicorn | grep -v grep | grep -v rake | awk '{ print $1 }' | xargs kill -9 || true)
+      sh %(ps ax | grep sd-test-gunicorn | grep -v grep | grep -v rake | awk '{ print $1 }' | xargs kill -9 || true)
       rm_rf gunicorn_rootdir
     end
 
@@ -34,7 +34,7 @@ namespace :ci do
         f.puts "chdir = \"#{gunicorn_rootdir}/app\""
       end
       cp "#{ENV['SDK_HOME']}/gunicorn/ci/app.py", "#{gunicorn_rootdir}/app/app.py"
-      Process.spawn "#{gunicorn_rootdir}/venv/bin/gunicorn --config=#{gunicorn_rootdir}/conf.py --name=dd-test-gunicorn app:app"
+      Process.spawn "#{gunicorn_rootdir}/venv/bin/gunicorn --config=#{gunicorn_rootdir}/conf.py --name=sd-test-gunicorn app:app"
     end
 
     task before_script: ['ci:common:before_script']
@@ -49,7 +49,7 @@ namespace :ci do
     task before_cache: ['ci:common:before_cache']
 
     task cleanup: ['ci:common:cleanup'] do
-      sh %(ps ax | grep dd-test-gunicorn | grep -v grep | grep -v rake | awk '{ print $1 }' | xargs kill -9 || true)
+      sh %(ps ax | grep sd-test-gunicorn | grep -v grep | grep -v rake | awk '{ print $1 }' | xargs kill -9 || true)
       rm_rf gunicorn_rootdir
     end
 

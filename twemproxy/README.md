@@ -6,7 +6,7 @@ Track overall and per-pool stats on each of your twemproxy servers. This Agent c
 
 # Installation
 
-The Agent's twemproxy check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on each of your Twemproxy servers.
+The Twemproxy check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=Twemproxy). To install the Twemproxy check install the `sd-agent-twemproxy` package.
 
 # Configuration
 
@@ -20,7 +20,7 @@ instances:
       port: 2222 # change if your twemproxy doesn't use the default stats monitoring port
 ```
 
-Restart the Agent to begin sending twemproxy metrics to Datadog.
+Restart the Agent to begin sending twemproxy metrics to Server Density.
 
 # Validation
 
@@ -45,10 +45,5 @@ The twemproxy check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/twemproxy/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-`twemproxy.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to the Twemproxy stats endpoint to collect metrics, otherwise OK.

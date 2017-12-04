@@ -6,7 +6,7 @@ The network check collects TCP/IP stats from the host operating system.
 
 # Installation
 
-The network check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host. If you need the newest version of the check, install the `dd-check-network` package.
+The network check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/search?query=install) on any host. If you need the newest version of the check, install the `sd-agent-network` package.
 
 # Configuration
 
@@ -50,4 +50,4 @@ The network check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/network/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.

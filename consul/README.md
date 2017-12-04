@@ -2,14 +2,14 @@
 
 # Overview
 
-The Datadog Agent collects many metrics from Consul nodes, including those for:
+The sd-agent collects many metrics from Consul nodes, including those for:
 
 * Total Consul peers
 * Service health - for a given service, how many of its nodes are up, passing, warning, critical?
 * Node health - for a given node, how many of its services are up, passing, warning, critical?
 * Network coordinates - inter- and intra-datacenter latencies
 
-The _Consul_ Agent can provide further metrics via DogStatsD. These metrics are more related to the internal health of Consul itself, not to services which depend on Consul. There are metrics for:
+The _Consul_ Agent can provide further metrics via SDStatsD. These metrics are more related to the internal health of Consul itself, not to services which depend on Consul. There are metrics for:
 
 * Serf events and member flaps
 * The Raft protocol
@@ -17,17 +17,15 @@ The _Consul_ Agent can provide further metrics via DogStatsD. These metrics are 
 
 And many more.
 
-Finally, in addition to metrics, the Datadog Agent also sends a service check for each of Consul's health checks, and an event after each new leader election.
-
 # Installation
 
-The Datadog Agent's Consul Check is included in the Agent package, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Consul nodes. If you need the newest version of the Consul check, install the `dd-check-consul` package; this package's check will override the one packaged with the Agent. See the [integrations-core](https://github.com/DataDog/integrations-core#installing-the-integrations) repository for more details.
+The Consul check can be installed with your package manager, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=consul).
 
 # Configuration
 
-### Connect Datadog Agent to Consul Agent
+### Connect sd-gent to Consul Agent
 
-Create a `consul.yaml` in the Datadog Agent's `conf.d` directory:
+Create a `consul.yaml` in the sd-agent's `conf.d` directory:
 
 ```
 init_config:
@@ -48,29 +46,29 @@ instances:
       network_latency_checks: yes
 ```
 
-See the [sample consul.yaml](https://github.com/DataDog/integrations-core/blob/master/consul/conf.yaml.example) for all available configuration options.
+See the [sample consul.yaml](conf.yaml.example) for all available configuration options.
 
-Restart the Agent to start sending Consul metrics to Datadog.
+Restart the Agent to start sending Consul metrics to Server Density.
 
-### Connect Consul Agent to DogStatsD
+### Connect Consul Agent to SDStatsD
 
-In the main Consul configuration file, add your `dogstatsd_addr` nested under the top-level `telemetry` key:
+In the main Consul configuration file, add your `sdstatsd_addr` nested under the top-level `telemetry` key:
 
 ```
 {
   ...
   "telemetry": {
-    "dogstatsd_addr": "127.0.0.1:8125"
+    "sdstatsd_addr": "127.0.0.1:8125"
   },
   ...
 }
 ```
 
-Reload the Consul Agent to start sending more Consul metrics to DogStatsD.
+Reload the Consul Agent to start sending more Consul metrics to SDStatsD.
 
 # Validation
 
-### Datadog Agent to Consul Agent
+### sd-agent to Consul Agent
 
 Run the Agent's `info` subcommand and look for `consul` under the Checks section:
 
@@ -87,7 +85,7 @@ Run the Agent's `info` subcommand and look for `consul` under the Checks section
     [...]
 ```
 
-Also, if your Consul nodes have debug logging enabled, you'll see the Datadog Agent's regular polling in the Consul log:
+Also, if your Consul nodes have debug logging enabled, you'll see the sd-agent's regular polling in the Consul log:
 
 ```
     2017/03/27 21:38:12 [DEBUG] http: Request GET /v1/status/leader (59.344µs) from=127.0.0.1:53768
@@ -99,7 +97,7 @@ Also, if your Consul nodes have debug logging enabled, you'll see the Datadog Ag
     2017/03/27 21:38:12 [DEBUG] http: Request GET /v1/coordinate/nodes (84.95µs) from=127.0.0.1:53780
 ```
 
-### Consul Agent to DogStatsD
+### Consul Agent to SDStatsD
 
 Use `netstat` to verify that Consul is sending its metrics, too:
 
@@ -114,30 +112,9 @@ The Consul check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/consul/metadata.csv) for a list of metrics provided by the Datadog Agent's Consul check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by the sd-agent's Consul check.
 
-See [Consul's Telemetry doc](https://www.consul.io/docs/agent/telemetry.html) for a description of metrics the Consul Agent sends to DogStatsD.
+See [Consul's Telemetry doc](https://www.consul.io/docs/agent/telemetry.html) for a description of metrics the Consul Agent sends to SDStatsD.
 
 See [Consul's Network Coordinates doc](https://www.consul.io/docs/internals/coordinates.html) if you're curious about how the network latency metrics are calculated.
 
-# Service Checks
-
-`consul.check`:
-
-The Datadog Agent submits a service check for each of Consul's health checks, tagging each with:
-
-* `service:<name>`, if Consul reports a `ServiceName`
-* `consul_service_id:<id>`, if Consul reports a `ServiceID`
-
-# Events
-
-`consul.new_leader`:
-
-The Datadog Agent emits an event when the Consul cluster elects a new leader, tagging it with `prev_consul_leader`, `curr_consul_leader`, and `consul_datacenter`. 
-
-# Further Reading
-
-To get a better idea of how (or why) to integrate your Consul cluster with Datadog, check out our blog posts:
-
-* [Monitor Consul health and performance with Datadog](https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog) - a more in-depth explanation of Datadog-Consul integration
-* [Consul at Datadog](https://engineering.datadoghq.com/consul-at-datadog/) - how Datadog Engineering uses Consul

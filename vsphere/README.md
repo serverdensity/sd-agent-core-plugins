@@ -2,17 +2,17 @@
 
 # Overview
 
-This check collects resource usage metrics from your vSphere cluster—CPU, disk, memory, and network usage. It also watches your vCenter server for events and emits them to Datadog.
+This check collects resource usage metrics from your vSphere cluster—CPU, disk, memory, and network usage.
 
 # Installation
 
-The vSphere check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your vCenter server. If you need the newest version of the check, install the `dd-check-mcache` package.
+The vSphere check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=vsphere). To install the vSphere check install the `sd-agent-vsphere` package.
 
 # Configuration
 
-In the Administration section of vCenter, add a read-only user called datadog-readonly.
+In the Administration section of vCenter, add a read-only user called serverdensity-readonly.
 
-Then, create a file `vsphere.yaml` in the Datadog Agent's `conf.d` directory:
+Then, create a file `vsphere.yaml` in the Server Density Agent's `conf.d` directory:
 
 ```
 init_config:
@@ -20,11 +20,11 @@ init_config:
 instances:
   - name: main-vcenter # how metrics will be tagged, i.e. 'vcenter_server:main-vcenter'
     host: <VCENTER_HOSTNAME>          # e.g. myvcenter.example.com
-    username: <USER_YOU_JUST_CREATED> # e.g. datadog-readonly@vsphere.local
+    username: <USER_YOU_JUST_CREATED> # e.g. serverdensity-readonly@vsphere.local
     password: <PASSWORD>
 ```
 
-Restart the Agent to start sending vSphere metrics and events to Datadog.
+Restart the Agent to start sending vSphere metrics and events to Server Density.
 
 ## Configuration Options
 
@@ -32,7 +32,7 @@ Restart the Agent to start sending vSphere metrics and events to Datadog.
 * `ssl_capath` (Optional) - Set to the absolute file path of a directory containing CA certificates in PEM format
 * `host_include_only_regex` (Optional) - Use a regex like this if you want only the check to fetch metrics for these ESXi hosts and the VMs running on it
 * `vm_include_only_regex` (Optional) - Use a regex to include only the VMs that are matching this pattern.
-* `include_only_marked` (Optional) - Set to true if you'd like to only collect metrics on vSphere VMs which are marked by a custom field with the value 'DatadogMonitored'. To set this custom field with PowerCLI, use the follow command: `Get-VM <MyVMName> | Set-CustomField -Name "DatadogMonitored" -Value "DatadogMonitored"`
+* `include_only_marked` (Optional) - Set to true if you'd like to only collect metrics on vSphere VMs which are marked by a custom field with the value 'SDMonitored'. To set this custom field with PowerCLI, use the follow command: `Get-VM <MyVMName> | Set-CustomField -Name "SDMonitored" -Value "SDMonitored"`
 * `all_metrics` (Optional) - When set to true, this will collect EVERY metric from vCenter, which means a LOT of metrics you probably do not care about. We have selected a set of metrics that are interesting to monitor for you if false.
 * `event_config` (Optional) - Event config is a dictionary. For now the only switch you can flip is collect_vcenter_alarms which will send as events the alarms set in vCenter.
 
@@ -59,35 +59,4 @@ The vsphere check is compatible with all Windows platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/vsphere/metadata.csv) for a list of metrics provided by this check.
-
-# Events
-
-This check watches vCenter's Event Manager for events and emits them to Datadog. It does NOT emit the following event types:
-
-AlarmStatusChangedEvent:Gray
-VmBeingHotMigratedEvent
-VmResumedEvent
-VmReconfiguredEvent
-VmPoweredOnEvent
-VmMigratedEvent
-TaskEvent:Initialize powering On
-TaskEvent:Power Off virtual machine
-TaskEvent:Power On virtual machine
-TaskEvent:Reconfigure virtual machine
-TaskEvent:Relocate virtual machine
-TaskEvent:Suspend virtual machine
-TaskEvent:Migrate virtual machine
-VmMessageEvent
-VmSuspendedEvent
-VmPoweredOffEvent
-
-# Service Checks
-
-`vcenter.can_connect`:
-
-Returns CRITICAL if the Agent cannot connect to vCenter to collect metrics, otherwise OK.
-
-# Further Reading
-
-See our [blog post](https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/#auto-discovery-across-vm-and-app-layers) on monitoring vSphere environments with Datadog.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.

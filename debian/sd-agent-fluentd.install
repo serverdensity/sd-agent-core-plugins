@@ -1,0 +1,3 @@
+checks.d/fluentd.py usr/share/python/sd-agent/checks.d
+conf.d/fluentd.yaml.example etc/sd-agent/conf.d
+

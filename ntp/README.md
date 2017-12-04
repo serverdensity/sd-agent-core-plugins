@@ -6,7 +6,7 @@ Get alerts when your hosts drift out of sync with your chosen NTP server.
 
 # Installation
 
-The NTP check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) wherever you'd like to run the check. If you need the newest version of the check, install the `dd-check-ntp` package.
+The NTP check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/search?query=install) on any host. If you need the newest version of the check, install the `sd-agent-ntp` package.
 
 # Configuration
 
@@ -48,10 +48,5 @@ The NTP check is compatible with all major platforms.
 
 # Metrics
 
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/ntp/metadata.csv) for a list of metrics provided by this check.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
-# Service Checks
-
-`ntp.in_sync`:
-
-Returns CRITICAL if the NTP offset is greater than the threshold specified in `ntp.yaml`, otherwise OK.
