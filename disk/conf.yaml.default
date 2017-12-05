@@ -7,12 +7,12 @@ init_config:
 instances:
   # The use_mount parameter will instruct the check to collect disk
   # and fs metrics using mount points instead of volumes
-  - use_mount: no
+  - use_mount: yes
     # The (optional) excluded_filesystems parameter will instruct the check to
     # ignore disks using these filesystems. Note: On some linux distributions,
     # rootfs will be found and tagged as a device, add rootfs here to exclude.
-    # excluded_filesystems:
-    #   - tmpfs
+    excluded_filesystems:
+      - tmpfs
 
     # The (optional) excluded_disks parameter will instruct the check to
     # ignore this list of disks.
