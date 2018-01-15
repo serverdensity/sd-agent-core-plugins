@@ -72,8 +72,14 @@ class Kong(AgentCheck):
 
         # Then the database metrics
         databases_metrics = parsed.get('database').items()
-        output.append((self.METRIC_PREFIX + 'table.count', len(databases_metrics), tags))
+        db_output_lines = 0
         for name, items in databases_metrics:
-            output.append((self.METRIC_PREFIX + 'table.items', items, tags + ['table:{}'.format(name)]))
+            if isinstance(items, (float, int)) and not isinstance(items, bool):
+                output.append((self.METRIC_PREFIX + 'table.items', items, tags + ['table:{}'.format(name)]))
+                db_output_lines += 1
+            else:
+                self.log.debug(u"Ignoring databases pair: {} {}".format(name, items))
+        if db_output_lines > 0:
+            output.append((self.METRIC_PREFIX + 'table.count', db_output_lines, tags))
 
         return output
