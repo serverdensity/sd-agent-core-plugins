@@ -1,0 +1,5 @@
+init_config:
+
+instances:
+  # The Storm REST API host/port need to be defined.
+  - server: 'http://[host]:[port]'

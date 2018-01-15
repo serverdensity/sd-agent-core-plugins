@@ -1,0 +1,18 @@
+{
+    "guid": "8b398a07-6c71-48d4-96c2-ae151d53b59a",
+    "linux_package_name": "sd-agent-storm",
+    "maintainer": "hello@serverdensity.com",
+    "manifest_version": "0.1.0",
+    "max_agent_version": "3.0.0",
+    "min_agent_version": "2.2.0",
+    "module_files": [
+        "requests"
+    ],
+    "name": "storm",
+    "short_description": "Apache Storm topology stats.",
+    "support": "core",
+    "supported_os": [
+      "linux"
+    ],
+    "version": "1.0.0"
+  }
