@@ -2,8 +2,10 @@ init_config:
 
 instances:
   # Specify the MongoDB URI, with database to use for reporting (defaults to "admin")
-  # E.g. mongodb://serverdensity:LnCbkX4uhpuLHSUrcayEoAZA@localhost:27016/my-db
-  - server: mongodb://user:pass@host:port/db-name
+  # E.g. mongodb://localhost:27016/my-db
+  - server: mongodb://host:port/db-name
+    username: serverdensity
+    password: supersecurepassword
     # Controls connectTimeoutMS, serverSelectionTimeoutMS and socketTimeoutMS (see http://api.mongodb.com/python/3.4.0/api/pymongo/mongo_client.html)
     # Defaults to 30 seconds
     # timeout: 30
