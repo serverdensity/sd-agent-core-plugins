@@ -4,7 +4,7 @@ instances:
 #  - tags:
 #    - name:mars_cluster
 #
-#    ceph_cmd: /usr/bin/ceph
+#  - ceph_cmd: /usr/bin/ceph
 #    ceph_cluster: ceph
 #
 # If your environment requires sudo, please add a line like:
