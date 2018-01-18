@@ -1,12 +1,10 @@
 sudo: required
-
 language: python
 cache:
   directories:
     - $HOME/.cache/pip
     - $HOME/sd-agent
     - vendor/cache
-
 python:
   - "2.7"
 
@@ -15,7 +13,6 @@ env:
 
 git:
   depth: 3
-
 branches:
   only:
     - master
@@ -23,7 +20,6 @@ branches:
 
 services:
   - docker
-
 matrix:
   fast_finish: true
 

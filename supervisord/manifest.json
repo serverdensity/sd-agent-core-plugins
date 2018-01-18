@@ -2,7 +2,7 @@
   "guid": "2b81259b-723e-47be-8612-87e1f64152e9",
   "linux_package_name": "sd-agent-supervisord",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "name": "supervisord",
@@ -13,5 +13,10 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.1.0",
+  "categories":["os & system"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/supervisor"]
 }

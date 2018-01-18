@@ -1,16 +1,18 @@
 # Riak Check
+{{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" responsive="true" popup="true">}}
 
-# Overview
+## Overview
 
 This check lets you track node, vnode and ring performance metrics from RiakKV or RiakTS.
 
-# Installation
+## Setup
+### Installation
 
 The Riak check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=riak). To install the Riak check install the `sd-agent-riak` package.
 
-# Configuration
+### Configuration
 
-Create a file `riak.yaml` in the Agent's `conf.d` directory:
+Create a file `riak.yaml` in the Agent's `conf.d` directory. See the [sample riak.yaml](https://github.com/DataDog/integrations-core/blob/master/riak/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -21,9 +23,9 @@ instances:
 
 Restart the Agent to start sending Riak metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `riak` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `riak` under the Checks section:
 
 ```
   Checks
@@ -38,11 +40,12 @@ Run the Agent's `info` subcommand and look for `riak` under the Checks section:
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The riak check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 

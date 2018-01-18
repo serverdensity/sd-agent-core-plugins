@@ -1,57 +1,76 @@
-# Process Integration
+# Process Check
 
 ## Overview
 
-* Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
-* Monitor the status of running processes with Process Monitors.
+The process check lets you:
 
-## Installation
+* Collect resource usage metrics for specific running processes on any host: CPU, memory, I/O, number of threads, etc
+* Use Process Monitors: configure thresholds for how many instances of a specific process ought to be running and get alerts when the thresholds aren't met (see **Service Checks** below).
 
+## Setup
+### Installation
 Install the `sd-agent-process` package manually or with your favorite configuration manager
 
-## Configuration
+### Configuration
 
-Configure the Agent to connect to your processes. Our example configuration will monitor the ssh, sshd, and postgres processes.
+Unlike many checks, the process check doesn't monitor anything useful by default; you must tell it which processes you want to monitor, and how.
 
-1. Edit `/etc/sd-agent/conf.d/process.yaml`
+While there's no standard default check configuration, here's an example `process.yaml` that monitors ssh/sshd processes. See the [sample process.yaml](conf.yaml.example) for all available configuration options:
+
 ```
 init_config:
-  # used to override the default procfs path, e.g. for docker
-  # containers to see the processes of the host at /host/proc
-  # procfs_path: /proc
+
 instances:
   - name: ssh
     search_string: ['ssh', 'sshd']
 
-  - name: postgres
-    search_string: ['postgres']
-
-  - name: pid_process
-    pid: 1278
-    # Do not use search_string when searching by pid or multiple processes will be grabbed
+# To search for sshd processes using an exact cmdline
+# - name: ssh
+#   search_string: ['/usr/sbin/sshd -D']
+#   exact_match: True
 ```
-2. Restart the Agent
+
+You can also configure the check to find any process by exact PID (`pid`) or pidfile (`pid_file`). If you provide more than one of `search_string`, `pid`, and `pid_file`, the check will the first option it finds in that order (e.g. it uses `search_string` over `pid_file` if you configure both).
+
+To have the check search for processes in a path other than `/proc`, set `procfs_path: <your_proc_path>` in `datadog.conf`, NOT in `process.yaml` (its use has been deprecated there). Set this to `/host/proc` if you're running the Agent from a Docker container (i.e. [docker-dd-agent](https://github.com/DataDog/docker-dd-agent)) and want to monitor processes running on the server hosting your containers. You DON'T need to set this to monitor processes running _in_ your containers; the [Docker check](https://github.com/DataDog/integrations-core/tree/master/docker_daemon) monitors those.
+
+See the [example configuration](conf.yaml.example) for more details on configuration options.
 
 ```sudo /etc/init.d/sd-agent restart```
-Refer to the comments in the process check [conf.yaml.example](conf.yaml.example) file for more options.
 
-For more details about configuring this integration refer to the following file(s) on GitHub:
-
-* [Process Check YAML example](conf.yaml.example)
-* [Process Check check.py](check.py)
-
-## Validation
+### Validation
 
 When you run `sd-agent info` you should see something like the following:
 
-    Checks
-    ======
+```
+  Checks
+  ======
+    [...]
 
-        process
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+    process
+    -------
+      - instance #0 [OK]
+      - instance #1 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+Each instance configured in `process.yaml` should have one `instance #<num> [OK]` line in the output, regardless of how many search_strings it might be configured with.
 
 ## Compatibility
 
-The process check is compatible with all major platforms
+The process check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+
+**Note**: Some metrics are not available on Linux or OSX:
+
+* Process I/O metrics aren't available on Linux or OSX since the files that the agent must read (/proc//io) are only readable by the process's owner. For more information, [read the Agent FAQ](https://docs.datadoghq.com/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
+* `system.cpu.iowait` is not available on windows
+
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+
+All metrics are per `instance` configured in process.yaml, and are tagged `process_name:<instance_name>`.
+

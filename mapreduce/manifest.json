@@ -2,7 +2,7 @@
   "guid": "1c143492-84ac-42d2-89d5-a45c718092b0",
   "linux_package_name": "sd-agent-mapreduce",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "mapreduce",
@@ -13,5 +13,10 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "guid": "1c143492-84ac-42d2-89d5-a45c718092b0",
+  "categories":["processing"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

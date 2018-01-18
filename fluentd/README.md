@@ -1,19 +1,19 @@
 # Fluentd Integration
-
-# Overview
+{{< img src="integrations/fluentd/snapshot-fluentd.png" alt="Fluentd Dashboard" responsive="true" popup="true">}}
+## Overview
 
 Get metrics from Fluentd to:
 
 * Visualize Fluentd performance.
 * Correlate the performance of Fluentd with the rest of your applications.
 
-# Installation
+## Setup
+### Installation
 
 The Fluentd check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=fluentd). To install the fluentd check install the `sd-agent-fluentd` package.
 
-# Configuration
-
-## Prepare Fluentd
+### Configuration
+#### Prepare Fluentd
 
 In your fluentd configuration, add a `monitor_agent` source:
 
@@ -25,9 +25,9 @@ In your fluentd configuration, add a `monitor_agent` source:
 </source>
 ```
 
-## Connect the Server Density Agent
+#### Connect the Server Density Agent
 
-Create a file `fluentd.yaml` in the Agent's `conf.d` directory:
+Create a file `fluentd.yaml` in the Agent's `conf.d` directory. See the [sample fluentd.yaml](https://github.com/DataDog/integrations-core/blob/master/fluentd/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -42,9 +42,9 @@ instances:
 
 Restart the Agent to begin sending Fluentd metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `fluentd` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `fluentd` under the Checks section:
 
 ```
   Checks
@@ -59,7 +59,9 @@ Run the Agent's `info` subcommand and look for `fluentd` under the Checks sectio
     [...]
 ```
 
-# Metrics
+
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 

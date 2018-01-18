@@ -1,18 +1,18 @@
 # HDFS DataNode Integration
 
-# Overview
+## Overview
 
 Track disk utilization and failed volumes on each of your HDFS DataNodes. This Agent check collects metrics for these, as well as block- and cache-related metrics.
 
 Use this check (hdfs_datanode) and its counterpart check (hdfs_namenode), not the older two-in-one check (hdfs); that check is deprecated.
 
-# Installation
+## Setup
+### Installation
 
 The HDFS Datanode check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=hdfs+datanode). To install the HDFS Datanode check install the `sd-agent-hdfs-datanode` package.
 
-# Configuration
-
-## Prepare the DataNode
+### Configuration
+#### Prepare the DataNode
 
 The Agent collects metrics from the DataNode's JMX remote interface. The interface is disabled by default, so enable it by setting the following option in `hadoop-env.sh` (usually found in $HADOOP_HOME/conf):
 
@@ -25,9 +25,9 @@ export HADOOP_DATANODE_OPTS="-Dcom.sun.management.jmxremote
 
 Restart the DataNode process to enable the JMX interface.
 
-## Connect the Agent
+#### Connect the Agent
 
-Create a file `hdfs_datanode.yaml` in the Agent's `conf.d` directory:
+Create a file `hdfs_datanode.yaml` in the Agent's `conf.d` directory. See the [sample hdfs_datanode.yaml](https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -38,9 +38,9 @@ instances:
 
 Restart the Agent to begin sending DataNode metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `hdfs_datanode` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `hdfs_datanode` under the Checks section:
 
 ```
   Checks
@@ -55,13 +55,12 @@ Run the Agent's `info` subcommand and look for `hdfs_datanode` under the Checks 
     [...]
 ```
 
-# Troubleshooting
-
-# Compatibility
+## Compatibility
 
 The hdfs_datanode check is compatible with all major platforms.
 
-# Metrics
 
+## Data Collected
+### Metrics
 See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 

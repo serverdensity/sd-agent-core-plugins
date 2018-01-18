@@ -2,7 +2,7 @@
   "guid": "0433d687-68d3-42db-ad5c-6c232d881619",
   "linux_package_name": "sd-agent-activemq_xml",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "activemq_xml",
@@ -13,5 +13,10 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "guid": "0433d687-68d3-42db-ad5c-6c232d881619",
+  "categories":["processing", "messaging"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

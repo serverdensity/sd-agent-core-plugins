@@ -2,16 +2,21 @@
   "guid": "eb133a1f-697c-4143-bad3-10e72541fa9c",
   "linux_package_name": "sd-agent-http_check",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "http_check",
-  "short_description": "http_check description.",
+  "short_description": "Monitor any HTTP service for bad responses, soon-to-expire SSL certs, and more.",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "version": "1.1.1"
+  "version": "1.3.0",
+  "categories":["web", "network"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/httpcheck"]
 }

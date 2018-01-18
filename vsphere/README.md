@@ -1,18 +1,19 @@
 # Agent Check: VMWare vSphere
-
-# Overview
+{{< img src="integrations/vmware/vsphere_graph.png" alt="vsphere graph" responsive="true" popup="true">}}
+## Overview
 
 This check collects resource usage metrics from your vSphere cluster—CPU, disk, memory, and network usage.
 
-# Installation
+## Setup
+### Installation
 
 The vSphere check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=vsphere). To install the vSphere check install the `sd-agent-vsphere` package.
 
-# Configuration
+### Configuration
 
 In the Administration section of vCenter, add a read-only user called serverdensity-readonly.
 
-Then, create a file `vsphere.yaml` in the Server Density Agent's `conf.d` directory:
+Then, create a file `vsphere.yaml` in the Server Density Agent's `conf.d` directory. See the [sample vsphere.yaml](conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -26,7 +27,7 @@ instances:
 
 Restart the Agent to start sending vSphere metrics and events to Server Density.
 
-## Configuration Options
+#### Configuration Options
 
 * `ssl_verify` (Optional) - Set to false to disable SSL verification, when connecting to vCenter
 * `ssl_capath` (Optional) - Set to the absolute file path of a directory containing CA certificates in PEM format
@@ -36,9 +37,9 @@ Restart the Agent to start sending vSphere metrics and events to Server Density.
 * `all_metrics` (Optional) - When set to true, this will collect EVERY metric from vCenter, which means a LOT of metrics you probably do not care about. We have selected a set of metrics that are interesting to monitor for you if false.
 * `event_config` (Optional) - Event config is a dictionary. For now the only switch you can flip is collect_vcenter_alarms which will send as events the alarms set in vCenter.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `vsphere` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `vsphere` under the Checks section:
 
 ```
   Checks
@@ -53,10 +54,11 @@ Run the Agent's `info` subcommand and look for `vsphere` under the Checks sectio
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The vsphere check is compatible with all Windows platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.

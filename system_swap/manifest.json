@@ -1,7 +1,7 @@
 {
   "linux_package_name": "sd-agent-system-swap",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "system_swap",
@@ -13,5 +13,9 @@
     "windows"
   ],
   "version": "1.0.0",
-  "guid": "4b3dcc12-7bc9-474a-960f-14680eb587a3"
+  "guid": "4b3dcc12-7bc9-474a-960f-14680eb587a3",
+  "categories":["os & system"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

@@ -2,7 +2,7 @@
   "guid": "bdd65394-92ff-4d51-bbe3-ba732663fdb2",
   "linux_package_name": "sd-agent-gearmand",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "module_files": [
@@ -15,5 +15,10 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.0.1"
+  "version": "1.0.1",
+  "categories":["processing"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/gearman"]
 }

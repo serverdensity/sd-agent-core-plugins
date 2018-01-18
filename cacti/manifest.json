@@ -2,7 +2,7 @@
   "guid": "566466b0-1422-44ef-b14f-493a64e7b58a",
   "linux_package_name": "sd-agent-cacti",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "cacti",
@@ -11,5 +11,9 @@
   "supported_os": [
     "linux"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "categories":["monitoring"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

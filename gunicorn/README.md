@@ -1,6 +1,6 @@
 # Gunicorn Integration
 
-# Overview
+## Overview
 
 The Server Density Agent collects one main metric about Gunicorn: the number of worker processes running.
 
@@ -11,15 +11,15 @@ Gunicorn itself can provide further metrics via SDStatsD, including those for:
 * Request duration (average, median, max, 95th percentile, etc)
 * Log message rate by log level (critical, error, warning, exception)
 
-# Installation
+## Setup
+### Installation
 
 The gunicorn check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=gunicorn). To install the gunicorn check install the `sd-agent-gunicorn` package.
 
 The Gunicorn check requires your Gunicorn app's Python environment to have the [`setproctitle`](https://pypi.python.org/pypi/setproctitle) package; without it, the Server Density Agent will always report that it cannot find a `gunicorn` master process (and hence, cannot find workers, either). Install the `setproctitle` package in your app's Python environment if you want to collect the `gunicorn.workers` metric.
 
-# Configuration
-
-### Configure the Server Density Agent
+### Configuration
+#### Configure the Server Density Agent
 
 Create a `gunicorn.yaml` in the Server Density Agent's `conf.d` directory:
 
@@ -35,13 +35,13 @@ instances:
 
 Restart the Agent to begin sending Gunicorn metrics to Server Density.
 
-### Connect Gunicorn to DogStatsD
+#### Connect Gunicorn to DogStatsD
 
-Since version 19.1, Gunicorn [provides an option](http://docs.gunicorn.org/en/stable/settings.html#statsd-host) to send its metrics to a StatsD daemon. As with many Gunicorn options, you can either pass it to `gunicorn` on the CLI (`--statsd-host`) or set it in your app's configuration file (`statsd_host`). Configure your app to send metrics to DogStatsD at `"localhost:8125"`, and restart the app.
+Since version 19.1, Gunicorn [provides an option](http://docs.gunicorn.org/en/stable/settings.html#statsd-host) to send its metrics to a daemon that implements the StatsD protocol, such as [DogStatsD](https://docs.datadoghq.com/guides/dogstatsd). As with many Gunicorn options, you can either pass it to `gunicorn` on the CLI (`--statsd-host`) or set it in your app's configuration file (`statsd_host`). Configure your app to send metrics to DogStatsD at `"localhost:8125"`, and restart the app.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `gunicorn` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `gunicorn` under the Checks section:
 
 ```
   Checks
@@ -65,8 +65,16 @@ $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:38374         127.0.0.1:8125          ESTABLISHED 15500/gunicorn: mas
 ```
 
-# Troubleshooting
+## Compatibility
 
+The gunicorn check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration - those from the Agent _and_ those sent by Gunicorn to DogStatsD.
+
+## Troubleshooting
 ### Agent cannot find Gunicorn process
 ```
   Checks
@@ -100,10 +108,3 @@ ubuntu   18462 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 ```
 
-# Compatibility
-
-The gunicorn check is compatible with all major platforms.
-
-# Metrics
-
-See [metadata.csv](metadata.csv) for a list of metrics provided by this integration - those from the Agent _and_ those sent by Gunicorn to DogStatsD.

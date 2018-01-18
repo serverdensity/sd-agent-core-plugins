@@ -4,7 +4,7 @@
   "guid": "cd935030-131f-4545-8b6a-a4ca21b8565b",
   "linux_package_name": "sd-agent-haproxy",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.2",
   "name": "haproxy",
@@ -15,5 +15,9 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.2"
+  "version": "1.0.2",
+  "categories":["web"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

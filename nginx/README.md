@@ -1,6 +1,7 @@
 # NGINX check
+{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" responsive="true" popup="true">}}
 
-# Overview
+## Overview
 
 The Server Density Agent can collect many metrics from NGINX instances, including:
 
@@ -16,11 +17,12 @@ For users of NGINX Plus, the commercial version of NGINX, the Agent can collect 
 
 And many more.
 
-# Installation
+## Setup
+### Installation
 
 The NGINX check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=nginx). To install the MySQL check install the `sd-agent-nginx` package.
 
-### NGINX status module
+#### NGINX status module
 
 The NGINX check pulls metrics from a local NGINX status endpoint, so your `nginx` binaries need to have been compiled with one of two NGINX status modules:
 
@@ -38,11 +40,10 @@ http_stub_status_module
 
 If the command output does not include `http_stub_status_module`, you must install an NGINX package that includes the module. You _can_ compile your own NGINX—enabling the module as you compile it—but most modern Linux distributions provide alternative NGINX packages with various combinations of extra modules built in. Check your operating system's NGINX packages to find one that includes the stub status module.
 
-# Configuration
+### Configuration
+#### Prepare NGINX
 
-### Prepare NGINX
-
-On each NGINX server, create a `status.conf` in the directory that contains your other NGINX configuration files (e.g. `/etc/nginx/conf.d/`):
+On each NGINX server, create a `status.conf` in the directory that contains your other NGINX configuration files (e.g. `/etc/nginx/conf.d/`). See the [sample nginx.yaml](https://github.com/DataDog/integrations-core/blob/master/nginx/conf.yaml.example) for all available configuration options:
 
 ```
 server {
@@ -59,6 +60,9 @@ server {
     # freely available with open source NGINX
     stub_status;
 
+    # for open source NGINX < version 1.7.5
+    # stub_status on;
+
     # available only with NGINX Plus
     # status;
   }
@@ -71,7 +75,7 @@ You may optionally configure HTTP basic authentication in the server block, but 
 
 Reload NGINX to enable the status endpoint. (There's no need for a full restart)
 
-### Connect the Agent
+#### Connect the Agent
 
 Create an `nginx.yaml` in the Agent's `conf.d` directory:
 
@@ -87,9 +91,9 @@ instances:
 
 Restart the Agent to start sending NGINX metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `nginx` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `nginx` under the Checks section:
 
 ```
   Checks
@@ -106,7 +110,7 @@ Run the Agent's `info` subcommand and look for `nginx` under the Checks section:
 
 See the Troubleshooting section if the status is not OK.
 
-# Troubleshooting
+## Troubleshooting
 
 You may observe one of these common problems in the output of the Server Density Agent's info subcommand.
 
@@ -137,11 +141,12 @@ http{
 
 Otherwise, review the **Configuration** section.
 
-# Compatibility
+## Compatibility
 
 The NGINX check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a full list of provided metrics.
 
@@ -164,5 +169,7 @@ These metrics don't refer exactly to the same metric, but they are somewhat rela
 
 Finally, these metrics have no good equivalent:
 
+|||
+|-------------------|-------------------|
 | nginx.net.reading | The current number of connections where nginx is reading the request header. |
 | nginx.net.writing | The current number of connections where nginx is writing the response back to the client. |

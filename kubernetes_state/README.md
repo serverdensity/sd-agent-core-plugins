@@ -7,15 +7,16 @@ Get metrics from kubernetes_state service in real time to:
 * Visualize and monitor kubernetes_state states
 * Be notified about kubernetes_state failovers and events.
 
-## Installation
+## Setup
+### Installation
 
 Install the `sd-agent-kubernetes_state` package manually or with your favorite configuration manager
 
-## Configuration
+### Configuration
 
-Edit the `kubernetes_state.yaml` file to point to your server and port, set the masters to monitor
+Edit the `kubernetes_state.yaml` file to point to your server and port, set the masters to monitor. See the [sample kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
 
-## Validation
+### Validation
 
 When you run `sd-agent info` you should see something like the following:
 
@@ -30,3 +31,8 @@ When you run `sd-agent info` you should see something like the following:
 ## Compatibility
 
 The kubernetes_state check is compatible with all major platforms
+
+## Data Collected
+### Metrics
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
+

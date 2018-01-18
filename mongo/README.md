@@ -1,19 +1,19 @@
 # MongoDB check
 
-# Overview
+## Overview
 
 Connect MongoDB to ServerDensity in order to:
 
 * Visualize key MongoDB metrics.
 * Correlate MongoDB performance with the rest of your applications.
 
-# Installation
+## Setup
+### Installation
 
 The MongoDB check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/articles/214171178) on your MongoDB masters. If you need the newest version of the check, install the `sd-agent-mongo` package.
 
-# Configuration
-
-### Prepare MongoDB
+### Configuration
+#### Prepare MongoDB
 
 In a Mongo shell, create a read-only user for the Server Density Agent in the `admin` database:
 
@@ -37,9 +37,9 @@ db.createUser({
 })
 ```
 
-### Connect the Agent
+#### Connect the Agent
 
-Create a file `mongodb.yaml` in the Agent's `conf.d` directory:
+Create a file `mongodb.yaml` in the Agent's `conf.d` directory. See the [sample mongodb.yaml](https://github.com/DataDog/integrations-core/blob/master/mongo/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -57,9 +57,9 @@ instances:
 
 Restart the Agent to start sending MongoDB metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `mongo` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `mongo` under the Checks section:
 
 ```
   Checks
@@ -74,11 +74,12 @@ Run the Agent's `info` subcommand and look for `mongo` under the Checks section:
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The mongo check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
@@ -86,6 +87,8 @@ See the [MongoDB 3.0 Manual](https://docs.mongodb.org/manual/reference/command/d
 
 **NOTE**: The following metrics are NOT collected by default:
 
+|||
+|---|---|
 |metric prefix|what to add to `additional_metrics` to collect it|
 |mongodb.collection|collection|
 |mongodb.commands|top|

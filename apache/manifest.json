@@ -4,7 +4,7 @@
   "guid": "cb2b4a06-4ede-465e-9478-a45f8b32058a",
   "linux_package_name": "sd-agent-apache",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "name": "apache",
@@ -15,5 +15,9 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "categories":["web"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

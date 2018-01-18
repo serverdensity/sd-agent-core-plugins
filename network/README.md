@@ -1,16 +1,17 @@
 # Network check
-
-# Overview
+{{< img src="integrations/network/netdashboard.png" alt="Network Dashboard" responsive="true" popup="true">}}
+## Overview
 
 The network check collects TCP/IP stats from the host operating system.
 
-# Installation
+## Setup
+### Installation
 
 The network check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/search?query=install) on any host. If you need the newest version of the check, install the `sd-agent-network` package.
 
-# Configuration
+### Configuration
 
-The Agent enables the network check by default, but if you want to configure the check yourself, create a file `network.yaml` in the Agent's `conf.d` directory:
+The Agent enables the network check by default, but if you want to configure the check yourself, create a file `network.yaml` in the Agent's `conf.d` directory. See the [sample network.yaml](https://github.com/DataDog/integrations-core/blob/master/network/conf.yaml.default) for all available configuration options:
 
 ```
 init_config:
@@ -25,11 +26,11 @@ instances:
 #   excluded_interface_re: eth1.*
 ```
 
-Restart the Agent to effect any configuration changes.
+[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to effect any configuration changes.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `network` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `network` under the Checks section:
 
 ```
   Checks
@@ -44,10 +45,11 @@ Run the Agent's `info` subcommand and look for `network` under the Checks sectio
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The network check is compatible with all major platforms.
 
-# Metrics
-
+## Data Collected
+### Metrics
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+

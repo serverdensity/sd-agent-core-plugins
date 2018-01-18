@@ -4,7 +4,7 @@
   "guid": "056bfc7f-4775-4581-9442-502078593d10",
   "linux_package_name": "sd-agent-mysql",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "module_files": [
@@ -19,11 +19,22 @@
     "small": "resources/small_mysql.png"
   },
   "short_description": "Collect performance schema metrics, query throughput, custom metrics, and more.",
+  "display_name": "MySQL",
+  "version": "1.1.0",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "version": "1.0.3"
+  "resources": {
+    "small": "resources/small_mysql.png",
+    "bot": "resources/bot_mysql.png",
+    "monitor_editor": "resources/monitor_mysql.png",
+    "my_image": "resources/mysql.png"
+  },
+  "categories":["data store"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

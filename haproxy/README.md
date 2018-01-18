@@ -1,6 +1,6 @@
 # Haproxy Integration
-
-# Overview
+{{< img src="integrations/haproxy/haproxydash.png" alt="HAProxy default dashboard" responsive="true" popup="true">}}
+## Overview
 
 Capture HAProxy activity in Server Density to:
 
@@ -8,13 +8,15 @@ Capture HAProxy activity in Server Density to:
 * Know when a server goes down.
 * Correlate the performance of HAProxy with the rest of your applications.
 
-# Installation
+## Setup
+### Installation
 
 The HAProxy check can be installed with your package manager if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=haproxy). To install the haproxy check install the `sd-agent-haproxy` package.
 
-# Configuration
+Make sure that stats are enabled on your HAProxy configuration. See [this post for guidance on doing this](https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics/).
 
-## Prepare HAProxy
+### Configuration
+#### Prepare HAProxy
 
 The Agent collects metrics via a stats endpoint. Configure one in your `haproxy.conf`:
 
@@ -30,9 +32,9 @@ stats auth <your_username>:<your_password>  # Authentication credentials
 
 Restart HAProxy to enable the stats endpoint.
 
-## Connect the Agent
+### Connect the Agent
 
-Create a file `haproxy.yaml` in the Agent's `conf.d` directory:
+Create a file `haproxy.yaml` in the Agent's `conf.d` directory. See the [sample haproxy.yaml](https://github.com/DataDog/integrations-core/blob/master/haproxy/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -45,9 +47,9 @@ instances:
 
 Restart the Agent to begin sending HAProxy metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `haproxy` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `haproxy` under the Checks section:
 
 ```
   Checks
@@ -62,13 +64,10 @@ Run the Agent's `info` subcommand and look for `haproxy` under the Checks sectio
     [...]
 ```
 
-# Troubleshooting
-
-# Compatibility
-
+## Compatibility
 The haproxy check is compatible with all major platforms.
 
-# Metrics
-
+## Data Collected
+### Metrics
 See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 

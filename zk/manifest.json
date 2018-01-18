@@ -3,7 +3,7 @@
   "guid": "5519c110-5183-438e-85ad-63678c072ac7",
   "linux_package_name": "sd-agent-zookeeper",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "name": "zk",
@@ -13,5 +13,10 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.1.0"
+  "version": "1.2.0",
+  "categories":["orchestration", "notification"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/zookeeper"]
 }

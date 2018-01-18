@@ -3,20 +3,25 @@
   "display_name": "DNS Check",
   "linux_package_name": "sd-agent-dns-check",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "dns_check",
-  "short_description": "dns_check description.",
+  "short_description": "Monitor the resolvablity of and lookup times for any DNS record.",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "version": "1.0.2",
-  "guid": "31e4c84c-fc4b-4cd4-97ed-0331bf4e2023",
   "module_files": [
     "dns"
-  ]
+  ],
+  "version": "1.1.0",
+  "public_title": "Datadog-DNS Check Integration",
+  "categories":["network", "web"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/dnscheck"]
 }

@@ -1,4 +1,4 @@
-# (C) Datadog, Inc. 2010-2016
+# (C) Datadog, Inc. 2010-2017
 # All rights reserved
 # Licensed under Simplified BSD License (see LICENSE)
 
@@ -23,6 +23,7 @@ class NodeNotFound(Exception):
 ESInstanceConfig = namedtuple(
     'ESInstanceConfig', [
         'pshard_stats',
+        'pshard_graceful_to',
         'cluster_stats',
         'password',
         'service_check_tags',
@@ -66,7 +67,8 @@ class ESCheck(AgentCheck):
         "elasticsearch.primaries.search.query.current": ("gauge", "_all.primaries.search.query_current"),
         "elasticsearch.primaries.search.fetch.total": ("gauge", "_all.primaries.search.fetch_total"),
         "elasticsearch.primaries.search.fetch.time": ("gauge", "_all.primaries.search.fetch_time_in_millis", lambda v: float(v)/1000),
-        "elasticsearch.primaries.search.fetch.current": ("gauge", "_all.primaries.search.fetch_current")
+        "elasticsearch.primaries.search.fetch.current": ("gauge", "_all.primaries.search.fetch_current"),
+        "elasticsearch.indices.count": ("gauge", "indices", lambda indices: len(indices))
     }
 
     PRIMARY_SHARD_METRICS_POST_1_0 = {
@@ -181,6 +183,12 @@ class ESCheck(AgentCheck):
         "jvm.mem.heap_max": ("gauge", "jvm.mem.heap_max_in_bytes"),
         "jvm.mem.non_heap_committed": ("gauge", "jvm.mem.non_heap_committed_in_bytes"),
         "jvm.mem.non_heap_used": ("gauge", "jvm.mem.non_heap_used_in_bytes"),
+        "jvm.mem.pools.young.used": ("gauge", "jvm.mem.pools.young.used_in_bytes"),
+        "jvm.mem.pools.young.max": ("gauge", "jvm.mem.pools.young.max_in_bytes"),
+        "jvm.mem.pools.old.used": ("gauge", "jvm.mem.pools.old.used_in_bytes"),
+        "jvm.mem.pools.old.max": ("gauge", "jvm.mem.pools.old.max_in_bytes"),
+        "jvm.mem.pools.survivor.used": ("gauge", "jvm.mem.pools.survivor.used_in_bytes"),
+        "jvm.mem.pools.survivor.max": ("gauge", "jvm.mem.pools.survivor.max_in_bytes"),
         "jvm.threads.count": ("gauge", "jvm.threads.count"),
         "jvm.threads.peak_count": ("gauge", "jvm.threads.peak_count"),
         "elasticsearch.fs.total.total_in_bytes": ("gauge", "fs.total.total_in_bytes"),
@@ -329,7 +337,8 @@ class ESCheck(AgentCheck):
     CLUSTER_PENDING_TASKS = {
         "elasticsearch.pending_tasks_total": ("gauge", "pending_task_total"),
         "elasticsearch.pending_tasks_priority_high": ("gauge", "pending_tasks_priority_high"),
-        "elasticsearch.pending_tasks_priority_urgent": ("gauge", "pending_tasks_priority_urgent")
+        "elasticsearch.pending_tasks_priority_urgent": ("gauge", "pending_tasks_priority_urgent"),
+        "elasticsearch.pending_tasks_time_in_queue": ("gauge", "pending_tasks_time_in_queue"),
     }
 
     SOURCE_TYPE_NAME = 'elasticsearch'
@@ -346,6 +355,7 @@ class ESCheck(AgentCheck):
             raise Exception("A URL must be specified in the instance")
 
         pshard_stats = _is_affirmative(instance.get('pshard_stats', False))
+        pshard_graceful_to = _is_affirmative(instance.get('pshard_graceful_timeout', False))
 
         cluster_stats = _is_affirmative(instance.get('cluster_stats', False))
         if 'is_external' in instance:
@@ -376,6 +386,7 @@ class ESCheck(AgentCheck):
 
         config = ESInstanceConfig(
             pshard_stats=pshard_stats,
+            pshard_graceful_to=pshard_graceful_to,
             cluster_stats=cluster_stats,
             password=instance.get('password'),
             service_check_tags=service_check_tags,
@@ -413,10 +424,17 @@ class ESCheck(AgentCheck):
         self._process_stats_data(stats_data, stats_metrics, config)
 
         # Load clusterwise data
+        # Note: this is a cluster-wide query, might TO.
         if config.pshard_stats:
+            send_sc = bubble_ex = not config.pshard_graceful_to
             pshard_stats_url = urlparse.urljoin(config.url, pshard_stats_url)
-            pshard_stats_data = self._get_data(pshard_stats_url, config)
-            self._process_pshard_stats_data(pshard_stats_data, config, pshard_stats_metrics)
+            try:
+                pshard_stats_data = self._get_data(pshard_stats_url, config, send_sc=send_sc)
+                self._process_pshard_stats_data(pshard_stats_data, config, pshard_stats_metrics)
+            except requests.ReadTimeout as e:
+                if bubble_ex:
+                    raise
+                self.log.warning("Timed out reading pshard-stats from servers (%s) - stats will be missing", e)
 
 
         # Load the health data.
@@ -468,8 +486,8 @@ class ESCheck(AgentCheck):
 
         if version >= [0, 90, 10]:
             # ES versions 0.90.10 and above
-            health_url = "/_cluster/health?pretty=true"
-            pending_tasks_url = "/_cluster/pending_tasks?pretty=true"
+            health_url = "/_cluster/health"
+            pending_tasks_url = "/_cluster/pending_tasks"
 
             # For "external" clusters, we want to collect from all nodes.
             if cluster_stats:
@@ -483,7 +501,7 @@ class ESCheck(AgentCheck):
 
             additional_metrics = self.JVM_METRICS_POST_0_90_10
         else:
-            health_url = "/_cluster/health?pretty=true"
+            health_url = "/_cluster/health"
             pending_tasks_url = None
             if cluster_stats:
                 stats_url = "/_cluster/nodes/stats?all=true"
@@ -592,14 +610,18 @@ class ESCheck(AgentCheck):
 
     def _process_pending_tasks_data(self, data, config):
         p_tasks = defaultdict(int)
+        average_time_in_queue = 0
 
         for task in data.get('tasks', []):
             p_tasks[task.get('priority')] += 1
+            average_time_in_queue += task.get('time_in_queue_millis', 0)
 
+        total = sum(p_tasks.values())
         node_data = {
-            'pending_task_total':               sum(p_tasks.values()),
+            'pending_task_total':               total,
             'pending_tasks_priority_high':      p_tasks['high'],
             'pending_tasks_priority_urgent':    p_tasks['urgent'],
+            'pending_tasks_time_in_queue':      average_time_in_queue/(total or 1), # if total is 0
         }
 
         for metric in self.CLUSTER_PENDING_TASKS:

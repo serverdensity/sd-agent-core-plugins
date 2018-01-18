@@ -1,16 +1,17 @@
 # PgBouncer check
 
-# Overview
+## Overview
 
 The PgBouncer check tracks connection pool metrics and lets you monitor traffic to and from your application.
 
-# Installation
+## Setup
+### Installation
 
 The PgBouncer check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=PgBouncer). To install the PgBouncer check install the `sd-agent-pgbouncer` package.
 
-# Configuration
+### Configuration
 
-Create a file `pgbouncer.yaml` in the Agent's `conf.d` directory:
+Create a file `pgbouncer.yaml` in the Agent's `conf.d` directory. See the [sample pgbouncer.yaml](https://github.com/DataDog/integrations-core/blob/master/pgbouncer/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -27,11 +28,21 @@ instances:
 #     - role:main
 ```
 
+In your PGBouncer userlist.txt file add
+```
+  "datadog" "<your_pass>"
+```
+
+Next, in your PGBouncer pgbouncer.ini file add
+```
+stats_users = datadog
+```
+
 Restart the Agent to start sending PgBouncer metrics to Server Density.
 
-# Validation
+### Validation
 
-Run the Agent's `info` subcommand and look for `pgbouncer` under the Checks section:
+[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `pgbouncer` under the Checks section:
 
 ```
   Checks
@@ -46,10 +57,11 @@ Run the Agent's `info` subcommand and look for `pgbouncer` under the Checks sect
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The PgBouncer check is compatible with all major platforms.
 
-# Metrics
-
+## Data Collected
+### Metrics
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+
