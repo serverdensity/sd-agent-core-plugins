@@ -10,9 +10,6 @@ cache:
 python:
   - "2.7"
 
-env:
-  - SKIP_CSV_CHECK_DIRS="debian/ embedded/ packaging/ vendor/"
-
 git:
   depth: 3
 
@@ -31,4 +28,4 @@ install:
   - gem install csvlint
 
 script:
-  - for d in */; do if [[ " $SKIP_CSV_CHECK_DIRS " =~ " $d " ]]; then continue; else csvlint "$d"metadata.csv; fi done
+  - for metadata in `ls */metadata.csv`; do csvlint ${metadata}; done
