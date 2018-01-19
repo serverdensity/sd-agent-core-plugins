@@ -65,3 +65,4 @@ The PgBouncer check is compatible with all major platforms.
 ### Metrics
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
+
