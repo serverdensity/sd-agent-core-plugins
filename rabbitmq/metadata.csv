@@ -12,8 +12,8 @@ rabbitmq.exchange.messages.ack.count,gauge,,message,,Number of messages delivere
 rabbitmq.exchange.messages.ack.rate,gauge,,message,,Rate of messages delivered to clients and acknowledged per second ,0,rabbitmq,xchng msgs ack rate
 rabbitmq.exchange.messages.confirm.count,gauge,,message,,Count of messages confirmed,0,rabbitmq,xchng msgs cnfrm
 rabbitmq.exchange.messages.confirm.rate,gauge,,message,,Rate of messages confirmed per second,0,rabbitmq,xchng msgs cnfrm rate
-rabbitmq.exchange.messages.deliver_get.count,gauge,,message,,Sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get,0,rabbitmq,xchng msgs dlv get
-rabbitmq.exchange.messages.deliver_get.rate,gauge,,message,,Rate per second of the sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get,0,rabbitmq,xchng msgs dlv get rate
+rabbitmq.exchange.messages.deliver_get.count,gauge,,message,,"Sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get",0,rabbitmq,xchng msgs dlv get
+rabbitmq.exchange.messages.deliver_get.rate,gauge,,message,,"Rate per second of the sum of messages delivered in acknowledgement mode to consumers, in no-acknowledgement mode to consumers, in acknowledgement mode in response to basic.get, and in no-acknowledgement mode in response to basic.get",0,rabbitmq,xchng msgs dlv get rate
 rabbitmq.exchange.messages.redeliver.count,gauge,,message,,Count of subset of messages in deliver_get which had the redelivered flag set,0,rabbitmq,xchng msgs redlv
 rabbitmq.exchange.messages.redeliver.rate,gauge,,message,,Rate of subset of messages in deliver_get which had the redelivered flag set per second ,0,rabbitmq,xchng msgs redlv rate
 rabbitmq.exchange.messages.return_unroutable.count,gauge,,message,,Count of messages returned to publisher as unroutable,0,rabbitmq,xchng msgs unroutable
@@ -23,7 +23,7 @@ rabbitmq.exchange.messages.publish.rate,gauge,,message,,Rate of messages publish
 rabbitmq.exchange.messages.publish_in.count,gauge,,message,,Count of messages published from channels into this exchange,0,rabbitmq,xchng msgs pub in
 rabbitmq.exchange.messages.publish_in.rate,gauge,,message,,Rate of messages published from channels into this exchange per sec,0,rabbitmq,xchng msgs pub in rate
 rabbitmq.exchange.messages.publish_out.count,gauge,,message,,Count of messages published from this exchange into queues,0,rabbitmq,xchng msgs pub out
-rabbitmq.exchange.messages.publish_out.rate,gauge,,message,,Rate of messages published from this exchange into queues per second,rabbitmq,xchng msgs pub out rate
+rabbitmq.exchange.messages.publish_out.rate,gauge,,message,,Rate of messages published from this exchange into queues per second,,rabbitmq,xchng msgs pub out rate
 rabbitmq.queue.active_consumers,gauge,,,,"Number of active consumers, consumers that can immediately receive any messages sent to the queue",0,rabbitmq,act cons
 rabbitmq.queue.bindings.count,gauge,,,,"Number of bindings for a specific queue",0,rabbitmq,queue bind
 rabbitmq.queue.consumers,gauge,,,,Number of consumers,0,rabbitmq,cons
