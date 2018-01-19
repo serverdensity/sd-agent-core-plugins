@@ -43,11 +43,11 @@ class StormCheck(AgentCheck):
                     topology_stats_10m_0s = topology_stats[0]
                     topology_stats_10m_0s_data = [
                         ('storm.topology.stats.complete_latency',
-                         topology_stats_10m_0s['completeLatency']),
+                         float(topology_stats_10m_0s['completeLatency'])),
                         ('storm.topology.stats.acked',
-                         topology_stats_10m_0s['acked']),
+                         int(topology_stats_10m_0s['acked'])),
                         ('storm.topology.stats.failed',
-                         topology_stats_10m_0s['failed']),
+                         int(topology_stats_10m_0s['failed']))
                     ]
 
                     for data in topology_stats_10m_0s_data:
@@ -64,8 +64,9 @@ class StormCheck(AgentCheck):
 
                         spout_data = [
                             ('storm.spouts.complete_latency',
-                             spout['completeLatency']),
-                            ('storm.spouts.failed', spout['failed'])
+                             float(spout['completeLatency'])),
+                            ('storm.spouts.failed',
+                             int(spout['failed']))
                         ]
 
                         for data in spout_data:
@@ -83,10 +84,11 @@ class StormCheck(AgentCheck):
 
                         bolt_data = [
                             ('storm.bolts.execute_latency',
-                             bolt['executeLatency']),
+                             float(bolt['executeLatency'])),
                             ('storm.bolts.process_latency',
-                             bolt['processLatency']),
-                            ('storm.bolts.failed', bolt['failed'])
+                             float(bolt['processLatency'])),
+                            ('storm.bolts.failed',
+                             int(bolt['failed']))
                         ]
 
                         for data in bolt_data:
