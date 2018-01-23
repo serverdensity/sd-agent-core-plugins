@@ -384,7 +384,7 @@ class ProcessCheck(AgentCheck):
         tags.extend(['process_name:%s' % name, name])
 
         self.log.debug('ProcessCheck: process %s analysed', name)
-        self.gauge('system.processes.number', len(pids), tags=tags)
+        self.gauge('system.processes.instances', len(pids), tags=tags)
 
         if len(pids) == 0:
             self.warning("No matching process '%s' was found" % name)
