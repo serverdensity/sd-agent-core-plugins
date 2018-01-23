@@ -159,7 +159,7 @@ class ProcessCheckTest(AgentCheckTest):
         'system.processes.mem.real',
         'system.processes.mem.rss',
         'system.processes.mem.vms',
-        'system.processes.number',
+        'system.processes.instances',
         'system.processes.open_file_descriptors',
         'system.processes.threads',
         'system.processes.voluntary_ctx_switches',
@@ -314,10 +314,10 @@ class ProcessCheckTest(AgentCheckTest):
                 expected_value = None
                 # - if no processes are matched we don't send metrics except number
                 # - it's the first time the check runs so don't send cpu.pct
-                if (len(mocked_processes) == 0 and mname != 'system.processes.number'):
+                if (len(mocked_processes) == 0 and mname != 'system.processes.instances'):
                     continue
 
-                if mname == 'system.processes.number':
+                if mname == 'system.processes.instances':
                     expected_value = len(mocked_processes)
 
                 self.assertMetric(
@@ -376,7 +376,7 @@ class ProcessCheckTest(AgentCheckTest):
 
         self.run_check(config, mocks={'_get_child_processes': self.mock_get_child_processes})
 
-        self.assertMetric('system.processes.number', 4, tags=self.generate_expected_tags(config['instances'][0]))
+        self.assertMetric('system.processes.instances', 4, tags=self.generate_expected_tags(config['instances'][0]))
 
     @patch('psutil.Process', return_value=MockProcess())
     def test_check_filter_user(self, mock_process):
@@ -528,7 +528,7 @@ class ProcessCheckTest(AgentCheckTest):
         expected_tags = self.generate_expected_tags(config['instances'][0])
         self.assertServiceCheckOK('process.up', count=1, tags=expected_tags + ['process:moved_procfs'])
 
-        self.assertMetric('system.processes.number', at_least=1, tags=expected_tags)
+        self.assertMetric('system.processes.instances', at_least=1, tags=expected_tags)
         self.assertMetric('system.processes.threads', at_least=1, tags=expected_tags)
         self.assertMetric('system.processes.run_time.avg', at_least=1, tags=expected_tags)
         self.assertMetric('system.processes.run_time.max', at_least=1, tags=expected_tags)
