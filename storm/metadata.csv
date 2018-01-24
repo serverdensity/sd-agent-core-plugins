@@ -1,9 +1,9 @@
 metric_name,metric_type,interval,unit_name,per_unit_name,description,orientation,integration,short_name
-storm.topology.stats.complete_latency,gauge,,latency,,Total latency for processing the message.,-1,storm,topology latency
-storm.topology.stats.acked,gauge,,acked,,Number of messages acked in given window.,-1,storm,topology acked
-storm.topology.stats.failed,gauge,,failed,,Number of messages failed in given window.,-1,storm,topology failed
-storm.spouts.complete_latency,gauge,,latency,,Total latency for processing the message.,-1,storm,spout latency
-storm.spouts.failed,gauge,,failed,,Number of messages failed.,-1,storm,spout failed
-storm.bolts.execute_latency,gauge,,latency,,Average time to run the execute method of the bolt.,-1,storm,bolt execute latency
-storm.bolts.process_latency,gauge,,latency,,Average time of the bolt to ack a message after it was received.,-1,storm,bolt process latency
-storm.bolts.failed,gauge,,failed,,Number of tuples failed by the bolt.,-1,storm,bolt failed
+storm.topology.stats.complete_latency,gauge,,millisecond,,Total latency for processing the message.,-1,storm,topology latency
+storm.topology.stats.acked,gauge,,,,Number of messages acked in given window.,-1,storm,topology acked
+storm.topology.stats.failed,gauge,,,,Number of messages failed in given window.,-1,storm,topology failed
+storm.spouts.complete_latency,gauge,,millisecond,,Total latency for processing the message.,-1,storm,spout latency
+storm.spouts.failed,gauge,,,,Number of messages failed.,-1,storm,spout failed
+storm.bolts.execute_latency,gauge,,millisecond,,Average time to run the execute method of the bolt.,-1,storm,bolt execute latency
+storm.bolts.process_latency,gauge,,millisecond,,Average time of the bolt to ack a message after it was received.,-1,storm,bolt process latency
+storm.bolts.failed,gauge,,,,Number of tuples failed by the bolt.,-1,storm,bolt failed
