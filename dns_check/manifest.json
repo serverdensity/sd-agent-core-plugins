@@ -18,10 +18,9 @@
     "dns"
   ],
   "version": "1.1.0",
-  "public_title": "Datadog-DNS Check Integration",
+  "public_title": "DNS Check Integration",
   "categories":["network", "web"],
   "type":"check",
   "is_public": true,
   "has_logo": true,
-  "aliases":["/integrations/dnscheck"]
 }

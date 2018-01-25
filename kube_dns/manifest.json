@@ -1,6 +1,6 @@
 {
   "guid": "3c05ed97-bf34-4061-83c4-e742d7daa5f8",
-  "linux_package_name": "sd-agent-kube_dns",
+  "linux_package_name": "sd-agent-kube-dns",
   "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
@@ -14,7 +14,7 @@
     "mac_os",
     "windows"
   ],
-  "short_description": "Track all your Kube DNS metrics with Datadog",
+  "short_description": "Track all your Kube DNS metrics",
   "guid": "3c05ed97-bf34-4061-83c4-e742d7daa5f8",
   "version": "1.2.0",
   "categories":["web", "network"],
