@@ -18,7 +18,7 @@ instances:
   #       export LD_RUN_PATH=/opt/oracle/instantclient_12_1
   #       export ORACLE_HOME=/opt/oracle/instantclient_12_1
   # 4. Install instant client in agent's virtual environment
-  #       /opt/datadog-agent/embedded/bin/pip install cx_Oracle
+  #       /usr/share/python/sd-agent/bin/pip install cx_Oracle
   # 5. Following cx_Oracle installation, ensure LD_LIBRARY_PATH points
   #    to this directory when starting/restarting the agent
   #       export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_1

@@ -7,7 +7,7 @@ Get metrics from Oracle Database servers in real time to visualize and monitor a
 ## Setup
 ### Installation
 
-Install the `dd-check-oracle` package manually or with your favorite configuration manager.
+Install the `sd-agent-oracle` package manually or with your favorite configuration manager.
 
 In order to use the Oracle integration you must install the Oracle Instant Client libraries. Due to licensing restrictions we are unable to include these libraries in our agent, but you can [download them directly frrom Oracle](https://www.oracle.com/technetwork/database/features/instant-client/index.htm).
 
@@ -36,34 +36,34 @@ unzip /opt/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip
 export LD_LIBRARY_PATH=/opt/oracle/instantclient/lib:$LD_LIBRARY_PATH
 ```
 
-Finally, you will need to create a read-only datadog user with proper access to your Oracle Database Server. Connect to your Oracle database with an administrative user (e.g. `SYSDBA` or `SYSOPER`) and run:
+Finally, you will need to create a read-only serverdensity user with proper access to your Oracle Database Server. Connect to your Oracle database with an administrative user (e.g. `SYSDBA` or `SYSOPER`) and run:
 
 ```
 -- Enable Oracle Script.
 ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 
--- Create the datadog user. Replace the password placeholder with a secure password.
-CREATE USER datadog IDENTIFIED BY <password>;
+-- Create the serverdensity user. Replace the password placeholder with a secure password.
+CREATE USER serverdensity IDENTIFIED BY <password>;
 
--- Grant access to the datadog user.
-GRANT CONNECT TO datadog;
-GRANT SELECT ON gv_$sysmetric TO datadog;
+-- Grant access to the serverdensity user.
+GRANT CONNECT TO serverdensity;
+GRANT SELECT ON gv_$sysmetric TO serverdensity;
 ```
 
 ### Configuration
 
-Edit the `oracle.yaml` file to point to your server and port, set the masters to monitor. See the [sample oracle.yaml](https://github.com/DataDog/integrations-core/blob/master/oracle/conf.yaml.example) for all available configuration options.
+Edit the `oracle.yaml` file to point to your server and port, set the masters to monitor. See the [sample oracle.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/oracle/conf.yaml.example) for all available configuration options.
 
 Configuration Options:
 * **`server`** (Required) - The IP address or hostname of the Oracle Database server.
 * **`service_name`** (Required) - The Oracle Database service name. To view the services available on your server, run the following query: `SELECT value FROM v$parameter WHERE name='service_names'`.
-* **`user`** (Required) - If you followed [the instructions above](#installation), set this to the read-only user `datadog`. Otherwise set it to a user with sufficient privileges to connect to the database and read system metrics.
+* **`user`** (Required) - If you followed [the instructions above](#installation), set this to the read-only user `serverdensity`. Otherwise set it to a user with sufficient privileges to connect to the database and read system metrics.
 * **`password`** (Required) - The password for the user account.
 * **`tags`** (Optional) - A list of tags applied to all metrics collected. Tags may be simple strings or key-value pairs.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `oracle` under the Checks section:
+Run the Agent's `info` subcommand and look for `oracle` under the Checks section:
 
     Checks
     ======
@@ -79,17 +79,7 @@ The Oracle check is currently compatible with Linux and macOS.
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv) for a list of metrics provided by this integration.
-
-### Events
-The Oracle Database check does not include any events at this time.
-
-### Service Checks
-The Oracle Database integration includes the service check `oracle.can_connect` which will verify the database is available and accepting connections.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
-
-## Further Reading
-
-Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+Need help? Contact [Server Density Support](http://support.serverdensity.com).
