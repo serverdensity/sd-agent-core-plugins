@@ -19,7 +19,7 @@ This check is JMX-based, so you'll need to enable JMX Remote on your Tomcat serv
 
 ### Configuration
 
-Create a file `tomcat.yaml` in the Agent's `conf.d` directory. See the [sample tomcat.yaml](https://github.com/DataDog/integrations-core/blob/master/tomcat/conf.yaml.example) for all available configuration options:
+Create a file `tomcat.yaml` in the Agent's `conf.d` directory. See the [sample tomcat.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/tomcat/conf.yaml.example) for all available configuration options:
 
 ```
 instances:
@@ -118,7 +118,7 @@ For a given bean, metrics get tagged in the following manner:
 
 Your metric will be mydomain (or some variation depending on the attribute inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
 
-If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Datadog as `my_metric_name`.
+If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Server Density as `my_metric_name`.
 
 #### The `attribute` filter
 
@@ -139,7 +139,7 @@ The `attribute` filter can accept two types of values:
                 alias: tomcat.bytes_rcvd
                 metric_type: counter
 
-In that case you can specify an alias for the metric that will become the metric name in Datadog. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
+In that case you can specify an alias for the metric that will become the metric name in Server Density. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
 
 * A list of attributes names:
 
@@ -180,31 +180,9 @@ Here is another filtering example:
               - 99thPercentile
 
 
-#### Note
-
-List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
-
-    # Datadog Agent > 5.3.0
-      conf:
-        - include:
-            domain: domain_name
-            bean:
-              - first_bean_name
-              - second_bean_name
-
-    # Older Datadog Agent versions
-      conf:
-        - include:
-            domain: domain_name
-            bean: first_bean_name
-        - include:
-            domain: domain_name
-            bean: second_bean_name
-
-
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `tomcat` under the Checks section:
+Run the Agent's `info` subcommand and look for `tomcat` under the Checks section:
 
 ```
   Checks

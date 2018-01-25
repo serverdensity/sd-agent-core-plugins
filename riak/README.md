@@ -1,5 +1,4 @@
 # Riak Check
-{{< img src="integrations/riak/riak_graph.png" alt="Riak Graph" responsive="true" popup="true">}}
 
 ## Overview
 
@@ -12,7 +11,7 @@ The Riak check can be installed with your package manager, if the sd-agent repos
 
 ### Configuration
 
-Create a file `riak.yaml` in the Agent's `conf.d` directory. See the [sample riak.yaml](https://github.com/DataDog/integrations-core/blob/master/riak/conf.yaml.example) for all available configuration options:
+Create a file `riak.yaml` in the Agent's `conf.d` directory. See the [sample riak.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/riak/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -25,7 +24,7 @@ Restart the Agent to start sending Riak metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `riak` under the Checks section:
+Run the Agent's `info` subcommand and look for `riak` under the Checks section:
 
 ```
   Checks

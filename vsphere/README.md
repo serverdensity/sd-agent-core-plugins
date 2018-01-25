@@ -1,5 +1,4 @@
 # Agent Check: VMWare vSphere
-{{< img src="integrations/vmware/vsphere_graph.png" alt="vsphere graph" responsive="true" popup="true">}}
 ## Overview
 
 This check collects resource usage metrics from your vSphere cluster—CPU, disk, memory, and network usage.
@@ -39,7 +38,7 @@ Restart the Agent to start sending vSphere metrics and events to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `vsphere` under the Checks section:
+Run the Agent's `info` subcommand and look for `vsphere` under the Checks section:
 
 ```
   Checks

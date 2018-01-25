@@ -14,7 +14,7 @@ The Marathon check can be installed with your package manager, if the sd-agent r
 
 ### Configuration
 
-Create a file `marathon.yaml` in the Agent's `conf.d` directory. See the [sample marathon.yaml](https://github.com/DataDog/integrations-core/blob/master/marathon/conf.yaml.example) for all available configuration options:
+Create a file `marathon.yaml` in the Agent's `conf.d` directory. See the [sample marathon.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/marathon/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -33,7 +33,7 @@ Restart the Agent to begin sending Marathon metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `marathon` under the Checks section:
+Run the Agent's `info` subcommand and look for `marathon` under the Checks section:
 
 ```
   Checks

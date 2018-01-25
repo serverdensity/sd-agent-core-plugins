@@ -34,7 +34,7 @@ echo -e "\033[0;31mMissing SELECT grant\033[0m"
 ```
 
 Configure the Agent to connect to MySQL
-Edit conf.d/`cacti.yaml`. See the [sample cacti.yaml](https://github.com/DataDog/integrations-core/blob/master/cacti/conf.yaml.example) for all available configuration options:
+Edit conf.d/`cacti.yaml`. See the [sample cacti.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/cacti/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -64,7 +64,7 @@ fi'
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `cacti` under the Checks section:
+Run the Agent's `info` subcommand and look for `cacti` under the Checks section:
 
 ```
   Checks
@@ -85,5 +85,5 @@ The Cacti check is compatible with all major platforms
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/cacti/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/cacti/metadata.csv) for a list of metrics provided by this integration.
 

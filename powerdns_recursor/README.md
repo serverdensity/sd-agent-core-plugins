@@ -38,7 +38,7 @@ Restart the recursor to enable the statistics API.
 
 #### Connect the Agent
 
-Create a file `powerdns_recursor.yaml` in the Agent's `conf.d` directory. See the [sample powerdns_recursor.yaml](https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/conf.yaml.example) for all available configuration options:
+Create a file `powerdns_recursor.yaml` in the Agent's `conf.d` directory. See the [sample powerdns_recursor.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/powerdns_recursor/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -54,7 +54,7 @@ Restart the Agent to begin sending PowerDNS Recursor metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `powerdns_recursor` under the Checks section:
+Run the Agent's `info` subcommand and look for `powerdns_recursor` under the Checks section:
 
 ```
   Checks

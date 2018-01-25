@@ -35,13 +35,13 @@ instances:
 
 Restart the Agent to begin sending Gunicorn metrics to Server Density.
 
-#### Connect Gunicorn to DogStatsD
+#### Connect Gunicorn to SdStatsD
 
-Since version 19.1, Gunicorn [provides an option](http://docs.gunicorn.org/en/stable/settings.html#statsd-host) to send its metrics to a daemon that implements the StatsD protocol, such as [DogStatsD](https://docs.datadoghq.com/guides/dogstatsd). As with many Gunicorn options, you can either pass it to `gunicorn` on the CLI (`--statsd-host`) or set it in your app's configuration file (`statsd_host`). Configure your app to send metrics to DogStatsD at `"localhost:8125"`, and restart the app.
+Since version 19.1, Gunicorn [provides an option](http://docs.gunicorn.org/en/stable/settings.html#statsd-host) to send its metrics to a daemon that implements the StatsD protocol, such as [SdStatsD](https://support.serverdensity.com/hc/en-us/articles/115014823747). As with many Gunicorn options, you can either pass it to `gunicorn` on the CLI (`--statsd-host`) or set it in your app's configuration file (`statsd_host`). Configure your app to send metrics to DogStatsD at `"localhost:8125"`, and restart the app.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `gunicorn` under the Checks section:
+Run the Agent's `info` subcommandand look for `gunicorn` under the Checks section:
 
 ```
   Checks

@@ -1,5 +1,4 @@
 # Agent Check: Hadoop YARN
-{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" responsive="true" popup="true">}}
 ## Overview
 
 This check collects metrics from your YARN ResourceManager, including:
@@ -16,7 +15,7 @@ The YARN check is packaged with the Agent, so simply [install the Agent](https:/
 
 ### Configuration
 
-Create a file `yarn.yaml` in the Agent's `conf.d` directory. See the [sample yarn.yaml](https://github.com/DataDog/integrations-core/blob/master/yarn/conf.yaml.example) for all available configuration options.:
+Create a file `yarn.yaml` in the Agent's `conf.d` directory. See the [sample yarn.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/yarn/conf.yaml.example) for all available configuration options.:
 
 ```
 init_config:
@@ -33,7 +32,7 @@ Restart the Agent to start sending YARN metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `yarn` under the Checks section:
+Run the Agent's `info` subcommand and look for `yarn` under the Checks section:
 
 ```
   Checks

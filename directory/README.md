@@ -16,7 +16,7 @@ The Directory check can be installed with your package manager, if the sd-agent 
 
 ### Configuration
 
-1. Edit your `directory.yaml` file in the Agent's `conf.d` directory. See the [sample directory.yaml](https://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example) for all available configuration options:
+1. Edit your `directory.yaml` file in the Agent's `conf.d` directory. See the [sample directory.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/directory/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -35,7 +35,7 @@ Ensure that the user running the Agent process (usually `sd-agent`) has read acc
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `directory` under the Checks section:
+Run the Agent's `info` subcommand and look for `directory` under the Checks section:
 
 ```
   Checks

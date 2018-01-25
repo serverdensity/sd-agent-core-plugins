@@ -2,9 +2,9 @@
 
 ## Overview
 
-This check monitors the availability and uptime of non-Datadog StatsD servers. It also tracks the number of metrics, by metric type, received by StatsD.
+This check monitors the availability and uptime of non-Server Density StatsD servers. It also tracks the number of metrics, by metric type, received by StatsD.
 
-This check does **NOT** forward application metrics from StatsD servers to Datadog. It collects metrics about StatsD itself.
+This check does **NOT** forward application metrics from StatsD servers to Server Density. It collects metrics about StatsD itself.
 
 ## Setup
 ### Installation
@@ -13,7 +13,7 @@ Install the `sd-agent-statsd` package manually or with your favorite configurati
 
 ### Configuration
 
-Create a file `statsd.yaml` in the Agent's `conf.d` directory. See the [sample statsd.yaml](https://github.com/DataDog/integrations-core/blob/master/statsd/conf.yaml.example) for all available configuration options:
+Create a file `statsd.yaml` in the Agent's `conf.d` directory. See the [sample statsd.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/statsd/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -23,7 +23,7 @@ instances:
     port: 8126 # or wherever your statsd listens
 ```
 
-[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to start sending StatsD metrics and service checks to Datadog.
+Restart the Agent to start sending StatsD metrics and service checks to Server Density.
 
 ### Validation
 

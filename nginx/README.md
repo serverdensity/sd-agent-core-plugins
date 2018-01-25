@@ -1,5 +1,4 @@
 # NGINX check
-{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" responsive="true" popup="true">}}
 
 ## Overview
 
@@ -43,7 +42,7 @@ If the command output does not include `http_stub_status_module`, you must insta
 ### Configuration
 #### Prepare NGINX
 
-On each NGINX server, create a `status.conf` in the directory that contains your other NGINX configuration files (e.g. `/etc/nginx/conf.d/`). See the [sample nginx.yaml](https://github.com/DataDog/integrations-core/blob/master/nginx/conf.yaml.example) for all available configuration options:
+On each NGINX server, create a `status.conf` in the directory that contains your other NGINX configuration files (e.g. `/etc/nginx/conf.d/`). See the [sample nginx.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/nginx/conf.yaml.example) for all available configuration options:
 
 ```
 server {
@@ -93,7 +92,7 @@ Restart the Agent to start sending NGINX metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `nginx` under the Checks section:
+Run the Agent's `info` subcommand and look for `nginx` under the Checks section:
 
 ```
   Checks

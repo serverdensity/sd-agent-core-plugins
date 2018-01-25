@@ -13,7 +13,7 @@ Though many metrics-oriented checks are best run on the same host(s) as the moni
 
 ### Configuration
 
-Create a file `dns_check.yaml` in the Agent's `conf.d` directory. See the [sample dns_check.yaml](https://github.com/DataDog/integrations-core/blob/master/dns_check/conf.yaml.example) for all available configuration options:
+Create a file `dns_check.yaml` in the Agent's `conf.d` directory. See the [sample dns_check.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/dns_check/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -33,7 +33,7 @@ Restart the Agent to begin sending DNS service checks and response times to Serv
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `dns_check` under the Checks section:
+Run the Agent's `info` subcommand and look for `dns_check` under the Checks section:
 
 ```
   Checks

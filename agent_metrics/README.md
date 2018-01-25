@@ -10,11 +10,11 @@ Get metrics from agent_metrics service in real time to:
 ## Setup
 ### Installation
 
-Install the `sd-agent-agent_metrics` package manually or with your favorite configuration manager
+Install the `sd-agent-agent-metrics` package manually or with your favorite configuration manager
 
 ### Configuration
 
-Edit the `agent_metrics.yaml` file to point to your server and port, set the masters to monitor. See the [sample agent_metrics.yaml](https://github.com/DataDog/integrations-core/blob/master/agent_metrics/conf.yaml.default) for all available configuration options.
+Edit the `agent_metrics.yaml` file to point to your server and port, set the masters to monitor. See the [sample agent_metrics.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/agent_metrics/conf.yaml.default) for all available configuration options.
 
 ### Validation
 
@@ -34,16 +34,7 @@ The Agent_metrics check is compatible with all major platforms
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/agent_metrics/metadata.csv) for a list of metrics provided by this integration.
-
-### Events
-The Agent_metrics check does not include any event at this time.
-
-### Service Checks
-The Agent_metrics check does not include any service check at this time.
+See [metadata.csv](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/agent_metrics/metadata.csv) for a list of metrics provided by this integration.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
-
-## Further Reading
-Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+Need help? Contact [Server Density Support](http://support.serverdensity.com).

@@ -1,5 +1,4 @@
 # Agent Check: Varnish
-{{< img src="integrations/varnish/varnish.png" alt="Varnish default dashboard" responsive="true" popup="true">}}
 ## Overview
 
 This check collects varnish metrics regarding:
@@ -18,9 +17,9 @@ Install the `sd-agent-varnish` package manually or with your favorite configurat
 
 ### Configuration
 
-If you're running Varnish 4.1+, add the dd-agent system user to the varnish group (e.g. `sudo usermod -G varnish -a sd-agent`).
+If you're running Varnish 4.1+, add the sd-agent system user to the varnish group (e.g. `sudo usermod -G varnish -a sd-agent`).
 
-Then, create a file `varnish.yaml` in the Agent's `conf.d` directory. See the [sample varnish.yaml](https://github.com/DataDog/integrations-core/blob/master/varnish/conf.yaml.example) for all available configuration options:
+Then, create a file `varnish.yaml` in the Agent's `conf.d` directory. See the [sample varnish.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/varnish/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -36,10 +35,10 @@ instances:
 If you don't set `varnishadm`, the Agent won't check backend health. If you do set it, the Agent needs privileges to execute the binary with root privileges. Add the following to your `/etc/sudoers` file:
 
 ```
-dd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
+sd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
 ```
 
-[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to start sending varnish metrics and service checks to Datadog.
+Restart the Agent to start sending varnish metrics and service checks to Server Density.
 
 ### Validation
 

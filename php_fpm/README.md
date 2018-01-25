@@ -1,5 +1,4 @@
 # PHP-FPM Check
-{{< img src="integrations/phpfpm/phpfpmoverview.png" alt="PHP overview" responsive="true" popup="true">}}
 ## Overview
 
 The PHP-FPM check monitors the state of your FPM pool and tracks request performance.
@@ -11,7 +10,7 @@ The PHP-FPM check can be installed with your package manager, if the sd-agent re
 
 ### Configuration
 
-Create a file `php_fpm.yaml` in the Agent's `conf.d` directory. See the [sample php_fpm.yaml](https://github.com/DataDog/integrations-core/blob/master/php_fpm/conf.yaml.example) for all available configuration options:
+Create a file `php_fpm.yaml` in the Agent's `conf.d` directory. See the [sample php_fpm.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/php_fpm/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -40,7 +39,7 @@ Restart the Agent to start sending PHP-FPM metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `php_fpm` under the Checks section:
+Run the Agent's `info` subcommand and look for `php_fpm` under the Checks section:
 
 ```
   Checks
@@ -60,7 +59,7 @@ Restart the Agent to start sending PHP-FPM metrics to Server Density.
 The php_fpm check is compatible with all major platforms.
 
 ## Data Collected
-### Metrics 
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 

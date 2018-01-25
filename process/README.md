@@ -32,7 +32,7 @@ instances:
 
 You can also configure the check to find any process by exact PID (`pid`) or pidfile (`pid_file`). If you provide more than one of `search_string`, `pid`, and `pid_file`, the check will the first option it finds in that order (e.g. it uses `search_string` over `pid_file` if you configure both).
 
-To have the check search for processes in a path other than `/proc`, set `procfs_path: <your_proc_path>` in `datadog.conf`, NOT in `process.yaml` (its use has been deprecated there). Set this to `/host/proc` if you're running the Agent from a Docker container (i.e. [docker-dd-agent](https://github.com/DataDog/docker-dd-agent)) and want to monitor processes running on the server hosting your containers. You DON'T need to set this to monitor processes running _in_ your containers; the [Docker check](https://github.com/DataDog/integrations-core/tree/master/docker_daemon) monitors those.
+To have the check search for processes in a path other than `/proc`, set `procfs_path: <your_proc_path>` in `config.cfg`, NOT in `process.yaml` (its use has been deprecated there). Set this to `/host/proc` if you're running the Agent from a Docker container (i.e. [docker-sd-agent](https://github.com/serverdensity/docker-sd-agent)) and want to monitor processes running on the server hosting your containers. You DON'T need to set this to monitor processes running _in_ your containers; the [Docker check](https://github.com/serverdensity/sd-agent-core-plugins/tree/master/docker_daemon) monitors those.
 
 See the [example configuration](conf.yaml.example) for more details on configuration options.
 
@@ -67,7 +67,7 @@ The process check is compatible with all major platforms.
 
 **Note**: Some metrics are not available on Linux or OSX:
 
-* Process I/O metrics aren't available on Linux or OSX since the files that the agent must read (/proc//io) are only readable by the process's owner. For more information, [read the Agent FAQ](https://docs.datadoghq.com/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
+* Process I/O metrics aren't available on Linux or OSX since the files that the agent must read (/proc//io) are only readable by the process's owner. F
 * `system.cpu.iowait` is not available on windows
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.

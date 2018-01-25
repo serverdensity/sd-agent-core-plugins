@@ -1,5 +1,4 @@
 # Agent Check: Zookeeper
-{{< img src="integrations/zookeeper/zookeepergraph.png" alt="Zookeeper Dashboard" responsive="true" popup="true">}}
 ## Overview
 
 The Zookeeper check tracks client connections and latencies, monitors the number of unprocessed requests, and more.
@@ -11,7 +10,7 @@ The Zookeeper check is packaged with the Agent, so simply [install the Agent](ht
 
 ### Configuration
 
-Create a file `zk.yaml` in the Agent's `conf.d` directory. See the [sample zk.yaml](https://github.com/DataDog/integrations-core/blob/master/zk/conf.yaml.example) for all available configuration options:
+Create a file `zk.yaml` in the Agent's `conf.d` directory. See the [sample zk.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/zk/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -26,7 +25,7 @@ Restart the Agent to start sending Zookeeper metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `zk` under the Checks section:
+Run the Agent's `info` subcommand and look for `zk` under the Checks section:
 
 ```
   Checks

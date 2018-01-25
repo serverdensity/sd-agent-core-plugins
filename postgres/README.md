@@ -1,5 +1,4 @@
 # Postgres Integration
-{{< img src="integrations/postgresql/pggraph.png" alt="PostgreSQL Graph" responsive="true" popup="true">}}
 
 ## Overview
 
@@ -13,19 +12,19 @@ Get metrics from postgres service in real time to:
 
 Install the `sd-agent-postgres` package manually or with your favorite configuration manager
 
-To get started with the PostgreSQL integration, create at least a read-only datadog user with proper access to your PostgreSQL Server. Start psql on your PostgreSQL database and run:
+To get started with the PostgreSQL integration, create at least a read-only serverdensity user with proper access to your PostgreSQL Server. Start psql on your PostgreSQL database and run:
 
 ```
-    create user datadog with password '<PASSWORD>';
-    grant SELECT ON pg_stat_database to datadog;
+    create user serverdensity with password '<PASSWORD>';
+    grant SELECT ON pg_stat_database to serverdensity;
 ```
 
-**Note**: `grant SELECT ON pg_stat_database to datadog;` is for most cases, but Postgres instances with more tables locked down or custom queries require granting `CONNECT` to additional tables.
+**Note**: `grant SELECT ON pg_stat_database to serverdensity;` is for most cases, but Postgres instances with more tables locked down or custom queries require granting `CONNECT` to additional tables.
 
 To verify the correct permissions run the following command:
 
 ```
-    psql -h localhost -U datadog postgres -c \
+    psql -h localhost -U serverdensity postgres -c \
     "select * from pg_stat_database LIMIT(1);"
     && echo -e "\e[0;32mPostgres connection - OK\e[0m" || \
     || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
@@ -35,7 +34,7 @@ When it prompts for a password, enter the one used in the first command.
 
 ### Configuration
 
-Edit the `postgres.yaml` file to point to your server and port, set the masters to monitor. See the [sample postgres.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/conf.yaml.example) for all available configuration options.
+Edit the `postgres.yaml` file to point to your server and port, set the masters to monitor. See the [sample postgres.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/postgres/conf.yaml.example) for all available configuration options.
 
 Configuration Options:
 
@@ -43,7 +42,7 @@ Configuration Options:
 * **`password`** (Optional) - The password for the user account.
 * **`dbname`** (Optional) - The name of the database you want to monitor.
 * **`ssl`** (Optional) - Defaults to False. Indicates whether to use an SSL connection.
-* **`use_psycopg2`** (Optional) - Defaults to False. Setting this option to `True` will force the Datadog Agent to collect PostgreSQL metrics using psycopg2 instead of pg8000. Note that pyscopg2 does not support SSL connections.
+* **`use_psycopg2`** (Optional) - Defaults to False. Setting this option to `True` will force the Server Density Agent to collect PostgreSQL metrics using psycopg2 instead of pg8000. Note that pyscopg2 does not support SSL connections.
 * **`tags`** (Optional) - A list of tags applied to all metrics collected. Tags may be simple strings or key-value pairs.
 * **`relations`** (Optional) - By default, all schemas are included. Add specific schemas here to collect metrics for schema relations. Each relation will generate 10 metrics and an additional 10 metrics per index. Use the following structure to declare relations:
 
@@ -84,7 +83,7 @@ See [metadata.csv](metadata.csv) for a list of metrics provided by this integrat
 The Agent generates PostgreSQL metrics from custom query results. For each custom query, four components are required: `descriptors`, `metrics`, `query`, and `relation`.
 
 * **`query`** is where you'll construct a base SELECT statement to generate your custom metrics. Each column name in your SELECT query should have a corresponding item in the `descriptors` section. Each item in `metrics` will be substituted for the first `%s` in the query.
-* **`metrics`** are key-value pairs where the key is the query column name or column function and the value is a tuple containing the custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the results of the sum of the `idx_scan` column will appear in Datadog  with the metric name `postgresql.idx_scan_count_by_table`.
+* **`metrics`** are key-value pairs where the key is the query column name or column function and the value is a tuple containing the custom metric name and metric type (`RATE`, `GAUGE`, or `MONOTONIC`). In the example below, the results of the sum of the `idx_scan` column will appear in Server Density with the metric name `postgresql.idx_scan_count_by_table`.
 * **`descriptors`** is used to add tags to your custom metrics. It's a list of lists each containing 2 strings. The first string is for documentation purposes and should be used to make clear what you are getting from the query. The second string will be the tag name. For multiple tags, include additional columns in your `query` string and a corresponding item in the `descriptors`. The order of items in `descriptors` must match the columns in `query`.
 * **`relation`** indicates whether to include schema relations specified in the [`relations` configuration option](#configuration-options). If set to `true`, the second `%s` in `query` will be set to the list of schema names specified in the `relations` configuration option.
 
@@ -130,7 +129,7 @@ custom_metrics:
 
 ##### Debugging
 
-If your custom metric does not work after an Agent restart, running `sudo /etc/init.d/datadog-agent info` can provide more information. For example:
+If your custom metric does not work after an Agent restart, running `sudo /etc/init.d/sd-agent info` can provide more information. For example:
 
 ```
 postgres
@@ -139,4 +138,4 @@ postgres
   - Collected 0 metrics, 0 events & 0 service checks
 ```
 
-You should also check the `/var/log/datadog/collector.log` file for more information.
+You should also check the `/var/log/sd-agent/collector.log` file for more information.

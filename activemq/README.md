@@ -7,14 +7,12 @@ The ActiveMQ check lets you collect metrics for brokers and queues, producers an
 ## Setup
 ### Installation
 
-The Agent's ActiveMQ check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your ActiveMQ nodes.
-
 Install the `sd-agent-activemq` package manually or with your favorite configuration manager
 
 ### Configuration
 
 1. **Make sure that [JMX Remote is enabled](http://activemq.apache.org/jmx.html) on your ActiveMQ server.**
-2. Configure the agent to connect to ActiveMQ. Edit `${confd_help('`conf.d/activemq.yaml`')}`. See the [sample activemq.yaml](https://github.com/DataDog/integrations-core/blob/master/activemq/conf.yaml.example) for all available configuration options.
+2. Configure the agent to connect to ActiveMQ. Edit `${confd_help('`conf.d/activemq.yaml`')}`. See the [sample activemq.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/activemq/conf.yaml.example) for all available configuration options.
 
 ```
 instances:
@@ -84,19 +82,19 @@ init_config:
 3. Restart the agent
 
 ```bash
-sudo /etc/init.d/datadog-agent restart
-
-
-if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; \
-then echo -e "\e[0;32mAgent is running\e[0m"; \
-else echo -e "\e[031mAgent is not running\e[0m"; fi
+sudo /etc/init.d/sd-agent restart
 ```
-
-{{< insert-example-links check="none" >}}
-
+or
+```bash
+sudo systemctl restart sd-agent
+```
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `activemq` under the Checks section:
+Run the Agent's `info` subcommand and look for `activemq` under the Checks section:
+
+```bash
+sudo /usr/share/python/sd-agent/agent.py info
+```
 
 ```
   Checks
@@ -115,19 +113,8 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 
 The ActiveMQ check only runs on Linux or Mac (OS X or macOS).
 
-## Data Collected
-### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv) for a list of metrics provided by this integration.
-
-### Events
-The Activemq check does not include any event at this time.
-
-### Service Checks
-The Activemq check does not include any service check at this time.
+## Metrics
+See [metadata.csv](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/activemq/metadata.csv) for a list of metrics provided by this integration.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
-
-## Further Reading
-
-* [Monitor ActiveMQ metrics and performance](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance/)
+Need help? Contact [Server Density Support](http://support.serverdensity.com).

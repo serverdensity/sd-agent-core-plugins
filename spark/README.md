@@ -1,5 +1,4 @@
 # Spark Check
-{{< img src="integrations/spark/sparkgraph.png" alt="spark graph" responsive="true" popup="true">}}
 ## Overview
 
 The Spark check collects metrics for:
@@ -12,23 +11,22 @@ The Spark check collects metrics for:
 ## Setup
 ### Installation
 
-The Spark check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your:
+The Spark check is available from the sd-agent repository, so simply install `sd-agent-spark` on your:
 
 - Mesos master (if you're running Spark on Mesos),
 - YARN ResourceManager (if you're running Spark on YARN), or
 - Spark master (if you're running Standalone Spark)
 
-Install the `sd-agent-spark` package manually or with your favorite configuration manager
 
 ### Configuration
 
-Create a file `spark.yaml` in the Agent's `conf.d` directory. See the [sample spark.yaml](https://github.com/DataDog/integrations-core/blob/master/spark/conf.yaml.example) for all available configuration options:
+Create a file `spark.yaml` in the Agent's `conf.d` directory. See the [sample spark.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/spark/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
 
 instances:
-  - spark_url: http://localhost:8088 # Spark master web UI 
+  - spark_url: http://localhost:8088 # Spark master web UI
 #   spark_url: http://<Mesos_master>:5050 # Mesos master web UI
 #   spark_url: http://<YARN_ResourceManager_address>:8088 # YARN ResourceManager address
 
@@ -44,7 +42,7 @@ instances:
 
 Set `spark_url` and `spark_cluster_mode` according to how you're running Spark.
 
-[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to start sending Spark metrics to Datadog.
+Restart the Agent to start sending Spark metrics to Server Density.
 
 ### Validation
 

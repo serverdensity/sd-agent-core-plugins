@@ -11,7 +11,7 @@ The SSH/SFTP check can be installed with your package manager, if the sd-agent r
 
 ### Configuration
 
-Create a file `ssh_check.yaml` in the Agent's `conf.d` directory. See the [sample ssh_check.yaml](https://github.com/DataDog/integrations-core/blob/master/ssh_check/conf.yaml.example) for all available configuration options:
+Create a file `ssh_check.yaml` in the Agent's `conf.d` directory. See the [sample ssh_check.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/ssh_check/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -31,7 +31,7 @@ Restart the Agent to start sending SSH/SFTP metrics and service checks to Server
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `ssh_check` under the Checks section:
+Run the Agent's `info` subcommand and look for `ssh_check` under the Checks section:
 
 ```
   Checks

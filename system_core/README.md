@@ -1,5 +1,4 @@
 # Agent Check: system cores
-{{< img src="integrations/systemcore/syscoredash.png" alt="System Core" responsive="true" popup="true">}}
 ## Overview
 
 This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).
@@ -11,7 +10,7 @@ The system_core check can be installed with your package manager, if the sd-agen
 
 ### Configuration
 
-Create a file `system_core.yaml` in the Agent's `conf.d` directory. See the [sample system_core.yaml](https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example) for all available configuration options:
+Create a file `system_core.yaml` in the Agent's `conf.d` directory. See the [sample system_core.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/system_core/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -22,11 +21,11 @@ instances:
 
 The Agent just needs one item in `instances` in order to enable the check. The content of the item doesn't matter.
 
-[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to enable the check.
+Restart the Agent to enable the check.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `system_core` under the Checks section:
+Run the Agent's `info` subcommand and look for `system_core` under the Checks section:
 
 ```
   Checks
@@ -52,14 +51,6 @@ See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
 Depending on the platform, the check may collect other CPU time metrics, e.g. `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
 
-### Events
-The System Core check does not include any event at this time.
-
-### Service Checks
-The System Core check does not include any service check at this time.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
-
-## Further Reading
-Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+Need help? Contact [Server Density Support](http://support.serverdensity.com).

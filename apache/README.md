@@ -1,5 +1,4 @@
 # Agent Check: Apache Web Server
-{{< img src="integrations/apache/apachegraph.png" alt="apache graph" responsive="true" popup="true">}}
 ## Overview
 
 The Apache check tracks requests per second, bytes served, number of worker threads, service uptime, and more.
@@ -13,7 +12,7 @@ Install `mod_status` on your Apache servers and enable `ExtendedStatus`.
 
 ### Configuration
 
-Create a file `apache.yaml` in the Agent's `conf.d` directory. See the [sample apache.yaml](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example) for all available configuration options:
+Create a file `apache.yaml` in the Agent's `conf.d` directory. See the [sample apache.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/apache/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -29,7 +28,7 @@ Restart the Agent to start sending Apache metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `apache` under the Checks section:
+Run the Agent's `info` subcommand and look for `apache` under the Checks section:
 
 ```
   Checks

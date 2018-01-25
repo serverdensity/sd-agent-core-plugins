@@ -6,21 +6,20 @@ This Agent check only collects metrics for message offsets. If you want to colle
 
 This check fetches the highwater offsets from the Kafka brokers, consumer offsets for old-style consumers that store their offsets in zookeeper, and the calculated consumer lag (which is the difference between those two metrics).
 
-This check does NOT support Kafka versions > 0.8—it can't collect consumer offsets for new-style consumer groups which store their offsets in Kafka. If run such a version of Kafka, track [this issue on GitHub](https://github.com/DataDog/integrations-core/issues/457).
+This check does NOT support Kafka versions > 0.8—it can't collect consumer offsets for new-style consumer groups which store their offsets in Kafka.
 
 ## Setup
 ### Installation
 
-Install the `sd-agent-kafka_consumer` package manually or with your favorite configuration manager
+Install the `sd-agent-kafka-consumer` package manually or with your favorite configuration manager
 
 ### Configuration
 
-Create a `kafka_consumer.yaml` file using [this sample conf file](https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/conf.yaml.example) as an example. Then restart the Datadog Agent to start sending metrics to Datadog.
+Create a `kafka_consumer.yaml` file using [this sample conf file](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/kafka_consumer/conf.yaml.example) as an example. Then restart the sd-agent to start sending metrics to Server Density.
 
 ### Validation
->>>>>>> 5.21.x
 
-When you run `sd-agent info` you should see something like the following:
+When you run `info` subcommand you should see something like the following:
 
 ```
   Checks

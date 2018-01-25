@@ -1,5 +1,4 @@
 # Agent Check: Supervisor
-{{< img src="integrations/supervisor/supervisorevent.png" alt="Supervisor Event" responsive="true" popup="true">}}
 ## Overview
 
 This check monitors the uptime, status, and number of processes running under supervisord.
@@ -24,7 +23,7 @@ username=user  # optional
 password=pass  # optional
 ```
 
-##### UNIX socket 
+##### UNIX socket
 
 Add blocks like these to `/etc/supervisor.conf` (if they're not already there):
 
@@ -45,7 +44,7 @@ Reload supervisord.
 
 #### Connect the Agent
 
-Create a file `supervisord.yaml` in the Agent's `conf.d` directory. See the [sample supervisord.yaml](https://github.com/DataDog/integrations-core/blob/master/supervisord/conf.yaml.example) for all available configuration options:
+Create a file `supervisord.yaml` in the Agent's `conf.d` directory. See the [sample supervisord.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/supervisord/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -81,7 +80,7 @@ Restart the Agent to start sending Supervisor metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `supervisord` under the Checks section:
+Run the Agent's `info` subcommand and look for `supervisord` under the Checks section:
 
 ```
   Checks

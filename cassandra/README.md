@@ -1,5 +1,4 @@
 # Cassandra Integration
-{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" responsive="true" popup="true">}}
 ## Overview
 
 Get metrics from cassandra service in real time to:
@@ -12,18 +11,18 @@ Get metrics from cassandra service in real time to:
 
 The Cassandra check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=cassandra). To install the cassandra check install the `sd-agent-cassandra` package.
 
-We recommend the use of Oracle's JDK for this integration. 
+We recommend the use of Oracle's JDK for this integration.
 
-This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the [JMX Checks documentation](https://docs.datadoghq.com/integrations/java/) for more detailed instructions. If you need to monitor more metrics, please send us an email at support@datadoghq.com
+This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below.
 
 ### Configuration
 
-1. Configure the Agent to connect to Cassandra, just edit `conf.d/cassandra.yaml`. See the [sample  cassandra.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra/conf.yaml.example) for all available configuration options.
-2. [Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent)
+1. Configure the Agent to connect to Cassandra, just edit `conf.d/cassandra.yaml`. See the [sample  cassandra.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/cassandra/conf.yaml.example) for all available configuration options.
+2. Restart the Agent
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `cassandra` under the Checks section:
+Run the Agent's `info` subcommand and look for `cassandra` under the Checks section:
 
 ```
   Checks

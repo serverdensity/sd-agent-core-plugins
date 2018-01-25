@@ -1,5 +1,4 @@
 # Postfix Check
-{{< img src="integrations/postfix/postfixgraph.png" alt="Postfix Graph" responsive="true" popup="true">}}
 ## Overview
 
 This check monitors the size of all your Postfix queues.
@@ -10,14 +9,14 @@ This check monitors the size of all your Postfix queues.
 The Postfix check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=Postfix). To install the Postfix check install the `sd-agent-postfix` package.
 
 ## Configuration
-This check can be configured to use the `find` command which requires granting the dd-agent user sudo access to get a count of messages in the `incoming`, `active`, and `deferred` mail queues.
+This check can be configured to use the `find` command which requires granting the sd-agent user sudo access to get a count of messages in the `incoming`, `active`, and `deferred` mail queues.
 
 Optionally, you can configure the agent to use a built in `postqueue -p` command to get a count of messages in the `active`, `hold`, and `deferred` mail queues. `postqueue` is exectued with set-group ID privileges without the need for sudo.
 
 **WARNING**: Using `postqueue` to monitor the mail queues will not report a count of messages for the `incoming` queue.
 
 ### Using sudo
-Create a file `postfix.yaml` in the Agent's `conf.d` directory. See the [sample postfix.yaml](https://github.com/DataDog/integrations-core/blob/master/postfix/conf.yaml.example) for all available configuration options:
+Create a file `postfix.yaml` in the Agent's `conf.d` directory. See the [sample postfix.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/postfix/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -65,12 +64,12 @@ the Postfix configuration directory.
 
 Postfix has internal access controls that limit activities on the mail queue. By default,
 Postfix allows `anyone` to view the queue. On production systems where the Postfix installation
-may be configured with stricter access controls, you may need to grant the dd-agent user access to view
+may be configured with stricter access controls, you may need to grant the sd-agent user access to view
 the mail queue.
 
 Run the Agent's `info` subcommand and look for postfix under the Checks section:
-    
-    postconf -e "authorized_mailq_users = sd-agent"        
+
+    postconf -e "authorized_mailq_users = sd-agent"
 
 http://www.postfix.org/postqueue.1.html
 
@@ -78,7 +77,7 @@ http://www.postfix.org/postqueue.1.html
                 List of users who are authorized to view the queue.
 
 
-[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to start sending Postfix metrics to Datadog.
+Restart the Agent to start sending Postfix metrics to Server Density.
 
 ### Validation
 

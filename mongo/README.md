@@ -10,7 +10,7 @@ Connect MongoDB to ServerDensity in order to:
 ## Setup
 ### Installation
 
-The MongoDB check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/articles/214171178) on your MongoDB masters. If you need the newest version of the check, install the `sd-agent-mongo` package.
+Ensure the sd-agent repository is configured on your server, install the `sd-agent-mongo` package.
 
 ### Configuration
 #### Prepare MongoDB
@@ -39,7 +39,7 @@ db.createUser({
 
 #### Connect the Agent
 
-Create a file `mongodb.yaml` in the Agent's `conf.d` directory. See the [sample mongodb.yaml](https://github.com/DataDog/integrations-core/blob/master/mongo/conf.yaml.example) for all available configuration options:
+Create a file `mongodb.yaml` in the Agent's `conf.d` directory. See the [sample mongodb.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/mongo/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -59,7 +59,7 @@ Restart the Agent to start sending MongoDB metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `mongo` under the Checks section:
+Run the Agent's `info` subcommand and look for `mongo` under the Checks section:
 
 ```
   Checks

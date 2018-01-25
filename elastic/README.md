@@ -34,7 +34,7 @@ See the [sample elastic.yaml](conf.yaml.example) for all available configuration
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `elastic` under the Checks section:
+Run the Agent's `info` subcommand and look for `elastic` under the Checks section:
 
 ```
   Checks

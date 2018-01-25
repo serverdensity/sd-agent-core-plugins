@@ -1,5 +1,4 @@
 # Ceph Integration
-{{< img src="integrations/ceph/ceph_graph.png" alt="Ceph Graph" responsive="true" popup="true">}}
 ## Overview
 
 Enable the Ceph integration to:
@@ -15,7 +14,7 @@ The Ceph check can be installed with your package manager, if the sd-agent repos
 
 ### Configuration
 
-Create a file `ceph.yaml` in the Agent's `conf.d` directory. See the [sample ceph.yaml](https://github.com/DataDog/integrations-core/blob/master/ceph/conf.yaml.example) for all available configuration options:
+Create a file `ceph.yaml` in the Agent's `conf.d` directory. See the [sample ceph.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/ceph/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -33,7 +32,7 @@ sd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `ceph` under the Checks section:
+Run the Agent's `info` subcommand and look for `ceph` under the Checks section:
 
 ```
   Checks

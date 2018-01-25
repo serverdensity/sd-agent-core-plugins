@@ -16,7 +16,7 @@ The CouchDB check can be installed with your package manager, if the sd-agent re
 
 ### Configuration
 
-Create a file `couch.yaml` in the Agent's `conf.d` directory. See the [sample  couch.yaml](https://github.com/DataDog/integrations-core/blob/master/couch/conf.yaml.example) for all available configuration options:
+Create a file `couch.yaml` in the Agent's `conf.d` directory. See the [sample  couch.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/couch/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -36,7 +36,7 @@ Restart the Agent to begin sending CouchDB metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `couch` under the Checks section:
+Run the Agent's `info` subcommand and look for `couch` under the Checks section:
 
 ```
   Checks

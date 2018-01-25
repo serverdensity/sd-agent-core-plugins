@@ -11,7 +11,7 @@ The PgBouncer check can be installed with your package manager, if the sd-agent 
 
 ### Configuration
 
-Create a file `pgbouncer.yaml` in the Agent's `conf.d` directory. See the [sample pgbouncer.yaml](https://github.com/DataDog/integrations-core/blob/master/pgbouncer/conf.yaml.example) for all available configuration options:
+Create a file `pgbouncer.yaml` in the Agent's `conf.d` directory. See the [sample pgbouncer.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/pgbouncer/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -30,19 +30,19 @@ instances:
 
 In your PGBouncer userlist.txt file add
 ```
-  "datadog" "<your_pass>"
+  "sd-agent" "<your_pass>"
 ```
 
 Next, in your PGBouncer pgbouncer.ini file add
 ```
-stats_users = datadog
+stats_users = sd-agent
 ```
 
 Restart the Agent to start sending PgBouncer metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `pgbouncer` under the Checks section:
+Run the Agent's `info` subcommand and look for `pgbouncer` under the Checks section:
 
 ```
   Checks

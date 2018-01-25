@@ -15,7 +15,7 @@ The Gearman check can be installed with your package manager, if the sd-agent re
 
 ### Configuration
 
-Create a file `gearmand.yaml` in the Agent's `conf.d` directory. See the [sample gearmand.yaml](https://github.com/DataDog/integrations-core/blob/master/gearmand/conf.yaml.example) for all available configuration options:
+Create a file `gearmand.yaml` in the Agent's `conf.d` directory. See the [sample gearmand.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/gearmand/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -29,7 +29,7 @@ Restart the Agent to begin sending Gearman metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `gearmand` under the Checks section:
+Run the Agent's `info` subcommand and look for `gearmand` under the Checks section:
 
 ```
   Checks

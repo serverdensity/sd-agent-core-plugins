@@ -32,7 +32,7 @@ Restart the Agent to start sending RiakCS metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `riakcs` under the Checks section:
+Run the Agent's `info` subcommand and look for `riakcs` under the Checks section:
 
 ```
   Checks

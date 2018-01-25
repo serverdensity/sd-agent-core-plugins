@@ -1,5 +1,4 @@
 # Docker_daemon Integration
-{{< img src="integrations/docker/docker.png" alt="Docker default dashboard" responsive="true" popup="true">}}
 ## Overview
 
 Get metrics from docker_daemon service in real time to:
@@ -10,90 +9,56 @@ Get metrics from docker_daemon service in real time to:
 ## Setup
 ### Installation
 
-To collect Docker metrics about all your containers, you will run **one** Datadog Agent on every host. There are two ways to run the Agent: directly on each host, or within a [docker-dd-agent container](https://github.com/DataDog/docker-dd-agent). We recommend the latter.
+To collect Docker metrics about all your containers, you will run **one** Server Density Agent on every host. There are two ways to run the Agent: directly on each host, or within a [docker-sd-agent container](https://github.com/serverdensity/docker-sd-agent). We recommend the latter.
 
-Whichever you choose, your hosts need to have cgroup memory management enabled for the Docker check to succeed. See the [docker-dd-agent repository](https://github.com/DataDog/docker-dd-agent#cgroups) for how to enable it.
+Whichever you choose, your hosts need to have cgroup memory management enabled for the Docker check to succeed.
 
 #### Host Installation
 
 1. Ensure Docker is running on the host.
-2. Install the `sd-agent-docker_daemon` package manually or with your favorite configuration manager
-3. Enable [the Docker integration tile in the application](https://app.datadoghq.com/account/settings#integrations/docker).
-4. Add the Agent user to the docker group: `usermod -a -G docker dd-agent`
-5. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/DataDog/integrations-core/blob/master/docker_daemon/conf.yaml.example). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
-6. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
-    {{< img src="integrations/docker/integrations-docker-dockerps.png" >}}
-
-{{< insert-example-links conf="docker_daemon" check="docker_daemon" >}}
+2. Install the `sd-agent-docker` package manually or with your favorite configuration manager
+3. Add the Agent user to the docker group: `usermod -a -G docker sd-agent`
+4. Create a `docker_daemon.yaml` file by copying [the example file in the agent conf.d directory](https://github.com/serverdensity/sd-agent-core-/blob/master/docker_daemon/conf.yaml.example). If you have a standard install of Docker on your host, there shouldn't be anything you need to change to get the integration to work.
+5. To enable other integrations, use `docker ps` to identify the ports used by the corresponding applications.
 
 **Note:** docker_daemon has replaced the older docker integration.
 
 #### Container Installation
 
 1. Ensure Docker is running on the host.
-2. As per [the docker container installation instructions](https://app.datadoghq.com/account/settings#agent/docker), run:
+2. Run:
+      ```
+      docker run -d --name sd-agent
+      -v /var/run/docker.sock:/var/run/docker.sock
+      -v /proc/:/host/proc/:ro
+      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      -e AGENT_KEY=$YOUR_AGENT_KEY
+      -e ACCOUNT=$YOUR_ACCOUNT
+      serverdensity/sd-agent
+      ```
 
-        docker run -d --name dd-agent \
-          -v /var/run/docker.sock:/var/run/docker.sock:ro \
-          -v /proc/:/host/proc/:ro \
-          -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-          -e API_KEY={YOUR API KEY} \
-          datadog/docker-dd-agent:latest
+Note that in the command above, you are able to pass your agent key and account name to the Server Density Agent using Docker's `-e` environment variable flag.
 
-Note that in the command above, you are able to pass your API key to the Datadog Agent using Docker's `-e` environment variable flag. Some other variables you can pass include:
+##### Full list of env variables
+The following environment variables can be used when running the container:
 
-| **Variable** | **Description** |
-|---|---|
-| API_KEY | Sets your Datadog API key. |
-| DD_HOSTNAME | Sets the hostname in the Agent container's datadog.conf file. If this variable is not set, the Agent container will default to using the `Name` field (as reported by the `docker info` command) as the Agent container hostname. |
-| DD_URL | Sets the Datadog intake server URL where the Agent will send data. This is useful when [using an agent as a proxy](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy). |
-| LOG_LEVEL | Sets logging verbosity (CRITICAL, ERROR, WARNING, INFO, DEBUG). For example, `-e LOG_LEVEL=DEBUG` will set logging to debug mode.
-| TAGS | Sets host tags as a comma delimited string. You can pass both simple tags and key-value tags. For example, `-e TAGS="simple-tag, tag-key:tag-value"`. |
-| EC2_TAGS | Enabling this feature allows the agent to query and capture custom tags set using the EC2 API during startup. To enable, set the value to "yes", for example, `-e EC2_TAGS=yes`. Note that this feature requires an [IAM role](https://github.com/DataDog/dd-agent/wiki/Capturing-EC2-tags-at-startup) associated with the instance. |
-| NON_LOCAL_TRAFFIC | Enabling this feature will allow statsd reporting from any external IP. For example, `-e NON_LOCAL_TRAFFIC=yes`. This can be used to report metrics from other containers or systems. See [network configuration](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration) for more details.
-| PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD | Sets proxy configuration details. For more information, see the [Agent proxy documentation](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-a-web-proxy-as-proxy) |
-| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Enables and configures Autodiscovery. For more information, please see the [Autodiscovery guide](/guides/autodiscovery/). |
+* `AGENT_KEY` - Your agent key, can be found in your UI
+* `ACCOUNT` - Your account name
+* `LOG_LEVEL` - The log level of the agent running in the container
+* `SD_HOSTNAME` - The hostname specified in your containered agent's config.cfg (Note that this does not set the container hostname)
+* `PROXY_HOST` - Configures a proxy host for the agent
+* `PROXY_PORT` - Configures a proxy port for the agent
+* `PROXY_USER` - Configures a proxy user for the agent
+* `PROXY_PASSWORD` - Configures a proxy password for the agent
+* `CONTAINER_SIZE` - Set to `TRUE` to enable container size metrics
+* `IMAGE_STATS` - Set to `TRUE` to enable image stat metrics
+* `IMAGE_SIZE` - Set to `TRUE` to enable image size metrics
+* `DISK_STATS` - Set to `TRUE` to enable disk stat metrics
+* `TIMEOUT` - Set the timeout for the docker_daemon check in seconds
+
 
 **Note**: Add `--restart=unless-stopped` if you want your agent to be resistant to restarts.
 
-#### Running the agent container on Amazon Linux
-
-To run the Datadog Agent container on Amazon Linux, you'll need to make one small change to the `cgroup` volume mount location:
-
-```
-docker run -d --name dd-agent \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /cgroup/:/host/sys/fs/cgroup:ro \
-  -e API_KEY={YOUR API KEY} \
-  datadog/docker-dd-agent:latest
-```
-
-#### Alpine Linux based container
-
-Our standard Docker image is based on Debian Linux, but as of version 5.7 of the Datadog Agent, we also offer an [Alpine Linux](https://alpinelinux.org/) based image. The Alpine Linux image is considerably smaller in size than the traditional Debian-based image. It also inherits Alpine's security-oriented design.
-
-To use the Alpine Linux image, simply append `-alpine` to the version tag. For example:
-
-```
-docker run -d --name dd-agent \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -e API_KEY={YOUR API KEY} \
-  datadog/docker-dd-agent:latest-alpine
-```
-
-#### Image versioning
-Starting with version 5.5.0 of the Datadog Agent, the docker image follows a new versioning pattern. This allows us to release changes to the Docker image of the Datadog Agent but with the same version of the Agent.
-
-The Docker image version will have the following pattern: **X.Y.Z** where **X** is the major version of the Docker Image, **Y** is the minor version, **Z** will represent the Agent version.
-
-For example, the first version of the Docker image that will bundle the Datadog Agent 5.5.0 will be: `10.0.550`
-
-#### Custom containers and additional information
-
-For more information about building custom Docker containers with the Datadog Agent, the Alpine Linux based image, versioning, and more, please reference [our `docker-dd-agent` project on Github](https://github.com/DataDog/docker-dd-agent).
 
 ### Validation
 

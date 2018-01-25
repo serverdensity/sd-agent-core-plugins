@@ -1,5 +1,4 @@
 # Btrfs Integration
-{{< img src="integrations/btrfs/btrfs_metric.png" alt="btrfs metric" responsive="true" popup="true">}}
 ## Overview
 
 Get metrics from btrfs service in real time to:
@@ -14,12 +13,12 @@ The btrfs check can be installed with your package manager, if the sd-agent is i
 
 ### Configuration
 
-1. Configure the Agent according to your needs, edit `conf.d/btrfs.yaml`. See the [sample btrfs.yaml](https://github.com/DataDog/integrations-core/blob/master/btrfs/conf.yaml.example) for all available configuration options.
-2. [Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent)
+1. Configure the Agent according to your needs, edit `conf.d/btrfs.yaml`. See the [sample btrfs.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/btrfs/conf.yaml.example) for all available configuration options.
+2. Restart the Agent
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `btrfs` under the Checks section:
+Run the Agent's `info` subcommand and look for `btrfs` under the Checks section:
 
 ```
   Checks
@@ -40,14 +39,9 @@ The Btrfs check is compatible with all major platforms.
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/btrfs/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/btrfs/metadata.csv) for a list of metrics provided by this integration.
 
-### Events
-The Btrfs check does not include any event at this time.
-
-### Service Checks
-The Btrfs check does not include any service check at this time.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+Need help? Contact [Server Density Support](http://support.serverdensity.com).
 

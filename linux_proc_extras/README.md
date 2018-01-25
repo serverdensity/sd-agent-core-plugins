@@ -9,11 +9,11 @@ Get metrics from linux_proc_extras service in real time to:
 ## Setup
 ### Installation
 
-Install the `sd-agent-linux_proc_extras` package manually or with your favorite configuration manager
+Install the `sd-agent-linux-proc-extras` package manually or with your favorite configuration manager
 
 ### Configuration
 
-Edit the `linux_proc_extras.yaml` file to point to your server and port, set the masters to monitor. See the [sample linux_proc_extras.yaml](https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/conf.yaml.example) for all available configuration options.
+Ensure the `linux_proc_extras.yaml` file is present in the agent config directory. No configuration is required for this check.
 
 ### Validation
 
@@ -33,5 +33,5 @@ The linux_proc_extras check is compatible with all major platforms
 
 ## Data Collected
 ### Metrics
-The Linux proc extras check does not include any metric at this time.
+See [metadata.csv](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/linux_proc_extra/metadata.csv) for a list of metrics provided by this integration.
 

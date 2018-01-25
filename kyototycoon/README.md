@@ -11,7 +11,7 @@ The Kyototycoon check can be installed with your package manager, if the sd-agen
 
 ### Configuration
 
-Create a file `kyototycoon.yaml` in the Agent's `conf.d` directory. See the [sample kyototycoon.yaml](https://github.com/DataDog/integrations-core/blob/master/kyototycoon/conf.yaml.example) for all available configuration options:
+Create a file `kyototycoon.yaml` in the Agent's `conf.d` directory. See the [sample kyototycoon.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/kyototycoon/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -32,7 +32,7 @@ instances:
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `kyototycoon` under the Checks section:
+Run the Agent's `info` subcommand and look for `kyototycoon` under the Checks section:
 
 ```
   Checks

@@ -13,7 +13,7 @@ The SNMP check can be installed with your package manager, if the sd-agent repos
 
 The SNMP check doesn't collect anything by default; you have to tell it specifically what to collect.
 
-Here's an example `snmp.yaml`. See the [sample snmp.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/conf.yaml.example) for all available configuration options:
+Here's an example `snmp.yaml`. See the [sample snmp.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/snmp/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -88,7 +88,7 @@ Restart the Agent to start sending SNMP metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `snmp` under the Checks section:
+Run the Agent's `info` subcommand and look for `snmp` under the Checks section:
 
 ```
   Checks
@@ -112,7 +112,7 @@ The snmp check is compatible with all major platforms.
 
 The SNMP check will submits specified metrics under the `snmp.*` namespace.
 
-### Knowledge Base 
+### Knowledge Base
 
 Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the ```metrics``` subsection using one of the following methods:
 
@@ -122,7 +122,7 @@ Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Spec
       - MIB: UDP-MIB
         symbol: udpInDatagrams
 
-#### Specify an OID and the name you want the metric to appear under in Datadog
+#### Specify an OID and the name you want the metric to appear under in Server Density
 
     metrics:
       - OID: 1.3.6.1.2.1.6.5
@@ -160,7 +160,7 @@ You can also gather tags based on the indices of your row, in case they are mean
 
 #### Use your own Mib
 
-To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the ```build-pysnmp-mibs``` script that ships with pysnmp.
+To use your own MIB with the sd-agent, you need to convert them to the pysnmp format. This can be done using the ```build-pysnmp-mibs``` script that ships with pysnmp.
 
 It has a dependency on ```smidump```, from the libsmi2ldbl package so make sure it is installed. Make also sure that you have all the dependencies of your MIB in your mib folder or it won't be able to convert your MIB correctly.
 

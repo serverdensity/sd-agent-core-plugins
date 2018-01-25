@@ -1,5 +1,4 @@
 # RabbitMQ Check
-{{< img src="integrations/rabbitmq/rabbitmqdashboard.png" alt="RabbitMQ Dashboard" responsive="true" popup="true">}}
 ## Overview
 
 The RabbitMQ check lets you:
@@ -21,7 +20,7 @@ You must enable the RabbitMQ management plugin. See [RabbitMQ's documentation](h
 
 #### Connect the Agent
 
-Create a file `rabbitmq.yaml` in the Agent's `conf.d` directory. See the [sample rabbitmq.yaml](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/conf.yaml.example) for all available configuration options:
+Create a file `rabbitmq.yaml` in the Agent's `conf.d` directory. See the [sample rabbitmq.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/rabbitmq/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -58,7 +57,7 @@ Restart the Agent to begin sending RabbitMQ metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `rabbitmq` under the Checks section:
+Run the Agent's `info` subcommand and look for `rabbitmq` under the Checks section:
 
 ```
   Checks

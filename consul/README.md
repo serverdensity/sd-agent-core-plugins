@@ -72,7 +72,7 @@ Reload the Consul Agent to start sending more Consul metrics to SDStatsD.
 
 #### sd-agent to Consul Agent
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `consul` under the Checks section:
+Run the Agent's `info` subcommand and look for `consul` under the Checks section:
 
 ```
   Checks

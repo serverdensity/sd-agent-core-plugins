@@ -12,7 +12,7 @@ The TCP check can be installed with your package manager, if the sd-agent reposi
 
 ### Configuration
 
-Create a file `tcp_check.yaml` in the Agent's `conf.d` directory. See the [sample tcp_check.yaml](https://github.com/DataDog/integrations-core/blob/master/tcp_check/conf.yaml.example) for all available configuration options:
+Create a file `tcp_check.yaml` in the Agent's `conf.d` directory. See the [sample tcp_check.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/tcp_check/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -39,7 +39,7 @@ Restart the Agent to start sending TCP service checks and response times to Serv
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `tcp_check` under the Checks section:
+Run the Agent's `info` subcommand and look for `tcp_check` under the Checks section:
 
 ```
   Checks

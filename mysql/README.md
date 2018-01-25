@@ -28,13 +28,13 @@ Query OK, 0 rows affected (0.00 sec)
 
 Please note that `@'localhost'` is only for local connections, use the hostname/IP of your agent for remote connections, learn more [here](https://dev.mysql.com/doc/refman/5.7/en/adding-users.html)
 
-Verify that the user was created successfully using the following command, replacing ```<UNIQUEPASSWORD>``` with the password above:
+Verify that the user was created successfully using the following command, replacing ```<YOUR_CHOSEN_PASSWORD>``` with the password above:
 
 ```
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
+mysql -u serverdensity --password=<YOUR_CHOSEN_PASSWORD> -e "show status" | \
 grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
 echo -e "\033[0;31mCannot connect to MySQL\033[0m"
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
+mysql -u serverdensity --password=<YOUR_CHOSEN_PASSWORD> -e "show slave status" && \
 echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
 echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
@@ -66,7 +66,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 #### Connect the Agent
 
-Create a basic `mysql.yaml` in the Agent's `conf.d` directory to connect it to the MySQL server. See the [sample mysql.yaml](https://github.com/DataDog/integrations-core/blob/master/mysql/conf.yaml.example) for all available configuration options:
+Create a basic `mysql.yaml` in the Agent's `conf.d` directory to connect it to the MySQL server. See the [sample mysql.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/mysql/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -94,7 +94,7 @@ Restart the Agent to start sending MySQL metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `mysql` under the Checks section:
+Run the Agent's `info` subcommand and look for `mysql` under the Checks section:
 
 ```
   Checks
@@ -142,7 +142,7 @@ mysql> select user,host,process_priv from mysql.user where user='serverdensity';
 +---------------+-----------+--------------+
 | user          | host      | process_priv |
 +---------------+-----------+--------------+
-| serverdebsity | localhost | N            |
+| serverdensity | localhost | N            |
 +---------------+-----------+--------------+
 1 row in set (0.00 sec)
 ```

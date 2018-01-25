@@ -1,5 +1,4 @@
 # Haproxy Integration
-{{< img src="integrations/haproxy/haproxydash.png" alt="HAProxy default dashboard" responsive="true" popup="true">}}
 ## Overview
 
 Capture HAProxy activity in Server Density to:
@@ -13,7 +12,7 @@ Capture HAProxy activity in Server Density to:
 
 The HAProxy check can be installed with your package manager if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=haproxy). To install the haproxy check install the `sd-agent-haproxy` package.
 
-Make sure that stats are enabled on your HAProxy configuration. See [this post for guidance on doing this](https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics/).
+Make sure that stats are enabled on your HAProxy configuration.
 
 ### Configuration
 #### Prepare HAProxy
@@ -34,7 +33,7 @@ Restart HAProxy to enable the stats endpoint.
 
 ### Connect the Agent
 
-Create a file `haproxy.yaml` in the Agent's `conf.d` directory. See the [sample haproxy.yaml](https://github.com/DataDog/integrations-core/blob/master/haproxy/conf.yaml.example) for all available configuration options:
+Create a file `haproxy.yaml` in the Agent's `conf.d` directory. See the [sample haproxy.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/haproxy/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -49,7 +48,7 @@ Restart the Agent to begin sending HAProxy metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `haproxy` under the Checks section:
+Run the Agent's `info` subcommand and look for `haproxy` under the Checks section:
 
 ```
   Checks

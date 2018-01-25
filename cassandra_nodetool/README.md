@@ -2,18 +2,17 @@
 
 ## Overview
 
-This check collects metrics for your Cassandra cluster that are not available through [jmx integration](https://github.com/DataDog/integrations-core/tree/master/cassandra).
+This check collects metrics for your Cassandra cluster that are not available through [jmx integration](https://github.com/serverdensity/sd-agent-core-plugins/tree/master/cassandra).
 It uses the `nodetool` utility to collect them.
 
 ## Setup
 ### Installation
 
-The cassandra nodetool check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your cassandra nodes.
-If you need the newest version of the check, install the `dd-check-cassandra_nodetool` package.
+Ensure you have the sd-agent repo configured, then install the `sd-agent-cassandra-nodetool` package.
 
 ### Configuration
 
-Create a file `cassandra_nodetool.yaml` in the Agent's `conf.d` directory. See the [sample cassandra_nodetool.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/conf.yaml.example) for all available configuration options:
+Create a file `cassandra_nodetool.yaml` in the Agent's `conf.d` directory. See the [sample cassandra_nodetool.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/cassandra_nodetool/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -43,7 +42,7 @@ instances:
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `cassandra_nodetool` under the Checks section:
+Run the Agent's `info` subcommandand look for `cassandra_nodetool` under the Checks section:
 
     Checks
     ======
@@ -59,21 +58,8 @@ The `cassandra_nodetool` check is compatible with all major platforms
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-### Events
-The Cassandra_nodetool check does not include any event at this time.
-
-### Service Checks
-
-**cassandra.nodetool.node_up**:
-The agent sends this service check for each node of the monitored cluster. Returns CRITICAL if the node is down, otherwise OK.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
-
-## Further Reading
-
-* [How to monitor Cassandra performance metrics](https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics/)
-* [How to collect Cassandra metrics](https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics/)
-* [Monitoring Cassandra with Datadog](https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog/)
+Need help? Contact [Server Density Support](http://support.serverdensity.com).

@@ -11,7 +11,7 @@ The Twemproxy check can be installed with your package manager, if the sd-agent 
 
 ### Configuration
 
-Create a file `twemproxy.yaml` in the Agent's `conf.d` directory. See the [sample twemproxy.yaml](https://github.com/DataDog/integrations-core/blob/master/twemproxy/conf.yaml.example) for all available configuration options:
+Create a file `twemproxy.yaml` in the Agent's `conf.d` directory. See the [sample twemproxy.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/twemproxy/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -25,7 +25,7 @@ Restart the Agent to begin sending twemproxy metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `twemproxy` under the Checks section:
+Run the Agent's `info` subcommand and look for `twemproxy` under the Checks section:
 
 ```
   Checks

@@ -40,7 +40,7 @@ Restart the Agent to begin sending Redis metrics to Server Density.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `redisdb` under the Checks section:
+Run the Agent's `info` subcommand and look for `redisdb` under the Checks section:
 
 ```
   Checks
@@ -65,8 +65,6 @@ The redis check is compatible with all major platforms.
 See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
 ## Troubleshooting
-
-* [Redis Integration Error: "unknown command 'CONFIG'"](https://docs.datadoghq.com/integrations/faq/redis-integration-error-unknown-command-config)
 
 ### Agent cannot connect
 ```
