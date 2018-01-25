@@ -22,9 +22,7 @@ init_config:
   collect_default_metrics: true
 
   # List of metrics to be collected by the integration
-  # Read http://docs.datadoghq.com/integrations/java/ to learn how to customize it
-  # Agent 5: Customize all your metrics below
-  # Agent 6: The default metrics to be collected are kept in metrics.yaml, but you can still add your own metrics here
+  # Read https://support.serverdensity.com/hc/en-us/articles/115014942368 to learn how to customize it
   conf:
     - include:
         type: searcher

@@ -37,7 +37,7 @@ instances:
     #
     # NOTE: These service checks only support up to version 4.x of Varnish
     # example /etc/sudoers entry:
-    #   dd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
+    #   sd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
     #
     # varnishadm: /usr/bin/varnishadm
 
