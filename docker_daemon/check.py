@@ -221,7 +221,7 @@ class DockerDaemon(AgentCheck):
 
             # Set tagging options
             # The collect_labels_as_tags is legacy, only tagging docker metrics.
-            # It is replaced by docker_labels_as_tags in datadog.conf.
+            # It is replaced by docker_labels_as_tags in config.cfg.
             # We keep this line for backward compatibility.
             if "collect_labels_as_tags" in instance:
                 self.collect_labels_as_tags = instance.get("collect_labels_as_tags")
@@ -1065,7 +1065,7 @@ class DockerDaemon(AgentCheck):
             self.warning("Unable to find any pid directory in {0}. "
                          "If you are running the agent in a container, make sure to "
                          'share the volume properly: "/proc:/host/proc:ro". '
-                         "See https://github.com/DataDog/docker-sd-agent/blob/master/README.md for more information. "
+                         "See https://github.com/serverdensity/docker-sd-agent/blob/master/README.md for more information. "
                          "Network metrics will be missing".format(proc_path))
             self._disable_net_metrics = True
             return container_dict

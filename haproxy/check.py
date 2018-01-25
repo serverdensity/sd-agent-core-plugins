@@ -415,7 +415,7 @@ class HAProxy(AgentCheck):
             return []
 
         # match.groupdict() returns tags dictionary in the form of {'name': 'value'}
-        # convert it to Datadog tag LIST: ['name:value']
+        # convert it to Server Density tag LIST: ['name:value']
         return ["%s:%s" % (name, value) for name, value in match.groupdict().iteritems()]
 
     @staticmethod

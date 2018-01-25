@@ -174,7 +174,7 @@ class KafkaCheck(AgentCheck):
 
         instance_key = self._get_instance_key(instance)
         if instance_key not in self.kafka_clients:
-            cli = KafkaClient(bootstrap_servers=kafka_conn_str, client_id='dd-agent')
+            cli = KafkaClient(bootstrap_servers=kafka_conn_str, client_id='sd-agent')
             self.kafka_clients[instance_key] = cli
 
         return self.kafka_clients[instance_key]
@@ -579,7 +579,7 @@ class KafkaCheck(AgentCheck):
         return val
 
     def _send_event(self, title, text, tags, type, aggregation_key, severity='info'):
-        """Emit an event to the Datadog Event Stream."""
+        """Emit an event to the Event Stream. (currently not supported)"""
         event_dict = {
             'timestamp': int(time()),
             'source_type_name': self.SOURCE_TYPE_NAME,

@@ -62,10 +62,10 @@ class PostfixCheck(AgentCheck):
 
     Postfix has internal access controls that limit activities on the mail queue. By default,
     Postfix allows `anyone` to view the queue. On production systems where the Postfix installation
-    may be configured with stricter access controls, you may need to grant the dd-agent user access to view
+    may be configured with stricter access controls, you may need to grant the sd-agent user access to view
     the mail queue.
 
-    postconf -e "authorized_mailq_users = dd-agent"
+    postconf -e "authorized_mailq_users = sd-agent"
 
     http://www.postfix.org/postqueue.1.html
 
@@ -131,7 +131,7 @@ class PostfixCheck(AgentCheck):
 
         # postque -p sample output
         '''
-        root@postfix:/opt/datadog-agent/agent/checks.d# postqueue -p
+        root@postfix # postqueue -p
         ----Queue ID----- --Size-- ---Arrival Time---- --Sender/Recipient------
         3xWyLP6Nmfz23fk        367 Tue Aug 15 16:17:33 root@postfix.devnull.home
                                                             (deferred transport)

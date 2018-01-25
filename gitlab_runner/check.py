@@ -23,7 +23,7 @@ class GitlabRunnerCheck(PrometheusCheck):
     """
     def __init__(self, name, init_config, agentConfig, instances=None):
         super(GitlabRunnerCheck, self).__init__(name, init_config, agentConfig, instances)
-        # Mapping from Prometheus metrics names to Datadog ones
+        # Mapping from Prometheus metrics names to Server Density names
         # For now it's a 1:1 mapping
         # TODO: mark some metrics as rate
         allowed_metrics = init_config.get('allowed_metrics')
