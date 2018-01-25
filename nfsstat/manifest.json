@@ -2,7 +2,7 @@
   "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
-  "min_agent_version": "2.3.0",
+  "min_agent_version": "2.2.0",
   "name": "nfsstat",
   "short_description": "nfsstat gets nfsiostat-sysstat metrics.",
   "guid": "9f2fe3a7-ae19-4da9-a253-ae817a5557ab",

@@ -23,11 +23,8 @@ class NfsStatCheck(AgentCheck):
         if init_config.get('nfsiostat_path'):
             self.nfs_cmd = init_config.get('nfsiostat_path')
         else:
-            # if not, check if it's installed in the opt dir, if so use that
-            if os.path.exists('/opt/datadog-agent/embedded/sbin/nfsiostat'):
-                self.nfs_cmd = '/opt/datadog-agent/embedded/sbin/nfsiostat'
             # if not, then check if it is in the default place
-            elif os.path.exists('/usr/local/sbin/nfsiostat'):
+            if os.path.exists('/usr/local/sbin/nfsiostat'):
                 self.nfs_cmd = '/usr/local/sbin/nfsiostat'
             else:
                 raise Exception('nfsstat check requires nfsiostat be installed, please install it (through nfs-utils) or set the path to the installed version')
