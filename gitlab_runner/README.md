@@ -13,12 +13,12 @@ more information about Gitlab Runner and its integration with Prometheus
 ## Setup
 ### Installation
 
-Install the `dd-check-gitlab_runner` package manually or with your favorite configuration manager
+Install the `sd-agent-gitlab-runner` package manually or with your favorite configuration manager
 
 ### Configuration
 
 Edit the `gitlab_runner.yaml` file to point to the Runner's Prometheus metrics endpoint and to the Gitlab master to have a service check.
-See the [sample gitlab_runner.yaml](https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/conf.yaml.example) for all available configuration options.
+See the [sample gitlab_runner.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/gitlab_runner/conf.yaml.example) for all available configuration options.
 
 The `allowed_metrics` item in the `init_config` section allows to specify the metrics that should be extracted.
 
@@ -29,7 +29,7 @@ The `allowed_metrics` item in the `init_config` section allows to specify the me
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `gitlab_runner` under the Checks section:
+Run the Agent's `info` subcommand and look for `gitlab_runner` under the Checks section:
 
     Checks
     ======
@@ -45,17 +45,9 @@ The gitlab_runner check is compatible with all major platforms
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/gitlab_runner/metadata.csv) for a list of metrics provided by this integration.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
-### Events
-The Gitlab Runner check does not include any event at this time.
-
-### Service Checks
-The Gitlab Runner check currently provides a service check to ensure that the Runner can talk to the Gitlab master and another one to ensure that the
-local Prometheus endpoint is available.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+Need help? Contact [Server Density Support](http://support.serverdensity.com).
 
-## Further Reading
-Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
