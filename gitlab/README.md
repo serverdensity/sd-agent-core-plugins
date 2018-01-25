@@ -12,18 +12,18 @@ more information about Gitlab and its integration with Prometheus
 ## Setup
 ### Installation
 
-Install the `dd-check-gitlab` package manually or with your favorite configuration manager
+Install the `sd-agent-gitlab` package manually or with your favorite configuration manager
 
 ### Configuration
 
 Edit the `gitlab.yaml` file to point to the Gitlab's Prometheus metrics endpoint.
-See the [sample gitlab.yaml](https://github.com/DataDog/integrations-core/blob/master/gitlab/conf.yaml.example) for all available configuration options.
+See the [sample gitlab.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/gitlab/conf.yaml.example) for all available configuration options.
 
 The `allowed_metrics` item in the `init_config` section allows to specify the metrics that should be extracted.
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information) and look for `gitlab` under the Checks section:
+Run the Agent's `info` subcommand and look for `gitlab` under the Checks section:
 
     Checks
     ======
@@ -39,17 +39,7 @@ The gitlab check is compatible with all major platforms
 
 ## Data Collected
 ### Metrics
-See [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/gitlab/metadata.csv) for a list of metrics provided by this integration.
-
-### Events
-The Gitlab check does not include any event at this time.
-
-### Service Checks
-The Gitlab check includes a readiness and a liveness service check.
-Moreover, it provides a service check to ensure that the local Prometheus endpoint is available.
+See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 
 ## Troubleshooting
-Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
-
-## Further Reading
-Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+Need help? Contact [Server Density Support](http://support.serverdensity.com).
