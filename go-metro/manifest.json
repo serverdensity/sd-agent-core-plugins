@@ -1,0 +1,20 @@
+{
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.3.0",
+  "name": "go-metro",
+  "short_description": "Passively calculate TCP RTT between hosts",
+  "support": "core",
+  "supported_os": [
+    "linux"
+  ],
+  "version": "1.0.0",
+  "guid": "6d00688b-32b1-4755-98cd-44bd1bd40428",
+  "public_title": "Go-Metro Integration",
+  "categories":["languages"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "linux_package_name": "sd-agent-go-metro",
+}
