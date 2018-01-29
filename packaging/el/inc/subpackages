@@ -86,6 +86,9 @@ This package installs the cacti plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/cacti.py
 %config /etc/sd-agent/conf.d/cacti.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pymysql
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/PyMySQL*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/rrdtool*
 
 %package -n sd-agent-cassandra
 Summary: Server Density Monitoring Agent. cassandra plugin
@@ -867,6 +870,8 @@ This package installs the ssh_check plugin.
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/Crypto*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/enum*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/_cffi_backend.so
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pyasn1*
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/idna*
 
 %package -n sd-agent-statsd
 Summary: Server Density Monitoring Agent. statsd plugin
