@@ -1050,3 +1050,139 @@ This package installs the zookeeper plugin.
 /usr/share/python/sd-agent/checks.d/zk.py
 %config /etc/sd-agent/conf.d/zk.yaml.example
 
+%package -n sd-agent-gitlab-runner
+Summary: Server Density Monitoring Agent. gitlab-runner plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-gitlab-runner
+%{longdescription}
+This package installs the gitlab-runner plugin.
+
+%files -n sd-agent-gitlab-runner
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/gitlab_runner.py
+%config /etc/sd-agent/conf.d/gitlab_runner.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*protobuf*
+
+%package -n sd-agent-gitlab
+Summary: Server Density Monitoring Agent. gitlab plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-gitlab
+%{longdescription}
+This package installs the gitlab plugin.
+
+%files -n sd-agent-gitlab
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/gitlab.py
+%config /etc/sd-agent/conf.d/gitlab.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*protobuf*
+
+%package -n sd-agent-go-expvar
+Summary: Server Density Monitoring Agent. go-expvar plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-go-expvar
+%{longdescription}
+This package installs the go-expvar plugin.
+
+%files -n sd-agent-go-expvar
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/go_expvar.py
+%config /etc/sd-agent/conf.d/go_expvar.yaml.example
+
+%package -n sd-agent-go-metro
+Summary: Server Density Monitoring Agent. go-metro plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-go-metro
+%{longdescription}
+This package installs the go-metro plugin.
+
+%files -n sd-agent-go-metro
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/go-metro.yaml.example
+
+%package -n sd-agent-mesos-master
+Summary: Server Density Monitoring Agent. mesos-master plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-mesos-master
+%{longdescription}
+This package installs the mesos-master plugin.
+
+%files -n sd-agent-mesos-master
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mesos_master.py
+%config /etc/sd-agent/conf.d/mesos_master.yaml.example
+
+%package -n sd-agent-mesos-slave
+Summary: Server Density Monitoring Agent. mesos-slave plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-mesos-slave
+%{longdescription}
+This package installs the mesos-slave plugin.
+
+%files -n sd-agent-mesos-slave
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mesos_slave.py
+%config /etc/sd-agent/conf.d/mesos_slave.yaml.example
+
+%package -n sd-agent-nfsstat
+Summary: Server Density Monitoring Agent. nfsstat plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-nfsstat
+%{longdescription}
+This package installs the nfsstat plugin.
+
+%files -n sd-agent-nfsstat
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/nfsstat.py
+%config /etc/sd-agent/conf.d/nfsstat.yaml.example
+
+%package -n sd-agent-oracle
+Summary: Server Density Monitoring Agent. oracle plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-oracle
+%{longdescription}
+This package installs the oracle plugin.
+
+%files -n sd-agent-oracle
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/oracle.py
+%config /etc/sd-agent/conf.d/oracle.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*cx_Oracle*
+
+%package -n sd-agent-storm
+Summary: Server Density Monitoring Agent. storm plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-storm
+%{longdescription}
+This package installs the storm plugin.
+
+%files -n sd-agent-storm
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/storm.py
+%config /etc/sd-agent/conf.d/storm.yaml.example

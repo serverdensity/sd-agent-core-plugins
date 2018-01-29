@@ -8,7 +8,8 @@ hdfs_datanode hdfs_namenode http_check jenkins kafka kafka_consumer kong kube_dn
 kubernetes_state kyototycoon lighttpd linux_proc_extras mapreduce marathon mcache mongo mysql \
 network nginx ntp openstack pgbouncer php_fpm postfix postgres powerdns_recursor process rabbitmq \
 redisdb riak riakcs snmp solr spark ssh_check statsd supervisord system_core system_swap \
-tcp_check tokumx tomcat twemproxy varnish vsphere yarn zk
+tcp_check tokumx tomcat twemproxy varnish vsphere yarn zk gitlab_runner gitlab go_expvar go-metro \
+mesos_master mesos_slave nfsstat oracle storm
 
 %:
 	dh $@

@@ -706,3 +706,92 @@ Description: The Server Density monitoring agent - couchbase plugin
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-gitlab-runner
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - gitlab runner plugin
+ Track and graph your Gitlab runner activity and performance metrics.
+ .
+ This package installs the gitlab runner plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-gitlab
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - gitlab plugin
+ Track and graph your Gitlab activity and performance metrics.
+ .
+ This package installs the gitlab plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-go-expvar
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - go expvar plugin
+ Track and graph your go expvar metrics.
+ .
+ This package installs the go expvar plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-go-metro
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - go metro plugin
+ Track and graph your go metro metrics.
+ .
+ This package installs the go metro plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-mesos-master
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - mesos master plugin
+ Track and graph your mesos master metrics.
+ .
+ This package installs the mesos master plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-mesos-slave
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - mesos slave plugin
+ Track and graph your mesos slave metrics.
+ .
+ This package installs the mesos slave plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-nfsstat
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - nfsstat plugin
+ Track and graph your nfsstat metrics.
+ .
+ This package installs the nfsstat plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-oracle
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - oracle plugin
+ Track and graph your oracle metrics.
+ .
+ This package installs the oracle plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-storm
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - storm plugin
+ Track and graph your storm metrics.
+ .
+ This package installs the storm plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
