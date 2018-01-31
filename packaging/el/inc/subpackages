@@ -75,7 +75,7 @@ This package installs the btrfs plugin.
 %package -n sd-agent-cacti
 Summary: Server Density Monitoring Agent. cacti plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0
+Requires: %{name} >= 2.2.0, sd-agent-mysql-common >= 2.3.0
 BuildArch: noarch
 
 %description -n sd-agent-cacti
@@ -86,8 +86,6 @@ This package installs the cacti plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/cacti.py
 %config /etc/sd-agent/conf.d/cacti.yaml.example
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pymysql
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/PyMySQL*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/rrdtool*
 
 %package -n sd-agent-cassandra
@@ -330,6 +328,20 @@ package split. It will be removed in next major release, please
 do not reference it or depend on it in any way.
 
 %files -n sd-agent-hdfs-compat
+
+%package -n sd-agent-mysql-common
+Summary: Server Density Monitoring Agent. Common MySQL libs
+Group: System/Monitoring
+BuildArch: noarch
+Requires: %{name} >= 2.1.1
+
+%description -n sd-agent-mysql-common
+%{longdescription}
+This package provides the python mysql module for plugins that require it
+
+%files -n sd-agent-mysql-common
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pymysql
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/PyMySQL*
 
 %package -n sd-agent-hdfs-datanode
 Summary: Server Density Monitoring Agent. hdfs_datanode plugin
@@ -576,7 +588,7 @@ This package installs the mongo plugin.
 %package -n sd-agent-mysql
 Summary: Server Density Monitoring Agent. mysql plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0
+Requires: %{name} >= 2.1.1, sd-agent-mysql-common >= 2.3.0
 BuildArch: noarch
 
 %description -n sd-agent-mysql
@@ -587,8 +599,6 @@ This package installs the mysql plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/mysql.py
 %config /etc/sd-agent/conf.d/mysql.yaml.example
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pymysql
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/PyMySQL*
 
 %package -n sd-agent-network
 Summary: Server Density Monitoring Agent. network plugin
