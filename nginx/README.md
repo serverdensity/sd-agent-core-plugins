@@ -19,7 +19,7 @@ And many more.
 ## Setup
 ### Installation
 
-The NGINX check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=nginx). To install the MySQL check install the `sd-agent-nginx` package.
+The NGINX check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=nginx). To install the NGINX check install the `sd-agent-nginx` package.
 
 #### NGINX status module
 
