@@ -17,7 +17,7 @@ BuildArch: x86_64 i386
 %include %{_topdir}/inc/version
 %include %{_topdir}/inc/release
 Requires: python >= 2.7, sysstat, libyaml
-BuildRequires: symlinks, libffi-devel, python-devel, openssl-devel
+BuildRequires: symlinks, libffi-devel, python27-devel, openssl-devel
 License: Simplified BSD
 Group: System/Monitoring
 Source: sd-agent-core-plugins-%{version}.tar.gz
@@ -31,7 +31,7 @@ BuildRoot: %{_tmppath}/sd-agent-core-plugins-%{version}-%{release}-root
 
 %prep
 curl -LO https://raw.github.com/pypa/virtualenv/1.11.6/virtualenv.py
-python virtualenv.py --no-site-packages --no-pip --no-setuptools %{__venv}
+python2.7 virtualenv.py --no-site-packages --no-pip --no-setuptools %{__venv}
 curl -LO https://bootstrap.pypa.io/ez_setup.py
 %{__venv}/bin/python ez_setup.py --version="20.9.0"
 curl -LO https://bootstrap.pypa.io/get-pip.py
@@ -51,7 +51,6 @@ rm -rf %{buildroot}
 
 %post
 /etc/init.d/sd-agent restart
-
 
 %include %{_topdir}/inc/files
 %include %{_topdir}/inc/subpackages
