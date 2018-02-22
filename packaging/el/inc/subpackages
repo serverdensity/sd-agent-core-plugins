@@ -1080,7 +1080,6 @@ This package installs the gitlab-runner plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/gitlab_runner.py
 %config /etc/sd-agent/conf.d/gitlab_runner.yaml.example
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*protobuf*
 
 %package -n sd-agent-gitlab
 Summary: Server Density Monitoring Agent. gitlab plugin
@@ -1096,7 +1095,6 @@ This package installs the gitlab plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/gitlab.py
 %config /etc/sd-agent/conf.d/gitlab.yaml.example
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*protobuf*
 
 %package -n sd-agent-go-expvar
 Summary: Server Density Monitoring Agent. go-expvar plugin
