@@ -17,7 +17,7 @@ BuildArch: x86_64 i386
 %include %{_topdir}/inc/version
 %include %{_topdir}/inc/release
 Requires: python >= 2.7, sysstat, libyaml
-BuildRequires: symlinks, libffi-devel, python-devel, openssl-devel
+BuildRequires: symlinks, libffi-devel, python-devel, openssl-devel, rrdtool-devel
 License: Simplified BSD
 Group: System/Monitoring
 Source: sd-agent-core-plugins-%{version}.tar.gz
