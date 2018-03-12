@@ -76,7 +76,6 @@ This package installs the btrfs plugin.
 Summary: Server Density Monitoring Agent. cacti plugin
 Group: System/Monitoring
 Requires: %{name} >= 2.2.0, sd-agent-mysql-common >= 2.3.0
-BuildArch: noarch
 
 %description -n sd-agent-cacti
 %{longdescription}
@@ -101,6 +100,21 @@ This package installs the cassandra plugin.
 %files -n sd-agent-cassandra
 %defattr(-,root,root,-)
 %config /etc/sd-agent/conf.d/cassandra.yaml.example
+
+%package -n sd-agent-cassandra-nodetool
+Summary: Server Density Monitoring Agent. cassandra cluster plugin using nodetool
+Group: System/Monitoring
+Requires: %{name} >= 2.3.0
+BuildArch: noarch
+
+%description -n sd-agent-cassandra-nodetool
+%{longdescription}
+This package installs the cassandra cluster plugin using nodetool.
+
+%files -n sd-agent-cassandra-nodetool
+%defattr(-,root,root,-)
+%config /etc/sd-agent/conf.d/cassandra_nodetool.yaml.example
+/usr/share/python/sd-agent/checks.d/cassandra_nodetool.py
 
 %package -n sd-agent-ceph
 Summary: Server Density Monitoring Agent. ceph plugin
@@ -1174,7 +1188,6 @@ This package installs the nfsstat plugin.
 Summary: Server Density Monitoring Agent. oracle plugin
 Group: System/Monitoring
 Requires: %{name} >= 2.2.0
-BuildArch: noarch
 
 %description -n sd-agent-oracle
 %{longdescription}

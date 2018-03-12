@@ -404,9 +404,20 @@ Description: The Server Density monitoring agent - ntp plugin
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-psycopg2-common
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), libpq5
+Breaks: sd-agent-pgbouncer (<<2.3.0)
+Replaces: sd-agent-pgbouncer (<<2.3.0)
+Description: The Server Density monitoring agent - common psycopg2 libs
+ This package provides the python psycopg2 module for plugins that require it
+ .
+ See https://www.serverdensity.com/ for more information.
+
 Package: sd-agent-postgresql
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Recommends: sd-agent-psycopg2-common
 Description: The Server Density monitoring agent - postgresql plugin
  Collect a wealth of database performance and health metrics.
  .
@@ -461,6 +472,16 @@ Description: The Server Density monitoring agent - cassandra plugin
  Track cluster performance, capacity, overall health, and much more.
  .
  This package installs the cassandra plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-cassandra-nodetool
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-jmx (>= 2.3.0)
+Description: The Server Density monitoring agent - cassandra cluster plugin using nodetool
+ Track cluster performance, capacity, overall health, and much more.
+ .
+ This package installs the cassandra cluster plugin using nodetool.
  .
  See https://www.serverdensity.com/ for more information.
 
@@ -567,8 +588,8 @@ Description: The Server Density monitoring agent - dns-check plugin
  See https://www.serverdensity.com/ for more information.
 
 Package: sd-agent-pgbouncer
-Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), libpq5
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), sd-agent-psycopg2-common
 Description: The Server Density monitoring agent - pgbouncer plugin
  Track connection pool metrics and monitor traffic to and from your application.
  .
@@ -657,7 +678,7 @@ Description: The Server Density monitoring agent - spark plugin
  See https://www.serverdensity.com/ for more information.
 
 Package: sd-agent-cacti
-Architecture: all
+Architecture: any
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0)
 Description: The Server Density monitoring agent - cacti plugin
  Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.
@@ -777,7 +798,7 @@ Description: The Server Density monitoring agent - nfsstat plugin
  See https://www.serverdensity.com/ for more information.
 
 Package: sd-agent-oracle
-Architecture: all
+Architecture: any
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
 Description: The Server Density monitoring agent - oracle plugin
  Track and graph your oracle metrics.
