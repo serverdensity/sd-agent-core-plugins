@@ -804,3 +804,13 @@ Replaces: sd-agent-mysql (<<2.2.0)
 Description: This package provides the python mysql module for plugins that require it
  .
  See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-jenkins
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Description: The Server Density monitoring agent - jenkins plugin
+ Track and graph your jenkins metrics.
+ .
+ This package installs the jenkins plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
