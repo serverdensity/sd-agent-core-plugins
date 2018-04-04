@@ -738,6 +738,9 @@ class MySql(AgentCheck):
                                 elif metric_type == RATE:
                                     self.rate(metric, float(
                                         result[col_idx]), tags=tags)
+                                elif metric_type == MONOTONIC:
+                                    self.monotonic_count(metric, float(
+                                        result[col_idx]), tags=tags)
                                 else:
                                     self.gauge(metric, float(
                                         result[col_idx]), tags=tags)
