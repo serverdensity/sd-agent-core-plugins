@@ -19,7 +19,6 @@ rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/dns*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/easy-install.pth
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/google*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/gridfs*
-rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/idna*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ipaddress*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/kazoo*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/meld3*
@@ -29,6 +28,7 @@ rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pip*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ply*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/protobuf*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/psutil*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/psycopg*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pycparser*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pycryptodome*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pysmi*

@@ -1,7 +1,21 @@
+%package -n sd-agent-psycopg2-common
+Summary: Server Density Monitoring Agent. Common psycopg2 libs
+Group: System/Monitoring
+Requires: %{name} >= 2.1.1, postgresql-libs
+Conflicts: sd-agent-pgbouncer <= 2.2.0
+
+%description -n sd-agent-psycopg2-common
+%{longdescription}
+This package provides the python psycopg2 module for plugins that require it
+
+%files -n sd-agent-psycopg2-common
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/psycopg*
+
 %package -n sd-agent-pgbouncer
 Summary: Server Density Monitoring Agent. pgbouncer plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0
+Requires: %{name} >= 2.2.0, sd-agent-psycopg2-common
+BuildArch: noarch
 
 %description -n sd-agent-pgbouncer
 %{longdescription}
@@ -11,4 +25,3 @@ This package installs the pgbouncer plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/pgbouncer.py
 %config /etc/sd-agent/conf.d/pgbouncer.yaml.example
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/psycopg2*

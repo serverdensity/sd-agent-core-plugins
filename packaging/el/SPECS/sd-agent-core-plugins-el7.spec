@@ -55,4 +55,5 @@ rm -rf %{buildroot}
 
 %include %{_topdir}/inc/files
 %include %{_topdir}/inc/subpackages
+%include %{_topdir}/pgbouncer-centos7
 %include %{_topdir}/inc/changelog
