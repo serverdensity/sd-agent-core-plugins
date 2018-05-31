@@ -95,25 +95,19 @@ class ServerDensityCPUChecks(AgentCheck):
             self.log.debug('getCPUStats: darwin')
 
             try:
-                proc = subprocess.Popen(['sar', '-u', '1', '2'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
-                stats = proc.communicate()[0]
-
-                itemRegexp = re.compile(r'\s+(\d+)[\s+]?')
-                titleRegexp = re.compile(r'.*?([%][a-zA-Z0-9]+)[\s+]?')
-                titles = []
-                values = []
-                for line in stats.split('\n'):
-                    # top line with the titles in
-                    if '%' in line:
-                        titles = re.findall(titleRegexp, line)
-                    if line and line.startswith('Average:'):
-                        values = re.findall(itemRegexp, line)
-
-                if values and titles:
-                    cpu_stats['ALL'] = dict(zip(titles, values))
-                    for headerIndex in range(0, len(titles)):
-                        key = titles[headerIndex].replace('%', '')
-                        self.gauge('serverdensity.cpu.{0}'.format(key), float(values[headerIndex]), device_name='ALL')
+                # generate 3 seconds of data
+                # ['          disk0           disk1       cpu     load average', '    KB/t tps  MB/s     KB/t tps  MB/s  us sy id   1m   5m   15m', '   21.23  13  0.27    17.85   7  0.13  14  7 79  1.04 1.27 1.31', '    4.00   3  0.01     5.00   8  0.04  12 10 78  1.04 1.27 1.31', '']
+                iostats, _, _ = get_subprocess_output(['iostat', '-C', '-w', '3', '-c', '2'], self.log)
+                lines = [l for l in iostats.splitlines() if len(l) > 0]
+                legend = [l for l in lines if "us" in l]
+                if len(legend) == 1:
+                    headers = legend[0].split()
+                    data = lines[-1].split()
+                    self.gauge('serverdensity.cpu.usr', float(get_value(headers, data, "us")), device_name='ALL')
+                    self.gauge('serverdensity.cpu.sys', float(get_value(headers, data, "sy")), device_name='ALL')
+                    self.gauge('serverdensity.cpu.idle', float(get_value(headers, data, "id")), device_name='ALL')
+                else:
+                    self.logger.warn("Expected to get at least 4 lines of data from iostat instead of just " + str(iostats[:max(80, len(iostats))]))
 
             except Exception:
                 import traceback
