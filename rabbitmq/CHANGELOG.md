@@ -1,5 +1,12 @@
 # CHANGELOG - rabbitmq
 
+1.3.0 / 2018-07-05
+==================
+
+### Changes
+
+* [FEATURE] Add a service check for the cluster status.
+
 1.2.0 / 2017-07-18
 ==================
 

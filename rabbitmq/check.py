@@ -382,3 +382,30 @@ class RabbitMQ(AgentCheck):
                 status = AgentCheck.CRITICAL
 
             self.service_check('rabbitmq.aliveness', status, tags, message=message)
+
+    def _check_cluster_status(self, instance, base_url, custom_tags, auth=None, ssl_verify=True):
+        """
+        Check the cluster API for all running nodes. If any of the nodes
+        are not running it will return their number in the case that
+        the check fails.
+        """
+
+        cluster_url = urlparse.urljoin(base_url, u'nodes')
+        cluster_proxy = self.get_instance_proxy(instance, cluster_url)
+        cluster_response = self._get_data(cluster_url, auth=auth, ssl_verify=ssl_verify, proxies=cluster_proxy)
+
+        failed_nodes = []
+        for node in cluster_response:
+            if not node[u'running']:
+                failed_nodes.append(node)
+
+        status = AgentCheck.OK
+        status_message = u'all nodes running'
+        failed_nodes_length = len(failed_nodes)
+        if failed_nodes_length > 0:
+            status = AgentCheck.CRITICAL
+            status_message = u'number of not running nodes is %s' % failed_nodes_length
+
+        message = u"Cluster status: %s" % status_message
+
+        self.service_check('rabbitmq.cluster_status', status, custom_tags, message=message)
