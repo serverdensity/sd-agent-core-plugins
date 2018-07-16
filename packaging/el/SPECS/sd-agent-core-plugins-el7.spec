@@ -17,7 +17,7 @@ BuildArch: x86_64 i386
 %include %{_topdir}/inc/version
 %include %{_topdir}/inc/release
 Requires: python >= 2.7, sysstat, libyaml
-BuildRequires: symlinks, libffi-devel, python-devel, openssl-devel, rrdtool-devel
+BuildRequires: symlinks, libffi-devel, python-devel, openssl-devel, rrdtool-devel, postgresql-devel  >= 9.1, postgresql-libs >= 9.1
 License: Simplified BSD
 Group: System/Monitoring
 Source: sd-agent-core-plugins-%{version}.tar.gz
@@ -44,6 +44,7 @@ for plugin in activemq_xml agent_metrics apache btrfs cacti cassandra ceph consu
 done
 
 %build
+%include %{_topdir}/pgbouncer-centos7
 %include %{_topdir}/inc/install
 
 %clean
@@ -55,5 +56,5 @@ rm -rf %{buildroot}
 
 %include %{_topdir}/inc/files
 %include %{_topdir}/inc/subpackages
-%include %{_topdir}/pgbouncer-centos7
+#%include %{_topdir}/pgbouncer-centos7
 %include %{_topdir}/inc/changelog

@@ -17,5 +17,5 @@
   "type":"check",
   "is_public": true,
   "has_logo": true,
-  "linux_package_name": "sd-agent-mesos-master",
+  "linux_package_name": "sd-agent-mesos-master"
 }

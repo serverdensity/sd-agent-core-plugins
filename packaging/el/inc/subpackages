@@ -104,7 +104,7 @@ This package installs the cassandra plugin.
 %package -n sd-agent-cassandra-nodetool
 Summary: Server Density Monitoring Agent. cassandra cluster plugin using nodetool
 Group: System/Monitoring
-Requires: %{name} >= 2.3.0
+Requires: %{name} >= 2.2.1
 BuildArch: noarch
 
 %description -n sd-agent-cassandra-nodetool
@@ -331,8 +331,8 @@ This package installs the haproxy plugin.
 Summary: Server Density Monitoring Agent. hdfs plugin
 Group: System/Monitoring
 Obsoletes: sd-agent-hdfs < 2.1.6-2
-Requires: sd-agent-hdfs-datanode = 2.2.0
-Requires: sd-agent-hdfs-namenode = 2.2.0
+Requires: sd-agent-hdfs-datanode >= 2.2.0
+Requires: sd-agent-hdfs-namenode >= 2.2.0
 BuildArch: noarch
 
 %description -n sd-agent-hdfs-compat

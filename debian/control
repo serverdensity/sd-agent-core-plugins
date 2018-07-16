@@ -4,7 +4,8 @@ Priority: extra
 Maintainer: Server Density Developers <hello@serverdensity.com>
 Build-Depends: debhelper (>= 9), python (>= 2.7.0), python-setuptools,
   python-dev, libyaml-dev, libcurl4-gnutls-dev, postgresql-server-dev-all,
-  symlinks, curl, ca-certificates, libffi-dev, librrd-dev
+  symlinks, curl, ca-certificates, libffi-dev, librrd-dev, libssl-dev,
+  build-essential
 Standards-Version: 3.9.5
 Vcs-Browser: https://github.com/serverdensity/sd-agent-core-plugins
 Vcs-Git: git://github.com/serverdensity/sd-agent-core-plugins.git
@@ -115,6 +116,7 @@ Description: The Server Density monitoring agent - fluentd plugin
 Package: sd-agent-snmp
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Recommends: sd-agent-pyasn1-common
 Description: The Server Density monitoring agent - snmp plugin
  Collect SNMP metrics from your network devices.
  .
@@ -215,6 +217,7 @@ Description: The Server Density monitoring agent - system-swap plugin
 Package: sd-agent-ssh-check
 Architecture: any
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), libffi6
+Recommends: sd-agent-pyasn1-common
 Description: The Server Density monitoring agent - ssh_check plugin
  Monitor SSH connectivity and SFTP latency.
  .
@@ -414,6 +417,17 @@ Description: The Server Density monitoring agent - common psycopg2 libs
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-pyasn1-common
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), libpq5
+Breaks: sd-agent-ssh-check (<<2.3.0), sd-agent-snmp (<<2.3.0)
+Replaces: sd-agent-ssh-check (<<2.3.0), sd-agent-snmp (<<2.3.0)
+Description: The Server Density monitoring agent - common pyasn1 libs
+ This package provides the python pyasn1 module for plugins that require it
+ .
+ See https://www.serverdensity.com/ for more information.
+
+
 Package: sd-agent-postgresql
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
@@ -477,7 +491,7 @@ Description: The Server Density monitoring agent - cassandra plugin
 
 Package: sd-agent-cassandra-nodetool
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-jmx (>= 2.3.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-jmx (>= 2.2.1)
 Description: The Server Density monitoring agent - cassandra cluster plugin using nodetool
  Track cluster performance, capacity, overall health, and much more.
  .

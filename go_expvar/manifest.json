@@ -16,5 +16,5 @@
   "public_title": "Go-Expvar Integration",
   "categories":["languages"],
   "type":"check",
-  "linux_package_name": "sd-agent-go-expvar",
+  "linux_package_name": "sd-agent-go-expvar"
 }

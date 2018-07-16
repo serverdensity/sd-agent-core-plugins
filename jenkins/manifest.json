@@ -16,5 +16,5 @@
   "type":"check",
   "is_public": true,
   "has_logo": true,
-  "linux_package_name": "sd-agent-jenkins",
+  "linux_package_name": "sd-agent-jenkins"
 }
