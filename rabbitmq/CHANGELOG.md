@@ -5,7 +5,7 @@
 
 ### Changes
 
-* [FEATURE] Add a service check for the cluster status.
+* [FEATURE] Add a check for the number of running nodes in a cluster.
 
 1.2.0 / 2017-07-18
 ==================

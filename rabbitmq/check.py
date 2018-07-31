@@ -182,6 +182,8 @@ class RabbitMQ(AgentCheck):
             # Generate a service check for the service status.
             self.service_check('rabbitmq.status', AgentCheck.OK, custom_tags)
 
+            self._check_cluster_status(instance, base_url, custom_tags, auth=auth, ssl_verify=ssl_verify)
+
         except RabbitMQException as e:
             msg = "Error executing check: {}".format(e)
             self.service_check('rabbitmq.status', AgentCheck.CRITICAL, custom_tags, message=msg)
@@ -394,18 +396,9 @@ class RabbitMQ(AgentCheck):
         cluster_proxy = self.get_instance_proxy(instance, cluster_url)
         cluster_response = self._get_data(cluster_url, auth=auth, ssl_verify=ssl_verify, proxies=cluster_proxy)
 
-        failed_nodes = []
+        running_nodes = 0
         for node in cluster_response:
-            if not node[u'running']:
-                failed_nodes.append(node)
+            if node[u'running']:
+                running_nodes += 1
 
-        status = AgentCheck.OK
-        status_message = u'all nodes running'
-        failed_nodes_length = len(failed_nodes)
-        if failed_nodes_length > 0:
-            status = AgentCheck.CRITICAL
-            status_message = u'number of not running nodes is %s' % failed_nodes_length
-
-        message = u"Cluster status: %s" % status_message
-
-        self.service_check('rabbitmq.cluster_status', status, custom_tags, message=message)
+        self.gauge(u'rabbitmq.running_nodes', running_nodes, tags=custom_tags)
