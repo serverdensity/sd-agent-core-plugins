@@ -26,3 +26,4 @@ rabbitmq.queue.messages.redeliver.count,gauge,,message,,Count of subset of messa
 rabbitmq.queue.messages.redeliver.rate,gauge,,message,second,Rate per second of subset of messages in deliver_get which had the redelivered flag set,0,rabbitmq,msgs redelv rate
 rabbitmq.connections,gauge,,connection,,"Number of current connections to a given rabbitmq vhost, tagged 'rabbitmq_vhost:<vhost_name>'",0,rabbitmq,connections
 rabbitmq.connections.state,gauge,,connection_state,,Number of connections in the specified connection state,0,rabbitmq,connection_state
+rabbitmq.running_nodes,gauge,,node,,Number of running nodes in a cluster,0,rabbitmq,running_nodes

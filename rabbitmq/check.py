@@ -402,3 +402,4 @@ class RabbitMQ(AgentCheck):
                 running_nodes += 1
 
         self.gauge(u'rabbitmq.running_nodes', running_nodes, tags=custom_tags)
+
