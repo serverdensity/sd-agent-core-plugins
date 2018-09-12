@@ -8,7 +8,8 @@ cache:
   - "$CACHE_DIR"
   timeout: 1000
 python:
-- '2.7'
+  - "2.7"
+
 git:
   depth: 3
 branches:
@@ -46,19 +47,22 @@ env:
 before_install:
 - rvm install 2.1.5
 install:
--
 - bundle install
 before_script:
 - if [ "${TRAVIS_OS_NAME}" != "osx" ]; then sudo apt-get --yes --no-install-recommends
   install binfmt-support qemu-user-static createrepo reprepro; fi
 - if [ "${TRAVIS_OS_NAME}" != "osx" ]; then echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' | sudo tee -a /proc/sys/fs/binfmt_misc/register; fi
 script:
-- echo 'Overriding script for debugging'
+  - echo 'Overriding script for debugging'
+  - for metadata in `ls */metadata.csv`; do csvlint ${metadata}; done
 notifications:
   slack:
     secure: EIK5M4WH0/ZnwgCyd6T4801Ll9g9pQuxmkL5PVCCzUHeT2ouwxFepEA/2olb74DYUc1DiDbhlKyevxZVw9l6G2vwZY670N9ZAhbivyDjK6hOduIt8+YicJNtFs3PzilRpu9yPrpDFlrOeuT8MT1TMP8xTCfvDa6WDic2Nfen4L0=
 jobs:
   include:
+  - stage: CSV lint
+    install: gem install csvlint
+    script: for metadata in `ls */metadata.csv`; do csvlint ${metadata}; done
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
     python: 2.7

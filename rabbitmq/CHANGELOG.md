@@ -1,7 +1,7 @@
 # CHANGELOG - rabbitmq
 
 
-1.4.0 / Unreleased
+1.4.0 / 2018-07-05
 ==================
 
 ### Changes
@@ -11,6 +11,7 @@
 * [BUGFIX] Assume a protocol if there isn't one, fixing a bug if you don't use a protocol. See [#909][].
 * [IMPROVEMENT] If vhosts are listed in the config, the check will only query for those specific vhosts, rather than querying for all of them. See [#910][].
 * [FEATURE] Add metrics to monitor a cluster. See [#924][]
+* [FEATURE] Add a check for the number of running nodes in a cluster.
 
 1.3.1 / 2017-10-10
 ==================
@@ -58,14 +59,9 @@
 [#635]: https://github.com/DataDog/integrations-core/issues/635
 [#674]: https://github.com/DataDog/integrations-core/issues/674
 [#729]: https://github.com/DataDog/integrations-core/issues/729
-<<<<<<< HEAD
-[#909]: https://github.com/DataDog/integrations-core/issues/909
-[#910]: https://github.com/DataDog/integrations-core/issues/910
-=======
 [#902]: https://github.com/DataDog/integrations-core/issues/902
 [#909]: https://github.com/DataDog/integrations-core/issues/909
 [#924]: https://github.com/DataDog/integrations-core/issues/924
 [@dnavre]: https://github.com/dnavre
->>>>>>> master
 [@ian28223]: https://github.com/ian28223
 [@jamescarr]: https://github.com/jamescarr
