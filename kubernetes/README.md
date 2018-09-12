@@ -17,7 +17,7 @@ Edit the `kubernetes.yaml` file to point to your server and port, set the master
 
 ## Validation
 
-When you run `sd-agent info` you should see something like the following:
+When you run `sd-agent info` you should see something like the following output. If you are on a systemd-based system, you should run `/usr/share/python/sd-agent/agent.py info` instead.
 
     Checks
     ======
