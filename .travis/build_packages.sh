@@ -11,6 +11,9 @@ deb=(bionic xenial trusty jessie stretch)
 CONTAINER="$RELEASE"
 echo "$CONTAINER"
 set -ev
+
+rvm install 2.1.5
+bundle install
 rake copy_checks
 
 if [ -f "${TRAVIS_BUILD_DIR}/config.py" ]; then
