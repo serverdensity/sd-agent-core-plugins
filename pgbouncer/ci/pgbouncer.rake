@@ -8,8 +8,8 @@ def pgbouncer_rootdir
   "#{ENV['INTEGRATIONS_DIR']}/pgbouncer_#{pgbouncer_version}"
 end
 
-pgname = 'dd-test-postgres'
-pgbname = 'dd-test-pgbouncer'
+pgname = 'sd-test-postgres'
+pgbname = 'sd-test-pgbouncer'
 pg_resources_path = (ENV['TRAVIS_BUILD_DIR']).to_s + '/pgbouncer/ci/resources/pg'
 pgb_resources_path = (ENV['TRAVIS_BUILD_DIR']).to_s + '/pgbouncer/ci/resources/pgb'
 
@@ -32,7 +32,7 @@ namespace :ci do
     task :install do
       Rake::Task['ci:common:install'].invoke('pgbouncer')
       puts 'Installing Postgres'
-      sh %(docker run --name #{pgname} -v #{pg_resources_path}:/docker-entrypoint-initdb.d -e POSTGRES_PASSWORD=datadog -d postgres:latest)
+      sh %(docker run --name #{pgname} -v #{pg_resources_path}:/docker-entrypoint-initdb.d -e POSTGRES_PASSWORD=serverdensity -d postgres:latest)
       count = 0
       logs = `docker logs #{pgname} 2>&1`
       until count == 20 || logs.include?('PostgreSQL init process complete')
@@ -58,7 +58,7 @@ namespace :ci do
     task before_cache: ['ci:common:before_cache']
 
     task cleanup: ['ci:common:cleanup'] do
-      sh %(docker rm -f dd-test-pgbouncer dd-test-postgres)
+      sh %(docker rm -f sd-test-pgbouncer sd-test-postgres)
     end
 
     task :execute do

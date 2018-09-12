@@ -32,11 +32,11 @@ class TestPgbouncer(AgentCheckTest):
                 {
                     'host': 'localhost',
                     'port': 16432,
-                    'username': 'datadog',
-                    'password': 'datadog'
+                    'username': 'serverdensity',
+                    'password': 'serverdensity'
                 },
                 {
-                    'database_url': 'postgresql://datadog:datadog@localhost:16432/datadog_test',
+                    'database_url': 'postgresql://serverdensity:serverdensity@localhost:16432/serverdensity_test',
                 }
             ]
         }
@@ -45,9 +45,9 @@ class TestPgbouncer(AgentCheckTest):
             connection = pg.connect(
                 host='localhost',
                 port='16432',
-                user='datadog',
-                password='datadog',
-                database='datadog_test')
+                user='serverdensity',
+                password='serverdensity',
+                database='serverdensity_test')
             connection.set_isolation_level(pg.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
             cur = connection.cursor()
             cur.execute('SELECT * FROM persons;')
@@ -81,9 +81,9 @@ class TestPgbouncer(AgentCheckTest):
             connection = pg.connect(
                 host='localhost',
                 port='16432',
-                user='datadog',
-                password='datadog',
-                database='datadog_test')
+                user='serverdensity',
+                password='serverdensity',
+                database='serverdensity_test')
             connection.set_isolation_level(pg.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
             cur = connection.cursor()
             cur.execute('SELECT * FROM persons;')
