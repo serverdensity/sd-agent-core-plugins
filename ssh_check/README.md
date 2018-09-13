@@ -1,16 +1,17 @@
 # Agent Check: SSH/SFTP
 
-# Overview
+## Overview
 
 This check lets you monitor SSH connectivity to remote hosts and SFTP response times.
 
-# Installation
+## Setup
+### Installation
 
 The SSH/SFTP check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=ssh+sftp). To install the SSH/SFTP check install the `sd-agent-ssh-check` package.
 
-# Configuration
+### Configuration
 
-Create a file `ssh_check.yaml` in the Agent's `conf.d` directory:
+Create a file `ssh_check.yaml` in the Agent's `conf.d` directory. See the [sample ssh_check.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/ssh_check/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -28,7 +29,7 @@ instances:
 
 Restart the Agent to start sending SSH/SFTP metrics and service checks to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `ssh_check` under the Checks section:
 
@@ -45,11 +46,12 @@ Run the Agent's `info` subcommand and look for `ssh_check` under the Checks sect
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The ssh check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 

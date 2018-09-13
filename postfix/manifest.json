@@ -2,7 +2,7 @@
   "guid": "7f03c5b7-ee54-466e-8854-5896d62c82b4",
   "linux_package_name": "sd-agent-postfix",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "name": "postfix",
@@ -12,5 +12,9 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.1.0"
+  "version": "1.1.0",
+  "categories":["Collaboration"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

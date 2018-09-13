@@ -2,7 +2,7 @@
   "guid": "a5cca58a-9984-4226-ad1c-8dff73c9d6ac",
   "linux_package_name": "sd-agent-twemproxy",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "twemproxy",
@@ -13,5 +13,9 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.1.0"
+  "version": "1.1.0",
+  "categories":["web"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

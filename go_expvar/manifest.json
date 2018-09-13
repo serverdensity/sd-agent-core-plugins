@@ -1,0 +1,20 @@
+{
+  "maintainer": "hello@serverdensity..com",
+  "manifest_version": "0.1.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "name": "go_expvar",
+  "short_description": "Collect expvar-instrumented metrics and memory stats from your Go service.",
+  "support": "core",
+  "supported_os": [
+    "linux",
+    "mac_os",
+    "windows"
+  ],
+  "version": "1.0.3",
+  "guid": "33557f7a-5f24-43f3-9551-78432894e539",
+  "public_title": "Go-Expvar Integration",
+  "categories":["languages"],
+  "type":"check",
+  "linux_package_name": "sd-agent-go-expvar"
+}

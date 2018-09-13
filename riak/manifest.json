@@ -2,7 +2,7 @@
   "guid": "e1ed642c-8a15-420c-954b-6fb894905956",
   "linux_package_name": "sd-agent-riak",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "riak",
@@ -13,5 +13,9 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.1.0",
+  "categories":["data store"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

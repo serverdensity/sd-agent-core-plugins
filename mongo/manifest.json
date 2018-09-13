@@ -2,7 +2,7 @@
   "guid": "d51c342e-7a02-4611-a47f-1e8eade5735c",
   "linux_package_name": "sd-agent-mongo",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "module_files": [
@@ -17,5 +17,10 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.2.0"
+  "version": "1.5.1",
+  "categories":["data store"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/mongodb"]
 }

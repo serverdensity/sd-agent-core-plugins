@@ -1,18 +1,18 @@
 # Solr Check
-
-# Overview
+## Overview
 
 The Solr check tracks the state and performance of a Solr cluster. It collects metrics like number of documents indexed, cache hits and evictions, average request times, average requests per second, and more.
 
-# Installation
+## Setup
+### Installation
 
 The Solr check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=solr). To install the Solr check install the `sd-agent-solr` package.
 
 This check is JMX-based, so you'll need to enable JMX Remote on your Tomcat servers. Read the [JMX Check documentation](hhttps://support.serverdensity.com/hc/en-us/search?query=java) for more information on that.
 
-# Configuration
+### Configuration
 
-Create a file `solr.yaml` in the Agent's `conf.d` directory:
+Create a file `solr.yaml` in the Agent's `conf.d` directory. See the [sample solr.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/solr/conf.yaml.example) for all available configuration options:
 
 ```
 instances:
@@ -94,7 +94,90 @@ init_config:
 
 Restart the Agent to start sending Solr metrics to Server Density.
 
-# Validation
+Configuration Options
+
+* `user` and `password` (Optional) - Username and password.
+* `process_name_regex` - (Optional) - Instead of specifying a host and port or jmx_url, the agent can connect using the attach api. This requires the JDK to be installed and the path to tools.jar to be set.
+* `tools_jar_path` - (Optional) - To be set when process_name_regex is set.
+* `java_bin_path` - (Optional) - Should be set if the agent cannot find your java executable.
+* `java_options` - (Optional) - Java JVM options
+* `trust_store_path` and `trust_store_password` - (Optional) - Should be set if ssl is enabled.
+
+The `conf` parameter is a list of dictionaries. Only 2 keys are allowed in this dictionary:
+
+* `include` (**mandatory**): Dictionary of filters, any attribute that matches these filters will be collected unless it also matches the "exclude" filters (see below)
+* `exclude` (**optional**): Another dictionary of filters. Attributes that match these filters won't be collected
+
+For a given bean, metrics get tagged in the following manner:
+
+    mydomain:attr0=val0,attr1=val1
+
+Your metric will be mydomain (or some variation depending on the attribute inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
+
+If you specify an alias in an `include` key that is formatted as *camel case*, it will be converted to *snake case*. For example, `MyMetricName` will be shown in Server Density as `my_metric_name`.
+
+#### The `attribute` filter
+
+The `attribute` filter can accept two types of values:
+
+* A dictionary whose keys are attributes names:
+
+      conf:
+        - include:
+          attribute:
+            maxThreads:
+              alias: tomcat.threads.max
+              metric_type: gauge
+            currentThreadCount:
+              alias: tomcat.threads.count
+              metric_type: gauge
+            bytesReceived:
+              alias: tomcat.bytes_rcvd
+              metric_type: counter
+
+
+In that case you can specify an alias for the metric that will become the metric name in Server Density. You can also specify the metric type either a gauge or a counter. If you choose counter, a rate per second will be computed for this metric.
+
+* A list of attributes names:
+
+      conf:
+        - include:
+          domain: org.apache.cassandra.db
+          attribute:
+            - BloomFilterDiskSpaceUsed
+            - BloomFilterFalsePositives
+            - BloomFilterFalseRatio
+            - Capacity
+            - CompressionRatio
+            - CompletedTasks
+            - ExceptionCount
+            - Hits
+            - RecentHitRate
+
+
+In that case:
+
+  * The metric type will be a gauge
+  * The metric name will be jmx.\[DOMAIN_NAME].\[ATTRIBUTE_NAME]
+
+Here is another filtering example:
+
+    instances:
+      - host: 127.0.0.1
+        name: jmx_instance
+        port: 9999
+
+    init_config:
+      conf:
+        - include:
+          bean: org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency
+          attribute:
+            - OneMinuteRate
+            - 75thPercentile
+            - 95thPercentile
+            - 99thPercentile
+
+### Validation
 
 Run the Agent's `info` subcommand and look for `solr` under the Checks section:
 
@@ -111,10 +194,34 @@ Run the Agent's `info` subcommand and look for `solr` under the Checks section:
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The solr check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+
+
+## Knowledge Base
+### Parsing a string value into a number
+If your jmxfetch returns only string values like **false** and **true** and you want to transform it into a Server Density gauge metric for advanced usages. For instance if you want the following equivalence for your jmxfetch:
+
+```
+"myJmxfetch:false" = myJmxfetch:0
+"myJmxfetch:true" = myJmxfetch:1
+```
+
+You may use the `attribute` filter as follow:
+
+```
+...
+    attribute:
+          myJmxfetch:
+            alias: your_metric_name
+            metric_type: gauge
+            values:
+              "false": 0
+              "true": 1
+```

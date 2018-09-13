@@ -1,16 +1,16 @@
 # Agent Check: system cores
-
-# Overview
+## Overview
 
 This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).
 
-# Installation
+## Setup
+### Installation
 
 The system_core check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=system_core). To install the system_core check install the `sd-agent-system-core` package.
 
-# Configuration
+### Configuration
 
-Create a file `system_core.yaml` in the Agent's `conf.d` directory:
+Create a file `system_core.yaml` in the Agent's `conf.d` directory. See the [sample system_core.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/system_core/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -23,7 +23,7 @@ The Agent just needs one item in `instances` in order to enable the check. The c
 
 Restart the Agent to enable the check.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `system_core` under the Checks section:
 
@@ -40,12 +40,17 @@ Run the Agent's `info` subcommand and look for `system_core` under the Checks se
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The system_core check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
 Depending on the platform, the check may collect other CPU time metrics, e.g. `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
+
+
+## Troubleshooting
+Need help? Contact [Server Density Support](http://support.serverdensity.com).

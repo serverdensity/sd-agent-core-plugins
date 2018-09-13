@@ -1,47 +1,66 @@
-# Varnish Integration
-
+# Agent Check: Varnish
 ## Overview
 
-Connect Varnish to Server Density in order to:
+This check collects varnish metrics regarding:
 
-* Visualize your cache performance in real-time
-* Correlate the performance of Varnish with the rest of your applications
+* Clients: connections and requests
+* Cache performance: hits, evictions, etc
+* Threads: creation, failures, threads queued
+* Backends: successful, failed, retried connections
 
-## Installation
+It also submits service checks for the health of each backend.
+
+## Setup
+### Installation
 
 Install the `sd-agent-varnish` package manually or with your favorite configuration manager
 
-## Configuration
+### Configuration
 
-Configure the Agent to connect to Varnish
+If you're running Varnish 4.1+, add the sd-agent system user to the varnish group (e.g. `sudo usermod -G varnish -a sd-agent`).
 
- - Edit conf.d/varnish.yaml
+Then, create a file `varnish.yaml` in the Agent's `conf.d` directory. See the [sample varnish.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/varnish/conf.yaml.example) for all available configuration options:
+
 ```
 init_config:
 
 instances:
-    - varnishstat: /usr/bin/varnishstat
-      tags:
-          - instance:production
+  - varnishstat: /usr/bin/varnishstat        # or wherever varnishstat lives
+    varnishadm: <PATH_TO_VARNISHADM_BIN>     # to submit service checks for the health of each backend
+#   secretfile: <PATH_TO_VARNISH_SECRETFILE> # if you configured varnishadm and your secret file isn't /etc/varnish/secret
+#   tags:
+#     - instance:production
 ```
 
- - If you're running Varnish 4.1+, you must add the sd-agent user to the varnish group.
+If you don't set `varnishadm`, the Agent won't check backend health. If you do set it, the Agent needs privileges to execute the binary with root privileges. Add the following to your `/etc/sudoers` file:
+
 ```
-sudo usermod -a -G varnish sd-agent
+sd-agent ALL=(ALL) NOPASSWD:/usr/bin/varnishadm
 ```
 
-## Validation
+Restart the Agent to start sending varnish metrics and service checks to Server Density.
+
+### Validation
 
 When you run `sd-agent info` you should see something like the following:
 
-    Checks
-    ======
+```
+  Checks
+  ======
+    [...]
 
-        varnish
-        -------
-          - instance #0 [OK]
-          - Collected 8 metrics & 0 events
+    varnish
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
 
+    [...]
+```
 ## Compatibility
 
-The Varnish check is compatible with all major platforms
+The Varnish check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+

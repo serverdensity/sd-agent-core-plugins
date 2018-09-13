@@ -1,6 +1,6 @@
 # Consul Integration
 
-# Overview
+## Overview
 
 The sd-agent collects many metrics from Consul nodes, including those for:
 
@@ -17,11 +17,12 @@ The _Consul_ Agent can provide further metrics via SDStatsD. These metrics are m
 
 And many more.
 
-# Installation
+## Setup
+### Installation
 
 The Consul check can be installed with your package manager, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=consul).
 
-# Configuration
+### Configuration
 
 ### Connect sd-gent to Consul Agent
 
@@ -50,7 +51,8 @@ See the [sample consul.yaml](conf.yaml.example) for all available configuration 
 
 Restart the Agent to start sending Consul metrics to Server Density.
 
-### Connect Consul Agent to SDStatsD
+#### Connect Consul Agent to SDStatsD
+
 
 In the main Consul configuration file, add your `sdstatsd_addr` nested under the top-level `telemetry` key:
 
@@ -66,9 +68,9 @@ In the main Consul configuration file, add your `sdstatsd_addr` nested under the
 
 Reload the Consul Agent to start sending more Consul metrics to SDStatsD.
 
-# Validation
+### Validation
 
-### sd-agent to Consul Agent
+#### sd-agent to Consul Agent
 
 Run the Agent's `info` subcommand and look for `consul` under the Checks section:
 
@@ -97,7 +99,7 @@ Also, if your Consul nodes have debug logging enabled, you'll see the sd-agent's
     2017/03/27 21:38:12 [DEBUG] http: Request GET /v1/coordinate/nodes (84.95µs) from=127.0.0.1:53780
 ```
 
-### Consul Agent to SDStatsD
+#### Consul Agent to SDStatsD
 
 Use `netstat` to verify that Consul is sending its metrics, too:
 
@@ -106,11 +108,12 @@ $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 23176/consul
 ```
 
-# Compatibility
+## Compatibility
 
 The Consul check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by the sd-agent's Consul check.
 

@@ -1,6 +1,5 @@
 # Agent Check: Hadoop YARN
-
-# Overview
+## Overview
 
 This check collects metrics from your YARN ResourceManager, including:
 
@@ -9,14 +8,14 @@ This check collects metrics from your YARN ResourceManager, including:
 * Node metrics: available vCores, time of last health update, etc
 
 And more.
-
-# Installation
+## Setup
+### Installation
 
 The YARN check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/articles/214171178) on your YARN ResourceManager. If you need the newest version of the check, install the `sd-agent-yarn` package.
 
-# Configuration
+### Configuration
 
-Create a file `yarn.yaml` in the Agent's `conf.d` directory:
+Create a file `yarn.yaml` in the Agent's `conf.d` directory. See the [sample yarn.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/yarn/conf.yaml.example) for all available configuration options.:
 
 ```
 init_config:
@@ -31,7 +30,7 @@ See the [example check configuration](conf.yaml.example) for a comprehensive lis
 
 Restart the Agent to start sending YARN metrics to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `yarn` under the Checks section:
 
@@ -48,11 +47,11 @@ Run the Agent's `info` subcommand and look for `yarn` under the Checks section:
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The yarn check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
-

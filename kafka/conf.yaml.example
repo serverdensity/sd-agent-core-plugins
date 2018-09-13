@@ -34,8 +34,10 @@ instances:
 
 init_config:
   is_jmx: true
+  collect_default_metrics: true
 
-  # Metrics collected by this check. You should not have to modify this.
+  # List of metrics to be collected by the integration
+  # Read https://support.serverdensity.com/hc/en-us/articles/115014942368 to learn how to customize it
   conf:
     #
     # Producers (only v0.8.2.x)

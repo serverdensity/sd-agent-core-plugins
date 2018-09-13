@@ -1,0 +1,17 @@
+{
+  "linux_package_name": "sd-agent-gitlab-runner",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "name": "gitlab_runner",
+  "short_description": "Track all the metrics from your Gitlab runners",
+  "guid": "08318775-7b40-4bc5-bb3d-36ad9111db37",
+  "support": "core",
+  "supported_os": ["linux","mac_os","windows"],
+  "version": "1.0.0",
+  "public_title": "Gitlab Runners Integration",
+  "categories":["web", "network"],
+  "is_public": false,
+  "has_logo": false
+}

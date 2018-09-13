@@ -2,7 +2,7 @@
   "guid": "eb31452b-d681-4823-87cc-2ef114559edf",
   "linux_package_name": "sd-agent-kubernetes",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "kubernetes",
@@ -12,5 +12,9 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.3.0"
+  "version": "1.5.0",
+  "categories":["orchestration", "containers"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

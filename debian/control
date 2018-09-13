@@ -4,7 +4,8 @@ Priority: extra
 Maintainer: Server Density Developers <hello@serverdensity.com>
 Build-Depends: debhelper (>= 9), python (>= 2.7.0), python-setuptools,
   python-dev, libyaml-dev, libcurl4-gnutls-dev, postgresql-server-dev-all,
-  symlinks, curl, ca-certificates, libffi-dev
+  symlinks, curl, ca-certificates, libffi-dev, librrd-dev, libssl-dev,
+  build-essential
 Standards-Version: 3.9.5
 Vcs-Browser: https://github.com/serverdensity/sd-agent-core-plugins
 Vcs-Git: git://github.com/serverdensity/sd-agent-core-plugins.git
@@ -115,6 +116,7 @@ Description: The Server Density monitoring agent - fluentd plugin
 Package: sd-agent-snmp
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Recommends: sd-agent-pyasn1-common
 Description: The Server Density monitoring agent - snmp plugin
  Collect SNMP metrics from your network devices.
  .
@@ -215,6 +217,7 @@ Description: The Server Density monitoring agent - system-swap plugin
 Package: sd-agent-ssh-check
 Architecture: any
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), libffi6
+Recommends: sd-agent-pyasn1-common
 Description: The Server Density monitoring agent - ssh_check plugin
  Monitor SSH connectivity and SFTP latency.
  .
@@ -404,9 +407,31 @@ Description: The Server Density monitoring agent - ntp plugin
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-psycopg2-common
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), libpq5
+Breaks: sd-agent-pgbouncer (<<2.3.0)
+Replaces: sd-agent-pgbouncer (<<2.3.0)
+Description: The Server Density monitoring agent - common psycopg2 libs
+ This package provides the python psycopg2 module for plugins that require it
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-pyasn1-common
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), libpq5
+Breaks: sd-agent-ssh-check (<<2.3.0), sd-agent-snmp (<<2.3.0)
+Replaces: sd-agent-ssh-check (<<2.3.0), sd-agent-snmp (<<2.3.0)
+Description: The Server Density monitoring agent - common pyasn1 libs
+ This package provides the python pyasn1 module for plugins that require it
+ .
+ See https://www.serverdensity.com/ for more information.
+
+
 Package: sd-agent-postgresql
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Recommends: sd-agent-psycopg2-common
 Description: The Server Density monitoring agent - postgresql plugin
  Collect a wealth of database performance and health metrics.
  .
@@ -464,9 +489,19 @@ Description: The Server Density monitoring agent - cassandra plugin
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-cassandra-nodetool
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-jmx (>= 2.2.1)
+Description: The Server Density monitoring agent - cassandra cluster plugin using nodetool
+ Track cluster performance, capacity, overall health, and much more.
+ .
+ This package installs the cassandra cluster plugin using nodetool.
+ .
+ See https://www.serverdensity.com/ for more information.
+
 Package: sd-agent-mysql
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0)
 Description: The Server Density monitoring agent - mysql plugin
  Collect performance schema metrics, query throughput, custom metrics, and more.
  .
@@ -567,8 +602,8 @@ Description: The Server Density monitoring agent - dns-check plugin
  See https://www.serverdensity.com/ for more information.
 
 Package: sd-agent-pgbouncer
-Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), libpq5
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), sd-agent-psycopg2-common
 Description: The Server Density monitoring agent - pgbouncer plugin
  Track connection pool metrics and monitor traffic to and from your application.
  .
@@ -657,8 +692,8 @@ Description: The Server Density monitoring agent - spark plugin
  See https://www.serverdensity.com/ for more information.
 
 Package: sd-agent-cacti
-Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0)
 Description: The Server Density monitoring agent - cacti plugin
  Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.
  .
@@ -706,3 +741,111 @@ Description: The Server Density monitoring agent - couchbase plugin
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-gitlab-runner
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - gitlab runner plugin
+ Track and graph your Gitlab runner activity and performance metrics.
+ .
+ This package installs the gitlab runner plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-gitlab
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - gitlab plugin
+ Track and graph your Gitlab activity and performance metrics.
+ .
+ This package installs the gitlab plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-go-expvar
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - go expvar plugin
+ Track and graph your go expvar metrics.
+ .
+ This package installs the go expvar plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-go-metro
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - go metro plugin
+ Track and graph your go metro metrics.
+ .
+ This package installs the go metro plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-mesos-master
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - mesos master plugin
+ Track and graph your mesos master metrics.
+ .
+ This package installs the mesos master plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-mesos-slave
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - mesos slave plugin
+ Track and graph your mesos slave metrics.
+ .
+ This package installs the mesos slave plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-nfsstat
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - nfsstat plugin
+ Track and graph your nfsstat metrics.
+ .
+ This package installs the nfsstat plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-oracle
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - oracle plugin
+ Track and graph your oracle metrics.
+ .
+ This package installs the oracle plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-storm
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Description: The Server Density monitoring agent - storm plugin
+ Track and graph your storm metrics.
+ .
+ This package installs the storm plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-mysql-common
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Breaks: sd-agent-mysql (<<2.2.0)
+Replaces: sd-agent-mysql (<<2.2.0)
+Description: This package provides the python mysql module for plugins that require it
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-jenkins
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Description: The Server Density monitoring agent - jenkins plugin
+ Track and graph your jenkins metrics.
+ .
+ This package installs the jenkins plugin.
+ .
+ See https://www.serverdensity.com/ for more information.

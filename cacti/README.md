@@ -1,17 +1,18 @@
 # Cacti Integration
 
-# Overview
+## Overview
 
 Get metrics from cacti service in real time to:
 
 * Visualize and monitor cacti states
 * Be notified about cacti failovers and events.
 
-# Installation
+## Setup
+### Installation
 
 The Cacti check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=cacti). To install the cacti check install the `sd-agent-cacti` package.
 
-# Configuration
+### Configuration
 
 Create a serverdensity user with read-only rights to the Cacti database
 
@@ -33,7 +34,7 @@ echo -e "\033[0;31mMissing SELECT grant\033[0m"
 ```
 
 Configure the Agent to connect to MySQL
-Edit conf.d/cacti.yaml
+Edit conf.d/`cacti.yaml`. See the [sample cacti.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/cacti/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -61,7 +62,7 @@ else echo -e "\033[0;31msd-agent can not read the RRD files\033[0m";
 fi'
 ```
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `cacti` under the Checks section:
 
@@ -78,10 +79,11 @@ Run the Agent's `info` subcommand and look for `cacti` under the Checks section:
     [...]
 ```
 
-# Troubleshooting
+## Compatibility
 
-# Compatibility
+The Cacti check is compatible with all major platforms
 
-The cacti check is compatible with all major platforms
+## Data Collected
+### Metrics
+See [metadata.csv](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/cacti/metadata.csv) for a list of metrics provided by this integration.
 
-# Metrics

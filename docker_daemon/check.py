@@ -1,4 +1,4 @@
-# (C) Datadog, Inc. 2010-2016
+# (C) Datadog, Inc. 2010-2017
 # All rights reserved
 # Licensed under Simplified BSD License (see LICENSE)
 
@@ -64,10 +64,16 @@ CGROUP_METRICS = [
             # We only get these metrics if they are properly set, i.e. they are a "reasonable" value
             "docker.mem.limit": (["hierarchical_memory_limit"], lambda x: float(x) if float(x) < 2 ** 60 else None, GAUGE),
             "docker.mem.sw_limit": (["hierarchical_memsw_limit"], lambda x: float(x) if float(x) < 2 ** 60 else None, GAUGE),
-            "docker.mem.in_use": (["rss", "hierarchical_memory_limit"], lambda x,y: float(x)/float(y) if float(y) < 2 ** 60 else None, GAUGE),
-            "docker.mem.sw_in_use": (["swap", "rss", "hierarchical_memsw_limit"], lambda x,y,z: float(x + y)/float(z) if float(z) < 2 ** 60 else None, GAUGE)
-
+            "docker.mem.in_use": (["rss", "hierarchical_memory_limit"], lambda x, y: float(x)/float(y) if float(y) < 2 ** 60 else None, GAUGE),
+            "docker.mem.sw_in_use": (["swap", "rss", "hierarchical_memsw_limit"], lambda x, y, z: float(x + y)/float(z) if float(z) < 2 ** 60 else None, GAUGE)
         }
+    },
+    {
+        "cgroup": "memory",
+        "file": "memory.soft_limit_in_bytes",
+        "metrics": {
+            "softlimit": ("docker.mem.soft_limit", GAUGE),
+        },
     },
     {
         "cgroup": "cpuacct",
@@ -139,6 +145,11 @@ EXCLUDED_ATTRIBUTES = [
     'name',
     'container',
 ]
+DEFAULT_FILTERED_EVENT_TYPES = [
+    'top',
+    'exec_create',
+    'exec_start',
+]
 
 CONTAINER = "container"
 PERFORMANCE = "performance"
@@ -147,6 +158,7 @@ HEALTHCHECK = "healthcheck"
 IMAGE = "image"
 
 ERROR_ALERT_TYPE = ['oom', 'kill']
+
 
 def compile_filter_rules(rules):
     patterns = []
@@ -167,31 +179,38 @@ class DockerDaemon(AgentCheck):
             raise Exception("Docker check only supports one configured instance.")
         AgentCheck.__init__(self, name, init_config,
                             agentConfig, instances=instances)
-
         self.init_success = False
-        self.docker_client = None
         self._service_discovery = agentConfig.get('service_discovery') and \
             agentConfig.get('service_discovery_backend') == 'docker'
+
+        global_labels_as_tags = agentConfig.get('docker_labels_as_tags')
+        if global_labels_as_tags:
+            self.collect_labels_as_tags = [label.strip() for label in global_labels_as_tags.split(',')]
+        else:
+            self.collect_labels_as_tags = DEFAULT_LABELS_AS_TAGS
         self.init()
 
     def init(self):
         try:
             instance = self.instances[0]
 
+            # Getting custom tags for service checks when docker is down
+            self.custom_tags = instance.get("tags", [])
+
             self.docker_util = DockerUtil()
+            if not self.docker_util.client:
+                raise Exception("Failed to initialize Docker client.")
 
-            self.docker_client = self.docker_util.client
             self.docker_gateway = DockerUtil.get_gateway()
-
             self.metadata_collector = MetadataCollector()
 
+            self.kubeutil = None
             if Platform.is_k8s():
                 try:
                     self.kubeutil = KubeUtil()
                 except Exception as ex:
-                    self.kubeutil = None
                     self.log.error("Couldn't instantiate the kubernetes client, "
-                        "subsequent kubernetes calls will fail as well. Error: %s" % str(ex))
+                                   "subsequent kubernetes calls will fail as well. Error: %s" % str(ex))
 
             # We configure the check with the right cgroup settings for this host
             # Just needs to be done once
@@ -201,8 +220,12 @@ class DockerDaemon(AgentCheck):
             self._disable_net_metrics = False
 
             # Set tagging options
-            self.custom_tags = instance.get("tags", [])
-            self.collect_labels_as_tags = instance.get("collect_labels_as_tags", DEFAULT_LABELS_AS_TAGS)
+            # The collect_labels_as_tags is legacy, only tagging docker metrics.
+            # It is replaced by docker_labels_as_tags in config.cfg.
+            # We keep this line for backward compatibility.
+            if "collect_labels_as_tags" in instance:
+                self.collect_labels_as_tags = instance.get("collect_labels_as_tags")
+
             self.kube_pod_tags = {}
 
             self.use_histogram = _is_affirmative(instance.get('use_histogram', False))
@@ -229,7 +252,6 @@ class DockerDaemon(AgentCheck):
                 self.whitelist_patterns = set(patterns)
                 self.tag_names[HEALTHCHECK] = set(whitelist_tags)
 
-
             # Other options
             self.collect_image_stats = _is_affirmative(instance.get('collect_images_stats', False))
             self.collect_container_size = _is_affirmative(instance.get('collect_container_size', False))
@@ -241,6 +263,8 @@ class DockerDaemon(AgentCheck):
             self.collect_disk_stats = _is_affirmative(instance.get('collect_disk_stats', False))
             self.collect_exit_codes = _is_affirmative(instance.get('collect_exit_codes', False))
             self.collect_ecs_tags = _is_affirmative(instance.get('ecs_tags', True)) and Platform.is_ecs_instance()
+
+            self.filtered_event_types = tuple(instance.get("filtered_event_types", DEFAULT_FILTERED_EVENT_TYPES))
 
             self.capped_metrics = instance.get('capped_metrics')
 
@@ -256,10 +280,15 @@ class DockerDaemon(AgentCheck):
             # Initialization can fail if cgroups are not ready or docker daemon is down. So we retry if needed
             self.init()
 
-            if self.docker_client is None:
-                message = "Unable to connect to Docker daemon"
+            try:
+                if self.docker_util.client is None:
+                    message = "Unable to connect to Docker daemon"
+                    self.service_check(SERVICE_CHECK_NAME, AgentCheck.CRITICAL,
+                                       message=message, tags=self.custom_tags)
+                    return
+            except Exception as ex:
                 self.service_check(SERVICE_CHECK_NAME, AgentCheck.CRITICAL,
-                                   message=message)
+                                   message=str(ex), tags=self.custom_tags)
                 return
 
             if not self.init_success:
@@ -319,9 +348,9 @@ class DockerDaemon(AgentCheck):
     def _count_and_weigh_images(self):
         try:
             tags = self._get_tags()
-            active_images = self.docker_client.images(all=False)
+            active_images = self.docker_util.client.images(all=False)
             active_images_len = len(active_images)
-            all_images_len = len(self.docker_client.images(quiet=True, all=True))
+            all_images_len = len(self.docker_util.client.images(quiet=True, all=True))
             self.gauge("docker.images.available", active_images_len, tags=tags)
             self.gauge("docker.images.intermediate", (all_images_len - active_images_len), tags=tags)
 
@@ -343,15 +372,15 @@ class DockerDaemon(AgentCheck):
         all_containers_count = Counter()
 
         try:
-            containers = self.docker_client.containers(all=True, size=must_query_size)
+            containers = self.docker_util.client.containers(all=True, size=must_query_size)
         except Exception as e:
             message = "Unable to list Docker containers: {0}".format(e)
             self.service_check(SERVICE_CHECK_NAME, AgentCheck.CRITICAL,
-                               message=message)
+                               message=message, tags=self.custom_tags)
             raise Exception(message)
 
         else:
-            self.service_check(SERVICE_CHECK_NAME, AgentCheck.OK)
+            self.service_check(SERVICE_CHECK_NAME, AgentCheck.OK, tags=self.custom_tags)
 
         # Create a set of filtered containers based on the exclude/include rules
         # and cache these rules in docker_util
@@ -379,19 +408,25 @@ class DockerDaemon(AgentCheck):
             # crawling for pids.
             if custom_cgroups or healthchecks:
                 try:
-                    inspect_dict = self.docker_client.inspect_container(container_name)
+                    inspect_dict = self.docker_util.client.inspect_container(container_name)
                     container['_pid'] = inspect_dict['State']['Pid']
                     container['health'] = inspect_dict['State'].get('Health', {})
                 except Exception as e:
                     self.log.debug("Unable to inspect Docker container: %s", e)
 
+        total_count = 0
         # TODO: deprecate these 2, they should be replaced by _report_container_count
         for tags, count in running_containers_count.iteritems():
+            total_count += count
             self.gauge("docker.containers.running", count, tags=list(tags))
+        self.gauge("docker.containers.running.total", total_count, tags=self.custom_tags)
 
+        total_count = 0
         for tags, count in all_containers_count.iteritems():
             stopped_count = count - running_containers_count[tags]
+            total_count += stopped_count
             self.gauge("docker.containers.stopped", stopped_count, tags=list(tags))
+        self.gauge("docker.containers.stopped.total", total_count, tags=self.custom_tags)
 
         return containers_by_id
 
@@ -424,6 +459,7 @@ class DockerDaemon(AgentCheck):
 
         if entity is not None:
             pod_name = None
+            namespace = None
             # Get labels as tags
             labels = entity.get("Labels")
             if labels is not None:
@@ -435,12 +471,11 @@ class DockerDaemon(AgentCheck):
                             k = "pod_name"
                             if "-" in pod_name:
                                 replication_controller = "-".join(pod_name.split("-")[:-1])
-                                if "/" in replication_controller: # k8s <= 1.1
+                                if "/" in replication_controller:  # k8s <= 1.1
                                     namespace, replication_controller = replication_controller.split("/", 1)
 
-                                elif KubeUtil.NAMESPACE_LABEL in labels: # k8s >= 1.2
+                                elif KubeUtil.NAMESPACE_LABEL in labels:  # k8s >= 1.2
                                     namespace = labels[KubeUtil.NAMESPACE_LABEL]
-                                    pod_name = "{0}/{1}".format(namespace, pod_name)
 
                                 tags.append("kube_namespace:%s" % namespace)
                                 tags.append("kube_replication_controller:%s" % replication_controller)
@@ -466,7 +501,7 @@ class DockerDaemon(AgentCheck):
                             tags.append(k)
 
                         else:
-                            tags.append("%s:%s" % (k,v))
+                            tags.append("%s:%s" % (k, v))
 
                     if k == KubeUtil.POD_NAME_LABEL and Platform.is_k8s() and k not in labels:
                         tags.append("pod_name:no_pod")
@@ -481,8 +516,8 @@ class DockerDaemon(AgentCheck):
                             tags.append('%s:%s' % (tag_name, str(t).strip()))
 
             # Add kube labels and creator/service tags
-            if Platform.is_k8s():
-                kube_tags = self.kube_pod_tags.get(pod_name)
+            if Platform.is_k8s() and namespace and pod_name:
+                kube_tags = self.kube_pod_tags.get("{0}/{1}".format(namespace, pod_name))
                 if kube_tags:
                     tags.extend(list(kube_tags))
 
@@ -594,10 +629,10 @@ class DockerDaemon(AgentCheck):
         """Report volume count per state (dangling or not)"""
         m_func = FUNC_MAP[GAUGE][self.use_histogram]
 
-        attached_volumes = self.docker_client.volumes(filters={'dangling': False})
-        dangling_volumes = self.docker_client.volumes(filters={'dangling': True})
-        attached_count = len(attached_volumes.get('Volumes', []))
-        dangling_count = len(dangling_volumes.get('Volumes', []))
+        attached_volumes = self.docker_util.client.volumes(filters={'dangling': False})
+        dangling_volumes = self.docker_util.client.volumes(filters={'dangling': True})
+        attached_count = len(attached_volumes.get('Volumes', []) or [])
+        dangling_count = len(dangling_volumes.get('Volumes', []) or [])
         m_func(self, 'docker.volume.count', attached_count, tags=['volume_state:attached'])
         m_func(self, 'docker.volume.count', dangling_count, tags=['volume_state:dangling'])
 
@@ -614,7 +649,7 @@ class DockerDaemon(AgentCheck):
     def _report_performance_metrics(self, containers_by_id):
 
         containers_without_proc_root = []
-        for container in containers_by_id.itervalues():
+        for container_id, container in containers_by_id.iteritems():
             if self._is_container_excluded(container) or not self._is_container_running(container):
                 continue
 
@@ -627,7 +662,7 @@ class DockerDaemon(AgentCheck):
                     continue
                 self._report_net_metrics(container, tags)
             except BogusPIDException as e:
-                self.log.warning('Unable to report cgroup metrics: %s', e)
+                self.log.warning('Unable to report cgroup metrics for container %s: %s', container_id[:12], e)
 
         if containers_without_proc_root:
             message = "Couldn't find pid directory for containers: {0}. They'll be missing network metrics".format(
@@ -783,10 +818,14 @@ class DockerDaemon(AgentCheck):
         events = []
         for image_name, event_group in aggregated_events.iteritems():
             container_tags = set()
-            low_prio_events = []
+            filtered_events_count = 0
             normal_prio_events = []
 
             for event in event_group:
+                # Only keep events that are not configured to be filtered out
+                if event['status'].startswith(self.filtered_event_types):
+                    filtered_events_count += 1
+                    continue
                 container_name = event['id'][:11]
 
                 if event['id'] in containers_by_id:
@@ -799,15 +838,9 @@ class DockerDaemon(AgentCheck):
                         if attr in event['Actor']['Attributes'] and attr not in EXCLUDED_ATTRIBUTES:
                             container_tags.add('%s:%s' % (attr, event['Actor']['Attributes'][attr]))
 
-                # health checks generate tons of these so we treat them separately and lower their priority
-                if event['status'].startswith('exec_create:') or event['status'].startswith('exec_start:'):
-                    low_prio_events.append((event, container_name))
-                else:
-                    normal_prio_events.append((event, container_name))
-
-            exec_event = self._create_dd_event(low_prio_events, image_name, container_tags, priority='Low')
-            if exec_event:
-                events.append(exec_event)
+                normal_prio_events.append((event, container_name))
+            if filtered_events_count:
+                self.log.debug('%d events were filtered out because of ignored event type' % filtered_events_count)
 
             normal_event = self._create_dd_event(normal_prio_events, image_name, container_tags, priority='Normal')
             if normal_event:
@@ -883,7 +916,6 @@ class DockerDaemon(AgentCheck):
             'priority': priority
         }
 
-
     def _report_disk_stats(self):
         """Report metrics about the volume space usage"""
         stats = {
@@ -897,7 +929,7 @@ class DockerDaemon(AgentCheck):
             # 'docker.data.percent': None,
             # 'docker.metadata.percent': None
         }
-        info = self.docker_client.info()
+        info = self.docker_util.client.info()
         driver_status = info.get('DriverStatus', [])
         if not driver_status:
             self.log.warning('Disk metrics collection is enabled but docker info did not'
@@ -983,6 +1015,13 @@ class DockerDaemon(AgentCheck):
                     return self._parse_blkio_metrics(fp.read().splitlines())
                 elif 'cpuacct.usage' in stat_file:
                     return dict({'usage': str(int(fp.read())/10000000)})
+                elif 'memory.soft_limit_in_bytes' in stat_file:
+                    value = int(fp.read())
+                    # do not report kernel max default value (uint64 * 4096)
+                    # see https://github.com/torvalds/linux/blob/5b36577109be007a6ecf4b65b54cbc9118463c2b/mm/memcontrol.c#L2844-L2845
+                    # 2 ** 60 is kept for consistency of other cgroups metrics
+                    if value < 2 ** 60:
+                        return dict({'softlimit': value})
                 else:
                     return dict(map(lambda x: x.split(' ', 1), fp.read().splitlines()))
         except IOError:
@@ -1006,11 +1045,11 @@ class DockerDaemon(AgentCheck):
     def _is_container_cgroup(self, line, selinux_policy):
         if line[1] not in ('cpu,cpuacct', 'cpuacct,cpu', 'cpuacct') or line[2] == '/docker-daemon':
             return False
-        if 'docker' in line[2]: # general case
+        if 'docker' in line[2]:  # general case
             return True
-        if 'docker' in selinux_policy: # selinux
+        if 'docker' in selinux_policy:  # selinux
             return True
-        if line[2].startswith('/') and re.match(CONTAINER_ID_RE, line[2][1:]): # kubernetes
+        if line[2].startswith('/') and re.match(CONTAINER_ID_RE, line[2][1:]):  # kubernetes
             return True
         if line[2].startswith('/') and re.match(CONTAINER_ID_RE, line[2].split('/')[-1]): # kube 1.6+ qos hierarchy
             return True
@@ -1024,10 +1063,10 @@ class DockerDaemon(AgentCheck):
 
         if len(pid_dirs) == 0:
             self.warning("Unable to find any pid directory in {0}. "
-                "If you are running the agent in a container, make sure to "
-                'share the volume properly: "/proc:/host/proc:ro". '
-                "See https://github.com/serverdensity/docker-sd-agent/blob/master/README.md for more information. "
-                "Network metrics will be missing".format(proc_path))
+                         "If you are running the agent in a container, make sure to "
+                         'share the volume properly: "/proc:/host/proc:ro". '
+                         "See https://github.com/serverdensity/docker-sd-agent/blob/master/README.md for more information. "
+                         "Network metrics will be missing".format(proc_path))
             self._disable_net_metrics = True
             return container_dict
 
@@ -1089,4 +1128,4 @@ class DockerDaemon(AgentCheck):
                 if val > cap:
                     sample = metric.samples.pop()
                     self.log.debug("Dropped latest value %s (raw sample: %s) of "
-                        "metric %s as it was above the cap for this metric." % (val, sample, metric.name))
+                                   "metric %s as it was above the cap for this metric." % (val, sample, metric.name))

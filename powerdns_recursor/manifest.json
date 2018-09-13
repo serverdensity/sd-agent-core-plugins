@@ -6,12 +6,17 @@
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "powerdns_recursor",
-  "short_description": "powerdns_recursor description.",
+  "short_description": "Keep an eye on strange traffic to and from your PowerDNS recursors.",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "categories":["web", "network"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/powerdns"]
 }

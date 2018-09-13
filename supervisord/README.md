@@ -1,20 +1,18 @@
 # Agent Check: Supervisor
-
-# Overview
+## Overview
 
 This check monitors the uptime, status, and number of processes running under supervisord.
 
-# Installation
+## Setup
+### Installation
 
 The supervisor check can be installed with your package manager, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=supervisor). install the `sd-agent-supervisord` package.
 
-# Configuration
-
-## Prepare supervisord
+### Configuration
+#### Prepare supervisord
 
 The Agent can collect data from Supervisor via HTTP server or UNIX socket. The Agent collects the same data no matter which collection method you configure.
-
-### HTTP server
+##### HTTP server
 
 Add a block like this to supervisor's main configuration file (e.g. `/etc/supervisor.conf`):
 
@@ -25,7 +23,7 @@ username=user  # optional
 password=pass  # optional
 ```
 
-### UNIX socket
+##### UNIX socket
 
 Add blocks like these to `/etc/supervisor.conf` (if they're not already there):
 
@@ -44,9 +42,9 @@ If supervisor is running as root, make sure `chmod` is set so that non-root user
 
 Reload supervisord.
 
-## Connect the Agent
+#### Connect the Agent
 
-Create a file `supervisord.yaml` in the Agent's `conf.d` directory:
+Create a file `supervisord.yaml` in the Agent's `conf.d` directory. See the [sample supervisord.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/supervisord/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -64,11 +62,23 @@ instances:
 
 Use the `proc_names` and/or `proc_regex` options to list processes you want the Agent to collect metrics on and create service checks for. If you don't provide either option, the Agent tracks _all_ child processes of supervisord. If you provide both options, the Agent tracks processes from both lists (i.e. the two options are not mutually exclusive).
 
+
+Configuration Options
+
+* `name` (Required) - An arbitrary name to identify the supervisord server.
+* `host` (Optional) - Defaults to localhost. The host where supervisord server is running.
+* `port` (Optional) - Defaults to 9001. The port number.
+* `user` (Optional) - Username
+* `pass` (Optional) - Password
+* `proc_names` (Optional) - Dictionary of process names to monitor
+* `server_check` (Optional) - Defaults to true. Service check for connection to supervisord server.
+* `socket` (Optional) - If using supervisorctl to communicate with supervisor, a socket is needed.
+
 See the [example check configuration](conf.yaml.example) for comprehensive descriptions of other check options.
 
 Restart the Agent to start sending Supervisor metrics to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `supervisord` under the Checks section:
 
@@ -85,34 +95,12 @@ Run the Agent's `info` subcommand and look for `supervisord` under the Checks se
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The supervisord check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
-
-# Service Checks
-
-**supervisord.can_connect**:
-
-Returns CRITICAL if the Agent cannot connect to the HTTP server or UNIX socket you configured, otherwise OK.
-
-**supervisord.process.status**:
-
-The Agent submits this service check for all child processes of supervisord (if neither `proc_names` nor `proc_regex` is configured) OR a set of child processes (those configured in `proc_names` and/or `proc_regex`), tagging each service check with `supervisord_process:<process_name>`.
-
-This table shows the `supervisord.process.status` that results from each supervisord status:
-
-|supervisord status|supervisord.process.status|
-|---
-|STOPPED|CRITICAL
-|STARTING|UNKNOWN
-|RUNNING|OK
-|BACKOFF|CRITICAL
-|STOPPING|CRITICAL
-|EXITED|CRITICAL
-|FATAL|CRITICAL
-|UNKNOWN|UNKNOWN
 

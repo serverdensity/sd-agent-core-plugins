@@ -1,0 +1,17 @@
+{
+  "linux_package_name": "sd-agent-gitlab",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.0",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "name": "gitlab",
+  "short_description": "Track all your Gitlab metrics",
+  "guid": "1cab328c-5560-4737-ad06-92ebc54af901",
+  "support": "core",
+  "supported_os": ["linux","mac_os","windows"],
+  "version": "1.0.0",
+  "public_title": "Gitlab Integration",
+  "categories":["web", "network"],
+  "is_public": false,
+  "has_logo": false
+}

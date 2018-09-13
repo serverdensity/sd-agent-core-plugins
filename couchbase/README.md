@@ -1,6 +1,5 @@
 # Couchbase Integration
-
-# Overview
+## Overview
 
 Identify busy buckets, track cache miss ratios, and more. This Agent check collects metrics like:
 
@@ -12,13 +11,14 @@ Identify busy buckets, track cache miss ratios, and more. This Agent check colle
 
 And many more.
 
-# Installation
+## Setup
+### Installation
 
-The Couchbase check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=cpuchbase). To install the couchbase check install the `sd-agent-couchbase` package.
+The Couchbase check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=couchbase). To install the couchbase check install the `sd-agent-couchbase` package.
 
-# Configuration
+### Configuration
 
-Create a file `couchbase.yaml` in the Agent's `conf.d` directory:
+Create a file `couchbase.yaml` in the Agent's `conf.d` directory. See the [sample couchbase.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/couchbase/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -31,7 +31,7 @@ instances:
 
 Restart the Agent to begin sending Couchbase metrics to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `couchbase` under the Checks section:
 
@@ -48,11 +48,12 @@ Run the Agent's `info` subcommand and look for `couchbase` under the Checks sect
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The couchbase check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 

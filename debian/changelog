@@ -1,3 +1,10 @@
+sd-agent-core-plugins (2.3.0-1trusty0) trusty; urgency=medium
+
+  * 9 New plugins available.
+  * Minor plugin bug fixes and enhancements.
+
+ -- Server Density <hello@serverdensity.com>  Tue, 6 Feb 2018 18:00:00 +0100
+
 sd-agent-core-plugins (2.2.0-3trusty0) trusty; urgency=medium
 
   * Initial version of the plugins split.

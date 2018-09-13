@@ -1,16 +1,20 @@
 {
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
-  "max_agent_version": "6.0.0",
-  "min_agent_version": "5.6.3",
+  "manifest_version": "0.1.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
   "name": "jenkins",
-  "short_description": "jenkins plugin",
-  "guid": "025978af-0dec-4e5f-a749-14007d062875",
-  "support": "contrib",
+  "short_description": "Track job statuses and see builds start and stop from your event stream.",
+  "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "categories":["configuration & deployment"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "linux_package_name": "sd-agent-jenkins"
 }

@@ -5,16 +5,21 @@
   "guid": "9e7ed68c-669a-40f0-8564-548d49aa8098",
   "linux_package_name": "sd-agent-couchdb",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "name": "couch",
   "short_description": "Track and graph your CouchDB activity and performance metrics.",
+  "version": "2.2.0",
   "support": "core",
   "supported_os": [
     "linux",
     "mac_os",
     "windows"
   ],
-  "version": "1.0.0"
+  "categories":["data store"],
+  "type":"check",
+  "aliases":["/integrations/couchdb"],
+  "is_public": true,
+  "has_logo": true
 }

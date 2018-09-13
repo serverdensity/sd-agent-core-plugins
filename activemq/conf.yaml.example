@@ -20,9 +20,12 @@ instances:
   #     env: stage
   #     newTag: test
 
-# List of metrics to be collected by the integration
-# Read https://support.serverdensity.com/hc/en-us/search?query=java to learn how to customize it
 init_config:
+  is_jmx: true
+  collect_default_metrics: true
+
+  # List of metrics to be collected by the integration
+  # Read https://support.serverdensity.com/hc/en-us/articles/115014942368 to learn how to customize it
   conf:
     - include:
         destinationType: Queue

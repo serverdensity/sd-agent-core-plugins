@@ -1,6 +1,6 @@
 # Directory Check
 
-# Overview
+## Overview
 
 Capture metrics from directories and files of your choosing. The Agent will collect:
 
@@ -9,13 +9,14 @@ Capture metrics from directories and files of your choosing. The Agent will coll
   * age of the last modification
   * age of the creation
 
-# Installation
+## Setup
+### Installation
 
 The Directory check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=directory). To install the directory check install the `sd-agent-directory` package.
 
-# Configuration
+### Configuration
 
-Create a file `directory.yaml` in the Agent's `conf.d` directory:
+1. Edit your `directory.yaml` file in the Agent's `conf.d` directory. See the [sample directory.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/directory/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -30,9 +31,9 @@ instances:
 
 Ensure that the user running the Agent process (usually `sd-agent`) has read access to the directories, subdirectories, and files you configure.
 
-Restart the Agent to begin sending metrics on your chosen directories to Server Density.
+2. Restart the Agent to begin sending metrics on your chosen directories to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `directory` under the Checks section:
 
@@ -49,13 +50,12 @@ Run the Agent's `info` subcommand and look for `directory` under the Checks sect
     [...]
 ```
 
-# Troubleshooting
-
-# Compatibility
+## Compatibility
 
 The directory check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this integration.
 

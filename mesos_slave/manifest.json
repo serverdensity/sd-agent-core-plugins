@@ -1,0 +1,21 @@
+{
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.1.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.0",
+  "name": "mesos_master",
+  "short_description": "Track cluster resource usage, master and slave counts, tasks statuses, and more.",
+  "support": "core",
+  "supported_os": [
+    "linux",
+    "mac_os"
+  ],
+  "version": "1.1.0",
+  "guid": "14d0267e-9989-4d09-8362-9319958e858e",
+  "public_title": "Mesos Slave Integration",
+  "categories":["configuration & deployment", "containers", "orchestration"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "linux_package_name": "sd-agent-mesos-slave"
+}

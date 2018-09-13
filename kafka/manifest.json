@@ -2,7 +2,7 @@
   "guid": "f201c0b7-4b31-4528-9955-ae756a4580b8",
   "linux_package_name": "sd-agent-kafka",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "kafka",
@@ -13,5 +13,9 @@
     "mac_os",
     "windows"
   ],
-  "version": "1.0.1"
+  "version": "1.0.2",
+  "categories":["processing", "messaging"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }

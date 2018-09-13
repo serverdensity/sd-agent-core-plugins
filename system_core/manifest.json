@@ -1,11 +1,11 @@
 {
   "linux_package_name": "sd-agent-system-core",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.2.0",
   "name": "system_core",
-  "short_description": "system_core description.",
+  "short_description": "Collect the number of CPU cores and CPU times on a host",
   "support": "core",
   "supported_os": [
     "linux",
@@ -13,5 +13,10 @@
     "windows"
   ],
   "version": "1.0.0",
-  "guid": "e123ef26-81bb-4c1b-b079-4dd4cc7d7ae7"
+  "guid": "e123ef26-81bb-4c1b-b079-4dd4cc7d7ae7",
+  "categories":["os & system"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true,
+  "aliases":["/integrations/systemcore"]
 }

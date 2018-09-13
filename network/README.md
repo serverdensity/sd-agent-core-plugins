@@ -1,16 +1,16 @@
 # Network check
-
-# Overview
+## Overview
 
 The network check collects TCP/IP stats from the host operating system.
 
-# Installation
+## Setup
+### Installation
 
-The network check is packaged with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/search?query=install) on any host. If you need the newest version of the check, install the `sd-agent-network` package.
+The network check is automatically installed with the Agent, so simply [install the Agent](https://support.serverdensity.com/hc/en-us/search?query=install) on any host. If you need the newest version of the check, install the `sd-agent-network` package.
 
-# Configuration
+### Configuration
 
-The Agent enables the network check by default, but if you want to configure the check yourself, create a file `network.yaml` in the Agent's `conf.d` directory:
+The Agent enables the network check by default, but if you want to configure the check yourself, create a file `network.yaml` in the Agent's `conf.d` directory. See the [sample network.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/network/conf.yaml.default) for all available configuration options:
 
 ```
 init_config:
@@ -27,7 +27,7 @@ instances:
 
 Restart the Agent to effect any configuration changes.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `network` under the Checks section:
 
@@ -44,10 +44,11 @@ Run the Agent's `info` subcommand and look for `network` under the Checks sectio
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The network check is compatible with all major platforms.
 
-# Metrics
-
+## Data Collected
+### Metrics
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+

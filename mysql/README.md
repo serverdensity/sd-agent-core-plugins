@@ -1,4 +1,6 @@
-# Overview
+# Mysql check
+
+## Overview
 
 The Server Density Agent can collect many metrics from MySQL databases, including:
 
@@ -9,19 +11,32 @@ The Server Density Agent can collect many metrics from MySQL databases, includin
 
 And many more. You can also invent your own metrics using custom SQL queries.
 
-# Installation
+## Setup
+### Installation
 
 The MySQL check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=mysql). To install the MySQL check install the `sd-agent-mysql` package.
 
-# Configuration
-
-### Prepare MySQL
+### Configuration
+#### Prepare MySQL
 
 On each MySQL server, create a database user for the Server Density Agent:
 
 ```
 mysql> CREATE USER 'serverdensity'@'localhost' IDENTIFIED BY '<YOUR_CHOSEN_PASSWORD>';
 Query OK, 0 rows affected (0.00 sec)
+```
+
+Please note that `@'localhost'` is only for local connections, use the hostname/IP of your agent for remote connections, learn more [here](https://dev.mysql.com/doc/refman/5.7/en/adding-users.html)
+
+Verify that the user was created successfully using the following command, replacing ```<YOUR_CHOSEN_PASSWORD>``` with the password above:
+
+```
+mysql -u serverdensity --password=<YOUR_CHOSEN_PASSWORD> -e "show status" | \
+grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
+echo -e "\033[0;31mCannot connect to MySQL\033[0m"
+mysql -u serverdensity --password=<YOUR_CHOSEN_PASSWORD> -e "show slave status" && \
+echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
+echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
 The Agent needs a few privileges to collect metrics. Grant its user ONLY the following privileges:
@@ -49,9 +64,9 @@ mysql> GRANT SELECT ON performance_schema.* TO 'serverdensity'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### Connect the Agent
+#### Connect the Agent
 
-Create a basic `mysql.yaml` in the Agent's `conf.d` directory to connect it to the MySQL server:
+Create a basic `mysql.yaml` in the Agent's `conf.d` directory to connect it to the MySQL server. See the [sample mysql.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/mysql/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -77,7 +92,7 @@ See our [sample mysql.yaml](https://github.com/serverdensity/sd-agent-core-plugi
 
 Restart the Agent to start sending MySQL metrics to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `mysql` under the Checks section:
 
@@ -97,7 +112,7 @@ Run the Agent's `info` subcommand and look for `mysql` under the Checks section:
 
 If the status is not OK, see the Troubleshooting section.
 
-# Troubleshooting
+## Troubleshooting
 
 You may observe one of these common problems in the output of the Server Density Agent's `info` subcommand.
 
@@ -127,24 +142,27 @@ mysql> select user,host,process_priv from mysql.user where user='serverdensity';
 +---------------+-----------+--------------+
 | user          | host      | process_priv |
 +---------------+-----------+--------------+
-| serverdebsity | localhost | N            |
+| serverdensity | localhost | N            |
 +---------------+-----------+--------------+
 1 row in set (0.00 sec)
 ```
 
 Review the Configuration section and grant the serverdensity user all necessary privileges. Do NOT grant all privileges on all databases to this user.
 
-# Compatibility
+## Compatibility
 
 The MySQL integration is supported on versions x.x+
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 
 The check does not collect all metrics by default. Set the following boolean configuration options to `true` to enable its metrics:
 
-|`extra_status_metrics`|
+`extra_status_metrics` adds the following metrics:
+
+|Metric name| Metric type|
 |----------|--------|
 | mysql.binlog.cache_disk_use | GAUGE |
 | mysql.binlog.cache_use | GAUGE |
@@ -180,7 +198,9 @@ The check does not collect all metrics by default. Set the following boolean con
 | mysql.performance.threads_cached | GAUGE |
 | mysql.performance.threads_created | MONOTONIC |
 
-|`extra_innodb_metrics`|
+`extra_innodb_metrics` adds the following metrics:
+
+|Metric name| Metric type|
 |----------|--------|
 | mysql.innodb.active_transactions | GAUGE |
 | mysql.innodb.buffer_pool_data | GAUGE |
@@ -268,12 +288,16 @@ The check does not collect all metrics by default. Set the following boolean con
 | mysql.innodb.x_lock_spin_rounds | RATE |
 | mysql.innodb.x_lock_spin_waits | RATE |
 
-|`extra_performance_metrics` adds the following metrics:|
+`extra_performance_metrics` adds the following metrics:
+
+|Metric name| Metric type|
 |----------|--------|
 | mysql.performance.query_run_time.avg | GAUGE |
 | mysql.performance.digest_95th_percentile.avg_us | GAUGE |
 
-|`schema_size_metrics` adds the following metric:|
+`schema_size_metrics` adds the following metric:
+
+|Metric name| Metric type|
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
 

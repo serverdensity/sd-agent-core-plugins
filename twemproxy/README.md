@@ -1,16 +1,17 @@
 # Twemproxy Integration
 
-# Overview
+## Overview
 
 Track overall and per-pool stats on each of your twemproxy servers. This Agent check collects metrics for client and server connections and errors, request and response rates, bytes in and out of the proxy, and more.
 
-# Installation
+## Setup
+### Installation
 
 The Twemproxy check can be installed with your package manager, if the sd-agent repository is configured on your server, [instructions are available on our support site](https://support.serverdensity.com/hc/en-us/search?query=Twemproxy). To install the Twemproxy check install the `sd-agent-twemproxy` package.
 
-# Configuration
+### Configuration
 
-Create a file `twemproxy.yaml` in the Agent's `conf.d` directory:
+Create a file `twemproxy.yaml` in the Agent's `conf.d` directory. See the [sample twemproxy.yaml](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/twemproxy/conf.yaml.example) for all available configuration options:
 
 ```
 init_config:
@@ -22,7 +23,7 @@ instances:
 
 Restart the Agent to begin sending twemproxy metrics to Server Density.
 
-# Validation
+### Validation
 
 Run the Agent's `info` subcommand and look for `twemproxy` under the Checks section:
 
@@ -39,11 +40,12 @@ Run the Agent's `info` subcommand and look for `twemproxy` under the Checks sect
     [...]
 ```
 
-# Compatibility
+## Compatibility
 
 The twemproxy check is compatible with all major platforms.
 
-# Metrics
+## Data Collected
+### Metrics
 
 See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
 

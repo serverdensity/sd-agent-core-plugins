@@ -1,32 +1,52 @@
-# Kafka Integration
+# Agent Check: Kafka
 
 ## Overview
 
-Get metrics from kafka service in real time to:
+Connect Kafka to Server Density in order to:
 
-* Visualize and monitor kafka states
-* Be notified about kafka failovers and events.
+* Visualize the performance of your cluster in real time
+* Correlate the performance of Kafka with the rest of your applications
 
-## Installation
+This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below.
 
 Install the `sd-agent-kafka` package manually or with your favorite configuration manager
 
-## Configuration
 
-Edit the `kafka.yaml` file to point to your server and port, set the masters to monitor
+## Setup
+### Installation
 
-## Validation
+Ensure that you have the sd-agent repostiory configured and install the `sd-agent-kafka` package.
+
+The check collects metrics via JMX, so you'll need a JVM on each kafka node so the Agent can connect. You can use the same JVM that Kafka uses.
+
+### Configuration
+
+Configure a `kafka.yaml` in the sd-agent's `conf.d` directory. Kafka bean names depend on the exact Kafka version you're running. You should always use the example that comes packaged with the Agent as a base since that will be the most up-to-date configuration. Use [this sample conf file](https://github.com/serverdensity/sd-agent-core-plugins/blob/master/kafka/conf.yaml.example) as an example.
+
+After you've configured `kafka.yaml`, restart the Agent to begin sending Kafka metrics to Server Density.
+
+### Validation
 
 When you run `sd-agent info` you should see something like the following:
 
-    Checks
-    ======
+```
+  Checks
+  ======
+    [...]
 
-        kafka
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+    kafka-localhost-9999
+    -------
+      - instance #0 [OK]
+      - Collected 8 metrics, 0 events & 0 service checks
+
+    [...]
+```
 
 ## Compatibility
 
-The kafka check is compatible with all major platforms
+The kafka check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+See [metadata.csv](metadata.csv) for a list of metrics provided by this check.
+

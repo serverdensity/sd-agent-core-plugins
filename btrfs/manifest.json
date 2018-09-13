@@ -2,7 +2,7 @@
   "guid": "54f9329a-8270-4f5a-bd4b-cd169abfc791",
   "linux_package_name": "sd-agent-btrfs",
   "maintainer": "hello@serverdensity.com",
-  "manifest_version": "0.1.0",
+  "manifest_version": "0.1.1",
   "max_agent_version": "3.0.0",
   "min_agent_version": "2.1.1",
   "name": "btrfs",
@@ -12,5 +12,9 @@
     "linux",
     "mac_os"
   ],
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "categories":["os & system"],
+  "type":"check",
+  "is_public": true,
+  "has_logo": true
 }
