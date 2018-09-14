@@ -693,7 +693,7 @@ Description: The Server Density monitoring agent - spark plugin
 
 Package: sd-agent-cacti
 Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0), librrd4
 Description: The Server Density monitoring agent - cacti plugin
  Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.
  .
