@@ -7,3 +7,5 @@ debian/build/lib/python2.7/site-packages/Crypto*  usr/share/python/sd-agent/lib/
 debian/build/lib/python2.7/site-packages/enum*  usr/share/python/sd-agent/lib/python2.7/site-packages
 debian/build/lib/python2.7/site-packages/_cffi_backend.so  usr/share/python/sd-agent/lib/python2.7/site-packages
 debian/build/lib/python2.7/site-packages/idna* usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python2.7/site-packages/cffi* usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python2.7/site-packages/pycparser* usr/share/python/sd-agent/lib/python2.7/site-packages
