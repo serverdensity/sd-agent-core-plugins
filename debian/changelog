@@ -1,6 +1,23 @@
+sd-agent-core-plugins (2.3.1-1trusty0) trusty; urgency=medium
+
+  * Plugin packaging fixes
+
+ -- Server Density <hello@serverdensity.com>  Tue, 18 Sep 2018 18:00:00 +0100
+
 sd-agent-core-plugins (2.3.0-1trusty0) trusty; urgency=medium
 
-  * 9 New plugins available.
+  * 11 New plugins available.
+  * sd-agent-cassandra-nodetool
+  * sd-agent-gitlab-runner
+  * sd-agent-gitlab
+  * sd-agent-go-expvar
+  * sd-agent-go-metro
+  * sd-agent-mesos-master
+  * sd-agent-mesos-slave
+  * sd-agent-nfsstat
+  * sd-agent-oracle
+  * sd-agent-storm
+  * sd-agent-jenkins
   * Minor plugin bug fixes and enhancements.
 
  -- Server Density <hello@serverdensity.com>  Tue, 6 Feb 2018 18:00:00 +0100
