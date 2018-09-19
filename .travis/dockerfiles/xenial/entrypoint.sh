@@ -1,23 +1,26 @@
 #!/bin/bash
 
-sudo sed -i "s|trusty|$RELEASE|" /sd-agent*/debian/changelog
+DEBIAN_PATH="/sd-agent/debian"
+UBUNTU=(bionic xenial trusty)
+
+if [[ ${UBUNTU[*]} =~ ${RELEASE} ]]
+then
+    DISTRO="ubuntu"
+else
+    DISTRO="debian"
+fi
+
+sudo cp -a ${DEBIAN_PATH}/distros/${RELEASE}/. ${DEBIAN_PATH}
+sudo sed -i "s|trusty|$RELEASE|" ${DEBIAN_PATH}/changelog
 sudo dpkg-source -b /sd-agent
 
-ubuntu=(bionic xenial trusty)
-
-if [[ ${ubuntu[*]} =~ "$RELEASE" ]]
-then
-    distro="ubuntu"
-else
-    distro="debian"
-fi
-for arch in amd64 i386; do
-    if [ ! -d /packages/"$distro"/"$RELEASE" ]; then
-        sudo mkdir /packages/"$distro"/"$RELEASE"
+for ARCH in amd64 i386; do
+    if [ ! -d /packages/${DISTRO}/${RELEASE} ]; then
+        sudo mkdir /packages/${DISTRO}/${RELEASE}
     fi
-    if [ ! -d /packages/"$distro"/"$RELEASE"/"$arch" ]; then
-        sudo mkdir /packages/"$distro"/"$RELEASE"/"$arch"
+    if [ ! -d /packages/${DISTRO}/${RELEASE}/${ARCH} ]; then
+        sudo mkdir /packages/${DISTRO}/${RELEASE}/${ARCH}
     fi
-    pbuilder-dist $RELEASE $arch build \
-    --buildresult /packages/"$distro"/"$RELEASE"/"$arch" *"$RELEASE"*.dsc
+    pbuilder-dist ${RELEASE} ${ARCH} build \
+    --buildresult /packages/${DISTRO}/${RELEASE}/${ARCH} *${RELEASE}*.dsc
 done;

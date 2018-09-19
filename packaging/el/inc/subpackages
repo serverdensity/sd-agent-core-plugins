@@ -75,7 +75,7 @@ This package installs the btrfs plugin.
 %package -n sd-agent-cacti
 Summary: Server Density Monitoring Agent. cacti plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0, sd-agent-mysql-common >= 2.3.0
+Requires: %{name} >= 2.2.0, sd-agent-mysql-common >= 2.3.0, rrdtool
 
 %description -n sd-agent-cacti
 %{longdescription}
