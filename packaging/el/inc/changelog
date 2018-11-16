@@ -1,4 +1,6 @@
 %changelog
+* Fri Nov 16 2018 Server Density <hello@serverdensity.com> 2.4.0-1
+- Adds entropy plugin.
 * Tue Sep 18 2018 Server Density <hello@serverdensity.com> 2.3.1-1
 - Plugin packaging fixes.
 * Tue Feb 6 2018 Server Density <hello@serverdensity.com> 2.3.0-1

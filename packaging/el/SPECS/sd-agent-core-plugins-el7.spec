@@ -38,7 +38,7 @@ curl -LO https://bootstrap.pypa.io/get-pip.py
 %{__venv}/bin/python get-pip.py
 
 %setup -qn sd-agent-core-plugins
-for plugin in activemq_xml agent_metrics apache btrfs cacti cassandra ceph consul couch couchbase directory disk dns_check docker_daemon elastic etcd fluentd gearmand gitlab gitlab_runner go_expvar go-metro gunicorn haproxy hdfs_datanode hdfs_namenode http_check jenkins kafka kafka_consumer kong kube_dns kubernetes kubernetes_state kyototycoon lighttpd linux_proc_extras mapreduce marathon mcache mesos_master mesos_slave mongo mysql network nfsstat nginx ntp openstack oracle pgbouncer php_fpm postfix postgres powerdns_recursor process rabbitmq redisdb riak riakcs snmp solr spark ssh_check statsd storm supervisord system_core system_swap tcp_check tokumx tomcat twemproxy varnish vsphere yarn zk; do
+for plugin in activemq_xml agent_metrics apache btrfs cacti cassandra ceph consul couch couchbase directory disk dns_check docker_daemon elastic entropy etcd fluentd gearmand gitlab gitlab_runner go_expvar go-metro gunicorn haproxy hdfs_datanode hdfs_namenode http_check jenkins kafka kafka_consumer kong kube_dns kubernetes kubernetes_state kyototycoon lighttpd linux_proc_extras mapreduce marathon mcache mesos_master mesos_slave mongo mysql network nfsstat nginx ntp openstack oracle pgbouncer php_fpm postfix postgres powerdns_recursor process rabbitmq redisdb riak riakcs snmp solr spark ssh_check statsd storm supervisord system_core system_swap tcp_check tokumx tomcat twemproxy varnish vsphere yarn zk; do
     echo ${plugin}
     %{__venv}/bin/python %{__venv}/bin/pip install --no-binary=:all: -r ${plugin}/requirements.txt
 done
