@@ -131,6 +131,8 @@ def get_ca_certs_path():
     """
     Get a path to the trusted certificates of the system
     """
+    ca_certs = ['/etc/ssl/certs/ca-certificates.crt']
+
     try:
         import tornado
     except ImportError:
@@ -155,8 +157,9 @@ class HTTPCheck(NetworkCheck):
     def __init__(self, name, init_config, agentConfig, instances):
         NetworkCheck.__init__(self, name, init_config, agentConfig, instances)
 
-        self.ca_certs = init_config.get('ca_certs', get_ca_certs_path())
-
+        self.ca_certs = init_config.get('ca_certs')
+        if not self.ca_certs:
+            self.ca_certs = get_ca_certs_path()
 
     def _load_conf(self, instance):
         # Fetches the conf

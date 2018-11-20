@@ -329,7 +329,7 @@ Description: The Server Density monitoring agent - statsd plugin
 
 Package: sd-agent-http-check
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
 Description: The Server Density monitoring agent - http_check plugin
  http_check description.
  .

@@ -391,7 +391,7 @@ This package installs the hdfs_namenode plugin.
 %package -n sd-agent-http-check
 Summary: Server Density Monitoring Agent. http_check plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0
+Requires: %{name} >= 2.2.2
 BuildArch: noarch
 
 %description -n sd-agent-http-check
