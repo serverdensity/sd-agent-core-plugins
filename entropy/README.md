@@ -13,6 +13,13 @@ The entropy check can be installed with your package manager, if the sd-agent re
 
 The entropy check does not require any configuration.
 
+### Permissions
+This check requires sudo to function. Here's an example for your sudoers file:
+
+```
+sd-agent ALL=(ALL) NOPASSWD: /bin/cat /proc/sys/kernel/random/entropy_avail
+```
+
 ### Validation
 
 Run the Agent's `info` subcommand and look for `entropy` under the Checks section:
