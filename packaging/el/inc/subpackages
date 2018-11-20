@@ -909,7 +909,6 @@ This package installs the ssh_check plugin.
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/Crypto*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/enum*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/_cffi_backend.so
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/idna*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/cffi*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/pycparser*
 

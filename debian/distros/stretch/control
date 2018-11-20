@@ -216,7 +216,7 @@ Description: The Server Density monitoring agent - system-swap plugin
 
 Package: sd-agent-ssh-check
 Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0), libffi6
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2), libffi6
 Recommends: sd-agent-pyasn1-common
 Description: The Server Density monitoring agent - ssh_check plugin
  Monitor SSH connectivity and SFTP latency.
