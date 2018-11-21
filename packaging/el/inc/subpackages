@@ -254,7 +254,7 @@ This package installs the elastic plugin.
 %package -n sd-agent-entropy
 Summary: Server Density Monitoring Agent. entropy plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0
+Requires: %{name} >= 2.2.2
 BuildArch: noarch
 
 %description -n sd-agent-entropy
