@@ -25,9 +25,7 @@ Description: The Server Density monitoring agent - ServerDensity CPU stats plugi
 
 Package: sd-agent-entropy
 Architecture: all
-Breaks: sd-agent (<<2.2.0)
-Replaces: sd-agent (<<2.2.0)
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
 Description: The Server Density monitoring agent - Entropy plugin
  Collects available entropy.
  .

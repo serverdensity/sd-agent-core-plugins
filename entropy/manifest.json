@@ -4,7 +4,7 @@
   "maintainer": "hello@serverdensity.com",
   "manifest_version": "0.0.1",
   "max_agent_version": "3.0.0",
-  "min_agent_version": "2.1.1",
+  "min_agent_version": "2.2.2",
   "name": "entropy",
   "short_description": "The entropy check gathers metrics on available entropy.",
   "support": "core",
