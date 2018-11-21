@@ -1,4 +1,8 @@
 %changelog
+* Fri Nov 16 2018 Server Density <hello@serverdensity.com> 2.4.0-1
+- Adds entropy plugin.
+- Security Update: Updates python paramiko library to address CVE-2018-1000805.
+- Security Update: Updates python requests library to address CVE-2018-18074.
 * Tue Sep 18 2018 Server Density <hello@serverdensity.com> 2.3.1-1
 - Plugin packaging fixes.
 * Tue Feb 6 2018 Server Density <hello@serverdensity.com> 2.3.0-1

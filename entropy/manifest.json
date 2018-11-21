@@ -1,0 +1,18 @@
+{
+  "guid": "94588b23-111e-4ed2-a2af-14680eb587a3",
+  "linux_package_name": "sd-agent-entropy",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.0.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.2",
+  "name": "entropy",
+  "short_description": "The entropy check gathers metrics on available entropy.",
+  "support": "core",
+  "supported_os": [
+    "linux"
+  ],
+  "version": "1.0.0",
+  "categories":["os & system"],
+  "type":"check",
+  "is_public": true
+}

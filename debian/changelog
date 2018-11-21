@@ -1,3 +1,11 @@
+sd-agent-core-plugins (2.4.0-1trusty0) trusty; urgency=medium
+
+  * Adds Entropy plugin
+  * Security Update: Updates python requests library to address CVE-2018-18074.
+  * Security Update: Updates python paramiko library to address CVE-2018-1000805.
+
+ -- Server Density <hello@serverdensity.com>  Fri, 16 Nov 2018 18:00:00 +0100
+
 sd-agent-core-plugins (2.3.1-1trusty0) trusty; urgency=medium
 
   * Plugin packaging fixes

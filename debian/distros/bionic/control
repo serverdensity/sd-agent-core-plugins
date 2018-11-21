@@ -23,6 +23,17 @@ Description: The Server Density monitoring agent - ServerDensity CPU stats plugi
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-entropy
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
+Description: The Server Density monitoring agent - Entropy plugin
+ Collects available entropy.
+ .
+ This package installs the entropy plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
+
 Package: sd-agent-btrfs
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)

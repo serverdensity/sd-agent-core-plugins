@@ -18,6 +18,7 @@ disk \
 dns_check \
 docker_daemon \
 elastic \
+entropy \
 etcd \
 fluentd \
 gearmand \
