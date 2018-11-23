@@ -10,6 +10,7 @@ cacti \
 cassandra \
 cassandra_nodetool \
 ceph \
+cockroachdb \
 consul \
 couch \
 couchbase \

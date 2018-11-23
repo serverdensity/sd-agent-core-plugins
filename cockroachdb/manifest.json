@@ -1,0 +1,26 @@
+{
+  "display_name": "CockroachDB",
+  "maintainer": "hello@serverdensity.com",
+  "linux_package_name": "sd-agent-cockroachdb",
+  "manifest_version": "0.0.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.2",
+  "name": "cockroachdb",
+  "metric_prefix": "cockroachdb.",
+  "creates_events": false,
+  "short_description": "Monitor the overall health and performance of CockroachDB clusters.",
+  "guid": "d66151ed-2e98-4037-ad89-bf4400e45f34",
+  "support": "core",
+  "supported_os": [
+    "linux",
+    "mac_os",
+    "windows"
+  ],
+  "public_title": "CockroachDB Integration",
+  "categories": [
+    "cloud",
+    "data store"
+  ],
+  "type": "check",
+  "is_public": true
+}

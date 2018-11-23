@@ -33,6 +33,16 @@ Description: The Server Density monitoring agent - Entropy plugin
  .
  See https://www.serverdensity.com/ for more information.
 
+Package: sd-agent-cockroachdb
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
+Description: The Server Density monitoring agent - CockroachDB plugin
+ Collects CockroachDB metrics.
+ .
+ This package installs the CockroachDB plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
 Package: sd-agent-btrfs
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
