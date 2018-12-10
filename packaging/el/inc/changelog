@@ -1,4 +1,6 @@
 %changelog
+* Fri Nov 23 2018 Server Density <hello@serverdensity.com> 2.5.0-1
+- Adds cockroachdb plugin.
 * Fri Nov 16 2018 Server Density <hello@serverdensity.com> 2.4.0-1
 - Adds entropy plugin.
 - Security Update: Updates python paramiko library to address CVE-2018-1000805.

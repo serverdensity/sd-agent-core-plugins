@@ -1,0 +1,29 @@
+init_config:
+  # Leave empty
+instances:
+  - prometheus_url: http://localhost:8080/_status/vars
+    prometheus_timeout: 10
+
+    ## Send counters as monotonic. Defaults to True.
+    # send_monotonic_counter: True
+
+    ## Send histogram bucket metrics. Defaults to False.
+    # send_histograms_buckets: True
+
+    ## Add custom tags to metrics in this insance.
+    # tags:
+    #  - <KEY_1>:<VALUE_1>
+    #  - <KEY_2>:<VALUE_2>
+
+    ## If you have a secured prometheus endpoint you can enter the path to the cert here.
+    ## You should also specify ssl_private_key, unless ssl_cert is a path to file
+    ## containing both the cert and private key.
+    # ssl_cert: "PATH_TO_CERT"
+
+    ## Required when the cert in ssl_cert does not include the private key.
+    ## Must be unencrypted
+    # ssl_private_key: "PATH_TO_KEY"
+
+    ## Path to trusted CA used to generate custom certificates.
+    ## Can also be set to false to disable SSL validation completely.
+    # ssl_ca_cert: "PATH_TO_TRUSTED_CA or False"
