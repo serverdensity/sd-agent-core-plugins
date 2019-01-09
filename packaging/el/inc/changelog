@@ -1,4 +1,6 @@
 %changelog
+* Tue Dec 18 2018 Server Density <hello@serverdensity.com> 2.5.1-1
+- Minor packaging dependency fixes.
 * Fri Nov 23 2018 Server Density <hello@serverdensity.com> 2.5.0-1
 - Adds cockroachdb plugin.
 * Fri Nov 16 2018 Server Density <hello@serverdensity.com> 2.4.0-1
