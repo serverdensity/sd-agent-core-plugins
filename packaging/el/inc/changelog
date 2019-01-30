@@ -1,4 +1,6 @@
 %changelog
+* Thu Jan 31 2019 Server Density <hello@serverdensity.com> 2.5.2-1
+- Added a 10s default timeout to the MySQL check.
 * Tue Dec 18 2018 Server Density <hello@serverdensity.com> 2.5.1-1
 - Minor packaging dependency fixes.
 * Fri Nov 23 2018 Server Density <hello@serverdensity.com> 2.5.0-1
