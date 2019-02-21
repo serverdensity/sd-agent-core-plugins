@@ -97,9 +97,9 @@ class Kubernetes(AgentCheck):
         AgentCheck.__init__(self, name, init_config, agentConfig, instances)
 
         inst = instances[0] if instances is not None else None
-        self.kubeutil = KubeUtil(init_config=init_config, instance=inst)
+        self.kubeutil = KubeUtil(instance=inst)
 
-        if not self.kubeutil.init_success:
+        if not self.kubeutil:
             if self.kubeutil.left_init_retries > 0:
                 self.log.warning("Kubelet client failed to initialized for now, pausing the Kubernetes check.")
             else:
@@ -161,7 +161,7 @@ class Kubernetes(AgentCheck):
                 self.service_check(service_check_base, AgentCheck.CRITICAL, tags=instance.get('tags', []))
 
     def _configure_event_collection(self, instance):
-        self._collect_events = self.kubeutil.is_leader or _is_affirmative(instance.get('collect_events', DEFAULT_COLLECT_EVENTS))
+        self._collect_events = _is_affirmative(instance.get('collect_events', DEFAULT_COLLECT_EVENTS))
         if self._collect_events:
             if self.event_retriever:
                 self.event_retriever.set_kinds(None)
@@ -181,7 +181,7 @@ class Kubernetes(AgentCheck):
             self.event_retriever = None
 
     def check(self, instance):
-        if not self.kubeutil.init_success:
+        if not self.kubeutil:
             if self.kubeutil.left_init_retries > 0:
                 self.kubeutil.init_kubelet(instance)
                 self.log.warning("Kubelet client is not initialized, Kubernetes check is paused.")

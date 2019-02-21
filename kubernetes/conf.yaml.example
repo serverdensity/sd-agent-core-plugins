@@ -94,6 +94,8 @@ instances:
   # collect_events: false
 
   # Leader election
+  # *** Currently this does not work - the required functions are missing from the underlying
+  # KubeUtil libs to perform leader election ***
   #
   # Agents can perform leader election among themselves.
   # The leader agent will collect events from the apiserver
