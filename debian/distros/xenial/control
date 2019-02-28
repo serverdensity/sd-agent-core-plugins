@@ -25,7 +25,8 @@ Description: The Server Density monitoring agent - ServerDensity CPU stats plugi
 
 Package: sd-agent-cockroachdb
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
+Breaks: sd-agent (<<2.2.5)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.5)
 Description: The Server Density monitoring agent - CockroachDB plugin
  Collects CockroachDB metrics.
  .
