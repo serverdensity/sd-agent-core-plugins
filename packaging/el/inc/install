@@ -36,3 +36,4 @@ rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/snakeb
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/supervisor*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/urllib3*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/wheel*
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/prometheus_client*

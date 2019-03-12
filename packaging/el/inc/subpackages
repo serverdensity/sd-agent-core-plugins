@@ -134,7 +134,7 @@ This package installs the ceph plugin.
 %package -n sd-agent-cockroachdb
 Summary: Server Density Monitoring Agent. cockroachdb plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.2
+Requires: %{name} >= 2.2.5
 BuildArch: noarch
 
 %description -n sd-agent-cockroachdb
@@ -145,7 +145,6 @@ This package installs the cockroachdb plugin.
 %defattr(-,root,root,-)
 /usr/share/python/sd-agent/checks.d/cockroachdb.py
 %config /etc/sd-agent/conf.d/cockroachdb.yaml.example
-/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/*prometheus_client*
 
 %package -n sd-agent-consul
 Summary: Server Density Monitoring Agent. consul plugin
