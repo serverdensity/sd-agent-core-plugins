@@ -19,7 +19,8 @@ RUN linux32 yum -y  --enablerepo=city-fan.org install yum-utils \
     ca-certificates
 RUN wget https://centos6.iuscommunity.org/ius-release.rpm
 RUN rpm -Uvh ius-release*.rpm
-RUN sed -i "s/\$basearch/i686/" /etc/yum.repos.d/ius-archive.repo
+RUN sed -i "s|https://repo.ius.io/archive/6/\$basearch/|https://dl.iuscommunity.org/pub/ius/archive/CentOS/6/i386/|" /etc/yum.repos.d/ius-archive.repo
+RUN rpm --import https://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY
 RUN linux32 yum -y install python27 python27-devel --enablerepo=ius-archive --disablerepo=ius
 RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
     rpm -Uvh pg*.rpm && \
