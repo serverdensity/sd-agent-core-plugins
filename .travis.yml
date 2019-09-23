@@ -52,9 +52,9 @@ notifications:
 jobs:
   include:
   - stage: CSV lint
-    install: gem install csvlint
+    install: go get github.com/Clever/csvlint/cmd/csvlint
     script: for metadata in `ls */metadata.csv`; do csvlint ${metadata}; done
-    rvm: 2.2.2
+    go: 1.10
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
     python: 2.7
