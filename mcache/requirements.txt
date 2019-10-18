@@ -1,2 +1,2 @@
 # integration pip requirements
-python-memcached==1.53
+python-memcached==1.59
