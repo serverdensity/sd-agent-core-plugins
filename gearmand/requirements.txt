@@ -1,1 +1,1 @@
-gearman==2.0.2
+python3-gearman==0.1.0
