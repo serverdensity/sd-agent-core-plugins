@@ -85,7 +85,7 @@ class Etcd(AgentCheck):
             'ssl_ca_certs': instance.get('ssl_ca_certs'),
         }
 
-        for key, param in ssl_params.items():
+        for key, param in list(ssl_params.items()):
             if param is None:
                 del ssl_params[key]
 

@@ -234,14 +234,14 @@ class Couchbase(AgentCheck):
 
     def _create_metrics(self, data, tags=None):
         storage_totals = data['stats']['storageTotals']
-        for key, storage_type in storage_totals.items():
-            for metric_name, val in storage_type.items():
+        for key, storage_type in list(storage_totals.items()):
+            for metric_name, val in list(storage_type.items()):
                 if val is not None:
                     metric_name = '.'.join(['couchbase', key, self.camel_case_to_joined_lower(metric_name)])
                     self.gauge(metric_name, val, tags=tags)
 
-        for bucket_name, bucket_stats in data['buckets'].items():
-            for metric_name, val in bucket_stats.items():
+        for bucket_name, bucket_stats in list(data['buckets'].items()):
+            for metric_name, val in list(bucket_stats.items()):
                 if val is not None:
                     norm_metric_name = self.camel_case_to_joined_lower(metric_name)
                     if norm_metric_name in self.BUCKET_STATS:
@@ -250,18 +250,18 @@ class Couchbase(AgentCheck):
                         metric_tags.append('bucket:%s' % bucket_name)
                         self.gauge(full_metric_name, val[0], tags=metric_tags, device_name=bucket_name)
 
-        for node_name, node_stats in data['nodes'].items():
-            for metric_name, val in node_stats['interestingStats'].items():
+        for node_name, node_stats in list(data['nodes'].items()):
+            for metric_name, val in list(node_stats['interestingStats'].items()):
                 if val is not None:
                     metric_name = '.'.join(['couchbase', 'by_node', self.camel_case_to_joined_lower(metric_name)])
                     metric_tags = list(tags)
                     metric_tags.append('node:%s' % node_name)
                     self.gauge(metric_name, val, tags=metric_tags, device_name=node_name)
 
-        for metric_name, val in data['query'].items():
+        for metric_name, val in list(data['query'].items()):
             if val is not None:
                 # for query times, the unit is part of the value, we need to extract it
-                if isinstance(val, basestring):
+                if isinstance(val, str):
                     val = self.extract_seconds_value(val)
                 norm_metric_name = self.camel_case_to_joined_lower(metric_name)
                 if norm_metric_name in self.QUERY_STATS:

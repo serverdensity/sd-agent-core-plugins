@@ -3,7 +3,7 @@
 # Licensed under Simplified BSD License (see LICENSE)
 
 # stdlib
-from urlparse import urljoin
+from urllib.parse import urljoin
 import os
 
 # 3rd party
@@ -212,25 +212,25 @@ class MapReduceCheck(AgentCheckTest):
         self.run_check(config)
 
         # Check the MapReduce job metrics
-        for metric, value in self.MAPREDUCE_JOB_METRIC_VALUES.iteritems():
+        for metric, value in self.MAPREDUCE_JOB_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.MAPREDUCE_JOB_METRIC_TAGS)
 
         # Check the map task metrics
-        for metric, value in self.MAPREDUCE_MAP_TASK_METRIC_VALUES.iteritems():
+        for metric, value in self.MAPREDUCE_MAP_TASK_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.MAPREDUCE_MAP_TASK_METRIC_TAGS)
 
         # Check the reduce task metrics
-        for metric, value in self.MAPREDUCE_REDUCE_TASK_METRIC_VALUES.iteritems():
+        for metric, value in self.MAPREDUCE_REDUCE_TASK_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.MAPREDUCE_REDUCE_TASK_METRIC_TAGS)
 
         # Check the MapReduce job counter metrics
-        for metric, attributes in self.MAPREDUCE_JOB_COUNTER_METRIC_VALUES_READ.iteritems():
+        for metric, attributes in self.MAPREDUCE_JOB_COUNTER_METRIC_VALUES_READ.items():
             tags = attributes['tags']
             tags.extend(self.MAPREDUCE_JOB_COUNTER_METRIC_TAGS)
             self.assertMetric(metric,
@@ -238,7 +238,7 @@ class MapReduceCheck(AgentCheckTest):
                 tags=tags)
 
         # Check the MapReduce job counter metrics
-        for metric, attributes in self.MAPREDUCE_JOB_COUNTER_METRIC_VALUES_WRITTEN.iteritems():
+        for metric, attributes in self.MAPREDUCE_JOB_COUNTER_METRIC_VALUES_WRITTEN.items():
             tags = attributes['tags']
             tags.extend(self.MAPREDUCE_JOB_COUNTER_METRIC_TAGS)
             self.assertMetric(metric,
@@ -246,7 +246,7 @@ class MapReduceCheck(AgentCheckTest):
                 tags=tags)
 
         # Check the MapReduce job counter metrics
-        for metric, attributes in self.MAPREDUCE_JOB_COUNTER_METRIC_VALUES_RECORDS.iteritems():
+        for metric, attributes in self.MAPREDUCE_JOB_COUNTER_METRIC_VALUES_RECORDS.items():
             tags = attributes['tags']
             tags.extend(self.MAPREDUCE_JOB_COUNTER_METRIC_TAGS)
             self.assertMetric(metric,

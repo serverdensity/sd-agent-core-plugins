@@ -104,10 +104,10 @@ class CassandraNodetoolCheck(AgentCheck):
             send_service_checks = False
 
             # Send the stats per datacenter
-            for datacenter, percent_up in percent_up_by_dc.items():
+            for datacenter, percent_up in list(percent_up_by_dc.items()):
                 self.gauge('cassandra.nodetool.status.replication_availability', percent_up,
                            tags=tags + ['keyspace:%s' % keyspace, 'datacenter:%s' % datacenter])
-            for datacenter, percent_total in percent_total_by_dc.items():
+            for datacenter, percent_total in list(percent_total_by_dc.items()):
                 self.gauge('cassandra.nodetool.status.replication_factor', int(round(percent_total / 100)),
                            tags=tags + ['keyspace:%s' % keyspace, 'datacenter:%s' % datacenter])
 

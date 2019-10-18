@@ -316,13 +316,13 @@ class TestMySql(AgentCheckTest):
         Check optional metrics - there should be at least `at_least` matches
         """
 
-        before = len(filter(lambda m: m[3].get('tested'), self.metrics))
+        before = len([m for m in self.metrics if m[3].get('tested')])
 
         for mname in optional_metrics:
             self.assertMetric(mname, tags=self.METRIC_TAGS, at_least=0)
 
         # Compute match rate
-        after = len(filter(lambda m: m[3].get('tested'), self.metrics))
+        after = len([m for m in self.metrics if m[3].get('tested')])
 
         self.assertTrue(after - before > at_least)
 
@@ -352,7 +352,7 @@ class TestMySql(AgentCheckTest):
         self.assertServiceCheck('mysql.replication.slave_running', status=AgentCheck.OK,
                                 tags=self.SC_TAGS, at_least=1)
 
-        ver = map(lambda x: int(x), self.service_metadata[0]['version'].split("."))
+        ver = [int(x) for x in self.service_metadata[0]['version'].split(".")]
         ver = tuple(ver)
 
         testable_metrics = (self.STATUS_VARS + self.VARIABLES_VARS + self.INNODB_VARS +
@@ -413,7 +413,7 @@ class TestMySql(AgentCheckTest):
         self.assertServiceCheck('mysql.replication.slave_running', status=AgentCheck.OK,
                                 tags=self.SC_TAGS_REPLICA, at_least=1)
 
-        ver = map(lambda x: int(x), self.service_metadata[0]['version'].split("."))
+        ver = [int(x) for x in self.service_metadata[0]['version'].split(".")]
         ver = tuple(ver)
 
         testable_metrics = (self.STATUS_VARS + self.VARIABLES_VARS + self.INNODB_VARS +

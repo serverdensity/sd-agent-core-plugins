@@ -96,13 +96,13 @@ class PHPFPMCheck(AgentCheck):
         if http_host is not None:
             metric_tags += ["http_host:{0}".format(http_host)]
 
-        for key, mname in self.GAUGES.iteritems():
+        for key, mname in self.GAUGES.items():
             if key not in data:
                 self.log.warn("Gauge metric {0} is missing from FPM status".format(key))
                 continue
             self.gauge(mname, int(data[key]), tags=metric_tags)
 
-        for key, mname in self.MONOTONIC_COUNTS.iteritems():
+        for key, mname in self.MONOTONIC_COUNTS.items():
             if key not in data:
                 self.log.warn("Counter metric {0} is missing from FPM status".format(key))
                 continue

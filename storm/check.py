@@ -1,5 +1,5 @@
 # stdlib
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 # 3rd party
 import requests

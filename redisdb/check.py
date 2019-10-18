@@ -193,7 +193,7 @@ class Redis(AgentCheck):
         self.gauge('redis.info.latency_ms', latency_ms, tags=tags)
 
         # Save the database statistics.
-        for key in info.keys():
+        for key in list(info.keys()):
             if self.db_key_pattern.match(key):
                 db_tags = list(tags) + ["redis_db:" + key]
                 # allows tracking percentage of expired keys as DD does not
@@ -218,7 +218,7 @@ class Redis(AgentCheck):
                     self.gauge(metric, val, tags=db_tags)
 
         # Save a subset of db-wide statistics
-        for info_name, value in info.iteritems():
+        for info_name, value in info.items():
             if info_name in self.GAUGE_KEYS:
                 self.gauge(self.GAUGE_KEYS[info_name], info[info_name], tags=tags)
             elif info_name in self.RATE_KEYS:
@@ -369,7 +369,7 @@ class Redis(AgentCheck):
                          "INFO COMMANDSTATS only works with Redis >= 2.6.")
             return
 
-        for key, stats in command_stats.iteritems():
+        for key, stats in command_stats.items():
             command = key.split('_', 1)[1]
             command_tags = tags + ['command:%s' % command]
             self.gauge('redis.command.calls', stats['calls'], tags=command_tags)

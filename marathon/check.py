@@ -5,7 +5,7 @@
 
 
 # stdlib
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 # 3rd party
 import requests
@@ -174,7 +174,7 @@ class Marathon(AgentCheck):
         for queue in response['queue']:
             q_tags = ['app_id:' + queue['app']['id'], 'version:' + queue['app']['version']] + tags
 
-            for m_type, sub_metric in self.QUEUE_METRICS.iteritems():
+            for m_type, sub_metric in self.QUEUE_METRICS.items():
                 if isinstance(sub_metric, list):
                     for attr, name in sub_metric:
                         try:

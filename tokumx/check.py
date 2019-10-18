@@ -264,7 +264,7 @@ class TokuMX(AgentCheck):
             'ssl_ca_certs': instance.get('ssl_ca_certs', None)
         }
 
-        for key, param in ssl_params.items():
+        for key, param in list(ssl_params.items()):
             if param is None:
                 del ssl_params[key]
 
@@ -430,7 +430,7 @@ class TokuMX(AgentCheck):
                 except errors.OperationFailure:
                     self.log.warning("Cannot access dbstats on database %s" % dbname)
                     continue
-                for m, v in stats.items():
+                for m, v in list(stats.items()):
                     if m in ['db', 'ok']:
                         continue
                     m = 'stats.db.%s' % m
@@ -439,20 +439,20 @@ class TokuMX(AgentCheck):
                     self.gauge(m, v, db_tags)
                 for collname in db.collection_names(False):
                     stats = db.command('collStats', collname)
-                    for m, v in stats.items():
+                    for m, v in list(stats.items()):
                         if m in ['db', 'ok']:
                             continue
                         if m == 'indexDetails':
                             for idx_stats in v:
                                 for k in ['count', 'size', 'avgObjSize', 'storageSize']:
                                     value = idx_stats[k]
-                                    if type(value) in (types.IntType, types.LongType, types.FloatType):
+                                    if type(value) in (int, int, float):
                                         self.histogram('tokumx.stats.idx.%s' % k, idx_stats[k], tags=db_tags)
                                 for k in ['queries', 'nscanned', 'nscannedObjects', 'inserts', 'deletes']:
                                     key = (dbname, collname, idx_stats['name'], k)
                                     self.submit_idx_rate('tokumx.statsd.idx.%s' % k, idx_stats[k], tags=db_tags, key=key)
                         # FIXME: here tokumx.stats.coll.* are potentially unbounded
-                        elif type(v) in (types.IntType, types.LongType, types.FloatType):
+                        elif type(v) in (int, int, float):
                             self.histogram('tokumx.stats.coll.%s' % m, v, db_tags)
 
             # If these keys exist, remove them for now as they cannot be serialized
@@ -478,9 +478,9 @@ class TokuMX(AgentCheck):
 
                 # value is now status[x][y][z]
                 if type(value) == bson.int64.Int64:
-                    value = long(value)
+                    value = int(value)
                 else:
-                    if type(value) not in (types.IntType, types.LongType, types.FloatType):
+                    if type(value) not in (int, int, float):
                         self.log.warning("Value found that is not of type int, int64,long, or float")
 
                 # Check if metric is a gauge or rate

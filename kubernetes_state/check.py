@@ -178,9 +178,9 @@ class KubernetesState(PrometheusCheck):
 
         self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
 
-        for job_tags, job_count in self.job_succeeded_count.iteritems():
+        for job_tags, job_count in self.job_succeeded_count.items():
             self.monotonic_count(self.NAMESPACE + '.job.succeeded', job_count, list(job_tags))
-        for job_tags, job_count in self.job_failed_count.iteritems():
+        for job_tags, job_count in self.job_failed_count.items():
             self.monotonic_count(self.NAMESPACE + '.job.failed', job_count, list(job_tags))
 
     def _condition_to_service_check(self, metric, sc_name, mapping, tags=None):

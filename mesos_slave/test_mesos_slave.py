@@ -36,6 +36,6 @@ class TestMesosSlave(AgentCheckTest):
         for d in (check.SLAVE_TASKS_METRICS, check.SYSTEM_METRICS, check.SLAVE_RESOURCE_METRICS,
                   check.SLAVE_EXECUTORS_METRICS, check.STATS_METRICS):
             metrics.update(d)
-        [self.assertMetric(v[0]) for k, v in check.TASK_METRICS.iteritems()]
-        [self.assertMetric(v[0]) for k, v in metrics.iteritems()]
+        [self.assertMetric(v[0]) for k, v in check.TASK_METRICS.items()]
+        [self.assertMetric(v[0]) for k, v in metrics.items()]
         self.assertServiceCheck('hello.ok', count=1, status=AgentCheck.OK)

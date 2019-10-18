@@ -347,12 +347,12 @@ class TestRabbitMQ(AgentCheckTest):
         sc = self.service_checks[1]
         self.assertEqual(sc['check'], 'rabbitmq.aliveness')
         self.assertEqual(sc['status'], AgentCheck.CRITICAL)
-        self.assertEqual(sc['tags'], [u'vhost:vhost1'])
+        self.assertEqual(sc['tags'], ['vhost:vhost1'])
 
         sc = self.service_checks[2]
         self.assertEqual(sc['check'], 'rabbitmq.aliveness')
         self.assertEqual(sc['status'], AgentCheck.CRITICAL)
-        self.assertEqual(sc['tags'], [u'vhost:vhost2'])
+        self.assertEqual(sc['tags'], ['vhost:vhost2'])
 
 
         self.check._get_data = mock.MagicMock()

@@ -83,7 +83,7 @@ class DirectoryTestCase(AgentCheckTest):
         self.temp_dir = tempfile.mkdtemp()
 
         # Create 10 files
-        for i in xrange(0, 10):
+        for i in range(0, 10):
             open(self.temp_dir + "/file_" + str(i), 'a').close()
 
         # Add 2 '.log' files
@@ -94,7 +94,7 @@ class DirectoryTestCase(AgentCheckTest):
         os.makedirs(str(self.temp_dir) + "/subfolder")
 
         # Create 5 subfiles
-        for i in xrange(0, 5):
+        for i in range(0, 5):
             open(self.temp_dir + "/subfolder" + '/file_' + str(i), 'a').close()
 
     def tearDown(self):
@@ -165,20 +165,20 @@ class DirectoryTestCase(AgentCheckTest):
             for mname in self.FILE_METRICS:
                 if config.get('pattern') != "file_*":
                     # 2 '*.log' files in 'temp_dir'
-                    for i in xrange(1, 3):
+                    for i in range(1, 3):
                         file_tag = [filetagname + ":%s" % os.path.normpath(self.temp_dir + "/log_" + str(i) + ".log")]
                         self.assertMetric(mname, tags=dir_tags + file_tag, count=1)
 
                 if config.get('pattern') != "*.log":
                     # Files in 'temp_dir'
-                    for i in xrange(0, 10):
+                    for i in range(0, 10):
                         file_tag = [filetagname + ":%s" % os.path.normpath(self.temp_dir + "/file_" + str(i))]
                         self.assertMetric(mname, tags=dir_tags + file_tag, count=1)
 
                 if not config.get('pattern'):
                     # Files in 'temp_dir/subfolder'
                     if config.get('recursive'):
-                        for i in xrange(0, 5):
+                        for i in range(0, 5):
                             file_tag = [filetagname + ":%s" % os.path.normpath(self.temp_dir + "/subfolder" + "/file_" + str(i))]
                             self.assertMetric(mname, tags=dir_tags + file_tag, count=1)
 

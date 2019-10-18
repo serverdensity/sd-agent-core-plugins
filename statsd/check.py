@@ -6,7 +6,7 @@
 # stdlib
 import re
 import socket
-from StringIO import StringIO
+from io import StringIO
 
 # project
 from checks import AgentCheck

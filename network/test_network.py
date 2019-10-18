@@ -69,7 +69,7 @@ class TestCheckNetwork(AgentCheckTest):
         self.run_check({})
 
         # Assert metrics
-        for metric, value in self.CX_STATE_GAUGES_VALUES.iteritems():
+        for metric, value in self.CX_STATE_GAUGES_VALUES.items():
             self.assertMetric(metric, value=value)
 
     @attr('unix')
@@ -79,7 +79,7 @@ class TestCheckNetwork(AgentCheckTest):
         self.run_check({})
 
         # Assert metrics
-        for metric, value in self.CX_STATE_GAUGES_VALUES.iteritems():
+        for metric, value in self.CX_STATE_GAUGES_VALUES.items():
             self.assertMetric(metric, value=value)
 
     @mock.patch('_network.Platform.is_linux', return_value=False)
@@ -141,13 +141,13 @@ class TestCheckNetwork(AgentCheckTest):
         with mock.patch('_network.psutil') as mock_psutil:
             mock_psutil.net_connections.return_value = conn
             self.check._cx_state_psutil()
-            for _, m in self.check.aggregator.metrics.iteritems():
+            for _, m in self.check.aggregator.metrics.items():
                 self.assertEqual(results[m.name], m.value)
 
     def test_cx_counters_psutil(self):
         snetio = namedtuple('snetio', ['bytes_sent', 'bytes_recv', 'packets_sent', 'packets_recv', 'errin', 'errout', 'dropin', 'dropout'])
         counters = {
-            'Ethernet': snetio(bytes_sent=3096403230L, bytes_recv=3280598526L, packets_sent=6777924, packets_recv=32888147, errin=0, errout=0, dropin=0, dropout=0),
+            'Ethernet': snetio(bytes_sent=3096403230, bytes_recv=3280598526, packets_sent=6777924, packets_recv=32888147, errin=0, errout=0, dropin=0, dropout=0),
             'Loopback Pseudo-Interface 1': snetio(bytes_sent=0, bytes_recv=0, packets_sent=0, packets_recv=0, errin=0, errout=0, dropin=0, dropout=0),
         }
         with mock.patch('_network.psutil') as mock_psutil:
@@ -155,7 +155,7 @@ class TestCheckNetwork(AgentCheckTest):
             self.check._excluded_ifaces = ['Loopback Pseudo-Interface 1']
             self.check._exclude_iface_re = ''
             self.check._cx_counters_psutil()
-            for _, m in self.check.aggregator.metrics.iteritems():
+            for _, m in self.check.aggregator.metrics.items():
                 self.assertEqual(m.device_name, 'Ethernet')
                 if 'bytes_rcvd' in m.name:  # test just one of the metrics
                     self.assertEqual(m.samples[0][1], 3280598526)

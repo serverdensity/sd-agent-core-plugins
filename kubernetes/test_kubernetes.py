@@ -638,18 +638,18 @@ class TestKubeutil(unittest.TestCase):
 
         pods = json.loads(Fixtures.read_file("pods_list_1.1.json", sdk_dir=FIXTURE_DIR, string_escape=False))
         res = self.kubeutil.extract_kube_pod_tags(pods, ['foo'])
-        labels = set(inn for out in res.values() for inn in out)
+        labels = set(inn for out in list(res.values()) for inn in out)
         self.assertEqual(len(labels), 8 + 4)
         res = self.kubeutil.extract_kube_pod_tags(pods, ['k8s-app'])
-        labels = set(inn for out in res.values() for inn in out)
+        labels = set(inn for out in list(res.values()) for inn in out)
         self.assertEqual(len(labels), 6 + 4)
 
         pods = json.loads(Fixtures.read_file("pods_list_1.2.json", sdk_dir=FIXTURE_DIR, string_escape=False))
         res = self.kubeutil.extract_kube_pod_tags(pods, ['foo'])
-        labels = set(inn for out in res.values() for inn in out)
+        labels = set(inn for out in list(res.values()) for inn in out)
         self.assertEqual(len(labels), 3 + 1)
         res = self.kubeutil.extract_kube_pod_tags(pods, ['k8s-app'])
-        labels = set(inn for out in res.values() for inn in out)
+        labels = set(inn for out in list(res.values()) for inn in out)
         self.assertEqual(len(labels), 3 + 1)
 
     @mock.patch('utils.kubernetes.kubeutil.KubeUtil.perform_kubelet_query')
@@ -678,12 +678,12 @@ class TestKubeutil(unittest.TestCase):
         client_cert = {'cert': ('client.crt', 'client.key')}
 
         instances = [
-            ('http://test.com', {'bearer_token': 'foo'}, dict(base_params.items() + verify_true.items())),
-            ('https://test.com', {'bearer_token': 'foo'}, dict(base_params.items() + verify_true.items() + auth_token_header.items())),
-            ('https://test.com', {'bearer_token': 'foo', 'kubelet_verify': True}, dict(base_params.items() + verify_true.items() + auth_token_header.items())),
-            ('https://test.com', {'bearer_token': 'foo', 'kubelet_verify': 'kubelet.pem'}, dict(base_params.items() + verify_cert.items() + auth_token_header.items())),
+            ('http://test.com', {'bearer_token': 'foo'}, dict(list(base_params.items()) + list(verify_true.items()))),
+            ('https://test.com', {'bearer_token': 'foo'}, dict(list(base_params.items()) + list(verify_true.items()) + list(auth_token_header.items()))),
+            ('https://test.com', {'bearer_token': 'foo', 'kubelet_verify': True}, dict(list(base_params.items()) + list(verify_true.items()) + list(auth_token_header.items()))),
+            ('https://test.com', {'bearer_token': 'foo', 'kubelet_verify': 'kubelet.pem'}, dict(list(base_params.items()) + list(verify_cert.items()) + list(auth_token_header.items()))),
             ('https://test.com', {'bearer_token': 'foo', 'kubelet_client_cert': ('client.crt', 'client.key')},
-                dict(base_params.items() + verify_true.items() + client_cert.items())),
+                dict(list(base_params.items()) + list(verify_true.items()) + list(client_cert.items()))),
         ]
         for url, ssl_context, expected_params in instances:
             req.get.reset_mock()

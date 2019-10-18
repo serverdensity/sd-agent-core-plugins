@@ -186,13 +186,13 @@ class TestMemCache(AgentCheckTest):
     def testConnectionLeaks(self):
         for i in range(3):
             # Count open connections to localhost:11212, should be 0
-            self.assertEquals(self._countConnections(11212), 0)
+            self.assertEqual(self._countConnections(11212), 0)
             new_conf = {'init_config': {}, 'instances': [
                 {'url': "localhost", 'port': PORT}]
             }
             self.run_check(new_conf)
             # Verify that the count is still 0
-            self.assertEquals(self._countConnections(11212), 0)
+            self.assertEqual(self._countConnections(11212), 0)
 
     def testOptionalItemsStats(self):
         config = {
@@ -274,6 +274,6 @@ class TestMemCache(AgentCheckTest):
                 self.check.get_metrics()
 
             end = len(gc.garbage)
-            self.assertEquals(end - start, 0, gc.garbage)
+            self.assertEqual(end - start, 0, gc.garbage)
         finally:
             gc.set_debug(0)

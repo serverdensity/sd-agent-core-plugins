@@ -32,7 +32,7 @@ hdfs.namenode.corrupt_blocks                    Number of corrupt blocks
 '''
 
 # stdlib
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 # 3rd party
 import requests
@@ -129,7 +129,7 @@ class HDFSNameNode(AgentCheck):
             if bean_name != bean_name:
                 raise Exception("Unexpected bean name {0}".format(bean_name))
 
-            for metric, (metric_name, metric_type) in metrics.iteritems():
+            for metric, (metric_name, metric_type) in metrics.items():
                 metric_value = bean.get(metric)
 
                 if metric_value is not None:
@@ -163,7 +163,7 @@ class HDFSNameNode(AgentCheck):
 
         # Add query_params as arguments
         if query_params:
-            query = '&'.join(['{0}={1}'.format(key, value) for key, value in query_params.iteritems()])
+            query = '&'.join(['{0}={1}'.format(key, value) for key, value in query_params.items()])
             url = urljoin(url, '?' + query)
 
         self.log.debug('Attempting to connect to "%s"' % url)

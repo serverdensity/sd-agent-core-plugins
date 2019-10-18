@@ -259,7 +259,7 @@ class TestCheckDockerDaemon(AgentCheckTest):
             images = [i["RepoTags"][0] for i in self.docker_client.images(c.split(":")[0]) if i["RepoTags"] and i["RepoTags"][0].startswith(c)]
             if len(images) == 0:
                 for line in self.docker_client.pull(c, stream=True):
-                    print line
+                    print(line)
 
         self.containers = []
         for c in CONTAINERS_TO_RUN:
@@ -786,7 +786,7 @@ class TestCheckDockerDaemon(AgentCheckTest):
             ({'RepoTags': ['localhost/redis:latest']}, [['localhost/redis'], ['latest']]),
             ({'RepoTags': ['localhost:5000/redis:latest']}, [['localhost:5000/redis'], ['latest']]),
             ({'RepoTags': ['localhost:5000/redis:latest', 'localhost:5000/redis:v1.1']}, [['localhost:5000/redis'], ['latest', 'v1.1']]),
-            ({'RepoTags': [], 'RepoDigests': [u'datadog/docker-dd-agent@sha256:47a59c2ea4f6d9555884aacc608b303f18bde113b1a3a6743844bfc364d73b44']},
+            ({'RepoTags': [], 'RepoDigests': ['datadog/docker-dd-agent@sha256:47a59c2ea4f6d9555884aacc608b303f18bde113b1a3a6743844bfc364d73b44']},
                 [['datadog/docker-dd-agent'], None]),
         ]
         for entity in entities:
@@ -895,7 +895,7 @@ class TestCheckDockerDaemon(AgentCheckTest):
                     if value < 2 ** 60:
                         return dict({'softlimit': value})
             else:
-                return dict(map(lambda x: x.split(' ', 1), fp.read().splitlines()))
+                return dict([x.split(' ', 1) for x in fp.read().splitlines()])
 
     def test_filter_capped_metrics(self):
         config = {

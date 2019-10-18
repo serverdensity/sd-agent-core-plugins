@@ -223,7 +223,7 @@ b,BACKEND,0,0,1,2,0,421,1,0,0,0,,0,0,0,0,UP,6,6,0,,0,1,0,,1,3,0,,421,,1,0,,1,,,,
         expected_hosts_statuses[('b', 'down')] = 1
         expected_hosts_statuses[('b', 'maint')] = 1
         expected_hosts_statuses[('a', 'open')] = 1
-        self.assertEquals(self.check.hosts_statuses, expected_hosts_statuses)
+        self.assertEqual(self.check.hosts_statuses, expected_hosts_statuses)
 
         # backend hosts
         agg_statuses = self.check._process_backend_hosts_metric(expected_hosts_statuses)
@@ -231,12 +231,12 @@ b,BACKEND,0,0,1,2,0,421,1,0,0,0,,0,0,0,0,UP,6,6,0,,0,1,0,,1,3,0,,421,,1,0,,1,,,,
             'a': {'available': 0, 'unavailable': 0},
             'b': {'available': 3, 'unavailable': 2},
         }
-        self.assertEquals(expected_agg_statuses, dict(agg_statuses))
+        self.assertEqual(expected_agg_statuses, dict(agg_statuses))
 
         # with process_events set to True
         self.check._process_data(data, True, True, collect_status_metrics=True,
                                  collect_status_metrics_by_host=False)
-        self.assertEquals(self.check.hosts_statuses, expected_hosts_statuses)
+        self.assertEqual(self.check.hosts_statuses, expected_hosts_statuses)
 
         # per host
         self.check._process_data(data, True, False, collect_status_metrics=True,
@@ -249,11 +249,11 @@ b,BACKEND,0,0,1,2,0,421,1,0,0,0,,0,0,0,0,UP,6,6,0,,0,1,0,,1,3,0,,421,,1,0,,1,,,,
         expected_hosts_statuses[('b', 'i-3', 'up')] = 1
         expected_hosts_statuses[('b', 'i-4', 'down')] = 1
         expected_hosts_statuses[('b', 'i-5', 'maint')] = 1
-        self.assertEquals(self.check.hosts_statuses, expected_hosts_statuses)
+        self.assertEqual(self.check.hosts_statuses, expected_hosts_statuses)
 
         self.check._process_data(data, True, True, collect_status_metrics=True,
                                  collect_status_metrics_by_host=True)
-        self.assertEquals(self.check.hosts_statuses, expected_hosts_statuses)
+        self.assertEqual(self.check.hosts_statuses, expected_hosts_statuses)
 
     @mock.patch('requests.get', return_value=mock.Mock(content=MOCK_DATA))
     def test_optional_tags(self, mock_requests):
@@ -460,7 +460,7 @@ class HaproxyTest(AgentCheckTest):
         self._test_service_checks()
 
         # Make sure the service checks aren't tagged with an empty hostname.
-        self.assertEquals(self.service_checks[0]['host_name'], get_hostname(config=self.config))
+        self.assertEqual(self.service_checks[0]['host_name'], get_hostname(config=self.config))
 
         self.coverage_report()
 
@@ -496,7 +496,7 @@ class HaproxyTest(AgentCheckTest):
         self._test_service_checks()
 
         # This time, make sure the hostname is empty
-        self.assertEquals(self.service_checks[0]['host_name'], '')
+        self.assertEqual(self.service_checks[0]['host_name'], '')
 
         self.coverage_report()
 

@@ -8,7 +8,7 @@ import copy
 import re
 import socket
 import time
-import urlparse
+import urllib.parse
 
 # 3rd party
 import requests
@@ -103,7 +103,7 @@ class HAProxy(AgentCheck):
         url = instance.get('url')
         self.log.debug('Processing HAProxy data for %s' % url)
 
-        parsed_url = urlparse.urlparse(url)
+        parsed_url = urllib.parse.urlparse(url)
 
         if parsed_url.scheme == 'unix':
             data = self._fetch_socket_data(parsed_url.path)
@@ -416,7 +416,7 @@ class HAProxy(AgentCheck):
 
         # match.groupdict() returns tags dictionary in the form of {'name': 'value'}
         # convert it to Server Density tag LIST: ['name:value']
-        return ["%s:%s" % (name, value) for name, value in match.groupdict().iteritems()]
+        return ["%s:%s" % (name, value) for name, value in match.groupdict().items()]
 
     @staticmethod
     def _normalize_status(status):
@@ -435,7 +435,7 @@ class HAProxy(AgentCheck):
     def _process_backend_hosts_metric(self, hosts_statuses, services_incl_filter=None,
                                       services_excl_filter=None, custom_tags=[]):
         agg_statuses = defaultdict(lambda: {status: 0 for status in Services.COLLATED_STATUSES})
-        for host_status, count in hosts_statuses.iteritems():
+        for host_status, count in hosts_statuses.items():
             try:
                 service, hostname, status = host_status
             except Exception:
@@ -479,7 +479,7 @@ class HAProxy(AgentCheck):
             reported_statuses_dict[reported_status] = 0
         statuses_counter = defaultdict(lambda: copy.copy(reported_statuses_dict))
 
-        for host_status, count in hosts_statuses.iteritems():
+        for host_status, count in hosts_statuses.items():
             hostname = None
             try:
                 service, hostname, status = host_status
@@ -515,13 +515,13 @@ class HAProxy(AgentCheck):
                 # An unknown status will be sent as UNAVAILABLE
                 agg_statuses_counter[tuple(agg_tags)][Services.STATUS_TO_COLLATED.get(status, Services.UNAVAILABLE)] += count
 
-        for tags, count_per_status in statuses_counter.iteritems():
-            for status, count in count_per_status.iteritems():
+        for tags, count_per_status in statuses_counter.items():
+            for status, count in count_per_status.items():
                 self.gauge('haproxy.count_per_status', count, tags=tags + ('status:%s' % status, ))
 
         # Send aggregates
-        for service_tags, service_agg_statuses in agg_statuses_counter.iteritems():
-            for status, count in service_agg_statuses.iteritems():
+        for service_tags, service_agg_statuses in agg_statuses_counter.items():
+            for status, count in service_agg_statuses.items():
                 self.gauge("haproxy.count_per_status", count, tags=service_tags + ('status:%s' % status, ))
 
     def _process_metrics(self, data, url, services_incl_filter=None,
@@ -549,7 +549,7 @@ class HAProxy(AgentCheck):
         if back_or_front == Services.BACKEND:
             tags.append('backend:%s' % hostname)
 
-        for key, value in data.items():
+        for key, value in list(data.items()):
             if HAProxy.METRICS.get(key):
                 suffix = HAProxy.METRICS[key][1]
                 name = "haproxy.%s.%s" % (back_or_front.lower(), suffix)

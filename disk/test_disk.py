@@ -158,7 +158,7 @@ class TestCheckDisk(AgentCheckTest):
 
             # Assert metrics
             tags = ['ext4', 'filesystem:ext4'] if tag_by == 'yes' else []
-            for metric, value in self.GAUGES_VALUES.iteritems():
+            for metric, value in self.GAUGES_VALUES.items():
                 self.assertMetric(metric, value=value, tags=tags,
                                   device_name=DEFAULT_DEVICE_NAME)
 
@@ -177,7 +177,7 @@ class TestCheckDisk(AgentCheckTest):
         self.run_check({'instances': [{'use_mount': 'yes'}]})
 
         # Assert metrics
-        for metric, value in self.GAUGES_VALUES.iteritems():
+        for metric, value in self.GAUGES_VALUES.items():
             self.assertMetric(metric, value=value, tags=[],
                               device_name='/')
 
@@ -193,7 +193,7 @@ class TestCheckDisk(AgentCheckTest):
                                        'excluded_filesystems': ['tmpfs']}]},
                        mocks={'_psutil': lambda: False})
 
-        for metric, value in self.GAUGES_VALUES.iteritems():
+        for metric, value in self.GAUGES_VALUES.items():
             self.assertMetric(metric, value=value, tags=[],
                               device_name=DEFAULT_DEVICE_NAME)
             # backward compatibility with the old check
@@ -213,7 +213,7 @@ class TestCheckDisk(AgentCheckTest):
                                        'excluded_disk_re': 'zroot/.+'}]},
                        mocks={'_psutil': lambda: False})
 
-        for metric, value in self.GAUGES_VALUES.iteritems():
+        for metric, value in self.GAUGES_VALUES.items():
             self.assertMetric(metric, value=value, tags=[],
                               device_name='zroot')
 
@@ -231,7 +231,7 @@ class TestCheckDisk(AgentCheckTest):
                                        'excluded_disks': ['/dev/sda1']}]},
                        mocks={'_psutil': lambda: False})
         for device in ['/dev/sda3', '10.1.5.223:/vil/cor']:
-            for metric, _ in self.GAUGES_VALUES.iteritems():
+            for metric, _ in self.GAUGES_VALUES.items():
                 self.assertMetric(metric, device_name=device)
 
         self.coverage_report()

@@ -1,5 +1,5 @@
 # stdlib
-import urlparse
+import urllib.parse
 
 # 3rd party
 import requests
@@ -31,7 +31,7 @@ class GitlabRunnerCheck(PrometheusCheck):
         if not allowed_metrics:
             raise CheckException("At least one metric must be whitelisted in `allowed_metrics`.")
 
-        self.metrics_mapper = dict(zip(allowed_metrics, allowed_metrics))
+        self.metrics_mapper = dict(list(zip(allowed_metrics, allowed_metrics)))
         self.NAMESPACE = 'gitlab_runner'
 
     def check(self, instance):
@@ -67,7 +67,7 @@ class GitlabRunnerCheck(PrometheusCheck):
             # Simply ignore this service check if not configured
             return
 
-        parsed_url = urlparse.urlparse(url)
+        parsed_url = urllib.parse.urlparse(url)
         gitlab_host = parsed_url.hostname
         gitlab_port = 443 if parsed_url.scheme == 'https' else (parsed_url.port or 80)
         service_check_tags = ['gitlab_host:%s' % gitlab_host, 'gitlab_port:%s' % gitlab_port]
@@ -78,7 +78,7 @@ class GitlabRunnerCheck(PrometheusCheck):
             'ssl_ca_certs': instance.get('ssl_ca_certs'),
         }
 
-        for key, param in ssl_params.items():
+        for key, param in list(ssl_params.items()):
             if param is None:
                 del ssl_params[key]
 

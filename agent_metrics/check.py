@@ -56,10 +56,10 @@ class AgentMetrics(AgentCheck):
             self.log.error('No metrics configured for AgentMetrics check!')
             return {}
 
-        methods, metric_types = zip(
+        methods, metric_types = list(zip(
             *[(p['name'], p.get('type', GAUGE))
                 for p in process_metrics if _is_affirmative(p.get('active'))]
-        )
+        ))
 
         names_to_metric_types = {}
         for i, m in enumerate(methods):
@@ -97,10 +97,10 @@ class AgentMetrics(AgentCheck):
 
         base_metric = 'serverdensity.agent.collector.{0}.{1}'
         # TODO: May have to call self.normalize(metric_name) to get a compliant name
-        for k, v in stats.iteritems():
+        for k, v in stats.items():
             metric_type = names_to_metric_types[k]
             if isinstance(v, dict):
-                for _k, _v in v.iteritems():
+                for _k, _v in v.items():
                     full_metric_name = base_metric.format(k, _k)
                     self._send_single_metric(full_metric_name, _v, metric_type)
             else:

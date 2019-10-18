@@ -352,6 +352,6 @@ if __name__ == '__main__':
     # Load the check and instance configurations
     check, instances = CockroachDB.from_yaml('/etc/sd-agent/conf.d/cockroachdb.yaml')
     for instance in instances:
-        print "\nRunning the check against host: {}:{}".format(instance.get('prometheus_url','http://localhost:8080/_status/vars'))
+        print("\nRunning the check against host: {}:{}".format(instance.get('prometheus_url','http://localhost:8080/_status/vars')))
         check.check(instance)
-        print 'Metrics: {}'.format(check.get_metrics())
+        print('Metrics: {}'.format(check.get_metrics()))

@@ -3,7 +3,7 @@
 # Licensed under Simplified BSD License (see LICENSE)
 
 # stdlib
-import urlparse
+import urllib.parse
 
 # 3rd party
 import requests
@@ -26,7 +26,7 @@ class Kong(AgentCheck):
                 name, value, tags = row
                 self.gauge(name, value, tags)
             except Exception:
-                self.log.error(u'Could not submit metric: %s', row)
+                self.log.error('Could not submit metric: %s', row)
 
     def _fetch_data(self, instance):
         if 'kong_status_url' not in instance:
@@ -34,16 +34,16 @@ class Kong(AgentCheck):
         tags = instance.get('tags', [])
         url = instance.get('kong_status_url')
 
-        parsed_url = urlparse.urlparse(url)
+        parsed_url = urllib.parse.urlparse(url)
         host = parsed_url.hostname
         port = parsed_url.port or 80
         service_check_name = 'kong.can_connect'
         service_check_tags = ['kong_host:%s' % host, 'kong_port:%s' % port]
 
         try:
-            self.log.debug(u"Querying URL: {0}".format(url))
+            self.log.debug("Querying URL: {0}".format(url))
             response = requests.get(url, headers=headers(self.agentConfig))
-            self.log.debug(u"Kong status `response`: {0}".format(response))
+            self.log.debug("Kong status `response`: {0}".format(response))
             response.raise_for_status()
         except Exception:
             self.service_check(service_check_name, AgentCheck.CRITICAL,
@@ -66,19 +66,19 @@ class Kong(AgentCheck):
         output = []
 
         # First get the server stats
-        for name, value in parsed.get('server').items():
+        for name, value in list(parsed.get('server').items()):
             metric_name = self.METRIC_PREFIX + name
             output.append((metric_name, value, tags))
 
         # Then the database metrics
-        databases_metrics = parsed.get('database').items()
+        databases_metrics = list(parsed.get('database').items())
         db_output_lines = 0
         for name, items in databases_metrics:
             if isinstance(items, (float, int)) and not isinstance(items, bool):
                 output.append((self.METRIC_PREFIX + 'table.items', items, tags + ['table:{}'.format(name)]))
                 db_output_lines += 1
             else:
-                self.log.debug(u"Ignoring databases pair: {} {}".format(name, items))
+                self.log.debug("Ignoring databases pair: {} {}".format(name, items))
         if db_output_lines > 0:
             output.append((self.METRIC_PREFIX + 'table.count', db_output_lines, tags))
 

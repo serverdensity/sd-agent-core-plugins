@@ -13,6 +13,7 @@ import psutil
 
 # project
 from tests.checks.common import AgentCheckTest
+import importlib
 
 
 # cross-platform switches
@@ -191,7 +192,7 @@ class ProcessCheckTest(AgentCheckTest):
             None
         )
 
-        self.assertNotEquals(name, None)
+        self.assertNotEqual(name, None)
 
     def test_psutil_wrapper_simple_fail(self):
         # Load check with empty config
@@ -202,7 +203,7 @@ class ProcessCheckTest(AgentCheckTest):
             None
         )
 
-        self.assertEquals(name, None)
+        self.assertEqual(name, None)
 
     def test_psutil_wrapper_accessors(self):
         # Load check with empty config
@@ -455,7 +456,7 @@ class ProcessCheckTest(AgentCheckTest):
         my_procfs = tempfile.mkdtemp()
 
         def _fake_procfs(arg, root=my_procfs):
-            for key, val in arg.iteritems():
+            for key, val in arg.items():
                 path = os.path.join(root, key)
                 if isinstance(val, dict):
                     os.mkdir(path)
@@ -513,7 +514,7 @@ class ProcessCheckTest(AgentCheckTest):
                                    patch('__builtin__.__import__', side_effect=import_mock)):
                 if not already_linux:
                     # Reloading psutil fails on linux, but we only need to do so if we didn't start out on a linux platform
-                    reload(psutil)
+                    importlib.reload(psutil)
                 assert Platform.is_linux()
 
                 self.run_check(config, mocks={'get_pagefault_stats': noop_get_pagefault_stats})
@@ -521,7 +522,7 @@ class ProcessCheckTest(AgentCheckTest):
             shutil.rmtree(my_procfs)
             if not already_linux:
                 # restore the original psutil that doesn't have our mocks
-                reload(psutil)
+                importlib.reload(psutil)
             else:
                 psutil.PROCFS_PATH = '/proc'
 

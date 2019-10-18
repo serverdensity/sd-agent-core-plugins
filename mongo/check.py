@@ -1,14 +1,14 @@
 # stdlib
 import re
 import time
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 # 3p
 import pymongo
 
 # project
 from checks import AgentCheck
-from urlparse import urlsplit
+from urllib.parse import urlsplit
 from config import _is_affirmative
 from distutils.version import LooseVersion # pylint: disable=E0611,E0401
 
@@ -416,7 +416,7 @@ class MongoDb(AgentCheck):
         self.metrics_to_collect_by_instance = {}
 
         self.collection_metrics_names = []
-        for (key, value) in self.COLLECTION_METRICS.iteritems():
+        for (key, value) in self.COLLECTION_METRICS.items():
             self.collection_metrics_names.append(key.split('.')[1])
 
     def get_library_versions(self):
@@ -488,7 +488,7 @@ class MongoDb(AgentCheck):
         metrics_to_collect = {}
 
         # Defaut metrics
-        for default_metrics in self.DEFAULT_METRICS.itervalues():
+        for default_metrics in self.DEFAULT_METRICS.values():
             metrics_to_collect.update(default_metrics)
 
         # Additional metrics metrics
@@ -497,19 +497,19 @@ class MongoDb(AgentCheck):
             if not additional_metrics:
                 if option in self.DEFAULT_METRICS:
                     self.log.warning(
-                        u"`%s` option is deprecated."
-                        u" The corresponding metrics are collected by default.", option
+                        "`%s` option is deprecated."
+                        " The corresponding metrics are collected by default.", option
                     )
                 else:
                     self.log.warning(
-                        u"Failed to extend the list of metrics to collect:"
-                        u" unrecognized `%s` option", option
+                        "Failed to extend the list of metrics to collect:"
+                        " unrecognized `%s` option", option
                     )
                 continue
 
             self.log.debug(
-                u"Adding `%s` corresponding metrics to the list"
-                u" of metrics to collect.", option
+                "Adding `%s` corresponding metrics to the list"
+                " of metrics to collect.", option
             )
             metrics_to_collect.update(additional_metrics)
 
@@ -551,11 +551,11 @@ class MongoDb(AgentCheck):
         metric_suffix = "ps" if submit_method == RATE else ""
 
         # Replace case-sensitive metric name characters
-        for pattern, repl in self.CASE_SENSITIVE_METRIC_NAME_SUFFIXES.iteritems():
+        for pattern, repl in self.CASE_SENSITIVE_METRIC_NAME_SUFFIXES.items():
             metric_name = re.compile(pattern).sub(repl, metric_name)
 
         # Normalize, and wrap
-        return u"{metric_prefix}{normalized_metric_name}{metric_suffix}".format(
+        return "{metric_prefix}{normalized_metric_name}{metric_suffix}".format(
             normalized_metric_name=self.normalize(metric_name.lower()),
             metric_prefix=metric_prefix, metric_suffix=metric_suffix
         )
@@ -576,7 +576,7 @@ class MongoDb(AgentCheck):
             # X.509
             if use_x509:
                 self.log.debug(
-                    u"Authenticate `%s`  to `%s` using `MONGODB-X509` mechanism",
+                    "Authenticate `%s`  to `%s` using `MONGODB-X509` mechanism",
                     username, database
                 )
                 authenticated = database.authenticate(username, mechanism='MONGODB-X509')
@@ -587,7 +587,7 @@ class MongoDb(AgentCheck):
 
         except pymongo.errors.PyMongoError as e:
             self.log.error(
-                u"Authentication failed due to invalid credentials or configuration issues. %s", e
+                "Authentication failed due to invalid credentials or configuration issues. %s", e
             )
 
         if not authenticated:
@@ -617,11 +617,11 @@ class MongoDb(AgentCheck):
         # Remove password (and optionally username) from sanitized server URI.
         # To ensure that the `replace` works well, we first need to url-decode the raw server string
         # since the password parsed by pymongo is url-decoded
-        decoded_server = urllib.unquote_plus(server)
+        decoded_server = urllib.parse.unquote_plus(server)
         clean_server_name = decoded_server.replace(password, "*" * 5) if password else decoded_server
 
         if sanitize_username and username:
-            username_pattern = u"{}[@:]".format(re.escape(username))
+            username_pattern = "{}[@:]".format(re.escape(username))
             clean_server_name = re.sub(username_pattern, "", clean_server_name)
 
         return username, password, db_name, nodelist, clean_server_name, auth_source
@@ -673,7 +673,7 @@ class MongoDb(AgentCheck):
             'ssl_ca_certs': instance.get('ssl_ca_certs', None)
         }
 
-        for key, param in ssl_params.items():
+        for key, param in list(ssl_params.items()):
             if param is None:
                 del ssl_params[key]
 
@@ -739,7 +739,7 @@ class MongoDb(AgentCheck):
 
         if not username:
             self.log.debug(
-                u"A username is required to authenticate to `%s`", server
+                "A username is required to authenticate to `%s`", server
             )
             do_auth = False
 
@@ -808,8 +808,8 @@ class MongoDb(AgentCheck):
                 replset_state = self.get_state_name(replSet['myState']).lower()
 
                 tags.extend([
-                    u"replset_name:{0}".format(replset_name),
-                    u"replset_state:{0}".format(replset_state),
+                    "replset_name:{0}".format(replset_name),
+                    "replset_state:{0}".format(replset_state),
                 ])
 
                 # Find nodes: master and current node (ourself)
@@ -885,16 +885,16 @@ class MongoDb(AgentCheck):
                     continue
 
             # value is now status[x][y][z]
-            if not isinstance(value, (int, long, float)):
+            if not isinstance(value, (int, float)):
                 raise TypeError(
-                    u"{0} value is a {1}, it should be an int, a float or a long instead."
+                    "{0} value is a {1}, it should be an int, a float or a long instead."
                     .format(metric_name, type(value)))
 
             # Submit the metric
             submit_method, metric_name_alias = self._resolve_metric(metric_name, metrics_to_collect)
             submit_method(self, metric_name_alias, value, tags=tags)
 
-        for st, value in dbstats.iteritems():
+        for st, value in dbstats.items():
             for metric_name in metrics_to_collect:
                 if not metric_name.startswith('stats.'):
                     continue
@@ -905,9 +905,9 @@ class MongoDb(AgentCheck):
                     continue
 
                 # value is now status[x][y][z]
-                if not isinstance(val, (int, long, float)):
+                if not isinstance(val, (int, float)):
                     raise TypeError(
-                        u"{0} value is a {1}, it should be an int, a float or a long instead."
+                        "{0} value is a {1}, it should be an int, a float or a long instead."
                         .format(metric_name, type(val))
                     )
 
@@ -915,8 +915,8 @@ class MongoDb(AgentCheck):
                 metrics_tags = (
                     tags +
                     [
-                        u"cluster:db:{0}".format(st),  # FIXME 6.0 - keep for backward compatibility
-                        u"db:{0}".format(st),
+                        "cluster:db:{0}".format(st),  # FIXME 6.0 - keep for backward compatibility
+                        "db:{0}".format(st),
                     ]
                 )
 
@@ -935,7 +935,7 @@ class MongoDb(AgentCheck):
         if 'top' in additional_metrics:
             try:
                 dbtop = db.command('top')
-                for ns, ns_metrics in dbtop['totals'].iteritems():
+                for ns, ns_metrics in dbtop['totals'].items():
                     if "." not in ns:
                         continue
 
@@ -955,9 +955,9 @@ class MongoDb(AgentCheck):
                             continue
 
                         # value is now status[x][y][z]
-                        if not isinstance(value, (int, long, float)):
+                        if not isinstance(value, (int, float)):
                             raise TypeError(
-                                u"{0} value is a {1}, it should be an int, a float or a long instead."
+                                "{0} value is a {1}, it should be an int, a float or a long instead."
                                 .format(m, type(value))
                             )
 
@@ -1005,9 +1005,9 @@ class MongoDb(AgentCheck):
                         pass
                 except KeyError:
                     # encountered an error trying to access options.size for the oplog collection
-                    self.log.warning(u"Failed to record `ReplicationInfo` metrics.")
+                    self.log.warning("Failed to record `ReplicationInfo` metrics.")
 
-            for (m, value) in oplog_data.iteritems():
+            for (m, value) in oplog_data.items():
                 submit_method, metric_name_alias = \
                     self._resolve_metric('oplog.%s' % m, metrics_to_collect)
                 submit_method(self, metric_name_alias, value, tags=tags)
@@ -1037,7 +1037,7 @@ class MongoDb(AgentCheck):
                         submit_method, metric_name_alias = \
                             self._resolve_metric('collection.%s' % m, self.COLLECTION_METRICS)
                         # loop through the indexes
-                        for (idx, val) in value.iteritems():
+                        for (idx, val) in value.items():
                             # we tag the index
                             idx_tags = coll_tags + ["index:%s" % idx]
                             submit_method(self, metric_name_alias, val, tags=idx_tags)
@@ -1046,5 +1046,5 @@ class MongoDb(AgentCheck):
                             self._resolve_metric('collection.%s' % m, self.COLLECTION_METRICS)
                         submit_method(self, metric_name_alias, value, tags=coll_tags)
         except Exception as e:
-            self.log.warning(u"Failed to record `collection` metrics.")
+            self.log.warning("Failed to record `collection` metrics.")
             self.log.exception(e)

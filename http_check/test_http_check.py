@@ -55,13 +55,13 @@ CONFIG = {
         'url': 'https://ja.wikipedia.org/',
         'timeout': 1,
         'check_certificate_expiration': False,
-        'content_match': u'メインページ'
+        'content_match': 'メインページ'
     }, {
         'name': 'cnt_mismatch_unicode',
         'url': 'https://ja.wikipedia.org/',
         'timeout': 1,
         'check_certificate_expiration': False,
-        'content_match': u'メインペーー'
+        'content_match': 'メインペーー'
     }, {
         'name': 'cnt_mismatch_reverse',
         'url': 'https://github.com',
@@ -82,14 +82,14 @@ CONFIG = {
         'timeout': 1,
         'reverse_content_match': True,
         'check_certificate_expiration': False,
-        'content_match': u'メインペーー'
+        'content_match': 'メインペーー'
     }, {
         'name': 'cnt_match_unicode_reverse',
         'url': 'https://ja.wikipedia.org/',
         'timeout': 1,
         'reverse_content_match': True,
         'check_certificate_expiration': False,
-        'content_match': u'メインページ'
+        'content_match': 'メインページ'
     }
     ]
 }

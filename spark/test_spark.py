@@ -5,7 +5,7 @@
 # stdlib
 import os
 
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 # 3rd party
 import mock
@@ -456,43 +456,43 @@ class SparkCheck(AgentCheckTest):
         self.run_check(config)
 
         # Check the running job metrics
-        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_RUNNING_METRIC_TAGS)
 
         # Check the succeeded job metrics
-        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_SUCCEEDED_METRIC_TAGS)
 
         # Check the running stage metrics
-        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_RUNNING_METRIC_TAGS)
 
         # Check the complete stage metrics
-        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_COMPLETE_METRIC_TAGS)
 
         # Check the driver metrics
-        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the executor metrics
-        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the RDD metrics
-        for metric, value in self.SPARK_RDD_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_RDD_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
@@ -513,43 +513,43 @@ class SparkCheck(AgentCheckTest):
         self.run_check(config)
 
         # Check the running job metrics
-        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_RUNNING_METRIC_TAGS)
 
         # Check the succeeded job metrics
-        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_SUCCEEDED_METRIC_TAGS)
 
         # Check the running stage metrics
-        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_RUNNING_METRIC_TAGS)
 
         # Check the complete stage metrics
-        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_COMPLETE_METRIC_TAGS)
 
         # Check the driver metrics
-        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the executor metrics
-        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the RDD metrics
-        for metric, value in self.SPARK_RDD_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_RDD_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
@@ -584,49 +584,49 @@ class SparkCheck(AgentCheckTest):
         self.run_check(config)
 
         # Check the running job metrics
-        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_RUNNING_METRIC_TAGS)
 
         # Check the running job metrics
-        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_RUNNING_METRIC_TAGS)
 
         # Check the succeeded job metrics
-        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_SUCCEEDED_METRIC_TAGS)
 
         # Check the running stage metrics
-        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_RUNNING_METRIC_TAGS)
 
         # Check the complete stage metrics
-        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_COMPLETE_METRIC_TAGS)
 
         # Check the driver metrics
-        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the executor metrics
-        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the RDD metrics
-        for metric, value in self.SPARK_RDD_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_RDD_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
@@ -646,49 +646,49 @@ class SparkCheck(AgentCheckTest):
         self.run_check(config)
 
         # Check the running job metrics
-        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_RUNNING_METRIC_TAGS)
 
         # Check the running job metrics
-        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_RUNNING_METRIC_TAGS)
 
         # Check the succeeded job metrics
-        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_JOB_SUCCEEDED_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_JOB_SUCCEEDED_METRIC_TAGS)
 
         # Check the running stage metrics
-        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_RUNNING_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_RUNNING_METRIC_TAGS)
 
         # Check the complete stage metrics
-        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_STAGE_COMPLETE_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_STAGE_COMPLETE_METRIC_TAGS)
 
         # Check the driver metrics
-        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_DRIVER_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the executor metrics
-        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_EXECUTOR_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)
 
         # Check the RDD metrics
-        for metric, value in self.SPARK_RDD_METRIC_VALUES.iteritems():
+        for metric, value in self.SPARK_RDD_METRIC_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.SPARK_METRIC_TAGS)

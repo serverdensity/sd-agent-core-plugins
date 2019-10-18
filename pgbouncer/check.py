@@ -8,7 +8,7 @@ Collects metrics from the pgbouncer database.
 """
 
 # stdlib
-import urlparse
+import urllib.parse
 
 # 3p
 import psycopg2 as pg
@@ -80,7 +80,7 @@ class PgBouncer(AgentCheck):
             tags = []
 
         if database_url:
-            parsed_url = urlparse.urlparse(database_url)
+            parsed_url = urllib.parse.urlparse(database_url)
             host = parsed_url.hostname
             port = parsed_url.port
 
@@ -187,7 +187,7 @@ class PgBouncer(AgentCheck):
 
         except Exception:
             redacted_url = self._get_redacted_dsn(host, port, user, database_url)
-            message = u'Cannot establish connection to {}'.format(redacted_url)
+            message = 'Cannot establish connection to {}'.format(redacted_url)
 
             self.service_check(self.SERVICE_CHECK_NAME, AgentCheck.CRITICAL,
                                tags=self._get_service_checks_tags(host, port, database_url, tags),
@@ -199,9 +199,9 @@ class PgBouncer(AgentCheck):
 
     def _get_redacted_dsn(self, host, port, user, database_url):
         if not database_url:
-            return u'pgbouncer://%s:******@%s:%s/%s' % (user, host, port, self.DB_NAME)
+            return 'pgbouncer://%s:******@%s:%s/%s' % (user, host, port, self.DB_NAME)
 
-        parsed_url = urlparse.urlparse(database_url)
+        parsed_url = urllib.parse.urlparse(database_url)
         if parsed_url.password:
             return database_url.replace(parsed_url.password, '******')
         return database_url
@@ -234,7 +234,7 @@ class PgBouncer(AgentCheck):
             self._collect_stats(db, tags)
 
         redacted_dsn = self._get_redacted_dsn(host, port, user, database_url)
-        message = u'Established connection to {}'.format(redacted_dsn)
+        message = 'Established connection to {}'.format(redacted_dsn)
         self.service_check(self.SERVICE_CHECK_NAME, AgentCheck.OK,
                            tags=self._get_service_checks_tags(host, port, database_url, tags),
                            message=message)

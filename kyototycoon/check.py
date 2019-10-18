@@ -61,7 +61,7 @@ class KyotoTycoonCheck(AgentCheck):
         name = instance.get('name')
 
         # generate the formatted list of tags
-        tags = ['%s:%s' % (k, v) for k, v in tags.items()]
+        tags = ['%s:%s' % (k, v) for k, v in list(tags.items())]
         if name is not None:
             tags.append('instance:%s' % name)
 
@@ -116,5 +116,5 @@ class KyotoTycoonCheck(AgentCheck):
             if key in self.TOTALS:
                 totals[self.TOTALS[key]] += float(value)
 
-        for key, value in totals.items():
+        for key, value in list(totals.items()):
             self.rate('kyototycoon.%s_per_s' % key, value, tags=tags)

@@ -231,7 +231,7 @@ class Memcache(AgentCheck):
 
 
     def _get_optional_metrics(self, client, tags, options=None):
-        for arg, metrics_args in self.OPTIONAL_STATS.iteritems():
+        for arg, metrics_args in self.OPTIONAL_STATS.items():
             if not options or options.get(arg, False):
                 try:
                     optional_rates = metrics_args[0]
@@ -246,7 +246,7 @@ class Memcache(AgentCheck):
                     # Access the dict
                     stats = raw_stats[0][1]
                     prefix = "memcache.{}".format(arg)
-                    for metric, val in stats.iteritems():
+                    for metric, val in stats.items():
                         # Check if metric is a gauge or rate
                         metric_tags = []
                         if optional_fn:

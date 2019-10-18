@@ -5,7 +5,7 @@
 # stdlib
 from datetime import datetime, timedelta
 from hashlib import md5
-from Queue import Empty, Queue
+from queue import Empty, Queue
 import re
 import ssl
 import time
@@ -119,14 +119,14 @@ class VSphereEvent(object):
             return transform_method()
 
         # Default event transformation
-        self.payload["msg_title"] = u"{0}".format(self.event_type)
-        self.payload["msg_text"] = u"@@@\n{0}\n@@@".format(self.raw_event.fullFormattedMessage)
+        self.payload["msg_title"] = "{0}".format(self.event_type)
+        self.payload["msg_text"] = "@@@\n{0}\n@@@".format(self.raw_event.fullFormattedMessage)
 
         return self.payload
 
     def transform_vmbeinghotmigratedevent(self):
-        self.payload["msg_title"] = u"VM {0} is being migrated".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"{user} has launched a hot migration of this virtual machine:\n".format(user=self.raw_event.userName)
+        self.payload["msg_title"] = "VM {0} is being migrated".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = "{user} has launched a hot migration of this virtual machine:\n".format(user=self.raw_event.userName)
         changes = []
         pre_host = self.raw_event.host.name
         new_host = self.raw_event.destHost.name
@@ -135,20 +135,20 @@ class VSphereEvent(object):
         pre_ds = self.raw_event.ds.name
         new_ds = self.raw_event.destDatastore.name
         if pre_host == new_host:
-            changes.append(u"- No host migration: still {0}".format(new_host))
+            changes.append("- No host migration: still {0}".format(new_host))
         else:
             # Insert in front if it's a change
-            changes = [u"- Host MIGRATION: from {0} to {1}".format(pre_host, new_host)] + changes
+            changes = ["- Host MIGRATION: from {0} to {1}".format(pre_host, new_host)] + changes
         if pre_dc == new_dc:
-            changes.append(u"- No datacenter migration: still {0}".format(new_dc))
+            changes.append("- No datacenter migration: still {0}".format(new_dc))
         else:
             # Insert in front if it's a change
-            changes = [u"- Datacenter MIGRATION: from {0} to {1}".format(pre_dc, new_dc)] + changes
+            changes = ["- Datacenter MIGRATION: from {0} to {1}".format(pre_dc, new_dc)] + changes
         if pre_ds == new_ds:
-            changes.append(u"- No datastore migration: still {0}".format(new_ds))
+            changes.append("- No datastore migration: still {0}".format(new_ds))
         else:
             # Insert in front if it's a change
-            changes = [u"- Datastore MIGRATION: from {0} to {1}".format(pre_ds, new_ds)] + changes
+            changes = ["- Datastore MIGRATION: from {0} to {1}".format(pre_ds, new_ds)] + changes
 
         self.payload["msg_text"] += "\n".join(changes)
 
@@ -211,7 +211,7 @@ class VSphereEvent(object):
         if transition is None:
             return None
 
-        self.payload['msg_title'] = u"[{transition}] {monitor} on {host_type} {host_name} is now {status}".format(
+        self.payload['msg_title'] = "[{transition}] {monitor} on {host_type} {host_name} is now {status}".format(
             transition=transition,
             monitor=self.raw_event.alarm.name,
             host_type=host_type,
@@ -220,7 +220,7 @@ class VSphereEvent(object):
         )
         self.payload['alert_type'] = TO_ALERT_TYPE[trans_after]
         self.payload['event_object'] = get_agg_key(self.raw_event)
-        self.payload['msg_text'] = u"""vCenter monitor status changed on this alarm, it was {before} and it's now {after}.""".format(
+        self.payload['msg_text'] = """vCenter monitor status changed on this alarm, it was {before} and it's now {after}.""".format(
             before=trans_before,
             after=trans_after
         )
@@ -228,20 +228,20 @@ class VSphereEvent(object):
         return self.payload
 
     def transform_vmmessageevent(self):
-        self.payload["msg_title"] = u"VM {0} is reporting".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"@@@\n{0}\n@@@".format(self.raw_event.fullFormattedMessage)
+        self.payload["msg_title"] = "VM {0} is reporting".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = "@@@\n{0}\n@@@".format(self.raw_event.fullFormattedMessage)
         self.payload['host'] = self.raw_event.vm.name
         return self.payload
 
     def transform_vmmigratedevent(self):
-        self.payload["msg_title"] = u"VM {0} has been migrated".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"@@@\n{0}\n@@@".format(self.raw_event.fullFormattedMessage)
+        self.payload["msg_title"] = "VM {0} has been migrated".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = "@@@\n{0}\n@@@".format(self.raw_event.fullFormattedMessage)
         self.payload['host'] = self.raw_event.vm.name
         return self.payload
 
     def transform_vmpoweredoffevent(self):
-        self.payload["msg_title"] = u"VM {0} has been powered OFF".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"""{user} has powered off this virtual machine. It was running on:
+        self.payload["msg_title"] = "VM {0} has been powered OFF".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = """{user} has powered off this virtual machine. It was running on:
 - datacenter: {dc}
 - host: {host}
 """.format(
@@ -253,8 +253,8 @@ class VSphereEvent(object):
         return self.payload
 
     def transform_vmpoweredonevent(self):
-        self.payload["msg_title"] = u"VM {0} has been powered ON".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"""{user} has powered on this virtual machine. It is running on:
+        self.payload["msg_title"] = "VM {0} has been powered ON".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = """{user} has powered on this virtual machine. It is running on:
 - datacenter: {dc}
 - host: {host}
 """.format(
@@ -266,8 +266,8 @@ class VSphereEvent(object):
         return self.payload
 
     def transform_vmresumingevent(self):
-        self.payload["msg_title"] = u"VM {0} is RESUMING".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"""{user} has resumed {vm}. It will soon be powered on.""".format(
+        self.payload["msg_title"] = "VM {0} is RESUMING".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = """{user} has resumed {vm}. It will soon be powered on.""".format(
             user=self.raw_event.userName,
             vm=self.raw_event.vm.name
         )
@@ -275,8 +275,8 @@ class VSphereEvent(object):
         return self.payload
 
     def transform_vmsuspendedevent(self):
-        self.payload["msg_title"] = u"VM {0} has been SUSPENDED".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"""{user} has suspended this virtual machine. It was running on:
+        self.payload["msg_title"] = "VM {0} has been SUSPENDED".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = """{user} has suspended this virtual machine. It was running on:
 - datacenter: {dc}
 - host: {host}
 """.format(
@@ -288,12 +288,12 @@ class VSphereEvent(object):
         return self.payload
 
     def transform_vmreconfiguredevent(self):
-        self.payload["msg_title"] = u"VM {0} configuration has been changed".format(self.raw_event.vm.name)
-        self.payload["msg_text"] = u"{user} saved the new configuration:\n@@@\n".format(user=self.raw_event.userName)
+        self.payload["msg_title"] = "VM {0} configuration has been changed".format(self.raw_event.vm.name)
+        self.payload["msg_text"] = "{user} saved the new configuration:\n@@@\n".format(user=self.raw_event.userName)
         # Add lines for configuration change don't show unset, that's hacky...
         config_change_lines = [line for line in self.raw_event.configSpec.__repr__().splitlines() if 'unset' not in line]
-        self.payload["msg_text"] += u"\n".join(config_change_lines)
-        self.payload["msg_text"] += u"\n@@@"
+        self.payload["msg_text"] += "\n".join(config_change_lines)
+        self.payload["msg_text"] += "\n@@@"
         self.payload['host'] = self.raw_event.vm.name
         return self.payload
 
@@ -390,7 +390,7 @@ class VSphereCheck(AgentCheck):
     def _clean(self):
         now = time.time()
         # TODO: use that
-        for name in self.jobs_status.keys():
+        for name in list(self.jobs_status.keys()):
             start_time = self.jobs_status[name]
             if now - start_time > JOB_TIMEOUT:
                 self.log.critical("Restarting Pool. One check is stuck.")
@@ -524,7 +524,7 @@ class VSphereCheck(AgentCheck):
         integration.
         List of pairs (hostname, list_of_tags)
         """
-        self.log.debug(u"Sending external_host_tags now")
+        self.log.debug("Sending external_host_tags now")
         external_host_tags = []
         for instance in self.instances:
             i_key = self._instance_key(instance)
@@ -532,12 +532,12 @@ class VSphereCheck(AgentCheck):
 
             if not mor_by_mor_name:
                 self.log.warning(
-                    u"Unable to extract hosts' tags for vSphere instance named %s"
-                    u"Is the check failing on this instance?", i_key
+                    "Unable to extract hosts' tags for vSphere instance named %s"
+                    "Is the check failing on this instance?", i_key
                 )
                 continue
 
-            for mor in mor_by_mor_name.itervalues():
+            for mor in mor_by_mor_name.values():
                 if mor['hostname']: # some mor's have a None hostname
                     external_host_tags.append((mor['hostname'], {SOURCE_TYPE: mor['tags']}))
 
@@ -575,15 +575,15 @@ class VSphereCheck(AgentCheck):
             if mor.parent:
                 tag = []
                 if isinstance(mor.parent, vim.HostSystem):
-                    tag.append(u'vsphere_host:{}'.format(mor.parent.name))
+                    tag.append('vsphere_host:{}'.format(mor.parent.name))
                 elif isinstance(mor.parent, vim.Folder):
-                    tag.append(u'vsphere_folder:{}'.format(mor.parent.name))
+                    tag.append('vsphere_folder:{}'.format(mor.parent.name))
                 elif isinstance(mor.parent, vim.ComputeResource):
                     if isinstance(mor.parent, vim.ClusterComputeResource):
-                        tag.append(u'vsphere_cluster:{}'.format(mor.parent.name))
-                    tag.append(u'vsphere_compute:{}'.format(mor.parent.name))
+                        tag.append('vsphere_cluster:{}'.format(mor.parent.name))
+                    tag.append('vsphere_compute:{}'.format(mor.parent.name))
                 elif isinstance(mor.parent, vim.Datacenter):
-                    tag.append(u'vsphere_datacenter:{}'.format(mor.parent.name))
+                    tag.append('vsphere_datacenter:{}'.format(mor.parent.name))
 
                 tags = _get_parent_tags(mor.parent)
                 if tag:
@@ -611,19 +611,19 @@ class VSphereCheck(AgentCheck):
 
                     vsphere_type = None
                     if isinstance(c, vim.VirtualMachine):
-                        vsphere_type = u'vsphere_type:vm'
+                        vsphere_type = 'vsphere_type:vm'
                         if c.runtime.powerState == vim.VirtualMachinePowerState.poweredOff:
                             continue
                         host = c.runtime.host.name
-                        instance_tags.append(u'vsphere_host:{}'.format(host))
+                        instance_tags.append('vsphere_host:{}'.format(host))
                     elif isinstance(c, vim.HostSystem):
-                        vsphere_type = u'vsphere_type:host'
+                        vsphere_type = 'vsphere_type:host'
                     elif isinstance(c, vim.Datastore):
-                        vsphere_type = u'vsphere_type:datastore'
-                        instance_tags.append(u'vsphere_datastore:{}'.format(c.name))
+                        vsphere_type = 'vsphere_type:datastore'
+                        instance_tags.append('vsphere_datastore:{}'.format(c.name))
                         hostname = None
                     elif isinstance(c, vim.Datacenter):
-                        vsphere_type = u'vsphere_type:datacenter'
+                        vsphere_type = 'vsphere_type:datacenter'
                         hostname = None
 
                     if vsphere_type:
@@ -772,7 +772,7 @@ class VSphereCheck(AgentCheck):
 
         processed = 0
         for resource_type in RESOURCE_TYPE_MAP:
-            for i in xrange(batch_size):
+            for i in range(batch_size):
                 try:
                     mor = self.morlist_raw[i_key][resource_type].pop()
                     self.pool.apply_async(self._cache_morlist_process_atomic, args=(instance, mor))
@@ -793,7 +793,7 @@ class VSphereCheck(AgentCheck):
         we cannot get any metrics from them anyway (or =0)
         """
         i_key = self._instance_key(instance)
-        morlist = self.morlist[i_key].items()
+        morlist = list(self.morlist[i_key].items())
 
         for mor_name, mor in morlist:
             last_seen = mor['last_seen']
@@ -875,11 +875,11 @@ class VSphereCheck(AgentCheck):
                     metric_name = None
 
                 if metric_name not in ALL_METRICS:
-                    self.log.debug(u"Skipping unknown `%s` metric.", metric_name)
+                    self.log.debug("Skipping unknown `%s` metric.", metric_name)
                     continue
 
                 if not result.value:
-                    self.log.debug(u"Skipping `%s` metric because the value is empty", metric_name)
+                    self.log.debug("Skipping `%s` metric because the value is empty", metric_name)
                     continue
 
                 instance_name = result.id.instance or "none"
@@ -911,7 +911,7 @@ class VSphereCheck(AgentCheck):
             self.log.debug("Not collecting metrics for this instance, nothing to do yet: {0}".format(i_key))
             return
 
-        mors = self.morlist[i_key].items()
+        mors = list(self.morlist[i_key].items())
         self.log.debug("Collecting metrics of %d mors" % len(mors))
 
         vm_count = 0

@@ -176,7 +176,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'debug.health'])
+        self.assertEqual(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'debug.health'])
         self.assertServiceCheckCritical("varnish.backend_healthy", tags=['backend:default'], count=1)
 
         mock_version.return_value = LooseVersion('4.1.0'), 'xml'
@@ -184,7 +184,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
+        self.assertEqual(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
 
 
 
@@ -202,7 +202,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'debug.health'])
+        self.assertEqual(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'debug.health'])
         self.assertServiceCheckOK("varnish.backend_healthy", tags=['backend:backend2'], count=1)
 
         mock_version.return_value = LooseVersion('4.1.0'), 'xml'
@@ -210,7 +210,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
+        self.assertEqual(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
 
     # Test the Varnishadm output for version >= 5.x
     @mock.patch('_varnish.geteuid')
@@ -226,7 +226,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
+        self.assertEqual(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
         self.assertServiceCheckOK("varnish.backend_healthy", tags=['backend:backend2'], count=1)
 
         mock_version.return_value = LooseVersion('5.0.0'), 'json'
@@ -234,7 +234,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
+        self.assertEqual(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
 
     # Test the varnishadm output for Varnish < 4.x
     @mock.patch('_varnish.geteuid')
@@ -250,7 +250,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'debug.health'])
+        self.assertEqual(args[0], [VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'debug.health'])
         self.assertServiceCheckOK("varnish.backend_healthy", tags=['backend:default'], count=1)
 
         mock_version.return_value = LooseVersion('4.1.0'), 'xml'
@@ -258,7 +258,7 @@ class VarnishCheckTest(AgentCheckTest):
 
         self.run_check(config)
         args, _ = mock_subprocess.call_args
-        self.assertEquals(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
+        self.assertEqual(args[0], ['sudo', VARNISHADM_PATH, '-S', SECRETFILE_PATH, 'backend.list', '-p'])
 
     # This the docker image is in a different repository, we check that the
     # verison requested in the FLAVOR_VERSION is the on running inside the
@@ -271,4 +271,4 @@ class VarnishCheckTest(AgentCheckTest):
             raise Exception("Could not retrieve varnish version from docker")
 
         version = res.groups()[0]
-        self.assertEquals(version, os.environ.get('FLAVOR_VERSION', VARNISH_DEFAULT_VERSION))
+        self.assertEqual(version, os.environ.get('FLAVOR_VERSION', VARNISH_DEFAULT_VERSION))

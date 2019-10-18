@@ -124,7 +124,7 @@ def create_topology(topology_json):
         """
         parsed_topology = {}
 
-        for field, value in topology_desc.iteritems():
+        for field, value in topology_desc.items():
             parsed_value = value
             if isinstance(value, dict):
                 parsed_value = rec_build(value)
@@ -137,7 +137,7 @@ def create_topology(topology_json):
         mor = MockedMOR(**parsed_topology)
 
         # set parent
-        for field, value in topology_desc.iteritems():
+        for field, value in topology_desc.items():
             if isinstance(parsed_topology[field], list):
                 for m in parsed_topology[field]:
                     if isinstance(m, MockedMOR):
@@ -167,7 +167,7 @@ class TestvSphereUnit(AgentCheckTest):
         if spec:
             mor_list = self.check.morlist_raw[instance_name][spec]
         else:
-            mor_list = [mor for _, mors in self.check.morlist_raw[instance_name].iteritems() for mor in mors]
+            mor_list = [mor for _, mors in self.check.morlist_raw[instance_name].items() for mor in mors]
 
         for mor in mor_list:
             if name is not None and name != mor['hostname']:
@@ -187,7 +187,7 @@ class TestvSphereUnit(AgentCheckTest):
 
         # Assertions
         if count:
-            self.assertEquals(len(candidates), count)
+            self.assertEqual(len(candidates), count)
         else:
             self.assertTrue(len(candidates))
 
@@ -281,7 +281,7 @@ class TestvSphereUnit(AgentCheckTest):
         # Samples
         instance = {'name': 'vsphere_mock'}
         vcenter_topology = create_topology('vsphere_topology.json')
-        tags = [u"toto"]
+        tags = ["toto"]
         include_regexes = {
             'host_include': "host[2-9]",
             'vm_include': "vm[^2]",
@@ -309,18 +309,18 @@ class TestvSphereUnit(AgentCheckTest):
             instance,
             name="host2", spec="host",
             tags=[
-                u"toto", u"vsphere_folder:rootFolder", u"vsphere_datacenter:datacenter1",
-                u"vsphere_compute:compute_resource1", u"vsphere_cluster:compute_resource1",
-                u"vsphere_type:host"
+                "toto", "vsphere_folder:rootFolder", "vsphere_datacenter:datacenter1",
+                "vsphere_compute:compute_resource1", "vsphere_cluster:compute_resource1",
+                "vsphere_type:host"
             ]
         )
         self.assertMOR(
             instance,
             name="host3", spec="host",
             tags=[
-                u"toto", u"vsphere_folder:rootFolder", u"vsphere_folder:folder1",
-                u"vsphere_datacenter:datacenter2", u"vsphere_compute:compute_resource2",
-                u"vsphere_cluster:compute_resource2", u"vsphere_type:host"
+                "toto", "vsphere_folder:rootFolder", "vsphere_folder:folder1",
+                "vsphere_datacenter:datacenter2", "vsphere_compute:compute_resource2",
+                "vsphere_cluster:compute_resource2", "vsphere_type:host"
             ]
         )
 
@@ -330,8 +330,8 @@ class TestvSphereUnit(AgentCheckTest):
             instance,
             name="vm4", spec="vm", subset=True,
             tags=[
-                u"toto", u"vsphere_folder:folder1", u"vsphere_datacenter:datacenter2",
-                u"vsphere_compute:compute_resource2",u"vsphere_cluster:compute_resource2",
-                u"vsphere_host:host3", u"vsphere_type:vm"
+                "toto", "vsphere_folder:folder1", "vsphere_datacenter:datacenter2",
+                "vsphere_compute:compute_resource2","vsphere_cluster:compute_resource2",
+                "vsphere_host:host3", "vsphere_type:vm"
             ]
         )

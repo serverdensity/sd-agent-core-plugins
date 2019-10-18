@@ -38,7 +38,7 @@ class TestCassandraNodetoolCheck(AgentCheckTest):
         self.run_check(self.config)
 
         # test per datacenter metrics
-        self.assertEquals(mock_output.call_args[0][0],
+        self.assertEqual(mock_output.call_args[0][0],
                           ['docker', 'exec', CASSANDRA_CONTAINER_NAME, 'nodetool', '-h', 'localhost', '-p',
                           '7199', '-u', 'controlRole', '-pw', 'QED', 'status', '--', 'test'])
         self.assertMetric('cassandra.nodetool.status.replication_availability', value=64.5,

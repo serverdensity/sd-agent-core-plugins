@@ -3,7 +3,7 @@
 # Licensed under Simplified BSD License (see LICENSE)
 
 # stdlib
-from urlparse import urljoin
+from urllib.parse import urljoin
 import os
 
 # 3rd party
@@ -234,31 +234,31 @@ class YARNCheck(AgentCheckTest):
         self.run_check(config)
 
         # Check the YARN Cluster Metrics
-        for metric, value in self.YARN_CLUSTER_METRICS_VALUES.iteritems():
+        for metric, value in self.YARN_CLUSTER_METRICS_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.YARN_CLUSTER_METRICS_TAGS)
 
         # Check the YARN App Metrics
-        for metric, value in self.YARN_APP_METRICS_VALUES.iteritems():
+        for metric, value in self.YARN_APP_METRICS_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.YARN_APP_METRICS_TAGS)
 
         # Check the YARN Node Metrics
-        for metric, value in self.YARN_NODE_METRICS_VALUES.iteritems():
+        for metric, value in self.YARN_NODE_METRICS_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.YARN_NODE_METRICS_TAGS)
 
         # Check the YARN Root Queue Metrics
-        for metric, value in self.YARN_ROOT_QUEUE_METRICS_VALUES.iteritems():
+        for metric, value in self.YARN_ROOT_QUEUE_METRICS_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.YARN_ROOT_QUEUE_METRICS_TAGS)
 
         # Check the YARN Custom Queue Metrics
-        for metric, value in self.YARN_QUEUE_METRICS_VALUES.iteritems():
+        for metric, value in self.YARN_QUEUE_METRICS_VALUES.items():
             self.assertMetric(metric,
                 value=value,
                 tags=self.YARN_QUEUE_METRICS_TAGS)

@@ -59,7 +59,7 @@ class TestNginx(unittest.TestCase):
 
         # Checking that only one metric is of type 'nginx.net.connections'
         r = nginx.get_metrics()
-        self.assertEquals(len([t for t in r if t[0] == "nginx.net.connections"]), 1, r)
+        self.assertEqual(len([t for t in r if t[0] == "nginx.net.connections"]), 1, r)
 
     def test_nginx_tags(self):
         nginx = load_check('nginx', self.config, self.agent_config)
@@ -69,13 +69,13 @@ class TestNginx(unittest.TestCase):
 
         # Checking that 'tags' attribute of some result is equal to 'tags' attribute in config for instance 1
         r = nginx.get_metrics()
-        self.assertEquals(r[0][3].get('tags'), ['first_one'])
+        self.assertEqual(r[0][3].get('tags'), ['first_one'])
 
         # Checking that each 'nginx.can_connect' service check's 'tags' attribute match expected host/port from config
         service_checks = nginx.get_service_checks()
         can_connect = [sc for sc in service_checks if sc['check'] == 'nginx.can_connect']
         for i in range(len(can_connect)):
-            self.assertEquals(set(can_connect[i]['tags']), set(['host:localhost', 'port:44441']), service_checks)
+            self.assertEqual(set(can_connect[i]['tags']), set(['host:localhost', 'port:44441']), service_checks)
 
     def test_nginx_ssl_validation_enabled(self):
         # Note: Throws an SSLError, because we're attempting to connect to an https endpoint with a self-signed
@@ -95,13 +95,13 @@ class TestNginx(unittest.TestCase):
 
         # Checking that 'tags' attribute of some result is equal to 'tags' attribute in config for instance 5
         r = nginx.get_metrics()
-        self.assertEquals(r[0][3].get('tags'), ['ssl_disabled'])
+        self.assertEqual(r[0][3].get('tags'), ['ssl_disabled'])
 
         # Checking that each 'nginx.can_connect' service check's 'tags' attribute match expected host/port from config
         service_checks = nginx.get_service_checks()
         can_connect = [sc for sc in service_checks if sc['check'] == 'nginx.can_connect']
         for i in range(len(can_connect)):
-            self.assertEquals(set(can_connect[i]['tags']), set(['host:localhost', 'port:44442']), service_checks)
+            self.assertEqual(set(can_connect[i]['tags']), set(['host:localhost', 'port:44442']), service_checks)
 
     def test_nginx_plus(self):
         test_data = Fixtures.read_file('nginx_plus_in.json', sdk_dir=FIXTURE_DIR)
@@ -111,4 +111,4 @@ class TestNginx(unittest.TestCase):
         parsed.sort()
 
         # Check that the parsed test data is the same as the expected output
-        self.assertEquals(parsed, expected)
+        self.assertEqual(parsed, expected)

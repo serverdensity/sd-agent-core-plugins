@@ -59,7 +59,7 @@ zk_max_file_descriptor_count    4096
 # stdlib
 from collections import defaultdict
 from distutils.version import LooseVersion # pylint: disable=E0611,E0401
-from StringIO import StringIO
+from io import StringIO
 import re
 import socket
 import struct
@@ -144,7 +144,7 @@ class ZookeeperCheck(AgentCheck):
                 status = AgentCheck.OK
             else:
                 status = AgentCheck.WARNING
-            message = u'Response from the server: %s' % ruok
+            message = 'Response from the server: %s' % ruok
         finally:
             self.service_check(
                 'zookeeper.ruok', status, message=message, tags=sc_tags
@@ -180,10 +180,10 @@ class ZookeeperCheck(AgentCheck):
             if expected_mode:
                 if mode == expected_mode:
                     status = AgentCheck.OK
-                    message = u"Server is in %s mode" % mode
+                    message = "Server is in %s mode" % mode
                 else:
                     status = AgentCheck.CRITICAL
-                    message = u"Server is in %s mode but check expects %s mode"\
+                    message = "Server is in %s mode but check expects %s mode"\
                               % (mode, expected_mode)
                 self.service_check('zookeeper.mode', status, message=message,
                                    tags=sc_tags)
@@ -223,7 +223,7 @@ class ZookeeperCheck(AgentCheck):
         self.gauge('zookeeper.instances', 1, tags=tags)
         gauges[mode] = 1
 
-        for k, v in gauges.iteritems():
+        for k, v in gauges.items():
             gauge_name = 'zookeeper.instances.%s' % k
             self.gauge(gauge_name, v)
 
@@ -300,15 +300,15 @@ class ZookeeperCheck(AgentCheck):
         _, value = buf.readline().split(':')
         # Fixme: This metric name is wrong. It should be removed in a major version of the agent
         # See https://github.com/DataDog/integrations-core/issues/816
-        metrics.append(ZKMetric('zookeeper.bytes_received', long(value.strip())))
-        metrics.append(ZKMetric('zookeeper.packets.received', long(value.strip()), "rate"))
+        metrics.append(ZKMetric('zookeeper.bytes_received', int(value.strip())))
+        metrics.append(ZKMetric('zookeeper.packets.received', int(value.strip()), "rate"))
 
         # Sent: 1324
         _, value = buf.readline().split(':')
         # Fixme: This metric name is wrong. It should be removed in a major version of the agent
         # See https://github.com/DataDog/integrations-core/issues/816
-        metrics.append(ZKMetric('zookeeper.bytes_sent', long(value.strip())))
-        metrics.append(ZKMetric('zookeeper.packets.sent', long(value.strip()), "rate"))
+        metrics.append(ZKMetric('zookeeper.bytes_sent', int(value.strip())))
+        metrics.append(ZKMetric('zookeeper.packets.sent', int(value.strip()), "rate"))
 
         if has_connections_val:
             # Connections: 1
@@ -321,12 +321,12 @@ class ZookeeperCheck(AgentCheck):
 
         # Outstanding: 0
         _, value = buf.readline().split(':')
-        metrics.append(ZKMetric('zookeeper.outstanding_requests', long(value.strip())))
+        metrics.append(ZKMetric('zookeeper.outstanding_requests', int(value.strip())))
 
         # Zxid: 0x1034799c7
         _, value = buf.readline().split(':')
         # Parse as a 64 bit hex int
-        zxid = long(value.strip(), 16)
+        zxid = int(value.strip(), 16)
         # convert to bytes
         zxid_bytes = struct.pack('>q', zxid)
         # the higher order 4 bytes is the epoch
@@ -340,11 +340,11 @@ class ZookeeperCheck(AgentCheck):
         # Mode: leader
         _, value = buf.readline().split(':')
         mode = value.strip().lower()
-        tags = [u'mode:' + mode]
+        tags = ['mode:' + mode]
 
         # Node count: 487
         _, value = buf.readline().split(':')
-        metrics.append(ZKMetric('zookeeper.nodes', long(value.strip())))
+        metrics.append(ZKMetric('zookeeper.nodes', int(value.strip())))
 
         return metrics, tags, mode, version
 
@@ -379,15 +379,15 @@ class ZookeeperCheck(AgentCheck):
 
             except ValueError:
                 self.log.warning(
-                    u"Cannot format `mntr` value. key={key}, value{value}".format(
+                    "Cannot format `mntr` value. key={key}, value{value}".format(
                         key=key, value=value
                     )
                 )
                 continue
             except Exception:
                 self.log.exception(
-                    u"Unexpected exception occurred while parsing `mntr` command content:\n"
-                    u"{buf}".format(
+                    "Unexpected exception occurred while parsing `mntr` command content:\n"
+                    "{buf}".format(
                         buf=buf
                     )
                 )

@@ -17,7 +17,7 @@ def requests_get_mock(*args, **kwargs):
             self.status_code = status_code
 
         def json(self):
-            print self.json_data
+            print(self.json_data)
             return json.loads(self.json_data)
 
         def raise_for_status(self):
@@ -61,5 +61,5 @@ class HDFSDataNode(AgentCheckTest):
 
         self.run_check(config)
 
-        for metric, value in self.HDFS_DATANODE_METRICS_VALUES.iteritems():
+        for metric, value in self.HDFS_DATANODE_METRICS_VALUES.items():
             self.assertMetric(metric, value=value, tags=self.HDFS_DATANODE_METRIC_TAGS)

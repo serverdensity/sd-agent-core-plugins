@@ -11,7 +11,7 @@ import socket
 import ssl
 import time
 import warnings
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 # 3rd party
 import requests
@@ -247,7 +247,7 @@ class HTTPCheck(NetworkCheck):
                              proxies = instance_proxy, allow_redirects=allow_redirects,
                              verify=False if disable_ssl_validation else instance_ca_certs,
                              json = data if method == 'post' and isinstance(data, dict) else None,
-                             data = data if method == 'post' and isinstance(data, basestring) else None,
+                             data = data if method == 'post' and isinstance(data, str) else None,
                              cert = (client_cert, client_key) if client_cert and client_key else None)
 
         except (socket.timeout, requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
@@ -279,7 +279,7 @@ class HTTPCheck(NetworkCheck):
         # Store tags in a temporary list so that we don't modify the global tags data structure
         tags_list = list(tags)
         # Only add the URL tag if it's not already present
-        if not filter(re.compile('^url:').match, tags_list):
+        if not list(filter(re.compile('^url:').match, tags_list)):
             tags_list.append('url:%s' % addr)
 
         # Only report this metric if the site is not down
@@ -313,7 +313,7 @@ class HTTPCheck(NetworkCheck):
             # Check content matching is set
             if content_match:
                 # r.text is the response content decoded by `requests`, of type `unicode`
-                content = r.text if type(content_match) is unicode else r.content
+                content = r.text if type(content_match) is str else r.content
                 if re.search(content_match, content, re.UNICODE):
                     if reverse_content_match:
                         send_status_down("%s is found in return content with the reverse_content_match option" % content_match,
@@ -368,7 +368,7 @@ class HTTPCheck(NetworkCheck):
         tags_list.extend(tags)
 
         # Only add the URL tag if it's not already present
-        if not filter(re.compile('^url:').match, tags_list):
+        if not list(filter(re.compile('^url:').match, tags_list)):
             tags_list.append('url:%s' % url)
 
         # Get a custom message that will be displayed in the event
@@ -401,12 +401,12 @@ class HTTPCheck(NetworkCheck):
                 if len(content) > 200:
                     content = content[:197] + '...'
 
-                msg = u"%d %s\n\n%s" % (code, reason, content)
+                msg = "%d %s\n\n%s" % (code, reason, content)
                 msg = msg.rstrip()
 
             title = "[Alert] %s reported that %s is down" % (self.hostname, name)
             alert_type = "error"
-            msg = u"%s %s %s reported that %s (%s) failed %s time(s) within %s last attempt(s)."\
+            msg = "%s %s %s reported that %s (%s) failed %s time(s) within %s last attempt(s)."\
                 " Last error: %s" % (notify_message, custom_message, self.hostname,
                                      name, url, nb_failures, nb_tries, msg)
             event_type = EventType.DOWN
@@ -414,7 +414,7 @@ class HTTPCheck(NetworkCheck):
         else:  # Status is UP
             title = "[Recovered] %s reported that %s is up" % (self.hostname, name)
             alert_type = "success"
-            msg = u"%s %s %s reported that %s (%s) recovered" \
+            msg = "%s %s %s reported that %s (%s) recovered" \
                 % (notify_message, custom_message, self.hostname, name, url)
             event_type = EventType.UP
 
@@ -437,7 +437,7 @@ class HTTPCheck(NetworkCheck):
         tags.append("instance:{0}".format(instance_name))
 
         # Only add the URL tag if it's not already present
-        if not filter(re.compile('^url:').match, tags):
+        if not list(filter(re.compile('^url:').match, tags)):
             tags.append('url:{0}'.format(url))
 
         if sc_name == self.SC_STATUS:
@@ -449,7 +449,7 @@ class HTTPCheck(NetworkCheck):
                 if len(content) > 200:
                     content = content[:197] + '...'
 
-                msg = u"%d %s\n\n%s" % (code, reason, content)
+                msg = "%d %s\n\n%s" % (code, reason, content)
                 msg = msg.rstrip()
 
         self.service_check(sc_name,

@@ -129,7 +129,7 @@ class TestMockGoExpVar(AgentCheckTest):
 
         for gauge in self.CHECK_GAUGES + self.CHECK_GAUGES_DEFAULT:
             self.assertMetric("{0}.{1}".format(self.CHECK_NAME, gauge), count=1, tags=shared_tags)
-        for gauge, tags in self.CHECK_GAUGES_CUSTOM_MOCK.iteritems():
+        for gauge, tags in self.CHECK_GAUGES_CUSTOM_MOCK.items():
             self.assertMetric("{0}.{1}".format(self.CHECK_NAME, gauge), count=1, tags=shared_tags + tags)
 
         for rate in self.CHECK_RATES:
@@ -174,7 +174,7 @@ class TestMockGoExpVar(AgentCheckTest):
 
         for gauge in self.CHECK_GAUGES + self.CHECK_GAUGES_DEFAULT:
             self.assertMetric("{0}.{1}".format(metric_namespace, gauge), count=1, tags=shared_tags)
-        for gauge, tags in self.CHECK_GAUGES_CUSTOM_MOCK.iteritems():
+        for gauge, tags in self.CHECK_GAUGES_CUSTOM_MOCK.items():
             self.assertMetric("{0}.{1}".format(metric_namespace, gauge), count=1, tags=shared_tags + tags)
 
         for rate in self.CHECK_RATES:
@@ -348,7 +348,7 @@ class TestGoExpVar(AgentCheckTest):
             self.assertMetric(gauge, count=1, tags=shared_tags)
         for rate in self.CHECK_RATES:
             self.assertMetric(rate, count=1, tags=shared_tags)
-        for rate, value in self.CHECK_RATES_CUSTOM.iteritems():
+        for rate, value in self.CHECK_RATES_CUSTOM.items():
             self.assertMetric(rate, count=1, value=value, tags=shared_tags)
 
         self.coverage_report()

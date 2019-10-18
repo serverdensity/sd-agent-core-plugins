@@ -18,7 +18,7 @@ class SystemCore(AgentCheck):
 
         for i, cpu in enumerate(cpu_times):
             tags = instance_tags + ["core:{0}".format(i)]
-            for key, value in cpu._asdict().iteritems():
+            for key, value in cpu._asdict().items():
                 self.rate(
                     "system.core.{0}".format(key),
                     100.0 * value,

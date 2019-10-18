@@ -53,32 +53,32 @@ class TestMongoUnit(AgentCheckTest):
             m_name: m_type for d in [
                 self.check.BASE_METRICS, self.check.DURABILITY_METRICS,
                 self.check.LOCKS_METRICS, self.check.WIREDTIGER_METRICS,]
-            for m_name, m_type in d.iteritems()
+            for m_name, m_type in d.items()
         }
 
         # No option
         no_additional_metrics = build_metric_list([])
-        self.assertEquals(len(no_additional_metrics), len(DEFAULT_METRICS))
+        self.assertEqual(len(no_additional_metrics), len(DEFAULT_METRICS))
 
         # Deprecate option, i.e. collected by default
         default_metrics = build_metric_list(['wiredtiger'])
-        self.assertEquals(len(default_metrics), len(DEFAULT_METRICS))
-        self.assertEquals(self.check.log.warning.call_count, 1)
+        self.assertEqual(len(default_metrics), len(DEFAULT_METRICS))
+        self.assertEqual(self.check.log.warning.call_count, 1)
 
         # One correct option
         default_and_tcmalloc_metrics = build_metric_list(['tcmalloc'])
-        self.assertEquals(
+        self.assertEqual(
             len(default_and_tcmalloc_metrics),
             len(DEFAULT_METRICS) + len(self.check.TCMALLOC_METRICS)
         )
 
         # One wrong and correct option
         default_and_tcmalloc_metrics = build_metric_list(['foobar', 'top'])
-        self.assertEquals(
+        self.assertEqual(
             len(default_and_tcmalloc_metrics),
             len(DEFAULT_METRICS) + len(self.check.TOP_METRICS)
         )
-        self.assertEquals(self.check.log.warning.call_count, 2)
+        self.assertEqual(self.check.log.warning.call_count, 2)
 
     def test_metric_resolution(self):
         """
@@ -100,14 +100,14 @@ class TestMongoUnit(AgentCheckTest):
         # Assert
 
         # Priority to aliases when defined
-        self.assertEquals((GAUGE, 'mongodb.barfoo'), resolve_metric('foobar', metrics_to_collect))
-        self.assertEquals((RATE, 'mongodb.bar.foops'), resolve_metric('foo.bar', metrics_to_collect))  # noqa
-        self.assertEquals((GAUGE, 'mongodb.qux.barfoo'), resolve_metric('foobar', metrics_to_collect, prefix="qux"))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.barfoo'), resolve_metric('foobar', metrics_to_collect))
+        self.assertEqual((RATE, 'mongodb.bar.foops'), resolve_metric('foo.bar', metrics_to_collect))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.qux.barfoo'), resolve_metric('foobar', metrics_to_collect, prefix="qux"))  # noqa
 
         #  Resolve an alias when not defined
-        self.assertEquals((GAUGE, 'mongodb.foobar'), resolve_metric('fOoBaR', metrics_to_collect))
-        self.assertEquals((RATE, 'mongodb.foo.barps'), resolve_metric('fOo.baR', metrics_to_collect))  # noqa
-        self.assertEquals((GAUGE, 'mongodb.qux.foobar'), resolve_metric('fOoBaR', metrics_to_collect, prefix="qux"))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.foobar'), resolve_metric('fOoBaR', metrics_to_collect))
+        self.assertEqual((RATE, 'mongodb.foo.barps'), resolve_metric('fOo.baR', metrics_to_collect))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.qux.foobar'), resolve_metric('fOoBaR', metrics_to_collect, prefix="qux"))  # noqa
 
     def test_metric_normalization(self):
         """
@@ -128,12 +128,12 @@ class TestMongoUnit(AgentCheckTest):
         resolve_metric = self.check._resolve_metric
 
         # Assert
-        self.assertEquals((GAUGE, 'mongodb.foo.bar'), resolve_metric('foo.bar', metrics_to_collect))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.foo.bar'), resolve_metric('foo.bar', metrics_to_collect))  # noqa
 
-        self.assertEquals((RATE, 'mongodb.foobar.sharedps'), resolve_metric('foobar.R', metrics_to_collect))  # noqa
-        self.assertEquals((GAUGE, 'mongodb.foobar.intent_shared'), resolve_metric('foobar.r', metrics_to_collect))  # noqa
-        self.assertEquals((RATE, 'mongodb.foobar.intent_exclusiveps'), resolve_metric('foobar.w', metrics_to_collect))  # noqa
-        self.assertEquals((GAUGE, 'mongodb.foobar.exclusive'), resolve_metric('foobar.W', metrics_to_collect))  # noqa
+        self.assertEqual((RATE, 'mongodb.foobar.sharedps'), resolve_metric('foobar.R', metrics_to_collect))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.foobar.intent_shared'), resolve_metric('foobar.r', metrics_to_collect))  # noqa
+        self.assertEqual((RATE, 'mongodb.foobar.intent_exclusiveps'), resolve_metric('foobar.w', metrics_to_collect))  # noqa
+        self.assertEqual((GAUGE, 'mongodb.foobar.exclusive'), resolve_metric('foobar.W', metrics_to_collect))  # noqa
 
     def test_state_translation(self):
         """
@@ -145,14 +145,14 @@ class TestMongoUnit(AgentCheckTest):
         }
         self.load_check(config)
 
-        self.assertEquals('STARTUP2', self.check.get_state_name(5))
-        self.assertEquals('PRIMARY', self.check.get_state_name(1))
+        self.assertEqual('STARTUP2', self.check.get_state_name(5))
+        self.assertEqual('PRIMARY', self.check.get_state_name(1))
 
-        self.assertEquals('Starting Up', self.check.get_state_description(0))
-        self.assertEquals('Recovering', self.check.get_state_description(3))
+        self.assertEqual('Starting Up', self.check.get_state_description(0))
+        self.assertEqual('Recovering', self.check.get_state_description(3))
 
         # Unknown states:
-        self.assertEquals('UNKNOWN', self.check.get_state_name(500))
+        self.assertEqual('UNKNOWN', self.check.get_state_name(500))
         unknown_desc = self.check.get_state_description(500)
         self.assertTrue(unknown_desc.find('500') != -1)
 
@@ -177,7 +177,7 @@ class TestMongoUnit(AgentCheckTest):
 
         for server, expected_clean_name in server_names:
             _, _, _, _, clean_name, _ = _parse_uri(server, sanitize_username=False)
-            self.assertEquals(expected_clean_name, clean_name)
+            self.assertEqual(expected_clean_name, clean_name)
 
         # Batch with `sanitize_username` set to True
         server_names = (
@@ -191,7 +191,7 @@ class TestMongoUnit(AgentCheckTest):
 
         for server, expected_clean_name in server_names:
             _, _, _, _, clean_name, _ = _parse_uri(server, sanitize_username=True)
-            self.assertEquals(expected_clean_name, clean_name)
+            self.assertEqual(expected_clean_name, clean_name)
 
 @attr(requires='mongo')
 class TestMongo(unittest.TestCase):
@@ -294,7 +294,7 @@ class TestMongo(unittest.TestCase):
                 tested_metrics.add(metric_name)
 
         if len(metric_val_checks) - len(tested_metrics) != 0:
-            print "missing metrics: %s" % (set(metric_val_checks.keys()) - tested_metrics)
+            print("missing metrics: %s" % (set(metric_val_checks.keys()) - tested_metrics))
         self.assertTrue(len(metric_val_checks) - len(tested_metrics) == 0)
 
         # Run the check against our running server
@@ -306,15 +306,15 @@ class TestMongo(unittest.TestCase):
 
         # Service checks
         service_checks = self.check.get_service_checks()
-        print service_checks
+        print(service_checks)
         service_checks_count = len(service_checks)
         self.assertTrue(isinstance(service_checks, ListType))
         self.assertTrue(service_checks_count > 0)
-        self.assertEquals(len([sc for sc in service_checks if sc['check'] == self.check.SERVICE_CHECK_NAME]), 4, service_checks)
+        self.assertEqual(len([sc for sc in service_checks if sc['check'] == self.check.SERVICE_CHECK_NAME]), 4, service_checks)
         # Assert that all service checks have the proper tags: host and port
-        self.assertEquals(len([sc for sc in service_checks if "host:localhost" in sc['tags']]), service_checks_count, service_checks)
-        self.assertEquals(len([sc for sc in service_checks if "port:%s" % PORT1 in sc['tags'] or "port:%s" % PORT2 in sc['tags']]), service_checks_count, service_checks)
-        self.assertEquals(len([sc for sc in service_checks if "db:test" in sc['tags']]), service_checks_count, service_checks)
+        self.assertEqual(len([sc for sc in service_checks if "host:localhost" in sc['tags']]), service_checks_count, service_checks)
+        self.assertEqual(len([sc for sc in service_checks if "port:%s" % PORT1 in sc['tags'] or "port:%s" % PORT2 in sc['tags']]), service_checks_count, service_checks)
+        self.assertEqual(len([sc for sc in service_checks if "db:test" in sc['tags']]), service_checks_count, service_checks)
 
         # Metric assertions
         metrics = self.check.get_metrics()

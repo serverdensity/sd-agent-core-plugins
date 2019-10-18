@@ -655,17 +655,17 @@ class TestCheckConsul(AgentCheckTest):
         latency = [m for m in self.metrics if m[0].startswith('consul.net.')]
         latency.sort()
         # Make sure we have the expected number of metrics
-        self.assertEquals(19, len(latency))
+        self.assertEqual(19, len(latency))
 
         # Only 3 dc-latency metrics since we only do source = self
         dc = [m for m in latency if '.dc.latency.' in m[0]]
-        self.assertEquals(3, len(dc))
-        self.assertEquals(1.6746410750238774, dc[0][2])
+        self.assertEqual(3, len(dc))
+        self.assertEqual(1.6746410750238774, dc[0][2])
 
         # 16 latency metrics, 2 nodes * 8 metrics each
         node = [m for m in latency if '.node.latency.' in m[0]]
-        self.assertEquals(16, len(node))
-        self.assertEquals(0.26577747932995816, node[0][2])
+        self.assertEqual(16, len(node))
+        self.assertEqual(0.26577747932995816, node[0][2])
 
 @attr(requires='consul')
 class TestIntegrationConsul(AgentCheckTest):

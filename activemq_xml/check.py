@@ -105,7 +105,7 @@ class ActiveMQXML(AgentCheck):
                 continue
 
             el_tags = tags + ["{0}:{1}".format(el_type, name)]
-            for attr_name, alias in TOPIC_QUEUE_METRICS.iteritems():
+            for attr_name, alias in TOPIC_QUEUE_METRICS.items():
                 metric_name = "activemq.{0}.{1}".format(el_type, alias)
                 value = stats.get(attr_name, 0)
                 self.gauge(metric_name, value, tags=el_tags)

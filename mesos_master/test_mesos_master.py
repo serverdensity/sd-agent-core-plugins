@@ -37,9 +37,9 @@ class TestMesosMaster(AgentCheckTest):
                   check.CLUSTER_RESOURCES_METRICS, check.CLUSTER_REGISTRAR_METRICS,
                   check.CLUSTER_FRAMEWORK_METRICS, check.SYSTEM_METRICS, check.STATS_METRICS):
             metrics.update(d)
-        [self.assertMetric(v[0]) for k, v in check.FRAMEWORK_METRICS.iteritems()]
-        [self.assertMetric(v[0]) for k, v in metrics.iteritems()]
-        [self.assertMetric(v[0]) for k, v in check.ROLE_RESOURCES_METRICS.iteritems()]
+        [self.assertMetric(v[0]) for k, v in check.FRAMEWORK_METRICS.items()]
+        [self.assertMetric(v[0]) for k, v in metrics.items()]
+        [self.assertMetric(v[0]) for k, v in check.ROLE_RESOURCES_METRICS.items()]
         self.assertMetric('mesos.cluster.total_frameworks')
         self.assertMetric('mesos.framework.total_tasks')
         self.assertMetric('mesos.role.frameworks.count')

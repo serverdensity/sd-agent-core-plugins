@@ -85,7 +85,7 @@ class Oracle(AgentCheck):
             self.log.debug("Connected to Oracle DB")
             self.service_check(self.SERVICE_CHECK_NAME, AgentCheck.OK,
                                tags=self.service_check_tags)
-        except Exception, e:
+        except Exception as e:
             self.service_check(self.SERVICE_CHECK_NAME, AgentCheck.CRITICAL,
                                tags=self.service_check_tags)
             self.log.error(e)

@@ -218,7 +218,7 @@ class SNMPTestCase(AgentCheckTest):
         # Test command generator MIB source
         mib_folders = cmdgen.snmpEngine.msgAndPduDsp\
             .mibInstrumController.mibBuilder.getMibSources()
-        full_path_mib_folders = map(lambda f: f.fullPath(), mib_folders)
+        full_path_mib_folders = [f.fullPath() for f in mib_folders]
 
         self.assertTrue("/etc/mibs" in full_path_mib_folders)
         self.assertFalse(cmdgen.ignoreNonIncreasingOid)

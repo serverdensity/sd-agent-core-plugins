@@ -3,7 +3,7 @@
 # Licensed under Simplified BSD License (see LICENSE)
 
 # stdlib
-import urlparse
+import urllib.parse
 
 # 3rd party
 import requests
@@ -59,7 +59,7 @@ class Apache(AgentCheck):
             auth = (instance['apache_user'], instance['apache_password'])
 
         # Submit a service check for status page availability.
-        parsed_url = urlparse.urlparse(url)
+        parsed_url = urllib.parse.urlparse(url)
         apache_host = parsed_url.hostname
         apache_port = parsed_url.port or 80
         service_check_name = 'apache.can_connect'

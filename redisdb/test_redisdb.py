@@ -95,7 +95,7 @@ class TestRedis(AgentCheckTest):
         # Assert we have values, timestamps and tags for each metric.
         for m in metrics:
             assert isinstance(m[1], int)    # timestamp
-            assert isinstance(m[2], (int, float, long))  # value
+            assert isinstance(m[2], (int, float))  # value
             tags = m[3]["tags"]
             expected_tags = ["redis_host:localhost", "redis_port:%s" % port]
             for e in expected_tags:
@@ -109,38 +109,38 @@ class TestRedis(AgentCheckTest):
 
         # gauges collected?
         remaining_keys = [m[0] for m in metrics]
-        expected = r.GAUGE_KEYS.values()
+        expected = list(r.GAUGE_KEYS.values())
         assert_key_present(expected, remaining_keys, MISSING_KEY_TOLERANCE)
 
         # Assert that the keys metrics are tagged by db. just check db0, since
         # it's the only one we can guarantee is there.
         db_metrics = self._sort_metrics(
             [m for m in metrics if m[0] in ['redis.keys', 'redis.expires'] and "redis_db:db14" in m[3]["tags"]])
-        self.assertEquals(2, len(db_metrics))
+        self.assertEqual(2, len(db_metrics))
 
-        self.assertEquals('redis.expires', db_metrics[0][0])
-        self.assertEquals(1, db_metrics[0][2])
+        self.assertEqual('redis.expires', db_metrics[0][0])
+        self.assertEqual(1, db_metrics[0][2])
 
-        self.assertEquals('redis.keys', db_metrics[1][0])
-        self.assertEquals(3, db_metrics[1][2])
+        self.assertEqual('redis.keys', db_metrics[1][0])
+        self.assertEqual(3, db_metrics[1][2])
 
         # Service checks
         service_checks = r.get_service_checks()
         service_checks_count = len(service_checks)
         self.assertTrue(isinstance(service_checks, list))
         self.assertTrue(service_checks_count > 0)
-        self.assertEquals(
+        self.assertEqual(
             len([sc for sc in service_checks if sc['check'] == "redis.can_connect"]), 1, service_checks)
         # Assert that all service checks have the proper tags: host and port
-        self.assertEquals(
+        self.assertEqual(
             len([sc for sc in service_checks if "redis_host:localhost" in sc['tags']]),
             service_checks_count,
             service_checks)
-        self.assertEquals(
+        self.assertEqual(
             len([sc for sc in service_checks if "redis_port:%s" % port in sc['tags']]),
             service_checks_count,
             service_checks)
-        self.assertEquals(
+        self.assertEqual(
             len([sc for sc in service_checks if "foo:bar" in sc['tags']]),
             service_checks_count,
             service_checks)
@@ -189,7 +189,7 @@ class TestRedis(AgentCheckTest):
             'host': 'localhost',
             'port': SLAVE_UNHEALTHY_PORT
         })
-        self.assert_(metric[2] > 0, "Value of %s should be greater than 0" % metric_name)
+        self.assertTrue(metric[2] > 0, "Value of %s should be greater than 0" % metric_name)
 
     def test_redis_replication_service_check(self):
         check_name = 'redis.replication.master_link_status'
@@ -241,7 +241,7 @@ class TestRedis(AgentCheckTest):
 
         # Assert that the replication works
         master_db.set('replicated:test', 'true')
-        self.assertEquals(slave_db.get('replicated:test'), 'true')
+        self.assertEqual(slave_db.get('replicated:test'), 'true')
 
         r = load_check('redisdb', {}, {})
         r.check(master_instance)
@@ -345,7 +345,7 @@ class TestRedis(AgentCheckTest):
         # Assert we have values, timestamps and tags for each metric.
         for m in command_metrics:
             assert isinstance(m[1], int)    # timestamp
-            assert isinstance(m[2], (int, float, long))  # value
+            assert isinstance(m[2], (int, float))  # value
             tags = m[3]["tags"]
             expected_tags = ["redis_host:localhost", "redis_port:%s" % port, "redis_role:master"]
             for e in expected_tags:
@@ -355,12 +355,12 @@ class TestRedis(AgentCheckTest):
         info_metrics = self._sort_metrics(
             [m for m in command_metrics if "command:info" in m[3]["tags"]])
         # There should be one value for each metric for the info command
-        self.assertEquals(2, len(info_metrics))
+        self.assertEqual(2, len(info_metrics))
 
-        self.assertEquals('redis.command.calls', info_metrics[0][0])
+        self.assertEqual('redis.command.calls', info_metrics[0][0])
         assert info_metrics[0][2] > 0, "Number of INFO calls should be >0"
 
-        self.assertEquals('redis.command.usec_per_call', info_metrics[1][0])
+        self.assertEqual('redis.command.usec_per_call', info_metrics[1][0])
         assert info_metrics[1][2] > 0, "Usec per INFO call should be >0"
 
     def _sort_metrics(self, metrics):

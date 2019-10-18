@@ -55,9 +55,9 @@ class Varnish(AgentCheck):
         if name == "stat":
             m_name = self.normalize(self._current_metric)
             if self._current_type in ("a", "c"):
-                self.rate(m_name, long(self._current_value), tags=tags)
+                self.rate(m_name, int(self._current_value), tags=tags)
             elif self._current_type in ("i", "g"):
-                self.gauge(m_name, long(self._current_value), tags=tags)
+                self.gauge(m_name, int(self._current_value), tags=tags)
             else:
                 # Unsupported data type, ignore
                 self._reset()
@@ -73,7 +73,7 @@ class Varnish(AgentCheck):
         data = data.strip()
         if len(data) > 0 and self._current_element != "":
             if self._current_element == "value":
-                self._current_value = long(data)
+                self._current_value = int(data)
             elif self._current_element == "flag":
                 self._current_type = data
             else:
@@ -111,9 +111,9 @@ class Varnish(AgentCheck):
 
         if name is not None:
             cmd.extend(['-n', name])
-            tags += [u'varnish_name:%s' % name]
+            tags += ['varnish_name:%s' % name]
         else:
-            tags += [u'varnish_name:default']
+            tags += ['varnish_name:default']
 
         output, _, _ = get_subprocess_output(cmd, self.log)
 
@@ -208,7 +208,7 @@ class Varnish(AgentCheck):
             p.Parse(output, True)
         elif varnishstat_format == "json":
             json_output = json.loads(output)
-            for name, metric in json_output.iteritems():
+            for name, metric in json_output.items():
                 if not isinstance(metric, dict): # skip 'timestamp' field
                     continue
 
@@ -217,9 +217,9 @@ class Varnish(AgentCheck):
                 value = metric.get("value", 0)
 
                 if metric["flag"] in ("a", "c"):
-                    self.rate(self.normalize(name, prefix="varnish"), long(value), tags=tags)
+                    self.rate(self.normalize(name, prefix="varnish"), int(value), tags=tags)
                 elif metric["flag"] in ("g", "i"):
-                    self.gauge(self.normalize(name, prefix="varnish"), long(value), tags=tags)
+                    self.gauge(self.normalize(name, prefix="varnish"), int(value), tags=tags)
         elif varnishstat_format == "text":
             for line in output.split("\n"):
                 self.log.debug("Parsing varnish results: %s" % line)
@@ -279,7 +279,7 @@ class Varnish(AgentCheck):
         for line in output.split("\n"):
             backend, status, message = None, None, None
             # split string and remove all empty fields
-            tokens = filter(None, line.strip().split(' '))
+            tokens = [_f for _f in line.strip().split(' ') if _f]
 
             if len(tokens) > 0:
                 if tokens == ['Backend', 'name', 'Admin', 'Probe']:
@@ -312,7 +312,7 @@ class Varnish(AgentCheck):
                 if backend is not None:
                     backends_by_status[status].append((backend, message))
 
-        for status, backends in backends_by_status.iteritems():
+        for status, backends in backends_by_status.items():
             check_status = BackendStatus.to_check_status(status)
             for backend, message in backends:
                 tags = ['backend:%s' % backend]

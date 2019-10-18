@@ -3,7 +3,7 @@
 # Licensed under Simplified BSD License (see LICENSE)
 
 # stdlib
-from urlparse import urljoin
+from urllib.parse import urljoin
 import csv
 import time
 import threading
@@ -158,7 +158,7 @@ class TestCouchdb2(AgentCheckTest):
         self.by_dd_gauges = []
         with open('couch/metadata.csv', 'rb') as csvfile:
             reader = csv.reader(csvfile)
-            reader.next() # This one skips the headers
+            next(reader) # This one skips the headers
             for row in reader:
                 if row[0] in ['couchdb.couchdb.request_time', 'couchdb.by_db.disk_size']:
                     # Skip CouchDB 1.x specific metrics
@@ -188,7 +188,7 @@ class TestCouchdb2(AgentCheckTest):
         """
         self.run_check({"instances": [self.NODE1, self.NODE2, self.NODE3]})
 
-        tags = map(lambda n: "instance:{0}".format(n['name']), [self.NODE1, self.NODE2, self.NODE3])
+        tags = ["instance:{0}".format(n['name']) for n in [self.NODE1, self.NODE2, self.NODE3]]
         for tag in tags:
             for gauge in self.cluster_gauges:
                 self.assertMetric(gauge, tags=[tag])
@@ -200,7 +200,7 @@ class TestCouchdb2(AgentCheckTest):
             for gauge in self.erlang_gauges:
                 self.assertMetric(gauge)
 
-            for db, dd in {"kennel": "dummy", "_replicator": "_replicator", "_users": "_auth"}.items():
+            for db, dd in list({"kennel": "dummy", "_replicator": "_replicator", "_users": "_auth"}.items()):
                 for gauge in self.by_dd_gauges:
                     self.assertMetric(gauge, tags=[tag, "design_document:{0}".format(dd), "language:javascript", "db:{0}".format(db)])
 
@@ -286,7 +286,7 @@ class TestCouchdb2(AgentCheckTest):
 
         self.run_check({"instances": [conf]})
 
-        tags = map(lambda n: "instance:{0}".format(n['name']), [self.NODE1, self.NODE2, self.NODE3])
+        tags = ["instance:{0}".format(n['name']) for n in [self.NODE1, self.NODE2, self.NODE3]]
         for tag in tags:
             for gauge in self.cluster_gauges:
                 self.assertMetric(gauge, tags=[tag])
@@ -299,7 +299,7 @@ class TestCouchdb2(AgentCheckTest):
             for gauge in self.erlang_gauges:
                 self.assertMetric(gauge)
 
-            for db, dd in {"kennel": "dummy", "_replicator": "_replicator", "_users": "_auth"}.items():
+            for db, dd in list({"kennel": "dummy", "_replicator": "_replicator", "_users": "_auth"}.items()):
                 for gauge in self.by_dd_gauges:
                     self.assertMetric(gauge, tags=[tag, "design_document:{0}".format(dd), "language:javascript", "db:{0}".format(db)])
 
@@ -327,7 +327,7 @@ class TestCouchdb2(AgentCheckTest):
         for gauge in self.erlang_gauges:
             self.assertMetric(gauge)
 
-        tags = map(lambda n: "instance:{0}".format(n['name']), [self.NODE1, self.NODE2])
+        tags = ["instance:{0}".format(n['name']) for n in [self.NODE1, self.NODE2]]
         for tag in tags:
             for gauge in self.cluster_gauges:
                 self.assertMetric(gauge, tags=[tag])
@@ -337,7 +337,7 @@ class TestCouchdb2(AgentCheckTest):
                 for gauge in self.by_db_gauges:
                     self.assertMetric(gauge, tags=tags)
 
-            for db, dd in {"kennel": "dummy", "_replicator": "_replicator", "_users": "_auth"}.items():
+            for db, dd in list({"kennel": "dummy", "_replicator": "_replicator", "_users": "_auth"}.items()):
                 for gauge in self.by_dd_gauges:
                     self.assertMetric(gauge, tags=[tag, "design_document:{0}".format(dd), "language:javascript", "db:{0}".format(db)])
 
@@ -426,7 +426,7 @@ class TestCouchdb2(AgentCheckTest):
 
         update_url = urljoin(self.NODE1['server'], 'kennel/{0}'.format(body['_id']))
 
-        for _ in xrange(50):
+        for _ in range(50):
             rev = r.json()['rev']
             body['data'] = str(time.time())
             body['_rev'] = rev
@@ -451,7 +451,7 @@ class TestCouchdb2(AgentCheckTest):
 
     def test_indexing_metrics(self):
         url = urljoin(self.NODE1['server'], 'kennel')
-        for _ in xrange(50):
+        for _ in range(50):
             r = requests.post(url, auth=(self.NODE1['user'], self.NODE1['password']), headers={'Content-Type': 'application/json'}, data=json.dumps({"_id": str(time.time())}))
             r.raise_for_status()
 
@@ -497,7 +497,7 @@ class TestCouchdb2(AgentCheckTest):
                         self.compact_views()
                     theid = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
                     docs.append(self.post_doc(theid))
-                    docs = map(lambda x: self.update_doc(x), docs)
+                    docs = [self.update_doc(x) for x in docs]
                     self.generate_views()
 
             def generate_views(self):

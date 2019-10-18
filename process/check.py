@@ -308,7 +308,7 @@ class ProcessCheck(AgentCheck):
                            'for /%s/%s/stat' % (psutil.PROCFS_PATH, pid))
             return None
 
-        return map(lambda i: int(i), data.split()[9:13])
+        return [int(i) for i in data.split()[9:13]]
 
     def _get_child_processes(self, pids):
         children_pids = set()
@@ -395,7 +395,7 @@ class ProcessCheck(AgentCheck):
         if len(pids) == 0:
             self.warning("No matching process '%s' was found" % name)
 
-        for attr, mname in ATTR_TO_METRIC.iteritems():
+        for attr, mname in ATTR_TO_METRIC.items():
             vals = [x for x in proc_state[attr] if x is not None]
             # skip []
             if vals:
@@ -408,7 +408,7 @@ class ProcessCheck(AgentCheck):
                 else:
                     self.gauge('system.processes.%s' % mname, sum(vals), tags=tags)
 
-        for attr, mname in ATTR_TO_METRIC_RATE.iteritems():
+        for attr, mname in ATTR_TO_METRIC_RATE.items():
             vals = [x for x in proc_state[attr] if x is not None]
             if vals:
                 self.rate('system.processes.%s' % mname, sum(vals), tags=tags)

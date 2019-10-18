@@ -8,7 +8,7 @@ import itertools
 import re
 import socket
 import time
-import xmlrpclib
+import xmlrpc.client
 
 # 3p
 import supervisor.xmlrpc
@@ -62,12 +62,12 @@ class SupervisordCheck(AgentCheck):
         # Gather all process information
         try:
             processes = supe.getAllProcessInfo()
-        except xmlrpclib.Fault as error:
+        except xmlrpc.client.Fault as error:
             raise Exception(
                 'An error occurred while reading process information: %s %s'
                 % (error.faultCode, error.faultString)
             )
-        except socket.error, e:
+        except socket.error as e:
             host = instance.get('host', DEFAULT_HOST)
             port = instance.get('port', DEFAULT_PORT)
             sock = instance.get('socket')
@@ -85,7 +85,7 @@ class SupervisordCheck(AgentCheck):
 
             raise Exception(msg)
 
-        except xmlrpclib.ProtocolError as e:
+        except xmlrpc.client.ProtocolError as e:
             if e.errcode == 401:  # authorization error
                 msg = 'Username or password to %s are incorrect.' % server_name
             else:
@@ -148,14 +148,14 @@ class SupervisordCheck(AgentCheck):
         if sock is not None:
             host = instance.get('host', DEFAULT_SOCKET_IP)
             transport = supervisor.xmlrpc.SupervisorTransport(None, None, sock)
-            server = xmlrpclib.ServerProxy(host, transport=transport)
+            server = xmlrpc.client.ServerProxy(host, transport=transport)
         else:
             host = instance.get('host', DEFAULT_HOST)
             port = instance.get('port', DEFAULT_PORT)
             user = instance.get('user')
             password = instance.get('pass')
             auth = '%s:%s@' % (user, password) if user and password else ''
-            server = xmlrpclib.Server('http://%s%s:%s/RPC2' % (auth, host, port))
+            server = xmlrpc.client.Server('http://%s%s:%s/RPC2' % (auth, host, port))
         return server.supervisor
 
     @staticmethod

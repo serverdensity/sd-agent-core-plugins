@@ -4,7 +4,7 @@
 
 # stdlib
 from datetime import datetime, timedelta
-from urlparse import urljoin
+from urllib.parse import urljoin
 
 # project
 from checks import AgentCheck
@@ -419,7 +419,7 @@ class OpenStackCheck(AgentCheck):
 
     def delete_current_scope(self):
         scope_to_delete = self._current_scope
-        for i_key, scope in self.instance_map.items():
+        for i_key, scope in list(self.instance_map.items()):
             if scope is scope_to_delete:
                 self.log.debug("Deleting current scope: %s", i_key)
                 del self.instance_map[i_key]
@@ -527,7 +527,7 @@ class OpenStackCheck(AgentCheck):
         uptime_sec = uptime.split(',')[0]
 
         return {
-            'loads': map(float, load_averages),
+            'loads': list(map(float, load_averages)),
             'uptime_sec': uptime_sec
         }
 
@@ -626,7 +626,7 @@ class OpenStackCheck(AgentCheck):
             self.service_check(self.HYPERVISOR_SC, AgentCheck.OK,
                                tags=tags)
 
-        for label, val in hyp.iteritems():
+        for label, val in hyp.items():
             if label in NOVA_HYPERVISOR_METRICS:
                 metric_label = "openstack.nova.{0}".format(label)
                 self.gauge(metric_label, val, tags=tags)
@@ -942,7 +942,7 @@ class OpenStackCheck(AgentCheck):
         """
         self.log.info("Collecting external_host_tags now")
         external_host_tags = []
-        for k,v in self.external_host_tags.iteritems():
+        for k,v in self.external_host_tags.items():
             external_host_tags.append((k, {SOURCE_TYPE: v}))
 
         self.log.debug("Sending external_host_tags: %s", external_host_tags)

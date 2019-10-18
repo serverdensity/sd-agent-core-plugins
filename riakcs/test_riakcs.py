@@ -33,7 +33,7 @@ class RiakCSTest(AgentCheckTest):
         def test_parser(self):
             input_json = Fixtures.read_file('riakcs_in.json', sdk_dir=FIXTURE_DIR)
             output_python = Fixtures.read_file('riakcs_out.python', sdk_dir=FIXTURE_DIR)
-            self.assertEquals(self.check.load_json(input_json), eval(output_python))
+            self.assertEqual(self.check.load_json(input_json), eval(output_python))
 
         def test_metrics(self):
             self.run_check(self.config)
@@ -81,7 +81,7 @@ class Riak21CSTest(AgentCheckTest):
         def test_21_parser(self):
             input_json = Fixtures.read_file('riakcs21_in.json', sdk_dir=FIXTURE_DIR)
             output_python = Fixtures.read_file('riakcs21_out.python', sdk_dir=FIXTURE_DIR)
-            self.assertEquals(self.check.load_json(input_json), eval(output_python))
+            self.assertEqual(self.check.load_json(input_json), eval(output_python))
 
         def test_21_metrics(self):
             self.run_check(self.config)

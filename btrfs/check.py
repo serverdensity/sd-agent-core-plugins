@@ -106,7 +106,7 @@ class BTRFS(AgentCheck):
             fcntl.ioctl(fd, BTRFS_IOC_SPACE_INFO, data)
 
         _, total_spaces = TWO_LONGS_STRUCT.unpack_from(ret, 0)
-        for offset in xrange(TWO_LONGS_STRUCT.size,
+        for offset in range(TWO_LONGS_STRUCT.size,
                              buffer_size,
                              THREE_LONGS_STRUCT.size):
 
@@ -128,7 +128,7 @@ class BTRFS(AgentCheck):
         if len(btrfs_devices) == 0:
             raise Exception("No btrfs device found")
 
-        for device, mountpoint in btrfs_devices.iteritems():
+        for device, mountpoint in btrfs_devices.items():
             for flags, total_bytes, used_bytes in self.get_usage(mountpoint):
                 replication_type, usage_type = FLAGS_MAPPER[flags]
                 tags = [

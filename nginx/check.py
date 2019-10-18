@@ -4,7 +4,7 @@
 
 # stdlib
 import re
-import urlparse
+import urllib.parse
 
 # 3rd party
 import requests
@@ -44,8 +44,8 @@ class Nginx(AgentCheck):
         tags = instance.get('tags', [])
 
         response, content_type = self._get_data(instance)
-        self.log.debug(u"Nginx status `response`: {0}".format(response))
-        self.log.debug(u"Nginx status `content_type`: {0}".format(content_type))
+        self.log.debug("Nginx status `response`: {0}".format(response))
+        self.log.debug("Nginx status `content_type`: {0}".format(content_type))
 
         if content_type.startswith('application/json'):
             metrics = self.parse_json(response, tags)
@@ -66,7 +66,7 @@ class Nginx(AgentCheck):
                 func = funcs[metric_type]
                 func(name, value, tags)
             except Exception as e:
-                self.log.error(u'Could not submit metric: %s: %s' % (repr(row), str(e)))
+                self.log.error('Could not submit metric: %s: %s' % (repr(row), str(e)))
 
     def _get_data(self, instance):
         url = instance.get('nginx_status_url')
@@ -77,13 +77,13 @@ class Nginx(AgentCheck):
             auth = (instance['user'], instance['password'])
 
         # Submit a service check for status page availability.
-        parsed_url = urlparse.urlparse(url)
+        parsed_url = urllib.parse.urlparse(url)
         nginx_host = parsed_url.hostname
         nginx_port = parsed_url.port or 80
         service_check_name = 'nginx.can_connect'
         service_check_tags = ['host:%s' % nginx_host, 'port:%s' % nginx_port]
         try:
-            self.log.debug(u"Querying URL: {0}".format(url))
+            self.log.debug("Querying URL: {0}".format(url))
             r = requests.get(url, auth=auth, headers=headers(self.agentConfig),
                              verify=ssl_validation, timeout=self.default_integration_http_timeout)
             r.raise_for_status()
@@ -137,7 +137,7 @@ class Nginx(AgentCheck):
         parsed = json.loads(raw)
         metric_base = 'nginx'
         output = []
-        all_keys = parsed.keys()
+        all_keys = list(parsed.keys())
 
         tagged_keys = [('caches', 'cache'), ('server_zones', 'server_zone'),
                        ('upstreams', 'upstream')]
@@ -146,7 +146,7 @@ class Nginx(AgentCheck):
         # getting concatenated to the metric name
         for key, tag_name in tagged_keys:
             metric_name = '%s.%s' % (metric_base, tag_name)
-            for tag_val, data in parsed.get(key, {}).iteritems():
+            for tag_val, data in parsed.get(key, {}).items():
                 tag = '%s:%s' % (tag_name, tag_val)
                 output.extend(cls._flatten_json(metric_name, data, tags + [tag]))
 
@@ -172,7 +172,7 @@ class Nginx(AgentCheck):
                     tags = [server]
                 else:
                     tags = tags + [server]
-            for key, val2 in val.iteritems():
+            for key, val2 in val.items():
                 metric_name = '%s.%s' % (metric_base, key)
                 output.extend(cls._flatten_json(metric_name, val2, tags))
 

@@ -5,7 +5,7 @@
 
 # stdlib
 from collections import defaultdict
-from urlparse import urlparse
+from urllib.parse import urlparse
 import re
 
 # 3rd party
@@ -72,13 +72,13 @@ class GoExpvar(AgentCheck):
             'ssl_certfile': instance.get('ssl_certfile'),
             'ssl_verify': instance.get('ssl_verify'),
         }
-        for key, param in ssl_params.items():
+        for key, param in list(ssl_params.items()):
             if param is None:
                 del ssl_params[key]
 
         # Load SSL configuration, if available.
         # ssl_verify can be a bool or a string (http://docs.python-requests.org/en/latest/user/advanced/#ssl-cert-verification)
-        if isinstance(ssl_params.get('ssl_verify'), bool) or isinstance(ssl_params.get('ssl_verify'), basestring):
+        if isinstance(ssl_params.get('ssl_verify'), bool) or isinstance(ssl_params.get('ssl_verify'), str):
             verify = ssl_params.get('ssl_verify')
         else:
             verify = None
@@ -241,7 +241,7 @@ class GoExpvar(AgentCheck):
             for new_key, new_content in enumerate(object):
                 yield str(new_key), new_content
         elif isinstance(object, dict):
-            for new_key, new_content in object.iteritems():
+            for new_key, new_content in object.items():
                 yield str(new_key), new_content
         else:
             self.log.warning("Could not parse this object, check the json"

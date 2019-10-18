@@ -26,23 +26,23 @@ def requests_get_mock(*args, **kwargs):
             self.status_code = status_code
 
         def json(self):
-            print self.json_data
+            print(self.json_data)
             return json.loads(self.json_data)
 
         def raise_for_status(self):
             return True
 
-    print 'DEBUG: {0}'.format(args[0])
-    print NAME_SYSTEM_STATE_URL
+    print('DEBUG: {0}'.format(args[0]))
+    print(NAME_SYSTEM_STATE_URL)
 
     if args[0] == NAME_SYSTEM_STATE_URL:
-        print 'here'
+        print('here')
         with open(Fixtures.file('hdfs_namesystem_state', sdk_dir=FIXTURE_DIR), 'r') as f:
             body = f.read()
             return MockResponse(body, 200)
 
     elif args[0] == NAME_SYSTEM_URL:
-        print 'here'
+        print('here')
         with open(Fixtures.file('hdfs_namesystem', sdk_dir=FIXTURE_DIR), 'r') as f:
             body = f.read()
             return MockResponse(body, 200)
@@ -96,8 +96,8 @@ class HDFSNameNode(AgentCheckTest):
 
         self.run_check(config)
 
-        for metric, value in self.HDFS_NAMESYSTEM_STATE_METRICS_VALUES.iteritems():
+        for metric, value in self.HDFS_NAMESYSTEM_STATE_METRICS_VALUES.items():
             self.assertMetric(metric, value=value, tags=self.HDFS_NAMESYSTEM_METRIC_TAGS)
 
-        for metric, value in self.HDFS_NAMESYSTEM_METRICS_VALUES.iteritems():
+        for metric, value in self.HDFS_NAMESYSTEM_METRICS_VALUES.items():
             self.assertMetric(metric, value=value, tags=self.HDFS_NAMESYSTEM_METRIC_TAGS)

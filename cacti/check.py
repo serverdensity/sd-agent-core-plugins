@@ -132,7 +132,7 @@ class Cacti(AgentCheck):
             return metric_count
 
         # Find the consolidation functions for the RRD metrics
-        c_funcs = set([v for k,v in info.items() if k.endswith('.cf')])
+        c_funcs = set([v for k,v in list(info.items()) if k.endswith('.cf')])
 
         for c in list(c_funcs):
             last_ts_key = '%s.%s' % (rrd_path, c)

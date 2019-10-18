@@ -43,7 +43,7 @@ class MoreUnixCheck(AgentCheck):
             "entropy_info": "sys/kernel/random/entropy_avail",
         }
 
-        for key, path in self.proc_path_map.iteritems():
+        for key, path in self.proc_path_map.items():
             self.proc_path_map[key] = "{procfs}/{path}".format(procfs=proc_location, path=path)
 
 

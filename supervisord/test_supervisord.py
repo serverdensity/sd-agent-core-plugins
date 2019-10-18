@@ -5,7 +5,7 @@
 # stdlib
 import os
 import unittest
-import xmlrpclib
+import xmlrpc.client
 from socket import socket
 from nose.plugins.attrib import attr
 import time
@@ -47,16 +47,13 @@ class TestSupervisord(AgentCheckTest):
     }]
 
     def setUp(self):
-        server = xmlrpclib.Server('http://localhost:19001/RPC2')
+        server = xmlrpc.client.Server('http://localhost:19001/RPC2')
         server.supervisor.startAllProcesses()
 
     # Supervisord should run 3 programs for 10, 20 and 30 seconds
     # respectively.
     # The following dictionnary shows the processes by state for each iteration.
-    PROCESSES_BY_STATE_BY_ITERATION = map(
-        lambda x: dict(up=PROCESSES[x:], down=PROCESSES[:x], unknown=[]),
-        range(4)
-    )
+    PROCESSES_BY_STATE_BY_ITERATION = [dict(up=PROCESSES[x:], down=PROCESSES[:x], unknown=[]) for x in range(4)]
 
     def test_check(self):
         """
@@ -357,7 +354,7 @@ instances:
                     check.check(instance)
                 except Exception as e:
                     if 'error_message' in tc:  # excepted error
-                        self.assertEquals(str(e), tc['error_message'])
+                        self.assertEqual(str(e), tc['error_message'])
                     else:
                         self.assertTrue(False, msg=str(e))
                 else:
@@ -414,7 +411,7 @@ Stop time: {time_stop}\nExit Status: 0""".format(
             'api_key': 'tota'
         }
         check = load_check('supervisord', {'init_config': {}, 'instances': self.TEST_CASES[0]['instances']}, agentConfig)
-        self.assertEquals(expected_message, check._build_message(process))
+        self.assertEqual(expected_message, check._build_message(process))
 
     # Helper Methods #######################################################
 
@@ -428,7 +425,7 @@ Stop time: {time_stop}\nExit Status: 0""".format(
 
     def assert_metrics(self, expected, actual):
         actual = [TestSupervisordCheck.norm_metric(metric) for metric in actual]
-        self.assertEquals(len(actual), len(expected), msg='Invalid # metrics reported.\n'
+        self.assertEqual(len(actual), len(expected), msg='Invalid # metrics reported.\n'
             'Expected: {0}. Found: {1}'.format(len(expected), len(actual)))
         self.assertTrue(all([expected_metric in actual for expected_metric in expected]),
             msg='Reported metrics are incorrect.\nExpected: {0}.\n'
@@ -437,7 +434,7 @@ Stop time: {time_stop}\nExit Status: 0""".format(
     def assert_service_checks(self, expected, actual):
         actual = [TestSupervisordCheck.norm_service_check(service_check)
                   for service_check in actual]
-        self.assertEquals(len(actual), len(expected), msg='Invalid # service checks reported.'
+        self.assertEqual(len(actual), len(expected), msg='Invalid # service checks reported.'
             '\nExpected: {0}. Found: {1}.'.format(expected, actual))
         self.assertTrue(all([expected_service_check in actual
                  for expected_service_check in expected]),
@@ -590,8 +587,8 @@ class MockSupervisor:
             socket().connect(('localhost', 38837))
         elif 'invalid_pass' in self.url:
             # Simulate xmlrpc exception for invalid credentials
-            raise xmlrpclib.ProtocolError(self.url[7:], 401,
+            raise xmlrpc.client.ProtocolError(self.url[7:], 401,
                                           'Unauthorized', None)
         elif proc is not None and 'invalid' in proc:
             # Simulate xmlrpc exception for process not found
-            raise xmlrpclib.Fault(10, 'BAD_NAME')
+            raise xmlrpc.client.Fault(10, 'BAD_NAME')

@@ -364,7 +364,7 @@ SELECT s.schemaname,
             cursor.execute('SHOW SERVER_VERSION;')
             result = cursor.fetchone()
             try:
-                version = map(int, result[0].split('.'))
+                version = list(map(int, result[0].split('.')))
             except Exception:
                 version = result[0]
             self.versions[key] = version
@@ -573,13 +573,13 @@ SELECT s.schemaname,
                     log_func = self.log.warning
 
                 # build query
-                cols = scope['metrics'].keys()  # list of metrics to query, in some order
+                cols = list(scope['metrics'].keys())  # list of metrics to query, in some order
                 # we must remember that order to parse results
 
                 try:
                     # if this is a relation-specific query, we need to list all relations last
                     if scope['relation'] and len(relations) > 0:
-                        relnames = ', '.join("'{0}'".format(w) for w in relations_config.iterkeys())
+                        relnames = ', '.join("'{0}'".format(w) for w in relations_config.keys())
                         query = scope['query'] % (", ".join(cols), "%s")  # Keep the last %s intact
                         self.log.debug("Running query: %s with relations: %s" % (query, relnames))
                         cursor.execute(query % (relnames))
@@ -619,7 +619,7 @@ SELECT s.schemaname,
                     assert len(row) == len(cols) + len(desc)
 
                     # build a map of descriptors and their values
-                    desc_map = dict(zip([x[1] for x in desc], row[0:len(desc)]))
+                    desc_map = dict(list(zip([x[1] for x in desc], row[0:len(desc)])))
                     if 'schema' in desc_map and relations:
                         try:
                             relname = desc_map['table']
@@ -639,12 +639,12 @@ SELECT s.schemaname,
                     else:
                         tags = [t for t in instance_tags]
 
-                    tags += [("%s:%s" % (k,v)) for (k,v) in desc_map.iteritems()]
+                    tags += [("%s:%s" % (k,v)) for (k,v) in desc_map.items()]
 
                     # [(metric-map, value), (metric-map, value), ...]
                     # metric-map is: (dd_name, "rate"|"gauge")
                     # shift the results since the first columns will be the "descriptors"
-                    values = zip([scope['metrics'][c] for c in cols], row[len(desc):])
+                    values = list(zip([scope['metrics'][c] for c in cols], row[len(desc):]))
 
                     # To submit simply call the function for each value v
                     # v[0] == (metric_name, submit_function)
@@ -691,7 +691,7 @@ SELECT s.schemaname,
                     connection = connect_fct(host=host, user=user, password=password,
                         database=dbname, ssl=ssl)
             except Exception as e:
-                message = u'Error establishing postgres connection: %s' % (str(e))
+                message = 'Error establishing postgres connection: %s' % (str(e))
                 service_check_tags = self._get_service_check_tags(host, port, dbname)
                 self.service_check(self.SERVICE_CHECK_NAME, AgentCheck.CRITICAL,
                     tags=service_check_tags, message=message)
@@ -721,7 +721,7 @@ SELECT s.schemaname,
             self.log.debug("Metric: {0}".format(m))
 
             try:
-                for ref, (_, mtype) in m['metrics'].iteritems():
+                for ref, (_, mtype) in m['metrics'].items():
                     cap_mtype = mtype.upper()
                     if cap_mtype not in ('RATE', 'GAUGE', 'MONOTONIC'):
                         raise CheckException("Collector method {0} is not known."
@@ -793,7 +793,7 @@ SELECT s.schemaname,
 
         if db is not None:
             service_check_tags = self._get_service_check_tags(host, port, dbname)
-            message = u'Established connection to postgres://%s:%s/%s' % (host, port, dbname)
+            message = 'Established connection to postgres://%s:%s/%s' % (host, port, dbname)
             self.service_check(self.SERVICE_CHECK_NAME, AgentCheck.OK,
                 tags=service_check_tags, message=message)
             try:

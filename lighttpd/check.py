@@ -4,7 +4,7 @@
 
 # stdlib
 import re
-import urlparse
+import urllib.parse
 
 # 3rd party
 import requests
@@ -88,7 +88,7 @@ class Lighttpd(AgentCheck):
             auth = (instance['user'], instance['password'])
 
         # Submit a service check for status page availability.
-        parsed_url = urlparse.urlparse(url)
+        parsed_url = urllib.parse.urlparse(url)
         lighttpd_url = parsed_url.hostname
         lighttpd_port = parsed_url.port or 80
         service_check_tags = ['host:%s' % lighttpd_url, 'port:%s' % lighttpd_port]

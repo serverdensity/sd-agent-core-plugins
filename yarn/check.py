@@ -80,7 +80,7 @@ yarn.queue.maxApplicationsPerUser       The maximum number of active application
 
 '''
 # stdlib
-from urlparse import urljoin, urlsplit, urlunsplit
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 # 3rd party
 from requests.exceptions import Timeout, HTTPError, InvalidURL, ConnectionError
@@ -230,7 +230,7 @@ class YarnCheck(AgentCheck):
             app_tags = {}
 
         filtered_app_tags = {}
-        for dd_prefix, yarn_key in app_tags.iteritems():
+        for dd_prefix, yarn_key in app_tags.items():
             if yarn_key in self._ALLOWED_APPLICATION_TAGS:
                 filtered_app_tags[dd_prefix] = yarn_key
         app_tags = filtered_app_tags
@@ -290,7 +290,7 @@ class YarnCheck(AgentCheck):
             for app_json in metrics_json['apps']['app']:
 
                 tags = []
-                for dd_tag, yarn_key in app_tags.iteritems():
+                for dd_tag, yarn_key in app_tags.items():
                     try:
                         val = app_json[yarn_key]
                         if val:
@@ -370,7 +370,7 @@ class YarnCheck(AgentCheck):
         '''
         Parse the JSON response and set the metrics
         '''
-        for dict_path, metric in yarn_metrics.iteritems():
+        for dict_path, metric in yarn_metrics.items():
             metric_name, metric_type = metric
 
             metric_value = self._get_value_from_json(dict_path, metrics_json)
@@ -425,7 +425,7 @@ class YarnCheck(AgentCheck):
 
         # Add kwargs as arguments
         if kwargs:
-            query = '&'.join(['{0}={1}'.format(key, value) for key, value in kwargs.iteritems()])
+            query = '&'.join(['{0}={1}'.format(key, value) for key, value in kwargs.items()])
             url = urljoin(url, '?' + query)
 
         try:

@@ -74,7 +74,7 @@ spark.rdd.disk_used
 '''
 
 # stdlib
-from urlparse import urljoin, urlsplit, urlunsplit, urlparse
+from urllib.parse import urljoin, urlsplit, urlunsplit, urlparse
 
 # 3rd party
 import requests
@@ -225,7 +225,7 @@ class SparkCheck(AgentCheck):
 
         # Report success after gathering all metrics from the ApplicationMaster
         if spark_apps:
-            app_id, (app_name, tracking_url) = spark_apps.items()[0]
+            app_id, (app_name, tracking_url) = list(spark_apps.items())[0]
             base_url = self._get_request_url(instance, tracking_url)
             am_address = self._get_url_base(base_url)
 
@@ -452,7 +452,7 @@ class SparkCheck(AgentCheck):
         Return a dictionary of {app_id: (app_name, tracking_url)} for Spark applications
         '''
         spark_apps = {}
-        for app_id, (app_name, tracking_url) in running_apps.iteritems():
+        for app_id, (app_name, tracking_url) in running_apps.items():
             response = self._rest_request_to_json(tracking_url,
                 SPARK_APPS_PATH,
                 SPARK_SERVICE_CHECK)
@@ -470,7 +470,7 @@ class SparkCheck(AgentCheck):
         '''
         Get metrics for each Spark job.
         '''
-        for app_id, (app_name, tracking_url) in running_apps.iteritems():
+        for app_id, (app_name, tracking_url) in running_apps.items():
 
             base_url = self._get_request_url(instance, tracking_url)
             response = self._rest_request_to_json(base_url,
@@ -492,7 +492,7 @@ class SparkCheck(AgentCheck):
         '''
         Get metrics for each Spark stage.
         '''
-        for app_id, (app_name, tracking_url) in running_apps.iteritems():
+        for app_id, (app_name, tracking_url) in running_apps.items():
 
             base_url = self._get_request_url(instance, tracking_url)
             response = self._rest_request_to_json(base_url,
@@ -514,7 +514,7 @@ class SparkCheck(AgentCheck):
         '''
         Get metrics for each Spark executor.
         '''
-        for app_id, (app_name, tracking_url) in running_apps.iteritems():
+        for app_id, (app_name, tracking_url) in running_apps.items():
 
             base_url = self._get_request_url(instance, tracking_url)
             response = self._rest_request_to_json(base_url,
@@ -537,7 +537,7 @@ class SparkCheck(AgentCheck):
         '''
         Get metrics for each Spark RDD.
         '''
-        for app_id, (app_name, tracking_url) in running_apps.iteritems():
+        for app_id, (app_name, tracking_url) in running_apps.items():
 
             base_url = self._get_request_url(instance, tracking_url)
             response = self._rest_request_to_json(base_url,
@@ -557,7 +557,7 @@ class SparkCheck(AgentCheck):
         '''
         Parse the JSON response and set the metrics
         '''
-        for status, (metric_name, metric_type) in metrics.iteritems():
+        for status, (metric_name, metric_type) in metrics.items():
             metric_status = metrics_json.get(status)
 
             if metric_status is not None:
@@ -594,7 +594,7 @@ class SparkCheck(AgentCheck):
 
         # Add kwargs as arguments
         if kwargs:
-            query = '&'.join(['{0}={1}'.format(key, value) for key, value in kwargs.iteritems()])
+            query = '&'.join(['{0}={1}'.format(key, value) for key, value in kwargs.items()])
             url = urljoin(url, '?' + query)
 
         try:

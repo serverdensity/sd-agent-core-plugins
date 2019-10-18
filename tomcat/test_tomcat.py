@@ -93,6 +93,6 @@ class TestTomcat(unittest.TestCase):
 
         self.assertTrue(isinstance(metrics, ListType))
         self.assertTrue(len(metrics) > 0)
-        self.assertEquals(len([t for t in metrics if t['metric'] == "tomcat.threads.busy" and "instance:tomcat_instance" in t['tags']]), 2, metrics)
-        self.assertEquals(len([t for t in metrics if t['metric'] == "tomcat.bytes_sent" and "instance:tomcat_instance" in t['tags']]), 0, metrics)
+        self.assertEqual(len([t for t in metrics if t['metric'] == "tomcat.threads.busy" and "instance:tomcat_instance" in t['tags']]), 2, metrics)
+        self.assertEqual(len([t for t in metrics if t['metric'] == "tomcat.bytes_sent" and "instance:tomcat_instance" in t['tags']]), 0, metrics)
         self.assertTrue(len([t for t in metrics if "jvm." in t['metric'] and "instance:tomcat_instance" in t['tags']]) > 4, metrics)

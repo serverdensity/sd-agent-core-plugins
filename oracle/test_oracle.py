@@ -85,7 +85,7 @@ class TestOracle(AgentCheckTest):
         cursor.execute("truncate table TestTempTable")
 
         # insert
-        rows = [{u"value": n} for n in range(250)]
+        rows = [{"value": n} for n in range(250)]
         cursor.arraysize = 100
         statement = "insert into TestTempTable (IntCol) values (:value)"
         cursor.executemany(statement, rows)

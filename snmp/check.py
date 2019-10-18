@@ -453,7 +453,7 @@ class SnmpCheck(NetworkCheck):
                         self.log.warning("No indication on what value to use for this tag")
 
                 for value_to_collect in metric.get("symbols", []):
-                    for index, val in results[value_to_collect].items():
+                    for index, val in list(results[value_to_collect].items()):
                         metric_tags = tags + self.get_index_tags(index, results,
                                                                  index_based_tags,
                                                                  column_based_tags)
@@ -461,7 +461,7 @@ class SnmpCheck(NetworkCheck):
 
             elif 'symbol' in metric:
                 name = metric['symbol']
-                result = results[name].items()
+                result = list(results[name].items())
                 if len(result) > 1:
                     self.log.warning("Several rows corresponding while the metric is supposed to be a scalar")
                     continue

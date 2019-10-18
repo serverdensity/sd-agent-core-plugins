@@ -101,10 +101,10 @@ class Twemproxy(AgentCheck):
         tags = instance.get('tags', [])
 
         response = self._get_data(instance)
-        self.log.debug(u"Twemproxy `response`: {0}".format(response))
+        self.log.debug("Twemproxy `response`: {0}".format(response))
 
         if not response:
-            self.log.warning(u"No response received from twemproxy.")
+            self.log.warning("No response received from twemproxy.")
             return
 
         metrics = Twemproxy.parse_json(response, tags)
@@ -115,9 +115,9 @@ class Twemproxy(AgentCheck):
                     self.gauge(name, value, tags)
                 else:
                     self.rate(name, value, tags)
-            except Exception, e:
+            except Exception as e:
                 self.log.error(
-                    u'Could not submit metric: %s: %s',
+                    'Could not submit metric: %s: %s',
                     repr(row), str(e)
                 )
 
@@ -142,7 +142,7 @@ class Twemproxy(AgentCheck):
                     client = socket.socket(*addr[0:3])
                     client.connect(addr[-1])
 
-                    self.log.debug(u"Querying: {0}:{1}".format(host, port))
+                    self.log.debug("Querying: {0}:{1}".format(host, port))
                     while 1:
                         data = client.recv(1024)
                         if not data:
@@ -167,11 +167,11 @@ class Twemproxy(AgentCheck):
         metric_base = 'twemproxy'
         output = []
 
-        for key, val in parsed.iteritems():
+        for key, val in parsed.items():
             if isinstance(val, dict):
                 # server pool
                 pool_tags = tags + ['pool:%s' % key]
-                for server_key, server_val in val.iteritems():
+                for server_key, server_val in val.items():
                     if isinstance(server_val, dict):
                         # server
                         server_tags = pool_tags + ['server:%s' % server_key]

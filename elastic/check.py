@@ -5,7 +5,7 @@
 # stdlib
 from collections import defaultdict, namedtuple
 import time
-import urlparse
+import urllib.parse
 
 # 3p
 import requests
@@ -364,7 +364,7 @@ class ESCheck(AgentCheck):
         pending_task_stats = _is_affirmative(instance.get('pending_task_stats', True))
         # Support URLs that have a path in them from the config, for
         # backwards-compatibility.
-        parsed = urlparse.urlparse(url)
+        parsed = urllib.parse.urlparse(url)
         if parsed[2] != "":
             url = "%s://%s" % (parsed[0], parsed[1])
         port = parsed.port
@@ -415,7 +415,7 @@ class ESCheck(AgentCheck):
         # This must happen before other URL processing as the cluster name
         # is retreived here, and added to the tag list.
 
-        stats_url = urlparse.urljoin(config.url, stats_url)
+        stats_url = urllib.parse.urljoin(config.url, stats_url)
         stats_data = self._get_data(stats_url, config)
         if stats_data['cluster_name']:
             # retreive the cluster name from the data, and append it to the
@@ -427,7 +427,7 @@ class ESCheck(AgentCheck):
         # Note: this is a cluster-wide query, might TO.
         if config.pshard_stats:
             send_sc = bubble_ex = not config.pshard_graceful_to
-            pshard_stats_url = urlparse.urljoin(config.url, pshard_stats_url)
+            pshard_stats_url = urllib.parse.urljoin(config.url, pshard_stats_url)
             try:
                 pshard_stats_data = self._get_data(pshard_stats_url, config, send_sc=send_sc)
                 self._process_pshard_stats_data(pshard_stats_data, config, pshard_stats_metrics)
@@ -438,13 +438,13 @@ class ESCheck(AgentCheck):
 
 
         # Load the health data.
-        health_url = urlparse.urljoin(config.url, health_url)
+        health_url = urllib.parse.urljoin(config.url, health_url)
         health_data = self._get_data(health_url, config)
         self._process_health_data(health_data, config)
 
         if config.pending_task_stats:
             # Load the pending_tasks data.
-            pending_tasks_url = urlparse.urljoin(config.url, pending_tasks_url)
+            pending_tasks_url = urllib.parse.urljoin(config.url, pending_tasks_url)
             pending_tasks_data = self._get_data(pending_tasks_url, config)
             self._process_pending_tasks_data(pending_tasks_data, config)
 
@@ -463,7 +463,7 @@ class ESCheck(AgentCheck):
             # pre-release versions of elasticearch are suffixed with -rcX etc..
             # peel that off so that the map below doesn't error out
             version = data['version']['number'].split('-')[0]
-            version = map(int, version.split('.')[0:3])
+            version = list(map(int, version.split('.')[0:3]))
         except Exception as e:
             self.warning(
                 "Error while trying to get Elasticsearch version "
@@ -631,7 +631,7 @@ class ESCheck(AgentCheck):
 
     def _process_stats_data(self, data, stats_metrics, config):
         cluster_stats = config.cluster_stats
-        for node_data in data['nodes'].itervalues():
+        for node_data in data['nodes'].values():
             metric_hostname = None
             metrics_tags = list(config.tags)
 
@@ -639,7 +639,7 @@ class ESCheck(AgentCheck):
             node_name = node_data.get('name')
             if node_name:
                 metrics_tags.append(
-                    u"node_name:{}".format(node_name)
+                    "node_name:{}".format(node_name)
                 )
 
             # Resolve the node's hostname
@@ -649,14 +649,14 @@ class ESCheck(AgentCheck):
                         metric_hostname = node_data[k]
                         break
 
-            for metric, desc in stats_metrics.iteritems():
+            for metric, desc in stats_metrics.items():
                 self._process_metric(
                     node_data, metric, *desc,
                     tags=metrics_tags, hostname=metric_hostname
                 )
 
     def _process_pshard_stats_data(self, data, config, pshard_stats_metrics):
-        for metric, desc in pshard_stats_metrics.iteritems():
+        for metric, desc in pshard_stats_metrics.items():
             self._process_metric(data, metric, *desc, tags=config.tags)
 
     def _process_metric(self, data, metric, xtype, path, xform=None,
@@ -697,7 +697,7 @@ class ESCheck(AgentCheck):
             event = self._create_event(data['status'], tags=config.tags)
             self.event(event)
 
-        for metric, desc in self.CLUSTER_HEALTH_METRICS.iteritems():
+        for metric, desc in self.CLUSTER_HEALTH_METRICS.items():
             self._process_metric(data, metric, *desc, tags=config.tags)
 
         # Process the service check

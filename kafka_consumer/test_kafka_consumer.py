@@ -108,7 +108,7 @@ class ZKConsumer(threading.Thread):
         while not SHUTDOWN.is_set():
             response = consumer.poll(timeout_ms=500, max_records=10)
             zk_trans = zk_conn.transaction()
-            for tp, records in response.iteritems():
+            for tp, records in response.items():
                 topic = tp.topic
                 partition = tp.partition
 
@@ -233,8 +233,8 @@ class TestKafka(AgentCheckTest):
         self.run_check({'instances': instances})
 
         for instance in instances:
-            for name, consumer_group in instance['consumer_groups'].iteritems():
-                for topic, partitions in consumer_group.iteritems():
+            for name, consumer_group in instance['consumer_groups'].items():
+                for topic, partitions in consumer_group.items():
                     for partition in partitions:
                         tags = ["topic:{}".format(topic),
                                 "partition:{}".format(partition)]
@@ -264,8 +264,8 @@ class TestKafka(AgentCheckTest):
         self.run_check({'instances': instances})
 
         for instance in instances:
-            for name, consumer_group in instance['consumer_groups'].iteritems():
-                for topic, partitions in consumer_group.iteritems():
+            for name, consumer_group in instance['consumer_groups'].items():
+                for topic, partitions in consumer_group.items():
                     for partition in partitions:
                         tags = ["topic:{}".format(topic),
                                 "partition:{}".format(partition)]
@@ -318,8 +318,8 @@ class TestKafka(AgentCheckTest):
         self.run_check({'instances': instances})
 
         for instance in instances:
-            for name, consumer_group in instance['consumer_groups'].iteritems():
-                for topic, partitions in consumer_group.iteritems():
+            for name, consumer_group in instance['consumer_groups'].items():
+                for topic, partitions in consumer_group.items():
                     for partition in partitions:
                         tags = ["topic:{}".format(topic),
                                 "partition:{}".format(partition)]

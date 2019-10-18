@@ -127,7 +127,7 @@ class Ceph(AgentCheck):
             # so we won't send the metric osd.pct_used
             if 'checks' in raw['health_detail']:
                 checks = raw['health_detail']['checks']
-                for check_name, check_detail in checks.iteritems():
+                for check_name, check_detail in checks.items():
                     if check_name == 'OSD_NEARFULL':
                         health['num_near_full_osds'] = len(check_detail['detail'])
                     if check_name == 'OSD_FULL':

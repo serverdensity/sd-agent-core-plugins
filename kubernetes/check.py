@@ -252,7 +252,7 @@ class Kubernetes(AgentCheck):
                 self.publish_gauge(self, metric, float(dat), tags)
 
         elif isinstance(dat, dict):
-            for k, v in dat.iteritems():
+            for k, v in dat.items():
                 self._publish_raw_metrics(metric + '.%s' % k.lower(), v, tags, depth + 1)
 
         elif isinstance(dat, list):
@@ -271,9 +271,9 @@ class Kubernetes(AgentCheck):
         # kube_container_name is the name of the Kubernetes container resource,
         # not the name of the docker container (that's tagged as container_name)
         kube_container_name = cont_labels[KubeUtil.CONTAINER_NAME_LABEL]
-        tags.append(u"pod_name:{0}".format(pod_name))
-        tags.append(u"kube_namespace:{0}".format(pod_namespace))
-        tags.append(u"kube_container_name:{0}".format(kube_container_name))
+        tags.append("pod_name:{0}".format(pod_name))
+        tags.append("kube_namespace:{0}".format(pod_namespace))
+        tags.append("kube_container_name:{0}".format(kube_container_name))
 
         kube_labels_key = "{0}/{1}".format(pod_namespace, pod_name)
 
@@ -297,7 +297,7 @@ class Kubernetes(AgentCheck):
         tags = []
 
         pod_name = cont_labels[KubeUtil.POD_NAME_LABEL]
-        tags.append(u"pod_name:{0}".format(pod_name))
+        tags.append("pod_name:{0}".format(pod_name))
 
         pod_labels = kube_labels.get(pod_name)
         if pod_labels:
@@ -307,14 +307,14 @@ class Kubernetes(AgentCheck):
             replication_controller = "-".join(pod_name.split("-")[:-1])
             if "/" in replication_controller:
                 namespace, replication_controller = replication_controller.split("/", 1)
-                tags.append(u"kube_namespace:%s" % namespace)
+                tags.append("kube_namespace:%s" % namespace)
 
-            tags.append(u"kube_replication_controller:%s" % replication_controller)
+            tags.append("kube_replication_controller:%s" % replication_controller)
 
         if self.publish_aliases and subcontainer.get("aliases"):
             for alias in subcontainer['aliases'][1:]:
                 # we don't add the first alias as it will be the container_name
-                tags.append(u"container_alias:%s" % (self._shorten_name(alias)))
+                tags.append("container_alias:%s" % (self._shorten_name(alias)))
 
         return tags
 
@@ -449,7 +449,7 @@ class Kubernetes(AgentCheck):
 
                 # limits
                 try:
-                    for limit, value_str in container['resources']['limits'].iteritems():
+                    for limit, value_str in container['resources']['limits'].items():
                         values = [parse_quantity(s) for s in QUANTITY_EXP.findall(value_str)]
                         if len(values) != 1:
                             self.log.warning("Error parsing limits value string: %s", value_str)
@@ -460,7 +460,7 @@ class Kubernetes(AgentCheck):
 
                 # requests
                 try:
-                    for request, value_str in container['resources']['requests'].iteritems():
+                    for request, value_str in container['resources']['requests'].items():
                         values = [parse_quantity(s) for s in QUANTITY_EXP.findall(value_str)]
                         if len(values) != 1:
                             self.log.warning("Error parsing requests value string: %s", value_str)
@@ -503,7 +503,7 @@ class Kubernetes(AgentCheck):
             tags_map[frozenset(pod_tags)] += 1
 
         commmon_tags = instance.get('tags', [])
-        for pod_tags, pod_count in tags_map.iteritems():
+        for pod_tags, pod_count in tags_map.items():
             tags = list(pod_tags)
             tags.extend(commmon_tags)
             self.publish_gauge(self, NAMESPACE + '.pods.running', pod_count, tags)

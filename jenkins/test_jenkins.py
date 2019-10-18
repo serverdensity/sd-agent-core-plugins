@@ -34,7 +34,7 @@ instances:
 def dict_to_xml(metadata_dict):
     """ Convert a dict to xml for use in a build.xml file """
     build = ET.Element('build')
-    for k, v in metadata_dict.iteritems():
+    for k, v in metadata_dict.items():
         node = ET.SubElement(build, k)
         node.text = v
 

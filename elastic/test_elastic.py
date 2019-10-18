@@ -332,8 +332,8 @@ class TestElastic(AgentCheckTest):
             "api_key": "bar"
         }
 
-        tags = [u"foo:bar", u"baz"]
-        cluster_tag = [u"cluster_name:elasticsearch"]
+        tags = ["foo:bar", "baz"]
+        cluster_tag = ["cluster_name:elasticsearch"]
         url = 'http://localhost:{0}'.format(port)
         bad_url = 'http://localhost:{0}'.format(bad_port)
 
@@ -358,7 +358,7 @@ class TestElastic(AgentCheckTest):
         instance_config = self.check.get_instance_config(config['instances'][0])
         es_version = self.check._get_es_version(instance_config)
 
-        self.assertEquals(es_version, get_es_version())
+        self.assertEqual(es_version, get_es_version())
 
         if es_version >= [0, 90, 5]:
             expected_metrics.update(ADDITIONAL_METRICS_POST_0_90_5)
@@ -415,7 +415,7 @@ class TestElastic(AgentCheckTest):
             set(CLUSTER_PENDING_TASKS.keys())
         )
 
-        for m_name, desc in expected_metrics.iteritems():
+        for m_name, desc in expected_metrics.items():
             for hostname, m_tags in contexts:
                 m_tags = m_tags + cluster_tag
                 if (m_name in CLUSTER_HEALTH_METRICS and
@@ -423,7 +423,7 @@ class TestElastic(AgentCheckTest):
                     hostname = conf_hostname
 
                 if m_name in stats_keys:
-                    m_tags = m_tags + [u"node_name:batman"]
+                    m_tags = m_tags + ["node_name:batman"]
 
                 if desc[0] == "gauge":
                     self.assertMetric(
@@ -477,13 +477,13 @@ class TestElastic(AgentCheckTest):
         }
 
         c = check.get_instance_config(instance)
-        self.assertEquals(c.username, "user")
-        self.assertEquals(c.password, "pass")
-        self.assertEquals(c.cluster_stats, True)
-        self.assertEquals(c.url, "http://foo.bar")
-        self.assertEquals(c.tags, ["url:http://foo.bar", "a", "b:c"])
-        self.assertEquals(c.timeout, check.DEFAULT_TIMEOUT)
-        self.assertEquals(c.service_check_tags, ["host:foo.bar", "port:None", "a", "b:c"])
+        self.assertEqual(c.username, "user")
+        self.assertEqual(c.password, "pass")
+        self.assertEqual(c.cluster_stats, True)
+        self.assertEqual(c.url, "http://foo.bar")
+        self.assertEqual(c.tags, ["url:http://foo.bar", "a", "b:c"])
+        self.assertEqual(c.timeout, check.DEFAULT_TIMEOUT)
+        self.assertEqual(c.service_check_tags, ["host:foo.bar", "port:None", "a", "b:c"])
 
         instance = {
             "url": "http://192.168.42.42:12999",
@@ -491,13 +491,13 @@ class TestElastic(AgentCheckTest):
         }
 
         c = check.get_instance_config(instance)
-        self.assertEquals(c.username, None)
-        self.assertEquals(c.password, None)
-        self.assertEquals(c.cluster_stats, False)
-        self.assertEquals(c.url, "http://192.168.42.42:12999")
-        self.assertEquals(c.tags, ["url:http://192.168.42.42:12999"])
-        self.assertEquals(c.timeout, 15)
-        self.assertEquals(c.service_check_tags,
+        self.assertEqual(c.username, None)
+        self.assertEqual(c.password, None)
+        self.assertEqual(c.cluster_stats, False)
+        self.assertEqual(c.url, "http://192.168.42.42:12999")
+        self.assertEqual(c.tags, ["url:http://192.168.42.42:12999"])
+        self.assertEqual(c.timeout, 15)
+        self.assertEqual(c.service_check_tags,
                           ["host:192.168.42.42", "port:12999"])
 
         instance = {
@@ -510,16 +510,16 @@ class TestElastic(AgentCheckTest):
         }
 
         c = check.get_instance_config(instance)
-        self.assertEquals(c.username, "user")
-        self.assertEquals(c.password, "pass")
-        self.assertEquals(c.cluster_stats, False)
-        self.assertEquals(c.url, "https://foo.bar:9200")
-        self.assertEquals(c.tags, ["url:https://foo.bar:9200"])
-        self.assertEquals(c.timeout, check.DEFAULT_TIMEOUT)
-        self.assertEquals(c.service_check_tags, ["host:foo.bar", "port:9200"])
-        self.assertEquals(c.ssl_verify, "true")
-        self.assertEquals(c.ssl_cert, "/path/to/cert.pem")
-        self.assertEquals(c.ssl_key, "/path/to/cert.key")
+        self.assertEqual(c.username, "user")
+        self.assertEqual(c.password, "pass")
+        self.assertEqual(c.cluster_stats, False)
+        self.assertEqual(c.url, "https://foo.bar:9200")
+        self.assertEqual(c.tags, ["url:https://foo.bar:9200"])
+        self.assertEqual(c.timeout, check.DEFAULT_TIMEOUT)
+        self.assertEqual(c.service_check_tags, ["host:foo.bar", "port:9200"])
+        self.assertEqual(c.ssl_verify, "true")
+        self.assertEqual(c.ssl_cert, "/path/to/cert.pem")
+        self.assertEqual(c.ssl_key, "/path/to/cert.key")
 
     def test_health_event(self):
         dummy_tags = ['foo:bar', 'elastique:recherche']
@@ -533,9 +533,9 @@ class TestElastic(AgentCheckTest):
         requests.put('http://localhost:9200/_settings', data='{"index": {"number_of_replicas": 1}}')
         self.run_check(config)
 
-        self.assertEquals(len(self.events), 1)
+        self.assertEqual(len(self.events), 1)
         self.assertIn('yellow', self.events[0]['msg_title'])
-        self.assertEquals(
+        self.assertEqual(
             ['url:http://localhost:9200'] + dummy_tags + server_tags,
             self.events[0]['tags']
         )
@@ -551,9 +551,9 @@ class TestElastic(AgentCheckTest):
         # Now shards should be green
         self.run_check(config)
 
-        self.assertEquals(len(self.events), 1)
+        self.assertEqual(len(self.events), 1)
         self.assertIn('green', self.events[0]['msg_title'])
-        self.assertEquals(
+        self.assertEqual(
             ['url:http://localhost:9200'] + dummy_tags + server_tags,
             self.events[0]['tags']
         )
@@ -591,7 +591,7 @@ class TestElastic(AgentCheckTest):
         if get_es_version() >= [1, 0, 0]:
             pshard_stats_metrics.update(PRIMARY_SHARD_METRICS_POST_1_0)
 
-        for m_name, desc in pshard_stats_metrics.iteritems():
+        for m_name, desc in pshard_stats_metrics.items():
             if desc[0] == "gauge":
                 self.assertMetric(m_name, count=1)
 

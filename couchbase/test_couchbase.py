@@ -45,7 +45,7 @@ class TestCouchbase(AgentCheckTest):
             '@@@super--$$-Funky__$__$$%' : 'super_funky',
         }
 
-        for test_input, expected_output in test_pairs.items():
+        for test_input, expected_output in list(test_pairs.items()):
             test_output = self.check.camel_case_to_joined_lower(test_input)
             self.assertEqual(test_output, expected_output,
                 'Input was %s, expected output was %s, actual output was %s' % (test_input, expected_output, test_output))
@@ -55,10 +55,10 @@ class TestCouchbase(AgentCheckTest):
             '3.45s': 3.45,
             '12ms': .012,
             '700.5us': .0007005,
-            u'733.364\u00c2s': .000733364,
+            '733.364\u00c2s': .000733364,
         }
 
-        for test_input, expected_output in test_pairs.items():
+        for test_input, expected_output in list(test_pairs.items()):
             test_output = self.check.extract_seconds_value(test_input)
             self.assertEqual(test_output, expected_output,
                 'Input was %s, expected output was %s, actual output was %s' % (test_input, expected_output, test_output))
@@ -70,10 +70,10 @@ class TestCouchbase(AgentCheckTest):
         metrics = self.check.get_metrics()
 
         camel_cased_metrics = [
-            u'couchbase.hdd.used_by_data',
-            u'couchbase.ram.used_by_data',
-            u'couchbase.ram.quota_total',
-            u'couchbase.ram.quota_used',
+            'couchbase.hdd.used_by_data',
+            'couchbase.ram.used_by_data',
+            'couchbase.ram.quota_total',
+            'couchbase.ram.quota_used',
         ]
 
         found_metrics = [k[0] for k in metrics if k[0] in camel_cased_metrics]

@@ -6,8 +6,8 @@
 # stdlib
 import re
 import time
-import urllib
-import urlparse
+import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 from collections import defaultdict
 
 # 3p
@@ -157,7 +157,7 @@ class RabbitMQ(AgentCheck):
         username = instance.get('rabbitmq_user', 'guest')
         password = instance.get('rabbitmq_pass', 'guest')
         custom_tags = instance.get('tags', [])
-        parsed_url = urlparse.urlparse(base_url)
+        parsed_url = urllib.parse.urlparse(base_url)
         if not parsed_url.scheme or "://" not in parsed_url.geturl():
             self.log.warning('The rabbit url did not include a protocol, assuming http')
             # urlparse.urljoin cannot add a protocol to the rest of the url for some reason.
@@ -166,7 +166,7 @@ class RabbitMQ(AgentCheck):
             # urlparse also has a known issue parsing url with no schema, but a port in the host section
             # mistakingly taking the host for the schema, hence the additional validation
             base_url = 'http://' + base_url
-            parsed_url = urlparse.urlparse(base_url)
+            parsed_url = urllib.parse.urlparse(base_url)
 
         ssl_verify = _is_affirmative(instance.get('ssl_verify', True))
         if not ssl_verify and parsed_url.scheme == 'https':
@@ -195,8 +195,8 @@ class RabbitMQ(AgentCheck):
             },
         }
 
-        for object_type, filters in specified.iteritems():
-            for filter_type, filter_objects in filters.iteritems():
+        for object_type, filters in specified.items():
+            for filter_type, filter_objects in filters.items():
                 if type(filter_objects) != list:
                     raise TypeError(
                         "{0} / {0}_regexes parameter must be a list".format(object_type))
@@ -210,7 +210,7 @@ class RabbitMQ(AgentCheck):
 
         if not vhosts:
             # Fetch a list of _all_ vhosts from the API.
-            vhosts_url = urlparse.urljoin(base_url, 'vhosts')
+            vhosts_url = urllib.parse.urljoin(base_url, 'vhosts')
             vhost_proxy = self.get_instance_proxy(instance, vhosts_url)
             vhosts_response = self._get_data(vhosts_url, auth=auth, ssl_verify=ssl_verify, proxies=vhost_proxy)
             vhosts = [v['name'] for v in vhosts_response]
@@ -255,7 +255,7 @@ class RabbitMQ(AgentCheck):
             # tag every vhost as CRITICAL or they would keep the latest value, OK, in case the RabbitMQ server goes down
             self.log.error("error while contacting rabbitmq (%s), setting aliveness to CRITICAL for vhosts: %s" % (base_url, self.cached_vhosts))
             for vhost in self.cached_vhosts.get(base_url, []):
-                self.service_check('rabbitmq.aliveness', AgentCheck.CRITICAL, ['vhost:%s' % vhost] + custom_tags, message=u"Could not contact aliveness API")
+                self.service_check('rabbitmq.aliveness', AgentCheck.CRITICAL, ['vhost:%s' % vhost] + custom_tags, message="Could not contact aliveness API")
 
     def _get_data(self, url, auth=None, ssl_verify=True, proxies={}):
         try:
@@ -348,14 +348,14 @@ class RabbitMQ(AgentCheck):
         # otherwise it'll just be making more queries for the same data
         if self._limit_vhosts(instance) and object_type == QUEUE_TYPE:
             for vhost in limit_vhosts:
-                url = '{}/{}'.format(object_type, urllib.quote_plus(vhost))
+                url = '{}/{}'.format(object_type, urllib.parse.quote_plus(vhost))
                 try:
-                    data += self._get_data(urlparse.urljoin(base_url, url), auth=auth,
+                    data += self._get_data(urllib.parse.urljoin(base_url, url), auth=auth,
                                            ssl_verify=ssl_verify, proxies=instance_proxy)
                 except Exception as e:
                     self.log.debug("Couldn't grab queue data from vhost, {}: {}".format(vhost, e))
         else:
-            data = self._get_data(urlparse.urljoin(base_url, object_type), auth=auth,
+            data = self._get_data(urllib.parse.urljoin(base_url, object_type), auth=auth,
                                   ssl_verify=ssl_verify, proxies=instance_proxy)
 
         """ data is a list of nodes or queues:
@@ -417,8 +417,8 @@ class RabbitMQ(AgentCheck):
         for item in data:
             vhost = item['vhost']
             tags = self._get_tags(item, object_type, custom_tags)
-            url = '{}/{}/{}/bindings'.format(QUEUE_TYPE, urllib.quote_plus(vhost), item['name'])
-            bindings_count = len(self._get_data(urlparse.urljoin(base_url, url), auth=auth,
+            url = '{}/{}/{}/bindings'.format(QUEUE_TYPE, urllib.parse.quote_plus(vhost), item['name'])
+            bindings_count = len(self._get_data(urllib.parse.urljoin(base_url, url), auth=auth,
                     ssl_verify=ssl_verify, proxies=instance_proxy))
 
             self.gauge('rabbitmq.queue.bindings.count', bindings_count, tags)
@@ -435,9 +435,9 @@ class RabbitMQ(AgentCheck):
             grab_all_data = False
             data = []
             for vhost in vhosts:
-                url = "vhosts/{}/{}".format(urllib.quote_plus(vhost), object_type)
+                url = "vhosts/{}/{}".format(urllib.parse.quote_plus(vhost), object_type)
                 try:
-                    data += self._get_data(urlparse.urljoin(base_url, url), auth=auth,
+                    data += self._get_data(urllib.parse.urljoin(base_url, url), auth=auth,
                                           ssl_verify=ssl_verify, proxies=instance_proxy)
                 except Exception as e:
                     # This will happen if there is no connection data to grab
@@ -445,7 +445,7 @@ class RabbitMQ(AgentCheck):
 
         # sometimes it seems to need to fall back to this
         if grab_all_data or not len(data):
-            data = self._get_data(urlparse.urljoin(base_url, object_type), auth=auth,
+            data = self._get_data(urllib.parse.urljoin(base_url, object_type), auth=auth,
                                   ssl_verify=ssl_verify, proxies=instance_proxy)
 
         stats = {vhost: 0 for vhost in vhosts}
@@ -456,10 +456,10 @@ class RabbitMQ(AgentCheck):
                 # 'state' does not exist for direct type connections.
                 connection_states[conn.get('state', 'direct')] += 1
 
-        for vhost, nb_conn in stats.iteritems():
+        for vhost, nb_conn in stats.items():
             self.gauge('rabbitmq.connections', nb_conn, tags=['%s_vhost:%s' % (TAG_PREFIX, vhost)] + custom_tags)
 
-        for conn_state, nb_conn in connection_states.iteritems():
+        for conn_state, nb_conn in connection_states.items():
             self.gauge('rabbitmq.connections.state', nb_conn, tags=['%s_conn_state:%s' % (TAG_PREFIX, conn_state)] + custom_tags)
 
     def alert(self, base_url, max_detailed, size, object_type, custom_tags):
@@ -508,11 +508,11 @@ class RabbitMQ(AgentCheck):
         for vhost in vhosts:
             tags = ['vhost:%s' % vhost] + custom_tags
             # We need to urlencode the vhost because it can be '/'.
-            path = u'aliveness-test/%s' % (urllib.quote_plus(vhost))
-            aliveness_url = urlparse.urljoin(base_url, path)
+            path = 'aliveness-test/%s' % (urllib.parse.quote_plus(vhost))
+            aliveness_url = urllib.parse.urljoin(base_url, path)
             aliveness_proxy = self.get_instance_proxy(instance, aliveness_url)
             aliveness_response = self._get_data(aliveness_url, auth=auth, ssl_verify=ssl_verify, proxies=aliveness_proxy)
-            message = u"Response from aliveness API: %s" % aliveness_response
+            message = "Response from aliveness API: %s" % aliveness_response
 
             if aliveness_response.get('status') == 'ok':
                 status = AgentCheck.OK
@@ -528,14 +528,14 @@ class RabbitMQ(AgentCheck):
         the check fails.
         """
 
-        cluster_url = urlparse.urljoin(base_url, u'nodes')
+        cluster_url = urllib.parse.urljoin(base_url, 'nodes')
         cluster_proxy = self.get_instance_proxy(instance, cluster_url)
         cluster_response = self._get_data(cluster_url, auth=auth, ssl_verify=ssl_verify, proxies=cluster_proxy)
 
         running_nodes = 0
         for node in cluster_response:
-            if node[u'running']:
+            if node['running']:
                 running_nodes += 1
 
-        self.gauge(u'rabbitmq.running_nodes', running_nodes, tags=custom_tags)
+        self.gauge('rabbitmq.running_nodes', running_nodes, tags=custom_tags)
 

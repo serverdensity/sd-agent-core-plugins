@@ -6,7 +6,7 @@
 import os
 import re
 import socket
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from collections import defaultdict, Counter, deque
 from math import ceil
 
@@ -416,13 +416,13 @@ class DockerDaemon(AgentCheck):
 
         total_count = 0
         # TODO: deprecate these 2, they should be replaced by _report_container_count
-        for tags, count in running_containers_count.iteritems():
+        for tags, count in running_containers_count.items():
             total_count += count
             self.gauge("docker.containers.running", count, tags=list(tags))
         self.gauge("docker.containers.running.total", total_count, tags=self.custom_tags)
 
         total_count = 0
-        for tags, count in all_containers_count.iteritems():
+        for tags, count in all_containers_count.items():
             stopped_count = count - running_containers_count[tags]
             total_count += stopped_count
             self.gauge("docker.containers.stopped", stopped_count, tags=list(tags))
@@ -566,7 +566,7 @@ class DockerDaemon(AgentCheck):
         return container_name in self._filtered_containers
 
     def _report_container_size(self, containers_by_id):
-        for container in containers_by_id.itervalues():
+        for container in containers_by_id.values():
             if self._is_container_excluded(container):
                 continue
 
@@ -582,7 +582,7 @@ class DockerDaemon(AgentCheck):
 
     def _send_container_healthcheck_sc(self, containers_by_id):
         """Send health service checks for containers."""
-        for container in containers_by_id.itervalues():
+        for container in containers_by_id.values():
             healthcheck_tags = self._get_tags(container, HEALTHCHECK)
             match = False
             for tag in healthcheck_tags:
@@ -616,7 +616,7 @@ class DockerDaemon(AgentCheck):
         per_state_count = defaultdict(int)
 
         filterlambda = lambda ctr: not self._is_container_excluded(ctr)
-        containers = list(filter(filterlambda, containers_by_id.values()))
+        containers = list(filter(filterlambda, list(containers_by_id.values())))
 
         for ctr in containers:
             per_state_count[ctr.get('State', '')] += 1
@@ -649,7 +649,7 @@ class DockerDaemon(AgentCheck):
     def _report_performance_metrics(self, containers_by_id):
 
         containers_without_proc_root = []
-        for container_id, container in containers_by_id.iteritems():
+        for container_id, container in containers_by_id.items():
             if self._is_container_excluded(container) or not self._is_container_running(container):
                 continue
 
@@ -692,13 +692,13 @@ class DockerDaemon(AgentCheck):
             else:
                 stats = self._parse_cgroup_file(stat_file)
                 if stats:
-                    for key, (dd_key, metric_func) in cgroup['metrics'].iteritems():
+                    for key, (dd_key, metric_func) in cgroup['metrics'].items():
                         metric_func = FUNC_MAP[metric_func][self.use_histogram]
                         if key in stats:
                             metric_func(self, dd_key, int(stats[key]), tags=tags)
 
                     # Computed metrics
-                    for mname, (key_list, fct, metric_func) in cgroup.get('to_compute', {}).iteritems():
+                    for mname, (key_list, fct, metric_func) in cgroup.get('to_compute', {}).items():
                         values = [stats[key] for key in key_list if key in stats]
                         if len(values) != len(key_list):
                             self.log.debug("Couldn't compute {0}, some keys were missing.".format(mname))
@@ -745,8 +745,8 @@ class DockerDaemon(AgentCheck):
                         net_tags = tags + ['docker_network:'+networks[interface_name]]
                         x = cols[1].split()
                         m_func = FUNC_MAP[RATE][self.use_histogram]
-                        m_func(self, "docker.net.bytes_rcvd", long(x[0]), net_tags)
-                        m_func(self, "docker.net.bytes_sent", long(x[8]), net_tags)
+                        m_func(self, "docker.net.bytes_rcvd", int(x[0]), net_tags)
+                        m_func(self, "docker.net.bytes_sent", int(x[8]), net_tags)
 
         except Exception as e:
             # It is possible that the container got stopped between the API call and now
@@ -773,7 +773,7 @@ class DockerDaemon(AgentCheck):
             try:
                 aggregated_events = self._pre_aggregate_events(api_events, containers_by_id)
                 events = self._format_events(aggregated_events, containers_by_id)
-            except (socket.timeout, urllib2.URLError):
+            except (socket.timeout, urllib.error.URLError):
                 self.warning('Timeout when collecting events. Events will be missing.')
                 return
             except Exception as e:
@@ -816,7 +816,7 @@ class DockerDaemon(AgentCheck):
 
     def _format_events(self, aggregated_events, containers_by_id):
         events = []
-        for image_name, event_group in aggregated_events.iteritems():
+        for image_name, event_group in aggregated_events.items():
             container_tags = set()
             filtered_events_count = 0
             normal_prio_events = []
@@ -883,7 +883,7 @@ class DockerDaemon(AgentCheck):
             status[ev['status']] += 1
             status_change.append([c_name, ev['status']])
 
-        status_text = ", ".join(["%d %s" % (count, st) for st, count in status.iteritems()])
+        status_text = ", ".join(["%d %s" % (count, st) for st, count in status.items()])
         msg_title = "%s %s on %s" % (image, status_text, self.hostname)
         msg_body = (
             "%%%\n"
@@ -952,13 +952,13 @@ class DockerDaemon(AgentCheck):
         stats = self._format_disk_metrics(stats)
         stats.update(self._calc_percent_disk_stats(stats))
         tags = self._get_tags()
-        for name, val in stats.iteritems():
+        for name, val in stats.items():
             if val is not None:
                 self.gauge(name, val, tags)
 
     def _format_disk_metrics(self, metrics):
         """Cast the disk stats to float and convert them to bytes"""
-        for name, raw_val in metrics.iteritems():
+        for name, raw_val in metrics.items():
             if raw_val:
                 match = DISK_STATS_RE.search(raw_val)
                 if match is None or len(match.groups()) != 2:
@@ -1023,7 +1023,7 @@ class DockerDaemon(AgentCheck):
                     if value < 2 ** 60:
                         return dict({'softlimit': value})
                 else:
-                    return dict(map(lambda x: x.split(' ', 1), fp.read().splitlines()))
+                    return dict([x.split(' ', 1) for x in fp.read().splitlines()])
         except IOError:
             # It is possible that the container got stopped between the API call and now.
             # Some files can also be missing (like cpu.stat) and that's fine.
@@ -1083,7 +1083,7 @@ class DockerDaemon(AgentCheck):
                 if os.path.exists(path):
                     with open(path, 'r') as f:
                         selinux_policy = f.readlines()[0]
-            except IOError, e:
+            except IOError as e:
                 #  Issue #2074
                 self.log.debug("Cannot read %s, process likely raced to finish : %s", path, e)
             except Exception as e:
@@ -1109,18 +1109,18 @@ class DockerDaemon(AgentCheck):
                     container_dict[container_id]['_pid'] = folder
                     container_dict[container_id]['_proc_root'] = os.path.join(proc_path, folder)
                 elif custom_cgroups:  # if we match by pid that should be enough (?) - O(n) ugh!
-                    for _, container in container_dict.iteritems():
+                    for _, container in container_dict.items():
                         if container.get('_pid') == int(folder):
                             container['_proc_root'] = os.path.join(proc_path, folder)
                             break
 
-            except Exception, e:
+            except Exception as e:
                 self.warning("Cannot parse %s content: %s" % (path, str(e)))
                 continue
         return container_dict
 
     def filter_capped_metrics(self):
-        metrics = self.aggregator.metrics.values()
+        metrics = list(self.aggregator.metrics.values())
         for metric in metrics:
             if metric.name in self.capped_metrics and len(metric.samples) >= 2:
                 cap = self.capped_metrics[metric.name]
