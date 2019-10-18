@@ -4,7 +4,7 @@
 # Licensed under Simplified BSD License (see LICENSE)
 
 # 3rd party
-import gearman
+import python3_gearman as gearman
 
 # project
 from checks import AgentCheck
