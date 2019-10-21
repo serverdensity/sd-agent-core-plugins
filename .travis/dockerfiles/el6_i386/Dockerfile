@@ -17,12 +17,10 @@ RUN linux32 yum -y  --enablerepo=city-fan.org install yum-utils \
     symlinks \
     git \
     ca-certificates
-RUN yum install -y https://dl.iuscommunity.org/pub/ius/archive/CentOS/6/i386/ius-release-1.0-11.ius.centos6.noarch.rpm
-RUN rpm --import https://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY
-RUN linux32 yum -y install python27 python27-devel --enablerepo=ius-archive --disablerepo=ius
-RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm && \
+RUN linux32 yum -y install python34 python34-devel
+RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
     rpm -Uvh pg*.rpm && \
-    linux32 yum -y install postgresql96-devel postgresql96-libs postgresql96 --enablerepo=ius-archive --disablerepo=ius
+    linux32 yum -y install postgresql96-devel postgresql96-libs postgresql96
 RUN ( grep -q :20: /etc/group || groupadd -g 20 osx_staff ) && \
     ( grep -q :501: /etc/passwd || useradd -u 501 -g 20 osx_user ) && \
     ( grep -q :1000: /etc/group || groupadd -g 1000 ubuntu_group ) && \

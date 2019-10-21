@@ -11,12 +11,9 @@ RUN yum -y install \
     curl-devel \
     tar \
     symlinks \
-    epel-release \
-    git
-RUN wget https://repo.ius.io/ius-release-el6.rpm && \
-    rpm -Uvh ius-release*.rpm && \
-    yum -y install python27 python27-devel --enablerepo=ius-archive --disablerepo=ius
-RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm && \
+    epel-release
+RUN yum -y install python34 python34-devel
+RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
     rpm -Uvh pg*.rpm && \
     yum -y install postgresql96-devel postgresql96-libs postgresql96
 RUN ( grep -q :20: /etc/group || groupadd -g 20 osx_staff ) && \
