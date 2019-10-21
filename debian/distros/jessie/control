@@ -2,8 +2,8 @@ Source: sd-agent-core-plugins
 Section: python
 Priority: extra
 Maintainer: Server Density Developers <hello@serverdensity.com>
-Build-Depends: debhelper (>= 9), python (>= 2.7.0), python-setuptools,
-  python-dev, libyaml-dev, libcurl4-gnutls-dev, postgresql-server-dev-all,
+Build-Depends: debhelper (>= 9), python3 (>= 3.0), python3-setuptools,
+  python3-dev, libyaml-dev, libcurl4-gnutls-dev, postgresql-server-dev-all,
   symlinks, curl, ca-certificates, libffi-dev, librrd-dev, libssl-dev,
   build-essential, git
 Standards-Version: 3.9.5

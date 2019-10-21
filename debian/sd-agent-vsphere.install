@@ -1,6 +1,6 @@
 checks.d/vsphere.py usr/share/python/sd-agent/checks.d
 conf.d/vsphere.yaml.example etc/sd-agent/conf.d
 
-debian/build/lib/python2.7/site-packages/pyvmomi*  usr/share/python/sd-agent/lib/python2.7/site-packages
-debian/build/lib/python2.7/site-packages/pyVmomi*  usr/share/python/sd-agent/lib/python2.7/site-packages
-debian/build/lib/python2.7/site-packages/pyVim*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python3.*/site-packages/pyvmomi*  usr/share/python/sd-agent/lib/python3.*/site-packages
+debian/build/lib/python3.*/site-packages/pyVmomi*  usr/share/python/sd-agent/lib/python3.*/site-packages
+debian/build/lib/python3.*/site-packages/pyVim*  usr/share/python/sd-agent/lib/python3.*/site-packages

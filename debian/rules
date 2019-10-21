@@ -96,13 +96,13 @@ override_dh_auto_clean:
 	#rm -rf $(BUILD_DIR)
 
 override_dh_auto_install:
-	pyclean $(BUILD_DIR)
+	py3clean $(BUILD_DIR)
 
 define create_venv
 	curl -LO https://raw.github.com/pypa/virtualenv/1.11.6/virtualenv.py
-	python virtualenv.py -p python2 --no-site-packages --no-pip --no-setuptools $(BUILD_DIR)
+	python3 virtualenv.py -p python3 --no-site-packages --no-pip --no-setuptools $(BUILD_DIR)
 	curl -LO https://bootstrap.pypa.io/ez_setup.py
 	$(BUILD_DIR)/bin/python ez_setup.py --version="44.1.1"
 	curl -LO https://bootstrap.pypa.io/get-pip.py
-	$(BUILD_DIR)/bin/python get-pip.py
+	$(BUILD_DIR)/bin/python3 get-pip.py
 endef

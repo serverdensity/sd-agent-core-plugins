@@ -1,5 +1,5 @@
 checks.d/gearmand.py usr/share/python/sd-agent/checks.d
 conf.d/gearmand.yaml.example etc/sd-agent/conf.d
 
-debian/build/lib/python2.7/site-packages/gearman*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python3.*/site-packages/python3_gearman*  usr/share/python/sd-agent/lib/python3.*/site-packages
 

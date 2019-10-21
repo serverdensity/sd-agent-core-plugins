@@ -1,2 +1,2 @@
-debian/build/lib/python2.7/site-packages/pymysql  usr/share/python/sd-agent/lib/python2.7/site-packages
-debian/build/lib/python2.7/site-packages/PyMySQL*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python3.*/site-packages/pymysql  usr/share/python/sd-agent/lib/python3.*/site-packages
+debian/build/lib/python3.*/site-packages/PyMySQL*  usr/share/python/sd-agent/lib/python3.*/site-packages

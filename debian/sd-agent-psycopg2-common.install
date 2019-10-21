@@ -1,1 +1,1 @@
-debian/build/lib/python2.7/site-packages/psycopg2*  usr/share/python/sd-agent/lib/python2.7/site-packages
+debian/build/lib/python3.*/site-packages/psycopg2*  usr/share/python/sd-agent/lib/python3.*/site-packages
