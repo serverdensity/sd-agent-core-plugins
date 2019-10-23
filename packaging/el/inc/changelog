@@ -1,4 +1,6 @@
 %changelog
+* Mon Nov 4 2020 Server Density <hello@serverdensity.com> 3.0.0-1
+- Use Python3
 * Mon Jun 1 2020 Server Density <hello@serverdensity.com> 2.6.3-1
 - Security Update: Updates python httplib2 to address CVE-2020-11078.
 * Tue May 5 2020 Server Density <hello@serverdensity.com> 2.6.2-1

@@ -1,3 +1,9 @@
+sd-agent-core-plugins (3.0.0-1trusty0) trusty; urgency=medium
+
+  * Use Python3
+
+ -- Server Density <hello@serverdensity.com>  Mon, 4 Nov 2019 10:30:00 +0100
+
 sd-agent-core-plugins (2.6.3-1trusty0) trusty; urgency=medium
 
   * Security Update: Updates python httplib2 to address CVE-2020-11078.
