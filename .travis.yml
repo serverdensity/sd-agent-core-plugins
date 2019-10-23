@@ -8,7 +8,7 @@ cache:
   - "$CACHE_DIR"
   timeout: 1000
 python:
-  - "2.7"
+  - "3.7-dev"
 
 git:
   depth: 3
@@ -57,52 +57,52 @@ jobs:
     go: 1.10
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=bionic
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=buster
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=focal
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=jessie
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=xenial
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=stretch
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=trusty
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=el6
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=el6_i386
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=el7
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    python: 3.7-dev
     env: RELEASE=el8
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=bionic
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -116,7 +116,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=buster
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -130,7 +130,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=focal
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -144,7 +144,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=jessie
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -158,7 +158,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=xenial
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -172,7 +172,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=stretch
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -186,7 +186,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=trusty
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -200,7 +200,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=el6
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -214,7 +214,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=el6_i386
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -228,7 +228,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=el7
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -242,7 +242,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=el8
-    python: 2.7
+    python: 3.7-dev
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
