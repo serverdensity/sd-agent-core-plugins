@@ -30,9 +30,8 @@ class ServerDensityCPUChecks(AgentCheck):
         self.log.debug('getCPUStats: start')
 
         cpu_stats = {}
-
-        if sys.platform == 'linux2':
-            self.log.debug('getCPUStats: linux2')
+        if 'linux' in sys.platform:
+            self.log.debug('getCPUStats: linux')
 
             headerRegexp = re.compile(r'.*?([%][a-zA-Z0-9]+)[\s+]?')
             itemRegexp = re.compile(r'.*?\s+(\d+)[\s+]?')
@@ -47,7 +46,7 @@ class ServerDensityCPUChecks(AgentCheck):
                 except Exception:
                     self.log.debug('Process already terminated')
 
-                stats = stats.split('\n')
+                stats = stats.decode('utf-8').split('\n')
                 header = stats[2]
                 headerNames = re.findall(headerRegexp, header)
                 device = None
@@ -60,7 +59,7 @@ class ServerDensityCPUChecks(AgentCheck):
 
                     deviceMatch = re.match(itemRegexp, row)
 
-                    if string.find(row, 'all') is not -1:
+                    if str.find(row, 'all') is not -1:
                         device = 'ALL'
                     elif deviceMatch is not None:
                         device = 'CPU%s' % deviceMatch.groups()[0]
