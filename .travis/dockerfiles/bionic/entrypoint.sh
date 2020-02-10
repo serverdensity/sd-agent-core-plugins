@@ -14,7 +14,7 @@ sudo cp -a ${DEBIAN_PATH}/distros/${RELEASE}/. ${DEBIAN_PATH}
 sudo sed -i "s|trusty|$RELEASE|" ${DEBIAN_PATH}/changelog
 sudo dpkg-source -b /sd-agent
 
-for ARCH in amd64 i386; do
+for ARCH in amd64 i386 arm64; do
     if [ ! -d /packages/${DISTRO}/${RELEASE} ]; then
         sudo mkdir /packages/${DISTRO}/${RELEASE}
     fi
