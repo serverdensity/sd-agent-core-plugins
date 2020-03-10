@@ -45,6 +45,7 @@ linux_proc_extras \
 mapreduce \
 marathon \
 mcache \
+mdadm \
 mesos_master \
 mesos_slave \
 mongo \

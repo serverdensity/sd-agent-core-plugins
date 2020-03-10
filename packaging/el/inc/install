@@ -19,6 +19,7 @@ rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/idna*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/kazoo*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/meld3*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/memcache.pyc
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/mdadm*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ntplib*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pip*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/ply*

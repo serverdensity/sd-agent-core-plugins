@@ -1273,3 +1273,18 @@ This package installs the jenkins plugin.
 /usr/share/python/sd-agent/checks.d/jenkins.py
 %config /etc/sd-agent/conf.d/jenkins.yaml.example
 
+%package -n sd-agent-mdadm
+Summary: Server Density Monitoring Agent. mdadm plugin
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+BuildArch: noarch
+
+%description -n sd-agent-mdadm
+%{longdescription}
+This package installs the mdadm plugin.
+
+%files -n sd-agent-mdadm
+%defattr(-,root,root,-)
+/usr/share/python/sd-agent/checks.d/mdadm.py
+%config /etc/sd-agent/conf.d/mdadm.yaml.example
+/usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/mdstat*
