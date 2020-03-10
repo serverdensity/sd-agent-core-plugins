@@ -106,7 +106,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -121,7 +121,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -136,7 +136,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -151,7 +151,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -166,7 +166,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -181,7 +181,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -196,7 +196,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -211,7 +211,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -226,7 +226,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
   - stage: build packages
@@ -241,7 +241,7 @@ jobs:
       bucket: sd-agent-packages
       skip_cleanup: true
       acl: public-read
-      local-dir: "/serverdensity"
+      local_dir: "/serverdensity"
       on:
         all_branches: true
 
