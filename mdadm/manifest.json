@@ -1,0 +1,18 @@
+{
+  "guid": "4fdcf93a-afa1-46d0-aa08-64703712762f",
+  "linux_package_name": "sd-agent-mdadm",
+  "maintainer": "hello@serverdensity.com",
+  "manifest_version": "0.0.1",
+  "max_agent_version": "3.0.0",
+  "min_agent_version": "2.2.2",
+  "name": "mdadm",
+  "short_description": "The mdadm check gathers metrics on available mdadm devices and disks.",
+  "support": "core",
+  "supported_os": [
+    "linux"
+  ],
+  "version": "1.0.0",
+  "categories":["os & system"],
+  "type":"check",
+  "is_public": true
+}

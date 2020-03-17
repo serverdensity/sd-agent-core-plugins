@@ -870,3 +870,13 @@ Description: The Server Density monitoring agent - jenkins plugin
  This package installs the jenkins plugin.
  .
  See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-mdadm
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
+Description: The Server Density monitoring agent - Entropy plugin
+ Collects mdadm metrics.
+ .
+ This package installs the mdadm plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
