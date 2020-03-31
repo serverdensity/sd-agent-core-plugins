@@ -235,17 +235,6 @@ Description: The Server Density monitoring agent - system-swap plugin
  .
  See https://www.serverdensity.com/ for more information.
 
-Package: sd-agent-ssh-check
-Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2), libffi6
-Recommends: sd-agent-pyasn1-common
-Description: The Server Density monitoring agent - ssh_check plugin
- Monitor SSH connectivity and SFTP latency.
- .
- This package installs the ssh_check plugin.
- .
- See https://www.serverdensity.com/ for more information.
-
 Package: sd-agent-twemproxy
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.0)
@@ -522,7 +511,7 @@ Description: The Server Density monitoring agent - cassandra cluster plugin usin
 
 Package: sd-agent-mysql
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.0)
 Description: The Server Density monitoring agent - mysql plugin
  Collect performance schema metrics, query throughput, custom metrics, and more.
  .
@@ -714,7 +703,7 @@ Description: The Server Density monitoring agent - spark plugin
 
 Package: sd-agent-cacti
 Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.3.0), librrd8
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.0), librrd8
 Description: The Server Density monitoring agent - cacti plugin
  Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.
  .
@@ -854,12 +843,33 @@ Description: The Server Density monitoring agent - storm plugin
 
 Package: sd-agent-mysql-common
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
-Breaks: sd-agent-mysql (<<2.2.0)
-Replaces: sd-agent-mysql (<<2.2.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), sd-agent-cryptography-common (>= 2.6.0)
+Breaks: sd-agent-mysql-common (<<2.6.1)
+Replaces: sd-agent-mysql-common (<<2.6.1)
 Description: This package provides the python mysql module for plugins that require it
  .
  See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-cryptography-common
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1)
+Breaks: sd-agent-ssh-check (<<2.6.1), sd-agent-mysql (<<2.6.1)
+Replaces: sd-agent-ssh-check (<<2.6.1), sd-agent-mysql (<<2.6.1)
+Description: This package provides the python cryptography module for plugins that require it
+ .
+ See https://www.serverdensity.com/ for more information.
+
+Package: sd-agent-ssh-check
+Architecture: any
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2), libffi6, sd-agent-cryptography-common
+Recommends: sd-agent-pyasn1-common
+Description: The Server Density monitoring agent - ssh_check plugin
+ Monitor SSH connectivity and SFTP latency.
+ .
+ This package installs the ssh_check plugin.
+ .
+ See https://www.serverdensity.com/ for more information.
+
 
 Package: sd-agent-jenkins
 Architecture: all
@@ -874,7 +884,7 @@ Description: The Server Density monitoring agent - jenkins plugin
 Package: sd-agent-mdadm
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2)
-Description: The Server Density monitoring agent - Entropy plugin
+Description: The Server Density monitoring agent - Mdadm plugin
  Collects mdadm metrics.
  .
  This package installs the mdadm plugin.
