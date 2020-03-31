@@ -1,2 +1,2 @@
 # integration pip requirements
-pymysql==0.6.6
+pymysql==0.9.3
