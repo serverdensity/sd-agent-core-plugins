@@ -22,7 +22,7 @@ RUN rpm -Uvh ius-release*.rpm
 RUN sed -i "s|https://repo.ius.io/archive/6/\$basearch/|https://dl.iuscommunity.org/pub/ius/archive/CentOS/6/i386/|" /etc/yum.repos.d/ius-archive.repo
 RUN rpm --import https://dl.iuscommunity.org/pub/ius/IUS-COMMUNITY-GPG-KEY
 RUN linux32 yum -y install python27 python27-devel --enablerepo=ius-archive --disablerepo=ius
-RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
+RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm && \
     rpm -Uvh pg*.rpm && \
     linux32 yum -y install postgresql96-devel postgresql96-libs postgresql96 --enablerepo=ius-archive --disablerepo=ius
 RUN ( grep -q :20: /etc/group || groupadd -g 20 osx_staff ) && \

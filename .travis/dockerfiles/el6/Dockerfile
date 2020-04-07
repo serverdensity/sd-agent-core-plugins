@@ -15,7 +15,7 @@ RUN yum -y install \
 RUN wget https://centos6.iuscommunity.org/ius-release.rpm && \
     rpm -Uvh ius-release*.rpm && \
     yum -y install python27 python27-devel
-RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-centos96-9.6-3.noarch.rpm && \
+RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm && \
     rpm -Uvh pg*.rpm && \
     yum -y install postgresql96-devel postgresql96-libs postgresql96
 RUN ( grep -q :20: /etc/group || groupadd -g 20 osx_staff ) && \
