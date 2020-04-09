@@ -1,4 +1,6 @@
 %changelog
+* Mon Apr 14 2020 Server Density <hello@serverdensity.com> 2.6.1-1
+- Improve MySQL 8 compatibility
 * Wed Mar 11 2020 Server Density <hello@serverdensity.com> 2.6.0-1
 - Adds mdadm plugin
 * Mon Mar 4 2019 Server Density <hello@serverdensity.com> 2.5.3-1

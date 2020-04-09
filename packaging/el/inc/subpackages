@@ -377,8 +377,8 @@ do not reference it or depend on it in any way.
 Summary: Server Density Monitoring Agent. Common MySQL libs
 Group: System/Monitoring
 BuildArch: noarch
-Requires: %{name} >= 2.1.1
-Conflicts: sd-agent-mysql <= 2.2.0, sd-agent-cacti <= 2.2.0
+Requires: %{name} >= 2.1.1, sd-agent-cryptography-common
+Conflicts: sd-agent-mysql <= 2.6.0, sd-agent-cacti <= 2.6.0
 
 %description -n sd-agent-mysql-common
 %{longdescription}
@@ -924,7 +924,8 @@ This package installs the spark plugin.
 %package -n sd-agent-ssh-check
 Summary: Server Density Monitoring Agent. ssh_check plugin
 Group: System/Monitoring
-Requires: %{name} >= 2.2.0, sd-agent-pyasn1-common
+Requires: %{name} >= 2.2.0, sd-agent-pyasn1-common, sd-agent-cryptography-common
+Conflicts: sd-agent-ssh-check <= 2.6.0
 
 %description -n sd-agent-ssh-check
 %{longdescription}
@@ -935,6 +936,19 @@ This package installs the ssh_check plugin.
 /usr/share/python/sd-agent/checks.d/ssh_check.py
 %config /etc/sd-agent/conf.d/ssh_check.yaml.example
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/paramiko*
+
+%package -n sd-agent-cryptography-common
+Summary: Server Density Monitoring Agent. common crytopograhy libs
+Group: System/Monitoring
+Requires: %{name} >= 2.2.0
+Conflicts: sd-agent-ssh-check <= 2.6.0, sd-agent-mysql-common <= 2.6.0
+
+%description -n sd-agent-cryptography-common
+%{longdescription}
+This package installs common cryptography libs.
+
+%files -n sd-agent-cryptography-common
+%defattr(-,root,root,-)
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/cryptography*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/Crypto*
 /usr/share/python/sd-agent/lib/python%{__sd_python_version}/site-packages/enum*
