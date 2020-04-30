@@ -511,7 +511,7 @@ Description: The Server Density monitoring agent - cassandra cluster plugin usin
 
 Package: sd-agent-mysql
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.1)
 Description: The Server Density monitoring agent - mysql plugin
  Collect performance schema metrics, query throughput, custom metrics, and more.
  .
@@ -703,7 +703,7 @@ Description: The Server Density monitoring agent - spark plugin
 
 Package: sd-agent-cacti
 Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.0), librrd4
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.1), librrd4
 Description: The Server Density monitoring agent - cacti plugin
  Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.
  .
