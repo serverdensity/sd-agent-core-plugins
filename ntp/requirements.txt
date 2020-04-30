@@ -1,2 +1,2 @@
 # integration pip requirements
-ntplib==0.3.3
+git+https://github.com/cf-natali/ntplib.git@master
