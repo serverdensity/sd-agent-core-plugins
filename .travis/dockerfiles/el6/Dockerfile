@@ -11,7 +11,8 @@ RUN yum -y install \
     curl-devel \
     tar \
     symlinks \
-    epel-release
+    epel-release \
+    git
 RUN wget https://centos6.iuscommunity.org/ius-release.rpm && \
     rpm -Uvh ius-release*.rpm && \
     yum -y install python27 python27-devel
