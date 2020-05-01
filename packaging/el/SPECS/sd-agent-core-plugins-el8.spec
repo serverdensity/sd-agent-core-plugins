@@ -17,7 +17,7 @@ BuildArch: x86_64 i386
 %include %{_topdir}/inc/version
 %include %{_topdir}/inc/release
 Requires: python2 >= 2.7, sysstat, libyaml
-BuildRequires: symlinks, libffi-devel, python2-devel, openssl-devel, rrdtool-devel, postgresql-devel >= 9.1, libpq, libpq-devel
+BuildRequires: symlinks, libffi-devel, python2-devel, openssl-devel, rrdtool-devel, postgresql-devel >= 9.1, libpq, libpq-devel, git
 License: Simplified BSD
 Group: System/Monitoring
 Source: sd-agent-core-plugins-%{version}.tar.gz
