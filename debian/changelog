@@ -1,3 +1,10 @@
+sd-agent-core-plugins (2.6.2-1trusty0) trusty; urgency=medium
+
+  * Fix sd-agent-mysql packaging issue
+  * Update version of ntplib python dependency
+
+ -- Server Density <hello@serverdensity.com>  Tue, 5 May 2020 10:00:00 +0100
+
 sd-agent-core-plugins (2.6.1-1trusty0) trusty; urgency=medium
 
   * Improve MySQL 8 compatibility

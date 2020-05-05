@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DEBIAN_PATH="/sd-agent/debian"
-UBUNTU=(bionic xenial trusty)
+UBUNTU=(bionic focal xenial trusty)
 
 if [[ ${UBUNTU[*]} =~ ${RELEASE} ]]
 then

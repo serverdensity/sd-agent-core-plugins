@@ -703,7 +703,7 @@ Description: The Server Density monitoring agent - spark plugin
 
 Package: sd-agent-cacti
 Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.1), librrd4
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent-mysql-common (>= 2.6.1), librrd8
 Description: The Server Density monitoring agent - cacti plugin
  Forward your Cacti RRDs to Server Density for richer alerting and beautiful graphing.
  .
@@ -843,7 +843,7 @@ Description: The Server Density monitoring agent - storm plugin
 
 Package: sd-agent-mysql-common
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), sd-agent-cryptography-common (>= 2.6.0)
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.1.1), sd-agent-cryptography-common (>= 2.6.1)
 Breaks: sd-agent-mysql-common (<<2.6.1)
 Replaces: sd-agent-mysql-common (<<2.6.1)
 Description: This package provides the python mysql module for plugins that require it
@@ -861,7 +861,7 @@ Description: This package provides the python cryptography module for plugins th
 
 Package: sd-agent-ssh-check
 Architecture: any
-Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2), libffi6, sd-agent-cryptography-common
+Depends: ${python:Depends}, ${misc:Depends}, sd-agent (>= 2.2.2), libffi7, sd-agent-cryptography-common
 Recommends: sd-agent-pyasn1-common
 Description: The Server Density monitoring agent - ssh_check plugin
  Monitor SSH connectivity and SFTP latency.
