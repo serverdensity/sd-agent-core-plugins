@@ -13,7 +13,7 @@ RUN yum -y install \
     symlinks \
     epel-release \
     git
-RUN wget https://centos6.iuscommunity.org/ius-release.rpm && \
+RUN wget https://repo.ius.io/ius-release-el6.rpm && \
     rpm -Uvh ius-release*.rpm && \
     yum -y install python27 python27-devel
 RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm && \
