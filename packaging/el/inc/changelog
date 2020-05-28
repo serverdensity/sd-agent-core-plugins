@@ -1,4 +1,6 @@
 %changelog
+* Mon Jun 1 2020 Server Density <hello@serverdensity.com> 2.6.3-1
+- Security Update: Updates python httplib2 to address CVE-2020-11078.
 * Tue May 5 2020 Server Density <hello@serverdensity.com> 2.6.2-1
 - Fix sd-agent-mysql packaging issue
 - Update version of ntplib python dependency
