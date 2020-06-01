@@ -29,7 +29,7 @@ rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pycryp
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/pysmi*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/python*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/requests*
-rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/setuptools-20.9.0-py2.7.egg
+rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/setuptools*.egg
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/setuptools.pth
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/simplejson*
 rm -Rf %{buildroot}/usr/share/python/sd-agent/lib/python2.7/site-packages/six*
