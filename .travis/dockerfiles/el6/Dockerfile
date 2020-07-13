@@ -15,7 +15,7 @@ RUN yum -y install \
     git
 RUN wget https://repo.ius.io/ius-release-el6.rpm && \
     rpm -Uvh ius-release*.rpm && \
-    yum -y install python27 python27-devel
+    yum -y install python27 python27-devel --enablerepo=ius-archive --disablerepo=ius
 RUN wget https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-redhat-repo-42.0-9.noarch.rpm && \
     rpm -Uvh pg*.rpm && \
     yum -y install postgresql96-devel postgresql96-libs postgresql96
