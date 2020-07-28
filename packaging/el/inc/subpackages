@@ -377,7 +377,7 @@ do not reference it or depend on it in any way.
 Summary: Server Density Monitoring Agent. Common MySQL libs
 Group: System/Monitoring
 BuildArch: noarch
-Requires: %{name} >= 2.1.1, sd-agent-cryptography-common
+Requires: %{name} >= 2.1.1, sd-agent-cryptography-common, sd-agent-pyasn1-common
 Conflicts: sd-agent-mysql <= 2.6.0, sd-agent-cacti <= 2.6.0
 
 %description -n sd-agent-mysql-common
