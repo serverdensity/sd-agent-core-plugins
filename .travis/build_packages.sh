@@ -14,7 +14,7 @@ set -ev
 
 rvm install 2.1.5
 bundle install
-rake copy_checks
+bundle exec rake copy_checks
 
 if [ -f "${TRAVIS_BUILD_DIR}/config.py" ]; then
    AGENT_VERSION=$(awk -F'"' '/^AGENT_VERSION/ {print $2}' ${TRAVIS_BUILD_DIR}/config.py)
