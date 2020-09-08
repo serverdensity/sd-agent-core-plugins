@@ -12,7 +12,10 @@ CONTAINER="$RELEASE"
 echo "$CONTAINER"
 set -ev
 
+ruby -v
 rvm install 2.1.5
+rvm use 2.1.5
+ruby -v
 bundle install
 bundle exec rake copy_checks
 
