@@ -25,7 +25,7 @@ namespace :ci do
       `python #{gunicorn_rootdir}/venv/virtualenv.py  --no-site-packages --no-pip --no-setuptools #{gunicorn_rootdir}/venv/`
       `wget -q -O #{gunicorn_rootdir}/venv/ez_setup.py https://bootstrap.pypa.io/ez_setup.py`
       `#{gunicorn_rootdir}/venv/bin/python #{gunicorn_rootdir}/venv/ez_setup.py`
-      `wget -q -O #{gunicorn_rootdir}/venv/get-pip.py https://bootstrap.pypa.io/get-pip.py`
+      `wget -q -O #{gunicorn_rootdir}/venv/get-pip.py https://bootstrap.pypa.io/pip/2.7/get-pip.py`
       `#{gunicorn_rootdir}/venv/bin/python #{gunicorn_rootdir}/venv/get-pip.py`
       `#{gunicorn_rootdir}/venv/bin/pip install gunicorn==#{gunicorn_version} gevent setproctitle`
       `#{gunicorn_rootdir}/venv/bin/pip install setproctitle`
