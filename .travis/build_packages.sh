@@ -13,6 +13,9 @@ echo "$CONTAINER"
 set -ev
 
 rvm install 2.1.5
+rvm --default use 2.1.5
+ruby -v
+rvm list
 bundle install
 rake copy_checks
 
