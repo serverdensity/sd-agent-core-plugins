@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/serverdensity/sd-agent-core-plugins.svg?branch=master)](https://travis-ci.org/serverdensity/sd-agent-core-plugins)
+[![Build Status](https://travis-ci.com/serverdensity/sd-agent-core-plugins.svg?branch=master)](https://travis-ci.com/serverdensity/sd-agent-core-plugins)
 <!---[![Build status](https://ci.appveyor.com/api/projects/status/?svg=true)](https://ci.appveyor.com/project/)-->
 # Server Density Agent Core Plugins
 
