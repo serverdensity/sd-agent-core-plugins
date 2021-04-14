@@ -39,9 +39,12 @@ class Mdadm(AgentCheck):
                 try:
                     tags.append("device:{}".format(device))
                     status_dict = data['devices'][device]['status']
-                    degraded = status_dict['raid_disks'] != \
-                        status_dict['non_degraded_disks']
-                    self.gauge("system.mdadm.degraded", int(degraded), tags)
+                    if status_dict.get('raid_disks'):
+                        # These keys are not present for RAID0 devices
+                        degraded = status_dict['raid_disks'] != \
+                            status_dict['non_degraded_disks']
+                        self.gauge("system.mdadm.degraded",
+                                   int(degraded), tags)
                     self.gauge("system.mdadm.read_only",
                                int(data['devices'][device]['read_only']), tags)
                     self.gauge("system.mdadm.active",
