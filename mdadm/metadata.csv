@@ -9,5 +9,6 @@ system.mdadm.disk.faulty,gauge,,,,The faulty state of the disk,1,mdadm,mdadm dis
 system.mdadm.disk.number,gauge,,,,The disk number,1,mdadm,mdadm disk number
 system.mdadm.disk.replacement,gauge,,,,The replacement state of the disk,1,mdadm,mdadm disk replacement
 system.mdadm.disk.spare,gauge,,,,The spare state of the disk,1,mdadm,mdadm disk spare
-system.mdadm.disk.write_mostly,gauge,,,,The write mostly state of the disk ,1,mdadm,madam disk write mostly
+system.mdadm.disk.write_mostly,gauge,,,,The write mostly state of the disk ,1,mdadm,mdadm disk write mostly
 system.mdadm.in_use_devices,gauge,,,,The number of devices in use,1,mdadm,mdadm devices in use
+system.mdadm.unused_devices,gauge,,,,The number of unused devices,1,mdadm,mdadm unused devices
