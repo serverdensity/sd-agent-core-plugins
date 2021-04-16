@@ -1,12 +1,13 @@
 metric_name,metric_type,interval,unit_name,per_unit_name,description,orientation,integration,short_name
 system.mdadm.blocks,gauge,,,,The useable size of the array in blocks,1,mdadm,mdadm blocks
-system.mdadm.degraded,gauge,,,,The degraded state of the device,1,mdadm,mdadm degraded 
+system.mdadm.degraded,gauge,,,,The degraded state of the device,1,mdadm,mdadm degraded
 system.mdadm.non_degraded_disks,gauge,,,,A count of non degraded disks,1,mdadm,mdadm non degraded disks
 system.mdadm.raid_disks,gauge,,,,A count of raid disks,1,mdadm,mdadm raid disks
-system.mdadm.read_only,gauge,,,,The read only state ,1,mdadm,mdadm read only 
+system.mdadm.read_only,gauge,,,,The read only state ,1,mdadm,mdadm read only
 system.mdadm.active,gauge,,,,The active state of the array. ,1,mdadm,mdadm active
-system.mdadm.disk.faulty,gauge,,,,The faulty state of the disk,1,mdadm,mdadm disk faulty 
+system.mdadm.disk.faulty,gauge,,,,The faulty state of the disk,1,mdadm,mdadm disk faulty
 system.mdadm.disk.number,gauge,,,,The disk number,1,mdadm,mdadm disk number
 system.mdadm.disk.replacement,gauge,,,,The replacement state of the disk,1,mdadm,mdadm disk replacement
 system.mdadm.disk.spare,gauge,,,,The spare state of the disk,1,mdadm,mdadm disk spare
 system.mdadm.disk.write_mostly,gauge,,,,The write mostly state of the disk ,1,mdadm,madam disk write mostly
+system.mdadm.in_use_devices,gauge,,,,The number of devices in use,1,mdadm,mdadm devices in use

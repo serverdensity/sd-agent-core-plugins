@@ -34,6 +34,8 @@ class Mdadm(AgentCheck):
             self.log.debug('mdstat.parse returned: {}'.format(data))
             self.gauge("system.mdadm.unused_devices",
                        len(data['unused_devices']))
+            self.gauge("system.mdadm.in_use_devices",
+                       len(data['devices']))
             for device in data['devices']:
                 tags = []
                 try:
