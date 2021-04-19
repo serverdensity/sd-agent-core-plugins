@@ -1,5 +1,13 @@
 sd-agent-core-plugins (2.6.3-1trusty0) trusty; urgency=medium
 
+  * Varnish: fix parsing of varnishstat 6.5 JSON output
+  * Mdadm: fix parsing to ensure RAID0 disks are captured
+  * Mdadm: add system.mdadm.in_use_devices metric
+
+ -- Server Density <hello@serverdensity.com>  Mon, 19 Apr 2021 10:00:00 +0100
+
+sd-agent-core-plugins (2.6.3-1trusty0) trusty; urgency=medium
+
   * Security Update: Updates python httplib2 to address CVE-2020-11078.
 
  -- Server Density <hello@serverdensity.com>  Mon, 1 Jun 2020 10:00:00 +0100
