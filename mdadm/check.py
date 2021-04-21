@@ -1,7 +1,7 @@
 """
   Server Density Plugin
   Mdadm Check
-  Version: 1.0.0
+  Version: 1.1.0
 """
 
 import json
@@ -34,14 +34,19 @@ class Mdadm(AgentCheck):
             self.log.debug('mdstat.parse returned: {}'.format(data))
             self.gauge("system.mdadm.unused_devices",
                        len(data['unused_devices']))
+            self.gauge("system.mdadm.in_use_devices",
+                       len(data['devices']))
             for device in data['devices']:
                 tags = []
                 try:
                     tags.append("device:{}".format(device))
                     status_dict = data['devices'][device]['status']
-                    degraded = status_dict['raid_disks'] != \
-                        status_dict['non_degraded_disks']
-                    self.gauge("system.mdadm.degraded", int(degraded), tags)
+                    if status_dict.get('raid_disks'):
+                        # These keys are not present for RAID0 devices
+                        degraded = status_dict['raid_disks'] != \
+                            status_dict['non_degraded_disks']
+                        self.gauge("system.mdadm.degraded",
+                                   int(degraded), tags)
                     self.gauge("system.mdadm.read_only",
                                int(data['devices'][device]['read_only']), tags)
                     self.gauge("system.mdadm.active",
