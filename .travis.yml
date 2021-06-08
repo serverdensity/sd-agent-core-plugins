@@ -1,5 +1,4 @@
 os: linux
-language: python
 cache:
   directories:
   - "$HOME/.cache/pip"
@@ -7,8 +6,6 @@ cache:
   - vendor/cache
   - "$CACHE_DIR"
   timeout: 1000
-python:
-  - "2.7"
 
 git:
   depth: 3
@@ -43,6 +40,7 @@ before_script:
 - if [ "${TRAVIS_OS_NAME}" != "osx" ]; then sudo apt-get --yes --no-install-recommends
   install binfmt-support qemu-user-static; fi
 - if [ "${TRAVIS_OS_NAME}" != "osx" ]; then echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' | sudo tee -a /proc/sys/fs/binfmt_misc/register; fi
+install: bundle install
 notifications:
   slack:
     secure: EIK5M4WH0/ZnwgCyd6T4801Ll9g9pQuxmkL5PVCCzUHeT2ouwxFepEA/2olb74DYUc1DiDbhlKyevxZVw9l6G2vwZY670N9ZAhbivyDjK6hOduIt8+YicJNtFs3PzilRpu9yPrpDFlrOeuT8MT1TMP8xTCfvDa6WDic2Nfen4L0=
@@ -54,41 +52,41 @@ jobs:
     go: 1.10
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=bionic
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=buster
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=focal
     dist: focal
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=jessie
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=xenial
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=stretch
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=el7
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
-    python: 2.7
+    rvm: 2.5
     env: RELEASE=el8
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=bionic
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -102,7 +100,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=buster
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -117,7 +115,7 @@ jobs:
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=focal
     dist: focal
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -131,7 +129,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=jessie
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -145,7 +143,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=xenial
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -159,7 +157,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=stretch
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -173,7 +171,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=el7
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
@@ -187,7 +185,7 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=el8
-    python: 2.7
+    rvm: 2.5
     deploy:
     - provider: gcs
       access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
