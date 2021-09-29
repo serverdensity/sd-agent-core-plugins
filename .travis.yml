@@ -29,6 +29,7 @@ env:
   - CACHE_FILE_el7=$CACHE_DIR/el7.tar.gz
   - CACHE_FILE_el8=$CACHE_DIR/el8.tar.gz
   - CACHE_FILE_bionic=$CACHE_DIR/bionic.tar.gz
+  - CACHE_FILE_bullseye=$CACHE_DIR/bullseye.tar.gz
   - CACHE_FILE_buster=$CACHE_DIR/buster.tar.gz
   - CACHE_FILE_focal=$CACHE_DIR/focal.tar.gz
   - CACHE_FILE_jessie=$CACHE_DIR/jessie.tar.gz
@@ -55,6 +56,10 @@ jobs:
     script: travis_retry ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=bionic
+  - stage: build containers
+    script: travis_retry ./.travis/build_containers.sh
+    rvm: 2.5
+    env: RELEASE=bullseye
   - stage: build containers
     script: travis_retry ./.travis/build_containers.sh
     rvm: 2.5
@@ -87,6 +92,20 @@ jobs:
   - stage: build packages
     script: travis_retry ./.travis/build_packages.sh
     env: RELEASE=bionic
+    rvm: 2.5
+    deploy:
+    - provider: gcs
+      access_key_id: GOOGQSTXHRV5ODGTXK2GT4U4
+      secret_access_key:
+        secure: zyn6V6ohrSeVb5t/th5LmmsTZDZcD1VCfiiMN1cF+ICM/82mTahTWiefQzgkhGwa1c+eRRq+uG+1pK2tLDu0u9cu4H+wQb3uRStCWalscpP5j2Y0Si7K4Bx28bUm/+fQpi0BkOxXIlwmmCR1eINqjT6WyTqYRHzE5S03twnk8h0dlV0kNANU7sYv/ObizLlM8Jz04ztueCO2EXbrxKYrSg0+0LQYPUzPI8fUICXlTPvVbh2py3TYNo7U7h6swudu5cmZJt4I/hurx+R/NjVaUH8mWlrNOrVsYG+iMv7kx/Dx4tKWAadC8jYToyrETxdKG0SXLMdK/48HecEn2fOiIFIUuCwwj5nNGdvyFGFn5iuVFx2pdDs90w/EGawbSZ6WGR0AooYt0KjPiZ90uhZzvPodE6TSlr+47pkl02mcmH54cXTg1fAxu5+8P52cx7mGRnP5IY6hwgOYqawz9swMf48J0dJqKqKRMg5lg8h6+lodKYHKZJsiqH7cAhtoh5R0k4OMV32z8wVwNvTdw+fYsLOxaMuT0iWzWBoOnAeOczTr1WQZS0gSqTyQ1FnexyLLzY7EYmgRjEzD6png5lCTD2OaM3DvOCvrIpGBONyPQFo92MRVedpGksBZ+rzWCy6f4ZbwAO85uX4KokgUo+jp2QS78j0512yCjYb4sz//CF4=
+      bucket: sd-agent-packages
+      acl: public-read
+      local_dir: "/serverdensity"
+      on:
+        all_branches: true
+  - stage: build packages
+    script: travis_retry ./.travis/build_packages.sh
+    env: RELEASE=bullseye
     rvm: 2.5
     deploy:
     - provider: gcs
