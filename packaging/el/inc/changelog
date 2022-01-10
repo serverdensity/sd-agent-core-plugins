@@ -1,4 +1,6 @@
 %changelog
+* Mon Jan 10 2022 Server Density <hello@serverdensity.com> 2.6.5-1
+- MySQL: Fix parsing of replication data
 * Mon Apr 19 2021 Server Density <hello@serverdensity.com> 2.6.4-1
 - Varnish: fix parsing of varnishstat 6.5 JSON output
 - Mdadm: fix parsing to ensure RAID0 disks are captured
