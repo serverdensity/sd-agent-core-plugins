@@ -55,54 +55,54 @@ jobs:
     script: for metadata in `ls */metadata.csv`; do csvlint ${metadata}; done
     go: 1.10
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=bionic
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=bullseye
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=buster
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=focal
     dist: focal
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=jessie
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=xenial
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=stretch
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=el7
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=el7_arm
     dist: focal
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=el8
   - stage: build containers
-    script: travis_retry ./.travis/build_containers.sh
+    script: travis_retry travis_wait 50 ./.travis/build_containers.sh
     rvm: 2.5
     env: RELEASE=el8_arm
     dist: focal
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=bionic
     rvm: 2.5
     deploy:
@@ -116,7 +116,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=bullseye
     rvm: 2.5
     deploy:
@@ -130,7 +130,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=buster
     rvm: 2.5
     deploy:
@@ -144,7 +144,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=focal
     dist: focal
     rvm: 2.5
@@ -159,7 +159,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=jessie
     rvm: 2.5
     deploy:
@@ -173,7 +173,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=xenial
     rvm: 2.5
     deploy:
@@ -187,7 +187,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=stretch
     rvm: 2.5
     deploy:
@@ -201,7 +201,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=el7
     rvm: 2.5
     deploy:
@@ -215,7 +215,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=el7_arm
     dist: focal
     rvm: 2.5
@@ -230,7 +230,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=el8
     rvm: 2.5
     deploy:
@@ -244,7 +244,7 @@ jobs:
       on:
         all_branches: true
   - stage: build packages
-    script: travis_retry ./.travis/build_packages.sh
+    script: travis_retry travis_wait 50 ./.travis/build_packages.sh
     env: RELEASE=el8_arm
     dist: focal
     rvm: 2.5
