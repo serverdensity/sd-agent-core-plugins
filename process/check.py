@@ -386,7 +386,7 @@ class ProcessCheck(AgentCheck):
 
         proc_state = self.get_process_state(name, pids)
 
-        tags.extend(['process_name:%s' % name])
+        tags.extend(['process_name:%s' % name, 'process:%s' % name])
 
         self.log.debug('ProcessCheck: process %s analysed', name)
         self.gauge('system.processes.instances', len(pids), tags=tags)
