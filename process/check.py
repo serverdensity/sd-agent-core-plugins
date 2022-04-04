@@ -386,8 +386,7 @@ class ProcessCheck(AgentCheck):
 
         proc_state = self.get_process_state(name, pids)
 
-        # FIXME 6.x remove the `name` tag
-        tags.extend(['process_name:%s' % name, name])
+        tags.extend(['process_name:%s' % name, 'process:%s' % name])
 
         self.log.debug('ProcessCheck: process %s analysed', name)
         self.gauge('system.processes.instances', len(pids), tags=tags)

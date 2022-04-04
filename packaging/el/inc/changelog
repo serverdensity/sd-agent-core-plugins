@@ -1,4 +1,6 @@
 %changelog
+* Wed Mar 30 2022 Server Density <hello@serverdensity.com> 2.6.6-1
+- Process: Fix metric tagging ensuring alerts trigger
 * Mon Jan 10 2022 Server Density <hello@serverdensity.com> 2.6.5-1
 - MySQL: Fix parsing of replication data
 * Mon Apr 19 2021 Server Density <hello@serverdensity.com> 2.6.4-1
