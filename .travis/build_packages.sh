@@ -7,7 +7,7 @@ else
     PACKAGES_DIR="/${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_ID}/"
 fi
 
-deb=(bionic bullseye buster focal xenial trusty jessie stretch)
+deb=(bionic bullseye buster focal jammy  xenial trusty jessie stretch)
 CONTAINER="$RELEASE"
 echo "$CONTAINER"
 set -ev
