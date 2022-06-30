@@ -89,7 +89,8 @@ zk
 
 override_dh_auto_build:
 	$(create_venv)
-
+	#Bump cryptography for Jammy builds
+	sed -i 's/cryptography==2.3/cryptography==3.3.2/g' ssh_check/requirements.txt
 	for plugin in ${PLUGINS}; do echo ${plugin}; $(BUILD_DIR)/bin/python2.7 $(BUILD_DIR)/bin/pip install --no-binary=:all: -r $${plugin}/requirements.txt; done
 
 override_dh_auto_clean:
