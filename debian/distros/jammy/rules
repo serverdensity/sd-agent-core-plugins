@@ -87,6 +87,9 @@ zk
 %:
 	dh $@
 
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
+
 override_dh_auto_build:
 	$(create_venv)
 	#Bump cryptography for Jammy builds
