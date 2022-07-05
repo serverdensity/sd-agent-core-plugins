@@ -1,0 +1,112 @@
+#!/usr/bin/make -f
+
+BUILD_DIR=debian/build
+DEST_VENV=/usr/share/python/sd-agent
+PLUGINS=activemq_xml \
+agent_metrics \
+apache \
+btrfs \
+cacti \
+cassandra \
+cassandra_nodetool \
+ceph \
+cockroachdb \
+consul \
+couch \
+couchbase \
+directory \
+disk \
+dns_check \
+docker_daemon \
+elastic \
+entropy \
+etcd \
+fluentd \
+gearmand \
+gitlab \
+gitlab_runner \
+go_expvar \
+go-metro \
+gunicorn \
+haproxy \
+hdfs_datanode \
+hdfs_namenode \
+http_check \
+jenkins \
+kafka \
+kafka_consumer \
+kong \
+kube_dns \
+kubernetes \
+kubernetes_state \
+kyototycoon \
+lighttpd \
+linux_proc_extras \
+mapreduce \
+marathon \
+mcache \
+mdadm \
+mesos_master \
+mesos_slave \
+mongo \
+mysql \
+network \
+nfsstat \
+nginx \
+ntp \
+openstack \
+oracle \
+pgbouncer \
+php_fpm \
+postfix \
+postgres \
+powerdns_recursor \
+process \
+rabbitmq \
+redisdb \
+riak \
+riakcs \
+snmp \
+solr \
+spark \
+ssh_check \
+statsd \
+storm \
+supervisord \
+system_core \
+system_swap \
+tcp_check \
+tokumx \
+tomcat \
+twemproxy \
+varnish \
+vsphere \
+yarn \
+zk
+
+%:
+	dh $@
+
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
+
+override_dh_auto_build:
+	$(create_venv)
+	#Bump cryptography for Jammy builds
+	sed -i 's/cryptography==2.3/cryptography==3.3.2/g' ssh_check/requirements.txt
+	for plugin in ${PLUGINS}; do echo ${plugin}; $(BUILD_DIR)/bin/python2.7 $(BUILD_DIR)/bin/pip install --no-binary=:all: -r $${plugin}/requirements.txt; done
+
+override_dh_auto_clean:
+	#rm -rf $(BUILD_DIR)
+
+override_dh_auto_install:
+	pyclean $(BUILD_DIR)
+
+define create_venv
+	curl -LO https://raw.github.com/pypa/virtualenv/1.11.6/virtualenv.py
+	python2.7 virtualenv.py -p python2.7 --no-site-packages --no-pip --no-setuptools $(BUILD_DIR)
+	curl -LO https://bootstrap.pypa.io/ez_setup.py
+	$(BUILD_DIR)/bin/python2.7 ez_setup.py --version="44.1.1"
+	curl -LO https://bootstrap.pypa.io/pip/2.7/get-pip.py
+	$(BUILD_DIR)/bin/python2.7 get-pip.py
+endef
