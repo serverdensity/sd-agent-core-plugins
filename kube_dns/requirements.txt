@@ -1,2 +1,2 @@
 # integration pip requirements
-protobuf==3.5.1
+protobuf==3.18.3
