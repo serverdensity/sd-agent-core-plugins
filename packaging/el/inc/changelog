@@ -1,4 +1,6 @@
 %changelog
+* Thu Mar 2 2023 Server Density <hello@serverdensity.com> 2.6.7-1
+- MySQL: Fixes compatibility with MariaDB 10.10.
 * Wed Mar 30 2022 Server Density <hello@serverdensity.com> 2.6.6-1
 - Process: Fix metric tagging ensuring alerts trigger
 * Mon Jan 10 2022 Server Density <hello@serverdensity.com> 2.6.5-1
