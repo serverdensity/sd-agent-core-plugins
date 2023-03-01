@@ -52,6 +52,7 @@ notifications:
 jobs:
   include:
   - stage: CSV lint
+    language: go
     install: go get github.com/Clever/csvlint/cmd/csvlint
     script: for metadata in `ls */metadata.csv`; do csvlint ${metadata}; done
     go: 1.10
