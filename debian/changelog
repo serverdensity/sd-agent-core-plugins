@@ -1,3 +1,9 @@
+sd-agent-core-plugins (2.6.7-1trusty0) trusty; urgency=medium
+
+  * MySQL: Fixes compatibility with MariaDB 10.10.
+
+ -- Server Density <hello@serverdensity.com>  Thu, 2 Mar 2023 10:00:00 +0100
+
 sd-agent-core-plugins (2.6.6-1trusty0) trusty; urgency=medium
 
   * Process: Fix metric tagging ensuring alerts trigger
